@@ -1,0 +1,20 @@
+I. Wprowadzenie
+	1. opis zawartości pracy
+I. Podstawowe zagadnienia:
+	1. opis pojęć związanych z Gramatykami Kształtu
+	2. przegląd różnych rodzajów gramatyk kształtu
+		a. jednomarkerowe gramatyki kształtu
+		b. gramatyki kolorujące
+	3. inne metody, podobne do Gramatyk Kształtu
+		a. porównianie gramatyk kształtu i L-systemów
+		b. można wspomnieć o gramatykach kształtu dla krzywych linii (http://oro.open.ac.uk/27277/2/Jowers_%26_Earl_2011_EPB.pdf)
+II. Opis stworzonego algorytmu
+	1. opis algorytmu
+		a. opis części modyfikującej kształt wejściowy
+		b. opis części kolorowania
+	2. pokazanie jego przebiegu algorytmu na przykładach
+III. Przegląd zastosowań Gramatyk Kształtu
+	1. Sposób wykorzystania ich w architekturze i urbanistyce
+	2. Zastosowanie Gramatyk kształtu w sztuce
+	3. Gramatyki kształtu w grafice komputerowej
+IV. Podsumowanie

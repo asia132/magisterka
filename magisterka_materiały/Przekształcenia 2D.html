@@ -1,0 +1,1968 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-2">
+<meta http-equiv="Content-Language" content="pl">
+<title>Przekształcenia 2D</title>
+<meta name="keywords" content="przesunięcie, obrót, skalowanie, jednokładność, składanie przekształceń, SDL, informatyka, liceum, zajęcia uzupełniające, programowanie, C++">
+<meta name="description" content="Artykuł opisuje podstawowe przekształcenia figur geometrycznych na płaszczyźnie - przesunięcie, obrót, skalowanie, jednokładność, składanie przekształceń.">
+<link rel="stylesheet" type="text/css" href="Przekszta%C5%82cenia%202D_pliki/blue.css">
+<!-- base href="http://eduinf.waw.pl/inf/utils/002_roz/2008_21.php" -->
+<style type="text/css">
+.style1 {
+	font-weight: normal;
+}
+</style>
+</head>
+
+<body>
+<h1 class="main"><span class="style1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Przekształcenia na płaszczyźnie</span></h1>
+<blockquote>
+  <p class="main"><a target="_self" href="http://eduinf.waw.pl/inf/utils/002_roz/008.php">Powrót do spisu treści</a></p>
+</blockquote>
+<blockquote>
+  <p>Wymagane jest zapoznanie się z następującymi podrozdziałami:</p>
+  <table border="0" cellspacing="0" cellpadding="4">
+    <tbody><tr>
+      <td valign="top"><a href="http://eduinf.waw.pl/inf/utils/002_roz/p019.php">P019</a> - Pierwszy program dla Windows<br>
+      <a href="http://eduinf.waw.pl/inf/utils/002_roz/2008_01.php">OL031</a> - instalacja biblioteki SDL w środowisku Dev-C++<br>
+      <a href="http://eduinf.waw.pl/inf/utils/002_roz/2008_02.php">OL032</a> - inicjalizacja biblioteki SDL<br>
+      <a href="http://eduinf.waw.pl/inf/utils/002_roz/2008_03.php">OL033</a> - powierzchnie graficzne w SDL<br>
+      <a href="http://eduinf.waw.pl/inf/utils/002_roz/2008_04.php">OL034</a> - przygotowanie plików własnej biblioteki graficznej<br>
+      <a href="http://eduinf.waw.pl/inf/utils/002_roz/2008_05.php">OL035</a> - rysowanie po powierzchni graficznej<br>
+      <a href="http://eduinf.waw.pl/inf/utils/002_roz/2008_06.php">OL036</a> - algorytm Bresenhama rysowania odcinka<br>
+      <a href="http://eduinf.waw.pl/inf/utils/002_roz/2008_07.php">OL037</a> - obcinanie grafiki do prostokąta</td>
+      <td valign="top"><a href="http://eduinf.waw.pl/inf/utils/002_roz/2008_08.php">OL038</a> - podstawowe algorytmy wypełniania 
+      obszarów<br>
+      <a href="http://eduinf.waw.pl/inf/utils/002_roz/2008_09.php">OL039</a> - algorytm Smitha<br>
+      <a href="http://eduinf.waw.pl/inf/utils/002_roz/2008_10.php">OL040</a> - praca w środowisku sterowanym zdarzeniami<br>
+      <a href="http://eduinf.waw.pl/inf/utils/002_roz/2008_11.php">OL041</a> - czcionka bitmapowa<br>
+      <a href="http://eduinf.waw.pl/inf/utils/002_roz/2008_12.php">OL042</a> - czcionka wektorowa<br>
+      <a href="http://eduinf.waw.pl/inf/utils/002_roz/2008_13.php">OL043</a> - przyciski poleceń<br>
+      <a href="http://eduinf.waw.pl/inf/utils/002_roz/2008_20.php">OL050</a> - macierze - podstawowe operacje na macierzach</td>
+    </tr>
+  </tbody></table>
+  <div align="center">
+    <table class="note" style="border-collapse: collapse; border-width: 1px" border="1" cellspacing="0" cellpadding="4">
+      <tbody><tr>
+        <td class="note">
+        <p class="style2"><font size="3" color="#FF0000">UWAGA!!!</font></p>
+        <p class="style3">Bieżące opracowanie NIE JEST KURSEM programowania biblioteki 
+        SDL. Są to materiały przeznaczone do zajęć na kole informatycznym w I LO 
+        w Tarnowie.</p>
+        <p class="style3">Przed pracą z tym rozdziałem utwórz w środowisku Dev-C++ 
+        nowy projekt SDL i dołącz do niego pliki <a target="_blank" href="http://eduinf.waw.pl/inf/utils/002_roz/sdl009/SDL_gfx.cpp">SDL_gfx.cpp</a> oraz <a target="_blank" href="http://eduinf.waw.pl/inf/utils/002_roz/sdl009/SDL_gfx.h">SDL_gfx.h</a>. 
+        Jeśli nie przeczytałeś zalecanych rozdziałów, koniecznie zrób to, a 
+        wszystko stanie się jasne. W przeciwnym razie odpuść sobie również ten 
+        rozdział. Opis funkcji bibliotecznych znajdziesz w 
+          podsumowaniu <a href="http://eduinf.waw.pl/inf/utils/002_roz/sdl009.php">SDL009</a>.</p>
+        </td>
+      </tr>
+    </tbody></table>
+    <p>&nbsp;</p>
+    <p><b><font size="7" color="#FF0000">Artykuł w PRZEBUDOWIE</font></b></p>
+  </div>
+  <hr size="1" color="#0099CC">
+  <p><a href="http://www.libsdl.org/index.php"><img alt="SDL" src="Przekszta%C5%82cenia%202D_pliki/2008_01_00.gif" style="float: left; margin-right: 8" border="0" width="181" height="73"></a>Na tej lekcji 
+  poznamy uniwersalne sposoby <span class="b">geometrycznego przekształcania</span>
+  <span class="rem">(ang. geometric transformation)</span> obiektów dwuwymiarowych
+  <span class="rem">(w przestrzeni trójwymiarowej będzie bardzo podobnie)</span> 
+  na płaszczyźnie. Najpierw określmy sposób reprezentacji obiektów geometrycznych. 
+  Umówmy się, iż obiekt będzie zbudowany z wielokątów. Wielokąty składają się z 
+  wierzchołków połączonych liniami. Zastosujemy zatem sposób wykorzystywany przez 
+  czcionkę wektorową, który opisaliśmy w rozdziale <a href="http://eduinf.waw.pl/inf/utils/002_roz/2008_12.php">OL042</a>. 
+  Takie rozwiązanie umożliwi również stosowanie naszych przekształceń do liter wektorowych.</p>
+  <p><br clear="left">
+  Obiekt będzie zbudowany z listy łamanych. Zasady tworzenia tej listy są następujące:</p>
+  <blockquote>
+    <p>Każda łamana rozpoczyna się od liczby określającej liczbę wierzchołków. Jeśli 
+    liczba ta ma wartość 0, to oznacza to koniec listy łamanych. Za liczbą wierzchołków 
+    następują pary współrzędnych określających położenie wierzchołka na płaszczyźnie.</p>
+    <blockquote>
+      <p>Przykład:</p>
+      <blockquote>
+        <p>3 12 1 14 5 1 1 2 5 3 4 7 0</p>
+      </blockquote>
+      <p>Ten obiekt składa się z dwóch łamanych:</p>
+      <blockquote>
+        <p><span style="background-color: #FEF0C2" lang="en">&nbsp;</span><span style="background-color: #FEF0C2">3&nbsp; 12 1 14 5 1 1 </span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style="background-color: #CCFFCC">&nbsp;2&nbsp; 5 3 4 7 </span>&nbsp;&nbsp;&nbsp; 
+        0</p>
+      </blockquote>
+      <p>Pierwsza łamana posiada trzy wierzchołki: (12,1), (14,5) i (1,1).<br>
+      Druga łamana posiada tylko dwa wierzchołki: (5,3) i (4,7).<br>
+      Ostatnie zero oznacza koniec listy łamanych.</p>
+    </blockquote>
+    <p>Listę łamanych można utworzyć w tablicy o odpowiedniej wielkości. Na przykład 
+    tak:</p>
+    <blockquote>
+      <pre>  <span class="v">Sint32 obj</span>[] = {<span class="n">3</span>, <span class="n">12</span>, <span class="n">1</span>, <span class="n">14</span>, <span class="n">5</span>, <span class="n">1</span>, <span class="n">1</span>, <span class="n">2</span>, <span class="n">5</span>, <span class="n">3</span>, <span class="n">4</span>, <span class="n">7</span>, <span class="n">0</span>};</pre>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<h3>Translacja - przesunięcie</h3>
+<blockquote>
+  <p><span class="b">Translacja</span> <span class="rem">(ang. translation)</span> 
+  polega na przesunięciu współrzędnych wszystkich wierzchołków łamanej o wektor 
+  (Tx, Ty).</p>
+</blockquote>
+<p style="text-align: center"><img src="Przekszta%C5%82cenia%202D_pliki/ol051_01.gif" alt="Translacja" border="0" width="377" height="373"></p>
+<blockquote>
+  <p>Oś OY jest skierowana w dół na powierzchni karty graficznej, pamiętasz? Współrzędne 
+  nowych punktów obliczamy wg wzorów:</p>
+  <blockquote>
+    <p>x' = x + Tx<br>
+    y' = y + Ty</p>
+  </blockquote>
+  <p>Jeśli w aplikacji stosujemy różne przekształcenia, to takie podejście nie jest 
+  wygodne. Lepszym rozwiązaniem będzie zastosowanie rachunku macierzowego, który 
+  ułatwi nam składanie przekształceń. Każdy punkt łamanej przekształcamy w macierz 
+  P<sub>1 x 3</sub> = [x, y, 1] - macierz <strong>P</strong> możemy potraktować 
+  jako współrzędne punktu (x,y) leżącego w przestrzeni trójwymiarowej na płaszczyźnie 
+  z=1 - równoległej do osi OX i OY układu współrzędnych. Następnie konstruujemy 
+  macierz translacji:</p>
+</blockquote>
+<div align="center">
+  <table style="border-collapse: collapse" border="0" cellpadding="2">
+    <tbody><tr>
+      <td>&nbsp;</td>
+      <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+      <td align="center">1</td>
+      <td align="center">0</td>
+      <td align="center">&nbsp;0</td>
+      <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td><strong>T</strong><sub>3 x 3</sub> =&nbsp;</td>
+      <td style="border-left: 1px solid #000000">&nbsp;</td>
+      <td align="center">0</td>
+      <td align="center">1</td>
+      <td align="center">&nbsp;0</td>
+      <td style="border-right: 1px solid #000000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+      <td align="center">Tx</td>
+      <td align="center">&nbsp;Ty</td>
+      <td align="center">&nbsp;1</td>
+      <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+    </tr>
+  </tbody></table>
+</div>
+<blockquote>
+  <p>Współrzędne (x',y') punktu przesuniętego o wektor (Tx,Ty) uzyskamy mnożąc macierz 
+  P przez macierz T:</p>
+</blockquote>
+<div align="center">
+  <table style="border-collapse: collapse" border="0" cellpadding="2">
+    <tbody><tr>
+      <td>&nbsp;</td>
+      <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+      <td align="center">1</td>
+      <td align="center">0</td>
+      <td align="center">&nbsp;0</td>
+      <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td><strong>P</strong>' = <strong>P</strong> x <strong>T</strong>;&nbsp;&nbsp;&nbsp; 
+      [x',y',1] = [x,y,1] x<span lang="en-us">&nbsp;</span></td>
+      <td style="border-left: 1px solid #000000">&nbsp;</td>
+      <td align="center">0</td>
+      <td align="center">1</td>
+      <td align="center">&nbsp;0</td>
+      <td style="border-right: 1px solid #000000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+      <td align="center">Tx</td>
+      <td align="center">&nbsp;Ty</td>
+      <td align="center">&nbsp;1</td>
+      <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+    </tr>
+  </tbody></table>
+  <blockquote>
+    <p>Sprawdźmy. Zgodnie z definicją <a href="http://eduinf.waw.pl/inf/utils/002_roz/2008_20.php#Mno">mnożenia macierzy</a> 
+    mamy:</p>
+    <blockquote>
+      <p>x' = x &#8226; 1 + y &#8226; 0 + 1 &#8226; Tx = x + Tx</p>
+      <p>y' = x &#8226; 0 + y &#8226; 1 + 1 &#8226; Ty = y + Ty</p>
+      <p>1 = x &#8226; 0 + y &#8226; 0 + 1 &#8226; 1</p>
+    </blockquote>
+  </blockquote>
+  <h3>Rotacja - obrót</h3>
+  <p style="text-align: center"><img src="Przekszta%C5%82cenia%202D_pliki/ol051_02.gif" alt="Rotacja" border="0" width="377" height="373"></p>
+  <blockquote>
+    <p>Jeśli chcemy uzyskać <span class="b">obrót</span> <span class="rem">(ang. 
+    rotation)</span> punktu P = (x,y) wokół środka układu współrzędnych o kąt &#966;
+    <span class="rem">(podany w radianach)</span>, to konstruujemy macierz punktu:</p>
+    <p class="style4"><strong>P</strong><sub>1 x 3</sub> = [x, y, 1].</p>
+    <p>Następnie konstruujemy macierz rotacji:</p>
+  </blockquote>
+  <div align="center">
+    <table style="border-collapse: collapse" border="0" cellpadding="2">
+      <tbody><tr>
+        <td>&nbsp;</td>
+        <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+        <td align="center">cos&#966;</td>
+        <td align="center">&nbsp;sin&#966;</td>
+        <td align="center">&nbsp;0</td>
+        <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+      </tr>
+      <tr>
+        <td><strong>R</strong><sub>3 x 3</sub> =&nbsp;</td>
+        <td style="border-left: 1px solid #000000">&nbsp;</td>
+        <td align="center">-sin&#966;</td>
+        <td align="center">&nbsp;cos&#966;</td>
+        <td align="center">&nbsp;0</td>
+        <td style="border-right: 1px solid #000000">&nbsp;</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+        <td align="center">0</td>
+        <td align="center">0</td>
+        <td align="center">&nbsp;1</td>
+        <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+      </tr>
+    </tbody></table>
+  </div>
+  <blockquote>
+    <p>Nowe współrzędne otrzymamy mnożąc macierz punktu P przez macierz rotacji 
+    R:</p>
+  </blockquote>
+  <table style="border-collapse: collapse" border="0" cellpadding="2">
+    <tbody><tr>
+      <td>&nbsp;</td>
+      <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+      <td align="center">cos&#966;</td>
+      <td align="center">&nbsp;sin&#966;</td>
+      <td align="center">&nbsp;0</td>
+      <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td><strong>P</strong>' = <strong>P</strong> x <strong>R</strong>;&nbsp;&nbsp; 
+      [x',y',1] = [x,y,1] x&nbsp; </td>
+      <td style="border-left: 1px solid #000000">&nbsp;</td>
+      <td align="center">-sin&#966;</td>
+      <td align="center">&nbsp;cos&#966;</td>
+      <td align="center">&nbsp;0</td>
+      <td style="border-right: 1px solid #000000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+      <td align="center">0</td>
+      <td align="center">0</td>
+      <td align="center">&nbsp;1</td>
+      <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+    </tr>
+  </tbody></table>
+</div>
+<blockquote>
+  <div align="center">
+    <table class="note" style="border-collapse: collapse; border-width: 1px" border="1" cellspacing="0" cellpadding="4">
+      <tbody><tr>
+        <td class="note">
+        <p class="style2"><font size="3" color="#FF0000">UWAGA!!! - PUŁAPKA.</font></p>
+        <p class="style3">Ponowne pomnożenie macierzy P' przez R da nam punkty obrócone 
+        o kolejny kąt &#966;. Mogłoby więc się wydawać, że będzie to dobry sposób do 
+        tworzenia animacji. Niestety, musimy uwzględnić błędy zaokrągleń. Wyliczone 
+        współrzędne nie będą dokładne, lecz przybliżone. Wielokrotne zastosowanie 
+        przekształcenia powoduje wzrost błędów i w efekcie nasza figura może się 
+        "numerycznie" rozsypać po powierzchni graficznej. Poprawnie robimy to tak:</p>
+        <ul>
+          <li>
+          <p class="style3">W pamięci przechowujemy oryginalne współrzędne obiektu, 
+          których nigdy nie zmieniamy.</p>
+          </li>
+          <li>
+          <p class="style3">Przekształcone współrzędne zapamiętujemy w kopii obiektu, 
+          która posłuży do narysowania go na powierzchni graficznej.</p>
+          </li>
+          <li>
+          <p class="style3">Modyfikujemy odpowiednio macierze przekształcenia i 
+          za ich pomocą wyliczamy nowe współrzędne wykorzystując współrzędne oryginalnego 
+          obiektu.. Dzięki temu zawsze utrzymamy błędy zaokrągleń na niskim poziomie 
+          - nie będą się kumulowały.</p>
+          </li>
+        </ul>
+        </td>
+      </tr>
+    </tbody></table>
+  </div>
+  <p>Jeśli chcemy obrócić nasz obiekt o kąt &#966; wokół dowolnego punktu (x<sub>R</sub>,y<sub>R</sub>), 
+  to musimy zastosować trzy przekształcenia:</p>
+  <ol>
+    <li>Sprowadzić punkt (x<sub>R</sub>,y<sub>R</sub>) do początku układu współrzędnych 
+    - translacja obiektu o wektor (-x<sub>R</sub>,-y<sub>R</sub>)</li>
+    <li>Obrócić wierzchołki obiektu o kąt &#966; - rotacja wokół środka układu współrzędnych.</li>
+    <li>Powrócić do punktu (x<sub>R</sub>,y<sub>R</sub>) - translacja o wektor (x<sub>R</sub>,y<sub>R</sub>)</li>
+  </ol>
+  <p>Tworzymy zatem trzy macierze, dwie translacji i jedną rotacji:</p>
+</blockquote>
+<div align="center">
+  <table style="border-collapse: collapse" border="0" cellpadding="4">
+    <tbody><tr>
+      <td align="center">
+      <table style="border-collapse: collapse" border="0" cellpadding="2">
+        <tbody><tr>
+          <td>&nbsp;</td>
+          <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+          <td align="center">1</td>
+          <td align="center">0</td>
+          <td align="center">&nbsp;0</td>
+          <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+        </tr>
+        <tr>
+          <td><strong>T</strong><sub> </sub>=&nbsp;</td>
+          <td style="border-left: 1px solid #000000">&nbsp;</td>
+          <td align="center">0</td>
+          <td align="center">1</td>
+          <td align="center">&nbsp;0</td>
+          <td style="border-right: 1px solid #000000">&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+          <td align="center">-x<sub>R</sub></td>
+          <td align="center">&nbsp;-y<sub>R</sub></td>
+          <td align="center">&nbsp;1</td>
+          <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+        </tr>
+      </tbody></table>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+      <table style="border-collapse: collapse" border="0" cellpadding="2">
+        <tbody><tr>
+          <td>&nbsp;</td>
+          <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+          <td align="center">cos&#966;</td>
+          <td align="center">&nbsp;sin&#966;</td>
+          <td align="center">&nbsp;0</td>
+          <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+        </tr>
+        <tr>
+          <td><strong>R</strong><sub> </sub>=&nbsp;</td>
+          <td style="border-left: 1px solid #000000">&nbsp;</td>
+          <td align="center">-sin&#966;</td>
+          <td align="center">&nbsp;cos&#966;</td>
+          <td align="center">&nbsp;0</td>
+          <td style="border-right: 1px solid #000000">&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+          <td align="center">0</td>
+          <td align="center">0</td>
+          <td align="center">&nbsp;1</td>
+          <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+        </tr>
+      </tbody></table>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+      <table style="border-collapse: collapse" border="0" cellpadding="2">
+        <tbody><tr>
+          <td>&nbsp;</td>
+          <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+          <td align="center">1</td>
+          <td align="center">0</td>
+          <td align="center">&nbsp;0</td>
+          <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+        </tr>
+        <tr>
+          <td><strong>T</strong><sup>-1</sup> =&nbsp;</td>
+          <td style="border-left: 1px solid #000000">&nbsp;</td>
+          <td align="center">0</td>
+          <td align="center">1</td>
+          <td align="center">&nbsp;0</td>
+          <td style="border-right: 1px solid #000000">&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+          <td align="center">x<sub>R</sub></td>
+          <td align="center">y<sub>R</sub></td>
+          <td align="center">&nbsp;1 </td>
+          <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+        </tr>
+      </tbody></table>
+      </td>
+    </tr>
+  </tbody></table>
+</div>
+<blockquote>
+  <p>Obliczamy macierz przekształcenia <strong>G</strong> = <strong>T</strong> x
+  <strong>R</strong> x <strong>T</strong><sup>-1</sup> (operację można rozbić:
+  <strong>G</strong> = <strong>T</strong> x <strong>R</strong>; <strong>G</strong> 
+  = <strong>G</strong> x <strong>T</strong><sup>-1</sup>). </p>
+</blockquote>
+<div align="center">
+  <table style="border-collapse: collapse" border="0" cellpadding="2">
+    <tbody><tr>
+      <td>
+      <table style="border-collapse: collapse" border="0" cellpadding="2">
+        <tbody><tr>
+          <td>&nbsp;</td>
+          <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+          <td align="center">1</td>
+          <td align="center">0</td>
+          <td align="center">&nbsp;0</td>
+          <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+        </tr>
+        <tr>
+          <td><strong>G</strong><sub> </sub>=&nbsp;</td>
+          <td style="border-left: 1px solid #000000">&nbsp;</td>
+          <td align="center">0</td>
+          <td align="center">1</td>
+          <td align="center">&nbsp;0</td>
+          <td style="border-right: 1px solid #000000">&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+          <td align="center">-x<sub>R</sub></td>
+          <td align="center">&nbsp;-y<sub>R</sub></td>
+          <td align="center">&nbsp;1</td>
+          <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+        </tr>
+      </tbody></table>
+      </td>
+      <td>
+      <table style="border-collapse: collapse" border="0" cellpadding="2">
+        <tbody><tr>
+          <td>&nbsp;</td>
+          <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+          <td align="center">cos&#966;</td>
+          <td align="center">&nbsp;sin&#966;</td>
+          <td align="center">&nbsp;0</td>
+          <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;x&nbsp; </td>
+          <td style="border-left: 1px solid #000000">&nbsp;</td>
+          <td align="center">-sin&#966;</td>
+          <td align="center">&nbsp;cos&#966;</td>
+          <td align="center">&nbsp;0</td>
+          <td style="border-right: 1px solid #000000">&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+          <td align="center">0</td>
+          <td align="center">0</td>
+          <td align="center">&nbsp;1</td>
+          <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+        </tr>
+      </tbody></table>
+      </td>
+      <td>
+      <table style="border-collapse: collapse" border="0" cellpadding="2">
+        <tbody><tr>
+          <td>&nbsp;</td>
+          <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+          <td align="center">1</td>
+          <td align="center">0</td>
+          <td align="center">&nbsp;0</td>
+          <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;x&nbsp; </td>
+          <td style="border-left: 1px solid #000000">&nbsp;</td>
+          <td align="center">0</td>
+          <td align="center">1</td>
+          <td align="center">&nbsp;0</td>
+          <td style="border-right: 1px solid #000000">&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+          <td align="center">x<sub>R</sub></td>
+          <td align="center">&nbsp;y<sub>R</sub></td>
+          <td align="center">&nbsp;1</td>
+          <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+        </tr>
+      </tbody></table>
+      </td>
+      <td>
+      <table style="border-collapse: collapse" border="0" cellpadding="2">
+        <tbody><tr>
+          <td>&nbsp;</td>
+          <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+          <td align="center">cos&#966;</td>
+          <td align="center">sin&#966;</td>
+          <td align="center">&nbsp;0</td>
+          <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+        </tr>
+        <tr>
+          <td><sub>&nbsp;</sub>=&nbsp;</td>
+          <td style="border-left: 1px solid #000000">&nbsp;</td>
+          <td align="center">-sin&#966;</td>
+          <td align="center">cos&#966;</td>
+          <td align="center">&nbsp;0</td>
+          <td style="border-right: 1px solid #000000">&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+          <td align="center">x<sub>R</sub>(1 - cos&#966;) + y<sub>R</sub>sin&#966;</td>
+          <td align="center"><span lang="en">&nbsp; </span>-x<sub>R</sub>sin&#966; + 
+          y<sub>R</sub>(1 - cos&#966;)</td>
+          <td align="center"><span lang="en">&nbsp;</span>1</td>
+          <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+        </tr>
+      </tbody></table>
+      </td>
+    </tr>
+  </tbody></table>
+</div>
+<blockquote>
+  <p>Wykorzystujemy macierz <strong>G</strong> do wyznaczenia nowych współrzędnych 
+  wszystkich wierzchołków obiektu:</p>
+  <p style="text-align: center"><strong>P</strong>' = <strong>P</strong> x
+  <strong>G</strong></p>
+  <p>Tutaj uwidaczniają się zalety rachunku macierzowego - jednorodność operacji. 
+  To duże ułatwienie.</p>
+  <p>Zapis <strong>T</strong><sup>-1</sup> oznacza macierz odwrotną. Przez analogię 
+  do zwykłego rachunku algebraicznego:</p>
+  <blockquote>
+    <p class="style5">a &#8226; a<sup>-1</sup> = 1</p>
+  </blockquote>
+  <p>Iloczyn macierzy T i T<sup>-1</sup> daje tzw. macierz jednostkową, która na 
+  głównej przekątnej posiada same jedynki, a na pozostałych pozycjach same zera. 
+  Sprawdźmy:</p>
+</blockquote>
+<div align="center">
+  <table style="border-collapse: collapse" border="0" cellpadding="2">
+    <tbody><tr>
+      <td colspan="7" rowspan="3" align="right"><strong>T</strong><sup>-1</sup> 
+      =&nbsp; </td>
+      <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+      <td class="style4">1</td>
+      <td class="style4">0</td>
+      <td class="style4">0</td>
+      <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+      <td rowspan="4">&nbsp;</td>
+    </tr>
+    <tr>
+      <td style="border-left: 1px solid #000000">&nbsp;</td>
+      <td class="style4">0</td>
+      <td class="style4">1</td>
+      <td class="style4">0</td>
+      <td style="border-right: 1px solid #000000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+      <td class="style4">-Tx</td>
+      <td class="style4">-Ty</td>
+      <td class="style4">1</td>
+      <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="12" height="8"></td>
+    </tr>
+    <tr>
+      <td rowspan="3"><strong>T</strong>=&nbsp; </td>
+      <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+      <td class="style4">1</td>
+      <td class="style4">0</td>
+      <td class="style4">0</td>
+      <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+      <td>&nbsp;</td>
+      <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+      <td class="style4">1</td>
+      <td class="style4">0</td>
+      <td class="style4">0</td>
+      <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+      <td rowspan="3">&nbsp;= <strong>1</strong></td>
+    </tr>
+    <tr>
+      <td style="border-left: 1px solid #000000">&nbsp;</td>
+      <td class="style4">0</td>
+      <td class="style4">1</td>
+      <td class="style4">0</td>
+      <td style="border-right: 1px solid #000000">&nbsp;</td>
+      <td>&nbsp;</td>
+      <td style="border-left: 1px solid #000000">&nbsp;</td>
+      <td class="style4">0</td>
+      <td class="style4">1</td>
+      <td class="style4">0</td>
+      <td style="border-right: 1px solid #000000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+      <td class="style4">Tx</td>
+      <td class="style4">Ty</td>
+      <td class="style4">1</td>
+      <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+      <td>&nbsp;</td>
+      <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+      <td class="style4">0</td>
+      <td class="style4">0</td>
+      <td class="style4">1</td>
+      <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+    </tr>
+  </tbody></table>
+</div>
+<blockquote>
+  Macierz odwrotną będziemy zawsze interpretować jako przekształcenie odwrotne - 
+  np. jeśli macierz <strong>R</strong> oznacza obrót o kąt &#966;, to <strong>R</strong><sup>-1</sup> 
+  będzie oznaczać obrót o kąt -&#966;. Istnieją algorytmy obliczające macierz odwrotną 
+  do danej. Jednakże wcale nie musimy z nich korzystać - jak zobaczymy dalej, wystarczy 
+  odpowiednio zastosować funkcje tworzące macierze przekształceń.</blockquote>
+<h3>Skalowanie</h3>
+<blockquote>
+  <p><span class="b">Skalowanie </span><span class="rem">(ang. scaling)</span> względem 
+  osi układu współrzędnych polega na przemnożeniu współrzędnych x i y każdego wierzchołka 
+  przez współczynniki skali w osi <nobr>OX - sx</nobr> i w osi <nobr>OY - sy</nobr>, 
+  które nie muszą być równe - wtedy obiekt zostanie rozciągnięty lub ściśnięty względem 
+  wybranej osi.</p>
+</blockquote>
+<p style="text-align: center"><img src="Przekszta%C5%82cenia%202D_pliki/ol051_03.gif" alt="Skalowanie" border="0" width="414" height="373"></p>
+<blockquote>
+  <p>Macierz skalowania zbudowana jest następująco:</p>
+</blockquote>
+<div align="center">
+  <table style="border-collapse: collapse" border="0" cellpadding="2">
+    <tbody><tr>
+      <td>&nbsp;</td>
+      <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+      <td align="center">Sx</td>
+      <td align="center">0</td>
+      <td align="center">&nbsp;0</td>
+      <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td><strong>S</strong><sub>3 x 3</sub> =&nbsp;</td>
+      <td style="border-left: 1px solid #000000">&nbsp;</td>
+      <td align="center">0</td>
+      <td align="center">Sy</td>
+      <td align="center">&nbsp;0</td>
+      <td style="border-right: 1px solid #000000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+      <td align="center">0</td>
+      <td align="center">0</td>
+      <td align="center">&nbsp;1</td>
+      <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+    </tr>
+  </tbody></table>
+</div>
+<blockquote>
+  <p>Współrzędne wierzchołków otrzymamy mnożąc macierz punktu <strong>P</strong> 
+  przez macierz skalowania <strong>S</strong>:&nbsp; <strong>P</strong>' =
+  <strong>P</strong> x <strong>S</strong>.</p>
+  <hr size="1" color="#0099CC">
+  <p>Jeśli chcemy skalować względem punktu P<sub>S</sub> = (x<sub>S</sub>,y<sub>S</sub>), 
+  to postępujemy podobnie jak przy rotacji - przekształcenie składamy z translacji 
+  od punktu (x<sub>S</sub>,y<sub>S</sub>) do środka układu współrzędnych, skalowania 
+  oraz translacji odwrotnej - od środka układu współrzędnych do punktu (x<sub>S</sub>,y<sub>S</sub>). 
+  W tym celu tworzymy trzy macierze przekształceń:</p>
+  <div align="center">
+    <table style="border-collapse: collapse" border="0" cellpadding="4">
+      <tbody><tr>
+        <td align="center">
+        <table style="border-collapse: collapse" border="0" cellpadding="2">
+          <tbody><tr>
+            <td>&nbsp;</td>
+            <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+            <td align="center">1</td>
+            <td align="center">0</td>
+            <td align="center">0</td>
+            <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+          </tr>
+          <tr>
+            <td><strong>T</strong><b> </b>=&nbsp;</td>
+            <td style="border-left: 1px solid #000000">&nbsp;</td>
+            <td align="center">0</td>
+            <td align="center">1</td>
+            <td align="center">0</td>
+            <td style="border-right: 1px solid #000000">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+            <td align="center">-x<sub>S</sub></td>
+            <td align="center">-y<sub>S</sub></td>
+            <td align="center">1</td>
+            <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+          </tr>
+        </tbody></table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+        <div align="center">
+          <table style="border-collapse: collapse" border="0" cellpadding="2">
+            <tbody><tr>
+              <td>&nbsp;</td>
+              <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+              <td align="center">Sx</td>
+              <td align="center">0</td>
+              <td align="center">0</td>
+              <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+            </tr>
+            <tr>
+              <td><strong>S</strong> =&nbsp;</td>
+              <td style="border-left: 1px solid #000000">&nbsp;</td>
+              <td align="center">0</td>
+              <td align="center">Sy</td>
+              <td align="center">0</td>
+              <td style="border-right: 1px solid #000000">&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+              <td align="center">0</td>
+              <td align="center">0</td>
+              <td align="center">1</td>
+              <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+            </tr>
+          </tbody></table>
+        </div>
+        </td>
+      </tr>
+      <tr>
+        <td align="center">
+        <table style="border-collapse: collapse" border="0" cellpadding="2">
+          <tbody><tr>
+            <td>&nbsp;</td>
+            <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+            <td align="center">1</td>
+            <td align="center">0</td>
+            <td align="center">0</td>
+            <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+          </tr>
+          <tr>
+            <td><strong>T</strong><sup>-1</sup> =&nbsp;</td>
+            <td style="border-left: 1px solid #000000">&nbsp;</td>
+            <td align="center">0</td>
+            <td align="center">1</td>
+            <td align="center">0</td>
+            <td style="border-right: 1px solid #000000">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+            <td align="center">x<sub>S</sub></td>
+            <td align="center">y<sub>S</sub></td>
+            <td align="center">1</td>
+            <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+          </tr>
+        </tbody></table>
+        </td>
+      </tr>
+    </tbody></table>
+  </div>
+  <p>Następnie wyliczamy macierz <strong>G</strong> złożonego przekształcenia jako 
+  iloczyn wyznaczonych macierzy <b>G</b> = <b>T</b><sub>1</sub> x <b>S</b> x<b> T</b><sub>2</sub>:</p>
+  <div align="center">
+    <table style="border-collapse: collapse" border="0" cellpadding="2">
+      <tbody><tr>
+        <td>
+        <table style="border-collapse: collapse" border="0" cellpadding="2">
+          <tbody><tr>
+            <td>&nbsp;</td>
+            <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+            <td align="center">1</td>
+            <td align="center">0</td>
+            <td align="center">0</td>
+            <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+          </tr>
+          <tr>
+            <td><strong>G</strong><sub> </sub>=&nbsp;</td>
+            <td style="border-left: 1px solid #000000">&nbsp;</td>
+            <td align="center">0</td>
+            <td align="center">1</td>
+            <td align="center">0</td>
+            <td style="border-right: 1px solid #000000">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+            <td align="center">-x<sub>S</sub></td>
+            <td align="center">-y<sub>S</sub></td>
+            <td align="center">1</td>
+            <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+          </tr>
+        </tbody></table>
+        </td>
+        <td>
+        <div align="center">
+          <table style="border-collapse: collapse" border="0" cellpadding="2">
+            <tbody><tr>
+              <td>&nbsp;</td>
+              <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+              <td align="center">Sx</td>
+              <td align="center">0</td>
+              <td align="center">0</td>
+              <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;x&nbsp; </td>
+              <td style="border-left: 1px solid #000000">&nbsp;</td>
+              <td align="center">0</td>
+              <td align="center">Sy</td>
+              <td align="center">0</td>
+              <td style="border-right: 1px solid #000000">&nbsp;</td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+              <td align="center">0</td>
+              <td align="center">0</td>
+              <td align="center">1</td>
+              <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+            </tr>
+          </tbody></table>
+        </div>
+        </td>
+        <td>
+        <table style="border-collapse: collapse" border="0" cellpadding="2">
+          <tbody><tr>
+            <td>&nbsp;</td>
+            <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+            <td align="center">1</td>
+            <td align="center">0</td>
+            <td align="center">0</td>
+            <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;x&nbsp; </td>
+            <td style="border-left: 1px solid #000000">&nbsp;</td>
+            <td align="center">0</td>
+            <td align="center">1</td>
+            <td align="center">0</td>
+            <td style="border-right: 1px solid #000000">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+            <td align="center">x<sub>S</sub></td>
+            <td align="center">y<sub>S</sub></td>
+            <td align="center">1</td>
+            <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+          </tr>
+        </tbody></table>
+        </td>
+        <td>
+        <table style="border-collapse: collapse" border="0" cellpadding="2">
+          <tbody><tr>
+            <td>&nbsp;</td>
+            <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+            <td align="center">Sx</td>
+            <td align="center">0</td>
+            <td align="center"><span lang="en">&nbsp;</span>0</td>
+            <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+          </tr>
+          <tr>
+            <td><sub>&nbsp;</sub>=&nbsp;</td>
+            <td style="border-left: 1px solid #000000">&nbsp;</td>
+            <td align="center">0</td>
+            <td align="center">Sy</td>
+            <td align="center"><span lang="en">&nbsp;</span>0</td>
+            <td style="border-right: 1px solid #000000">&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+            <td align="center">-x<sub>S</sub><sup>2</sup>Sx</td>
+            <td align="center"><span lang="en">&nbsp; </span>-y<sub>S</sub><sup>2</sup>Sy</td>
+            <td align="center"><span lang="en">&nbsp;</span>1</td>
+            <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+          </tr>
+        </tbody></table>
+        </td>
+      </tr>
+    </tbody></table>
+    <p>Współrzędne punktów otrzymujemy mnożąc ich macierze <strong>P</strong> przez 
+    macierz przekształcenia <strong>G</strong>:<strong>&nbsp; P</strong>' =
+    <strong>P</strong> x <strong>G</strong>.</p>
+    <hr size="1" color="#0099CC">
+  </div>
+  <p>Skalować można również wzdłuż dwóch osi prostopadłych do siebie i tworzących 
+  kąt &#966; z osiami układu współrzędnych:</p>
+</blockquote>
+<p style="text-align: center"><img src="Przekszta%C5%82cenia%202D_pliki/ol051_04.gif" alt="Skalowanie pod kątem" border="0" width="396" height="373"></p>
+<blockquote>
+  <p>Znalezienie macierzy przekształcenia <strong>G</strong> proponuję jako zadanie 
+  dla czytelnika. Dla ambitnych proponuję zastanowić się nad skalowaniem względem 
+  dwóch osi prostopadłych, nachylonych pod zadanym katem względem osi układu współrzędnych, 
+  jednakże przesuniętych do punktu P<sub>S</sub> = (x<sub>S</sub>.y<sub>S</sub>).</p>
+</blockquote>
+<h3>Jednokładność</h3>
+<blockquote>
+  <p><span class="b">Jednokładność</span> <span class="rem">(ang. homothety, homeothetic 
+  transformation)</span> o środku P<sub>H</sub> = (x<sub>H</sub>,y<sub>H</sub>) 
+  i skali k różnej od zera jest przekształceniem płaszczyzny, które punkt (x,y) 
+  przekształca w punkt o współrzędnych:</p>
+  <blockquote>
+    <p>x' = x<sub>H</sub> + k(x - x<sub>H</sub>)<br>
+    y' = y<sub>H</sub> + k(y - y<sub>H</sub>)</p>
+  </blockquote>
+  <p>Interpretacja geometryczna jest bardzo prosta:</p>
+</blockquote>
+<p style="text-align: center"><img src="Przekszta%C5%82cenia%202D_pliki/ol051_05.gif" alt="Jednokładność" border="0" width="377" height="373"></p>
+<p>&nbsp;</p>
+<blockquote>
+  <p>Prowadzimy prostą przechodzącą przez punkt P<sub>H</sub> = (x<sub>H</sub>,y<sub>H</sub>) 
+  oraz punkt P = (x,y). Punkt P' = (x',y') odkładamy na tej prostej tak, aby jego 
+  odległość do P<sub>H</sub> była k razy większa od odległości punktu P od P<sub>H</sub> 
+  - czyli:</p>
+  <blockquote>
+    <p class="style5"><nobr>|P<sub>H</sub>P'| = k|P<sub>H</sub>P|</nobr></p>
+  </blockquote>
+  <p>Jeśli k jest ujemne, to punkt P' będzie znajdował się po drugiej stronie punktu 
+  P<sub>H</sub> niż punkt P. Dla k = -1 oba punkty P i P' będą w równych odległościach 
+  od P<sub>H</sub>, lecz znajdą się po przeciwnych stronach punktu P<sub>H</sub>. 
+  Otrzymamy symetrię środkową.</p>
+  <p>Macierz jednokładności jest następująca:</p>
+</blockquote>
+<div align="center">
+  <table style="border-collapse: collapse" border="0" cellpadding="2">
+    <tbody><tr>
+      <td>&nbsp;</td>
+      <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+      <td align="center">k</td>
+      <td align="center">0</td>
+      <td align="center">&nbsp;0</td>
+      <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td><strong>H</strong><sub> 3 x 3</sub> =&nbsp;</td>
+      <td style="border-left: 1px solid #000000">&nbsp;</td>
+      <td align="center">0</td>
+      <td align="center">k</td>
+      <td align="center">&nbsp;0</td>
+      <td style="border-right: 1px solid #000000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+      <td align="center">(1 - k)x<sub>H</sub></td>
+      <td align="center">&nbsp; (1 - k)y<sub>H</sub></td>
+      <td align="center">&nbsp;1</td>
+      <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+    </tr>
+  </tbody></table>
+</div>
+<blockquote>
+  <p>Punkt P' otrzymamy standardowo: <strong>P</strong>' = <strong>P</strong> x
+  <strong>H</strong>.</p>
+</blockquote>
+<h3>Powinowactwo prostokątne</h3>
+<p style="text-align: center"><img alt="Powinowactwo prostokątne" src="Przekszta%C5%82cenia%202D_pliki/ol051_06.gif" width="386" height="394"></p>
+<blockquote>
+  <p>Przy <span class="b">powinowactwie prostokątnym</span> <span class="rem">
+  (ang. rectangular affinity)</span> mamy daną prostą o równaniu ax + by + c = 0 oraz 
+  stosunek powinowactwa k. Przez punkt P = (x,y) prowadzimy prostopadłą do prostej. Prostopadła przecina prostą <nobr>ax + by + c = 0</nobr> w punkcie Q, 
+  który jest rzutem prostokątnym punktu P na oś powinowactwa. Punkt P' = (x',y') 
+  znajdujemy na prostopadłej w odległości |P'Q| równej odległości k|QP|.</p>
+  <p>Jeśli k = -1, otrzymujemy <span class="b">symetrię osiową</span> 
+  <span class="rem">(ang. axial symmetry)</span> względem osi powinowactwa.</p>
+  <p>Jeśli oś powinowactwa pokrywa się z osią OX lub OY, to otrzymujemy skalowanie 
+  względem osi OX lub OY.</p>
+  <table border="0" cellspacing="0" cellpadding="0">
+    <tbody><tr>
+      <td rowspan="2">Oznaczmy:&nbsp;&nbsp; f = </td>
+      <td align="center">k - 1</td>
+    </tr>
+    <tr>
+      <td style="border-top: 1px solid #000000" align="center">a<sup>2</sup> + b<sup>2</sup></td>
+    </tr>
+  </tbody></table>
+  <p>Macierz powinowactwa prostokątnego względem prostej ax + by + c = 0 i o współczynniku 
+  k jest następująca:</p>
+</blockquote>
+<div align="center">
+  <table style="border-collapse: collapse" border="0" cellpadding="2">
+    <tbody><tr>
+      <td>&nbsp;</td>
+      <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+      <td align="center">1 + fa<sup>2</sup></td>
+      <td align="center">fab</td>
+      <td align="center">&nbsp;0</td>
+      <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td><b>A</b><sub>R 3 x 3</sub> =&nbsp;</td>
+      <td style="border-left: 1px solid #000000">&nbsp;</td>
+      <td align="center">fab</td>
+      <td align="center">1 + fb<sup>2</sup></td>
+      <td align="center">&nbsp;0</td>
+      <td style="border-right: 1px solid #000000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+      <td align="center">fac</td>
+      <td align="center">fbc</td>
+      <td align="center">&nbsp;1</td>
+      <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+    </tr>
+  </tbody></table>
+</div>
+<blockquote>
+  <p>Macierze współrzędnych wierzchołków przemnażamy przez macierz <b>A</b><sub>R</sub>:
+  <b>P</b>' = <b>P</b> x <b>A</b><sub>R</sub>.</p>
+</blockquote>
+<h3>Ścinanie</h3>
+<p style="text-align: center"><img src="Przekszta%C5%82cenia%202D_pliki/ol051_07.gif" border="0" width="377" height="373"></p>
+<blockquote>
+  <p> <span class="b">Ścinanie</span>  
+  <span class="rem">(ang. shear)</span> jest przekształceniem, które przesuwa 
+  punkt P wzdłuż osi OX lub OY o odległość zależną od drugiej współrzędnej i 
+  współczynnika ścinania wzdłuż tej osi:</p>
+  <blockquote>
+    <p>x' = x + kx &#8226; y<br>
+    y' = y + ky &#8226; x</p>
+  </blockquote>
+  <p>Macierz przekształcenia jest następująca:</p>
+<div align="center">
+  <table style="border-collapse: collapse" border="0" cellpadding="2">
+    <tbody><tr>
+      <td>&nbsp;</td>
+      <td style="border-left: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+      <td align="center">1</td>
+      <td align="center">ky</td>
+      <td align="center">&nbsp;0</td>
+      <td style="border-right: 1px solid #000000; border-top: 1px solid #000000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td><b>S</b><sub>S 3 x 3</sub> =&nbsp;</td>
+      <td style="border-left: 1px solid #000000">&nbsp;</td>
+      <td align="center">kx</td>
+      <td align="center">1</td>
+      <td align="center">&nbsp;0</td>
+      <td style="border-right: 1px solid #000000">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td style="border-left: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+      <td align="center">0</td>
+      <td align="center">0</td>
+      <td align="center">&nbsp;1</td>
+      <td style="border-right: 1px solid #000000; border-bottom: 1px solid #000000">&nbsp;</td>
+    </tr>
+  </tbody></table>
+  <p>Jeśli jeden z współczynników kx lub ky jest równy 0, to ścinanie następuje 
+  tylko wzdłuż jednej z osi, dla której współczynnik ścinania ma wartość różną 
+  od zera. Obraz punktu otrzymujemy przemnażając macierz punktu <b>P</b> przez 
+  macierz ścinania <b>S</b><sub>S</sub>:&nbsp; <b>P</b>' = <b>P</b> x <b>S</b><sub>S</sub>.</p></div>
+</blockquote>
+<h3>Funkcje biblioteczne tworzenia macierzy przekształceń</h3>
+<blockquote>
+  <p>Dla każdego przekształcenia utworzymy osobną funkcję biblioteki SDL_gfx, która 
+  utworzy odpowiednią macierz przekształcenia na podstawie otrzymanych parametrów. 
+  Utwórz projekt SDL, dołącz do niego pliki <a target="_blank" href="http://eduinf.waw.pl/inf/utils/002_roz/sdl009/SDL_gfx.h">SDL_gfx.h</a>, <a target="_blank" href="http://eduinf.waw.pl/inf/utils/002_roz/sdl009/SDL_gfx.cpp">SDL_gfx.cpp</a>, 
+  których opis znajdziesz w podsumowaniu
+  <a href="http://eduinf.waw.pl/inf/utils/002_roz/sdl009.php">SDL009</a>. Następnie dołącz pliki <a target="_blank" href="http://eduinf.waw.pl/inf/utils/002_roz/gui004/SDL_gui.h">SDL_gui.h</a> i <a target="_blank" href="http://eduinf.waw.pl/inf/utils/002_roz/gui004/SDL_gui.cpp">SDL_gui.cpp</a> 
+  - opis w podsumowaniu <a href="http://eduinf.waw.pl/inf/utils/002_roz/gui004.php">GUI004</a>. Będziemy również potrzebowali 
+  czcionki <a href="http://eduinf.waw.pl/inf/utils/002_roz/vecprop9x12.fnt">vecprop9x12.fnt</a>, którą przekopiuj do katalogu 
+  projektu SDL.</p>
+  <p>Na końcu pliku nagłówkowego <span class="b">SDL_gfx.h</span> dopisz poniższy fragment:</p>
+  <blockquote>
+    <pre><span class="i">
+double</span> * gfx2DTrans(<span class="i">double</span> <span class="v">Tx</span>, <span class="i">double</span> <span class="v">Ty</span>);
+
+<span class="i">double</span> * gfx2DRot(<span class="i">double</span> <span class="v">phi</span>);
+
+<span class="i">double</span> * gfx2DScale(<span class="i">double</span> <span class="v">Sx</span>, <span class="i">double</span> <span class="v">Sy</span>);
+
+<span class="i">double</span> * gfx2DHomoth(<span class="i">double</span> <span class="v">xh</span>, <span class="i">double</span> <span class="v">yh</span>, <span class="i">double</span> <span class="v">k</span>);
+
+<span class="i">double</span> * gfx2DAffine(<span class="i">double</span> <span class="v">a</span>, <span class="i">double</span> <span class="v">b</span>, <span class="i">double</span> <span class="v">c</span>, <span class="i">double</span> <span class="v">k</span>);
+
+<span class="i">double</span> * gfx2DShear(<span class="i">double</span> <span class="v">kx</span>, <span class="i">double</span> <span class="v">ky</span>);
+
+<span class="i">void</span> gfx2DDrawPoly(<span class="v">SDL_Surface</span> * <span class="v">s</span>, <span class="v">Sint32</span> * <span class="v">p</span>, <span class="v">Uint32 color</span>);
+
+<span class="i">void</span> gfx2DTransform(<span class="v">Sint32</span> * <span class="v">p</span>, <span class="i">double</span> * <span class="v">tmx</span>);
+
+<span class="v">Sint32</span> * gfx2DCopyPoly(<span class="v">Sint32</span> * <span class="v">p</span>);
+
+</pre>
+  </blockquote>
+</blockquote>
+<blockquote>
+  <span class="b">gfx2DTrans(Tx,Ty)</span> - tworzy macierz translacji<blockquote>
+    <table style="border-collapse: collapse" border="0" cellpadding="0">
+      <tbody><tr>
+        <td class="v" valign="top">Tx</td>
+        <td valign="top" nowrap="nowrap"><span lang="en">&nbsp;-</span><span lang="en-us">&nbsp;</span></td>
+        <td>przesunięcie wzdłuż osi OX</td>
+      </tr>
+      <tr>
+        <td class="v" valign="top">Ty</td>
+        <td valign="top" nowrap="nowrap">&nbsp;- </td>
+        <td>przesunięcie wzdłuż osi OY</td>
+      </tr>
+    </tbody></table>
+  </blockquote>
+  <span class="b">gfx2DRot(phi)</span> - tworzy macierz rotacji<blockquote>
+    <table style="border-collapse: collapse" border="0" cellpadding="0">
+      <tbody><tr>
+        <td class="v" valign="top">phi</td>
+        <td valign="top" nowrap="nowrap"><span lang="en">&nbsp;-&nbsp;</span></td>
+        <td>kąt obrotu podany w radianach</td>
+      </tr>
+    </tbody></table>
+  </blockquote>
+  <span class="b">gfx2DScale(Sx,Sy)</span> - tworzy macierz skalowania<blockquote>
+    <table style="border-collapse: collapse" border="0" cellpadding="0">
+      <tbody><tr>
+        <td class="v" valign="top">Sx</td>
+        <td valign="top" nowrap="nowrap"><span lang="en">&nbsp;- </span></td>
+        <td>skala na osi OX</td>
+      </tr>
+      <tr>
+        <td class="v" valign="top">Sy</td>
+        <td valign="top" nowrap="nowrap">&nbsp;-<span lang="en">&nbsp;</span> </td>
+        <td>skala na osi OY</td>
+      </tr>
+    </tbody></table>
+  </blockquote>
+  <span class="b">gfx2DHomoth(xh,yh,k)</span> - tworzy macierz jednokładności<blockquote>
+    <table style="border-collapse: collapse" border="0" cellpadding="0">
+      <tbody><tr>
+        <td class="v" valign="top">xh,yh</td>
+        <td valign="top" nowrap="nowrap"><span lang="en">&nbsp;-&nbsp;</span></td>
+        <td>współrzędne punktu jednokładności</td>
+      </tr>
+      <tr>
+        <td class="v" valign="top">k</td>
+        <td valign="top" nowrap="nowrap">&nbsp;- </td>
+        <td>współczynnik skali</td>
+      </tr>
+    </tbody></table>
+  </blockquote>
+  <span class="b">gfx2DAffine(a,b,c,k)</span> - tworzy macierz powinowactwa prostokątnego<blockquote>
+    <table style="border-collapse: collapse" border="0" cellpadding="0">
+      <tbody><tr>
+        <td class="v" valign="top">a,b,c</td>
+        <td valign="top" nowrap="nowrap"><span lang="en">&nbsp;-&nbsp;</span></td>
+        <td>współczynniki osi powinowactwa o równaniu ax + by + c = 0</td>
+      </tr>
+      <tr>
+        <td class="v" valign="top">k</td>
+        <td valign="top" nowrap="nowrap">&nbsp;- </td>
+        <td>współczynnik powinowactwa</td>
+      </tr>
+    </tbody></table>
+  </blockquote>
+  <p><span class="b">gfx2DShear(kx,ky)</span> - tworzy macierz przekształcenia 
+  ścinającego</p>
+  <blockquote>
+    <table style="border-collapse: collapse" border="0" cellpadding="0">
+      <tbody><tr>
+        <td class="v" valign="top">kx</td>
+        <td valign="top" nowrap="nowrap"><span lang="en">&nbsp;-&nbsp;</span></td>
+        <td>współczynniki ścinania wzdłuż osi OX</td>
+      </tr>
+      <tr>
+        <td class="v" valign="top">ky</td>
+        <td valign="top" nowrap="nowrap">&nbsp;- </td>
+        <td>współczynniki ścinania wzdłuż osi OY</td>
+      </tr>
+    </tbody></table>
+  </blockquote>
+  <p><span class="b">gfx2DDrawPoly(s,p,color)</span> - rysuje obiekt zbudowany z 
+  listy łamanych.</p>
+  <blockquote>
+    <table style="border-collapse: collapse" border="0" cellpadding="0">
+      <tbody><tr>
+        <td class="v" valign="top">s</td>
+        <td valign="top" nowrap="nowrap"><span lang="en">&nbsp;- &nbsp; </span></td>
+        <td>wskaźnik struktury SDL_Surface</td>
+      </tr>
+      <tr>
+        <td class="v" valign="top">p</td>
+        <td valign="top" nowrap="nowrap">&nbsp;- </td>
+        <td>wskaźnik listy łamanych</td>
+      </tr>
+      <tr>
+        <td class="v" valign="top">color</td>
+        <td valign="top" nowrap="nowrap">&nbsp;-</td>
+        <td>kolor rysowanych linii</td>
+      </tr>
+    </tbody></table>
+  </blockquote>
+  <p><span class="b">gfx2DTransform(p,tmx)</span> - przekształca współrzędne 
+  wierzchołków obiektu zgodnie z macierzą transformacji. Operację tę wykonujemy 
+  zwykle na kopi obiektu.</p>
+  <blockquote>
+    <table style="border-collapse: collapse" border="0" cellpadding="0">
+      <tbody><tr>
+        <td class="v" valign="top">p</td>
+        <td valign="top" nowrap="nowrap"><span lang="en">&nbsp;- &nbsp; </span></td>
+        <td>wskaźnik listy łamanych</td>
+      </tr>
+      <tr>
+        <td class="v" valign="top">tmx</td>
+        <td valign="top" nowrap="nowrap">&nbsp;- </td>
+        <td>wskaźnik macierzy przekształcenia</td>
+      </tr>
+    </tbody></table>
+  </blockquote>
+  <p><span class="b">gfx2DCopyPoly(p)</span> - tworzy kopię listy łamanych i 
+  zwraca jej adres - po wykorzystaniu kopię usuwamy.</p>
+  <blockquote>
+    <table style="border-collapse: collapse" border="0" cellpadding="0">
+      <tbody><tr>
+        <td class="v" valign="top">p</td>
+        <td valign="top" nowrap="nowrap"><span lang="en">&nbsp;- &nbsp; </span></td>
+        <td>wskaźnik listy łamanych</td>
+      </tr>
+    </tbody></table>
+  </blockquote>
+  <p>Na początku pliku <span class="b">SDL_gfx.cpp</span> dopisz dyrektywę preprocesora zaznaczoną na czerwono
+  <span class="rem">(bez niej nie będzie funkcji trygonometrycznych)</span>:</p>
+  <blockquote>
+    <pre>// I Liceum Ogólnokształcące
+// w Tarnowie
+// Koło informatyczne 2007
+//
+// Biblioteka procedur graficznych dla trybów 32 bitowych
+//-------------------------------------------------------
+
+#include &lt;SDL/SDL_gfx.h&gt;
+#include &lt;stack&gt;
+#include &lt;fstream&gt;
+#include &lt;list&gt;
+<span class="t"><strong>#include &lt;cmath&gt;</strong></span>
+
+using namespace std;
+</pre>
+  </blockquote>
+  <p>Następnie na końcu pliku <span class="b">SDL_ghx.cpp</span> dopisz kod nowych funkcji:</p>
+  <blockquote>
+    <pre><span class="c">
+// Tworzy macierz translacji
+// Tx, Ty - współrzędne wektora przesunięcia
+//------------------------------------------</span>
+
+<span class="i">double</span> * gfx2DTrans(<span class="i">double</span> <span class="v">Tx</span>, <span class="i">double</span> <span class="v">Ty</span>)
+{
+  <span class="i">double</span> * <span class="v">T</span> = <span class="i">new double</span>[<span class="n">9</span>];
+
+  <span class="v">T</span>[<span class="n">1</span>] = <span class="v">T</span>[<span class="n">2</span>] = <span class="v">T</span>[<span class="n">3</span>] = <span class="v">T</span>[<span class="n">5</span>] = <span class="n">0</span>;
+  <span class="v">T</span>[<span class="n">0</span>] = <span class="v">T</span>[<span class="n">4</span>] = <span class="v">T</span>[<span class="n">8</span>] = <span class="n">1</span>;
+  <span class="v">T</span>[<span class="n">6</span>] = <span class="v">Tx</span>;
+  <span class="v">T</span>[<span class="n">7</span>] = <span class="v">Ty</span>;
+  <span class="i">return</span> <span class="v">T</span>;     
+}
+
+<span class="c">// Tworzy macierz rotacji
+// phi - kąt obrotu w radianach
+//-----------------------------</span>
+
+<span class="i">double</span> * gfx2DRot(<span class="i">double</span> <span class="v">phi</span>)
+{
+  <span class="i">double</span> * <span class="v">R</span> = <span class="i">new double</span>[<span class="n">9</span>];
+  
+  <span class="v">R</span>[<span class="n">2</span>] = <span class="v">R</span>[<span class="n">5</span>] = <span class="v">R</span>[<span class="n">6</span>] = <span class="v">R</span>[<span class="n">7</span>] = <span class="n">0</span>;
+  <span class="v">R</span>[<span class="n">0</span>] = <span class="v">R</span>[<span class="n">4</span>] = cos(<span class="v">phi</span>);
+  <span class="v">R</span>[<span class="n">1</span>] = sin(<span class="v">phi</span>);
+  <span class="v">R</span>[<span class="n">3</span>] = -<span class="v">R</span>[<span class="n">1</span>];
+  <span class="v">R</span>[<span class="n">8</span>] = <span class="n">1</span>;
+  <span class="i">return</span> <span class="v">R</span>;
+}
+
+<span class="c">// Tworzy macierz skalowania
+// Sx - współczynnik skali na osi OX
+// Sy - współczynnik skali na osi OY
+//----------------------------------</span>
+
+<span class="i">double</span> * gfx2DScale(<span class="i">double</span> <span class="v">Sx</span>, <span class="i">double</span> <span class="v">Sy</span>)
+{
+  <span class="i">double</span> * <span class="v">S</span> = <span class="i">new double</span>[<span class="n">9</span>];
+  
+  <span class="v">S</span>[<span class="n">1</span>] = <span class="v">S</span>[<span class="n">2</span>] = <span class="v">S</span>[<span class="n">3</span>] = <span class="v">S</span>[<span class="n">5</span>] = <span class="v">S</span>[<span class="n">6</span>] = <span class="v">S</span>[<span class="n">7</span>] = <span class="n">0</span>;
+  <span class="v">S</span>[<span class="n">0</span>] = <span class="v">Sx</span>;
+  <span class="v">S</span>[<span class="n">4</span>] = <span class="v">Sy</span>;
+  <span class="v">S</span>[<span class="n">8</span>] = <span class="n">1</span>;
+  <span class="i">return</span> <span class="v">S</span>;
+}
+
+<span class="c">// Tworzy macierz jednokładności
+// xh,yh - współrzędne punktu jednokładności
+// k - współczynnik jednokładności
+//------------------------------------------</span>
+
+<span class="i">double</span> * gfx2DHomoth(<span class="i">double</span> <span class="v">xh</span>, <span class="i">double</span> <span class="v">yh</span>, <span class="i">double</span> <span class="v">k</span>)
+{
+  <span class="i">double</span> * <span class="v">H</span> = <span class="i">new double</span>[<span class="n">9</span>];
+  
+  <span class="v">H</span>[<span class="n">1</span>] = <span class="v">H</span>[<span class="n">2</span>] = <span class="v">H</span>[<span class="n">3</span>] = <span class="v">H</span>[<span class="n">5</span>] = <span class="n">0</span>;
+  <span class="v">H</span>[<span class="n">0</span>] = <span class="v">H</span>[<span class="n">4</span>] = <span class="v">k</span>;
+  <span class="v">H</span>[<span class="n">6</span>] = (<span class="n">1</span> - <span class="v">k</span>) * <span class="v">xh</span>;
+  <span class="v">H</span>[<span class="n">7</span>] = (<span class="n">1</span> - <span class="v">k</span>) * <span class="v">yh</span>;
+  <span class="v">H</span>[<span class="n">8</span>] = <span class="n">1</span>;
+  <span class="i">return</span> <span class="v">H</span>;       
+}
+
+<span class="c">// Tworzy macierz powinowactwa prostokątnego
+// a,b,c - współczynniki osi powinowactwa ax+by+c=0
+// k - współczynnik powinowactwa
+//-------------------------------------------------</span>
+<span class="i">
+double</span> * gfx2DAffine(<span class="i">double</span> <span class="v">a</span>, <span class="i">double</span> <span class="v">b</span>, <span class="i">double</span> <span class="v">c</span>, <span class="i">double</span> <span class="v">k</span>)
+{
+   <span class="i">double</span> * <span class="v">SR</span> = <span class="i">new double</span>[<span class="n">9</span>];
+   <span class="i">double</span> <span class="v">f</span> = (<span class="v">k</span> - <span class="n">1</span>) / (<span class="v">a</span> * <span class="v">a</span> + <span class="v">b</span> * <span class="v">b</span>);
+   
+   <span class="v">SR</span>[<span class="n">0</span>] = <span class="n">1</span> + <span class="v">f</span> * <span class="v">a</span> * <span class="v">a</span>;
+   <span class="v">SR</span>[<span class="n">1</span>] = <span class="v">SR</span>[<span class="n">3</span>] = <span class="v">f</span> * <span class="v">a</span> * <span class="v">b</span>;
+   <span class="v">SR</span>[<span class="n">2</span>] = <span class="v">SR</span>[<span class="n">5</span>] = <span class="n">0</span>;
+   <span class="v">SR</span>[<span class="n">4</span>] = <span class="n">1</span> + <span class="v">f</span> * <span class="v">b</span> * <span class="v">b</span>;
+   <span class="v">SR</span>[<span class="n">6</span>] = <span class="v">f</span> * <span class="v">a</span> * <span class="v">c</span>;
+   <span class="v">SR</span>[<span class="n">7</span>] = <span class="v">f</span> * <span class="v">b</span> * <span class="v">c</span>;
+   <span class="v">SR</span>[<span class="n">8</span>] = 1;
+   <span class="i">return</span> <span class="v">SR</span>;
+}
+
+<span class="c">// Tworzy macierz ścinania
+// kx - współczynnik ścinania wzdłuż osi OX
+// ky - współczynnik ścinania wzdłuż osi OY
+//-----------------------------------------</span>
+
+<span class="i">double</span> * gfx2DShear(<span class="i">double</span> <span class="v">kx</span>, <span class="i">double</span> <span class="v">ky</span>)
+{
+  <span class="i">double</span> * <span class="v">S</span> = <span class="i">new double</span>[<span class="n">9</span>];
+
+  <span class="v">S</span>[<span class="n">0</span>] = <span class="v">S</span>[<span class="n">4</span>] = <span class="v">S</span>[<span class="n">8</span>] = <span class="n">1</span>;
+  <span class="v">S</span>[<span class="n">1</span>] = <span class="v">ky</span>;
+  <span class="v">S</span>[<span class="n">2</span>] = <span class="v">S</span>[<span class="n">5</span>] = <span class="v">S</span>[<span class="n">6</span>] = <span class="v">S</span>[<span class="n">7</span>] = <span class="n">0</span>;
+  <span class="v">S</span>[<span class="n">3</span>] = <span class="v">kx</span>;
+  <span class="i">return</span> <span class="v">S</span>;
+}
+
+<span class="c">// Rysuje figurę zbudowaną z listy łamanych
+// s - wskaźnik struktury SDL_Surface
+// p - wskaźnik listy łamanych
+// color - kolor linii
+//----------------------------------------- </span>
+
+<span class="i">void</span> gfx2DDrawPoly(<span class="v">SDL_Surface</span> * <span class="v">s</span>, <span class="v">Sint32</span> * <span class="v">p</span>, <span class="v">Uint32 color</span>)
+{
+  <span class="v">Sint32 plen</span>, <span class="v">x</span>, <span class="v">y</span>;
+  
+  <span class="i">while</span>(<span class="v">plen</span> = * <span class="v">p</span>++)
+  {
+    <span class="v">x</span> = * <span class="v">p</span>++; <span class="v">y</span> = * <span class="v">p</span>++;
+    gfxMoveTo(<span class="v">x</span>, <span class="v">y</span>);
+    <span class="i">while</span>(--<span class="v">plen</span>)
+    {
+      <span class="v">x</span> = * <span class="v">p</span>++; <span class="v">y</span> = * <span class="v">p</span>++;
+      gfxClipLineTo(<span class="v">s</span>, <span class="v">x</span>, <span class="v">y</span>, <span class="v">color</span>);          
+    }
+  }
+}
+
+<span class="c">// Dokonuje transformacji figury na podstawie
+// macierzy przekształcenia
+// p   - wskaźnik listy łamanych
+// tmx - macierz transformacji
+//-------------------------------------------</span>
+
+<span class="i">void</span> gfx2DTransform(<span class="v">Sint32</span> * <span class="v">p</span>, <span class="i">double</span> * <span class="v">tmx</span>)
+{
+  <span class="i">double</span> <span class="v">pxy</span>[<span class="n">3</span>], * <span class="v">pw</span>;
+  <span class="v">Sint32 plen</span>;
+  
+  <span class="i">while</span>(<span class="v">plen</span> = * <span class="v">p</span>++)
+  {
+    <span class="i">while</span>(<span class="v">plen</span>--)
+    {
+      <span class="v">pxy</span>[<span class="n">0</span>] = * <span class="v">p</span>++; <span class="v">pxy</span>[<span class="n">1</span>] = * <span class="v">p</span>++; <span class="v">pxy</span>[<span class="n">2</span>] = <span class="n">1</span>;
+      <span class="v">pw</span> = gfxMMul(<span class="n">1</span>,<span class="n">3</span>,<span class="n">3</span>,<span class="v">pxy</span>,<span class="v">tmx</span>);
+      * (<span class="v">p</span> -<span class="n"> 2</span>) = (<span class="v">Sint32</span>)<span class="v">pw</span>[<span class="n">0</span>];
+      * (<span class="v">p</span> - <span class="n">1</span>) = (<span class="v">Sint32</span>)<span class="v">pw</span>[<span class="n">1</span>];
+      <span class="i">delete</span> [] <span class="v">pw</span>;
+    }
+  } 
+}
+
+<span class="c">// Tworzy kopię listy łamanych
+// p - wskaźnik pierwotnej listy
+//------------------------------</span>
+
+<span class="v">Sint32</span> * gfx2DCopyPoly(<span class="v">Sint32</span> * <span class="v">p</span>)
+{
+  <span class="v">Sint32 plen</span>, * <span class="v">pp</span> = <span class="v">p</span>;
+  
+  <span class="i">while</span>(<span class="v">plen</span> = * <span class="v">pp</span>++)
+  {
+    <span class="i">while</span>(<span class="v">plen</span>--) <span class="v">pp</span> += <span class="n">2</span>;
+  }
+  <span class="v">plen</span> = <span class="v">pp</span> - <span class="v">p</span>;
+  
+  <span class="v">Sint32</span> * <span class="v">f</span> = <span class="v">pp</span> = <span class="i">new</span> Sint32[<span class="v">plen</span>];
+
+  <span class="i">while</span>(<span class="v">plen</span>--) * <span class="v">pp</span>++ = * <span class="v">p</span>++;
+
+  <span class="i">return</span> <span class="v">f</span>;
+}
+
+</pre>
+  </blockquote>
+  <p>Poniższy program testuje nowe funkcje biblioteczne demonstrując 
+  jednocześnie sposób ich używania. Rodzaj transformacji 
+  wybieramy przyciskiem akcji.</p>
+  <blockquote>
+    <pre><span class="c">// I Liceum Ogólnokształcące
+// w Tarnowie
+// Koło informatyczne
+//
+// P040 - Transformacje geometryczne
+//----------------------------------</span>
+
+<span class="pp">#include &lt;SDL/SDL_gfx.h&gt;
+#include &lt;SDL/SDL_gui.h&gt;
+#include &lt;time.h&gt;
+
+</span><span class="i">const int</span> <span class="v">SCRX</span> = <span class="n">640</span>;      <span class="c">// stałe określające szerokość i wysokość</span>
+<span class="i">const int</span> <span class="v">SCRY</span> = <span class="n">480</span>;      <span class="c">// ekranu w pikselach</span>
+
+<span class="v">SDL_Surface</span> * <span class="v">screen</span>;
+<span class="v">gfxFont</span>     * <span class="v">font</span> = gfxOpenFont(<span class="t">"vecprop9x12.fnt"</span>);
+
+<span class="c">//------------------------------------------
+// Funkcje obsługujące poszczególne animacje
+//------------------------------------------</span>
+
+<span class="i">void</span> (* <span class="v">action</span>)();         <span class="c">// wskaźnik funkcji</span>
+
+<span class="v">Sint32 figure</span>[] = {<span class="n">11</span>,<span class="n">0</span>,<span class="n">20</span>,<span class="n">20</span>,<span class="n">0</span>,<span class="n">40</span>,<span class="n">0</span>,<span class="n">40</span>,<span class="n">20</span>,<span class="n">60</span>,<span class="n">20</span>,<span class="n">60</span>,<span class="n">40</span>,<span class="n">50</span>,<span class="n">50</span>,<span class="n">50</span>,<span class="n">60</span>,<span class="n">20</span>,<span class="n">60</span>,<span class="n">0</span>,<span class="n">40</span>,<span class="n">0</span>,<span class="n">20</span>,<span class="n">0</span>};
+
+<span class="i">char</span> * <span class="v">t</span>[] = {<span class="t">"Transformacje geometryczne"</span>,<span class="t">" Translacja "</span>,<span class="t">" Rotacja "</span>,<span class="t">" Skalowanie "</span>,
+              <span class="t">" Jednokładność "</span>,<span class="t">" Powinowactwo "</span>,<span class="t">" Ścinanie "</span>,<span class="t">" Zakończ "</span>};<span class="c">
+
+// Ustala prostokąt obcinania dla animacji
+// i kasuje ekran - włącza blokadę
+//----------------------------------------</span>
+
+<span class="i">void</span> SetClip()
+{
+  <span class="v">SDL_Rect r</span>;
+  
+  <span class="v">r</span>.<span class="v">x</span> = <span class="n">0</span>; <span class="v">r</span>.<span class="v">y</span> = <span class="v">font</span>-&gt;<span class="v">h</span> + <span class="n">8</span>; <span class="v">r</span>.<span class="v">h</span> = <span class="v">screen</span>-&gt;<span class="v">h</span> - <span class="v">font</span>-&gt;<span class="v">h</span> - <span class="n">8</span>; <span class="v">r</span>.<span class="v">w</span> = <span class="v">screen</span>-&gt;<span class="v">w</span>;
+  
+  SDL_SetClipRect(<span class="v">screen</span>,&amp;<span class="v">r</span>);
+  
+  <span class="i">if</span>(SDL_MUSTLOCK(<span class="v">screen</span>)) SDL_LockSurface(<span class="v">screen</span>);
+
+  SDL_FillRect(<span class="v">screen</span>, &amp;(<span class="v">screen</span>-&gt;<span class="v">clip_rect</span>), <span class="n">0</span>);  
+}
+
+<span class="c">// Odtwarza prostokąt obcinania
+//-----------------------------</span>
+
+<span class="i">void</span> RestoreClip(<span class="i">int</span> <span class="v">i</span>)
+{
+  gfxDrawText(<span class="v">screen</span>, <span class="v">font</span>, <span class="v">t</span>[<span class="v">i</span>], (<span class="v">screen</span>-&gt;<span class="v">w</span> &gt;&gt; <span class="n">1</span>) - (gfxTextLength(<span class="v">font</span>,<span class="v"> t</span>[<span class="v">i</span>]) &gt;&gt; <span class="n">1</span>),
+              <span class="v">screen</span>-&gt;<span class="v">clip_rect</span>.<span class="v">y</span> + <span class="n">8</span>, <span class="n">0x00ff00</span>, <span class="n">-1</span>);
+  <span class="v">SDL_Rect r</span>;
+  
+  <span class="i">if</span>(SDL_MUSTLOCK(<span class="v">screen</span>)) SDL_UnlockSurface(<span class="v">screen</span>);
+
+  SDL_UpdateRect(<span class="v">screen</span>, <span class="v">screen</span>-&gt;<span class="v">clip_rect</span>.<span class="v">x</span>, <span class="v">screen</span>-&gt;<span class="v">clip_rect</span>.<span class="v">y</span>,
+                 <span class="v">screen</span>-&gt;<span class="v">clip_rect</span>.<span class="v">w</span>, <span class="v">screen</span>-&gt;<span class="v">clip_rect</span>.<span class="v">h</span>);    
+
+  <span class="v">r</span>.<span class="v">x</span> = <span class="n">0</span>; <span class="v">r</span>.<span class="v">y</span> = <span class="n">0</span>; <span class="v">r</span>.<span class="v">h</span> = <span class="v">screen</span>-&gt;<span class="v">h</span>; <span class="v">r</span>.<span class="v">w</span> = <span class="v">screen</span>-&gt;<span class="v">w</span>;
+  
+  SDL_SetClipRect(<span class="v">screen</span>, &amp;<span class="v">r</span>);
+}
+
+<span class="c">// Translacja
+//-----------</span>
+
+<span class="i">const int</span> <span class="v">MAXF</span> = <span class="n">25</span>;
+
+<span class="i">double</span> <span class="v">Tx</span>[<span class="v">MAXF</span>],<span class="v">Ty</span>[<span class="v">MAXF</span>],<span class="v">dx</span>[<span class="v">MAXF</span>],<span class="v">dy</span>[<span class="v">MAXF</span>];
+<span class="i">int</span>    <span class="v">si</span>[<span class="v">MAXF</span>];
+
+<span class="i">void</span> InitTransI(<span class="i">int</span> <span class="v">i</span>)
+{
+  <span class="i">int</span> <span class="v">xp</span>,<span class="v">yp</span>,<span class="v">xk</span>,<span class="v">yk</span>;
+  <span class="v">si</span>[<span class="v">i</span>] = <span class="n">300</span> + rand() % <span class="n">1000</span>;
+  <span class="i">switch</span>(rand() % <span class="n">4</span>)
+  {
+    <span class="i">case</span> <span class="n">0</span>:
+      <span class="v">xp</span> = rand() % (<span class="v">screen</span>-&gt;<span class="v">w</span> + <span class="n">120</span>) - <span class="n">60</span>;
+      <span class="v">xk</span> = rand() % (<span class="v">screen</span>-&gt;<span class="v">w</span> + <span class="n">120</span>) - <span class="n">60</span>;
+      <span class="v">yp</span> = <span class="n">-60</span>;
+      <span class="v">yk</span> = <span class="v">screen</span>-&gt;<span class="v">h</span> + <span class="n">60</span>;
+      <span class="i">break</span>;
+    <span class="i">case</span> <span class="n">1</span>:
+      <span class="v">xp</span> = rand() % (<span class="v">screen</span>-&gt;<span class="v">w</span> + <span class="n">120</span>) - <span class="n">60</span>;
+      <span class="v">xk</span> = rand() % (<span class="v">screen</span>-&gt;<span class="v">w</span> + <span class="n">120</span>) - <span class="n">60</span>;
+      <span class="v">yk</span> = <span class="n">-60</span>;
+      <span class="v">yp</span> = <span class="v">screen</span>-&gt;<span class="v">h</span> + <span class="n">30</span>;
+      <span class="i">break</span>;
+    <span class="i">case</span> <span class="n">2</span>:
+      <span class="v">yp</span> = rand() % (<span class="v">screen</span>-&gt;<span class="v">h</span> + <span class="n">120</span>) - <span class="n">60</span>;
+      <span class="v">yk</span> = rand() % (<span class="v">screen</span>-&gt;<span class="v">h</span> + <span class="n">120</span>) - <span class="n">60</span>;
+      <span class="v">xp</span> = <span class="n">-60</span>;
+      <span class="v">xk</span> = <span class="v">screen</span>-&gt;<span class="v">w</span> + <span class="n">60</span>;
+      <span class="i">break</span>;
+    <span class="i">case</span> <span class="n">3</span>:
+      <span class="v">yp</span> = rand() % (<span class="v">screen</span>-&gt;<span class="v">h</span> + <span class="n">120</span>) - <span class="n">60</span>;
+      <span class="v">yk</span> = rand() % (<span class="v">screen</span>-&gt;<span class="v">h</span> + <span class="n">120</span>) - <span class="n">60</span>;
+      <span class="v">xk</span> = <span class="n">-60</span>;
+      <span class="v">xp</span> = <span class="v">screen</span>-&gt;<span class="v">w</span> + <span class="n">60</span>;
+      <span class="i">break</span>;
+  }
+  <span class="v">Tx</span>[<span class="v">i</span>] = <span class="v">xp</span>; <span class="v">Ty</span>[<span class="v">i</span>] = <span class="v">yp</span>;
+  <span class="v">dx</span>[<span class="v">i</span>] = (<span class="v">xk</span> - <span class="v">Tx</span>[<span class="v">i</span>]) / <span class="v">si</span>[<span class="v">i</span>];
+  <span class="v">dy</span>[<span class="v">i</span>] = (<span class="v">yk</span> - <span class="v">Ty</span>[<span class="v">i</span>]) / <span class="v">si</span>[<span class="v">i</span>];
+}
+
+<span class="i">void</span> InitTrans()
+{
+  <span class="i">for</span>(<span class="i">int</span> <span class="v">i</span> = <span class="n">0</span>; <span class="v">i</span> &lt; <span class="v">MAXF</span>; <span class="v">i</span>++) InitTransI(<span class="v">i</span>);     
+}
+
+<span class="i">void</span> Trans()
+{ 
+  SetClip();
+
+  <span class="i">for</span>(<span class="i">int</span> <span class="v">i</span> = <span class="n">0</span>; <span class="v">i</span> &lt; <span class="v">MAXF</span>; <span class="v">i</span>++)
+  {
+    <span class="i">if</span>(!<span class="v">si</span>[<span class="v">i</span>]) InitTransI(<span class="v">i</span>);
+    <span class="v">si</span>[<span class="v">i</span>]--;
+    <span class="v">Tx</span>[<span class="v">i</span>] += <span class="v">dx</span>[<span class="v">i</span>];
+    <span class="v">Ty</span>[<span class="v">i</span>] += <span class="v">dy</span>[<span class="v">i</span>];
+    <span class="i">double</span> * <span class="v">T</span> = gfx2DTrans(<span class="v">Tx</span>[<span class="v">i</span>], <span class="v">Ty</span>[<span class="v">i</span>]);
+    <span class="v">Sint32</span> * <span class="v">F</span> = gfx2DCopyPoly(<span class="v">figure</span>);
+    gfx2DTransform(<span class="v">F</span>, <span class="v">T</span>);
+    gfx2DDrawPoly(<span class="v">screen</span>, <span class="v">F</span>, <span class="n">0xffff00</span>);
+    <span class="i">delete</span> [] <span class="v">T</span>;
+    <span class="i">delete</span> [] <span class="v">F</span>;
+  }
+  RestoreClip(<span class="n">1</span>);
+}
+
+<span class="c">// Rotacja
+//-----------</span>
+
+<span class="i">double</span> <span class="v">phi</span>[<span class="v">MAXF</span>], <span class="v">dphi</span>[<span class="v">MAXF</span>];
+
+<span class="i">void</span> InitRot()
+{
+  <span class="i">for</span>(<span class="i">int</span> <span class="v">i</span> = <span class="n">0</span>; <span class="v">i</span> &lt; <span class="v">MAXF</span>; <span class="v">i</span>++)
+  {
+    <span class="v">Tx</span>[<span class="v">i</span>] = rand() % (<span class="v">screen</span>-&gt;<span class="v">w</span>);
+    <span class="v">Ty</span>[<span class="v">i</span>] = rand() &amp; (<span class="v">screen</span>-&gt;<span class="v">h</span>);
+    <span class="v">phi</span>[<span class="v">i</span>] =<span class="n"> 0</span>;
+    <span class="v">dphi</span>[<span class="v">i</span>] = <span class="n">1</span> / (<span class="i">double</span>)(<span class="n">200</span> + rand() % <span class="n">200</span>);
+  }
+}
+
+<span class="i">void</span> Rot()
+{
+  SetClip(); 
+
+  <span class="i">for</span>(<span class="i">int</span> <span class="v">i</span> = <span class="n">0</span>; <span class="v">i</span> &lt; <span class="v">MAXF</span>; <span class="v">i</span>++)
+  {
+    <span class="v">phi</span>[<span class="v">i</span>] += <span class="v">dphi</span>[<span class="v">i</span>];
+    <span class="i">if</span>(<span class="v">phi</span>[<span class="v">i</span>] &gt; <span class="n">6.2831853</span>) <span class="v">phi</span>[<span class="v">i</span>] -= <span class="n">6.2831853</span>;
+    <span class="i">double</span> * <span class="v">T1</span> = gfx2DTrans(<span class="v">Tx</span>[<span class="v">i</span>] - (<span class="v">screen</span>-&gt;<span class="v">w</span> &gt;&gt; <span class="n">1</span>), <span class="v">Ty</span>[<span class="v">i</span>] - (<span class="v">screen</span>-&gt;<span class="v">h</span> &gt;&gt; <span class="n">1</span>));
+    <span class="i">double</span> * <span class="v">R</span>  = gfx2DRot(<span class="v">phi</span>[<span class="v">i</span>]);
+    <span class="i">double</span> * <span class="v">T2</span> = gfx2DTrans((<span class="v">screen</span>-&gt;<span class="v">w</span> &gt;&gt; 1),(<span class="v">screen</span>-&gt;<span class="v">h</span> &gt;&gt; <span class="n">1</span>));
+    <span class="i">double</span> * <span class="v">E</span>  = gfxMMul(<span class="n">3</span>, <span class="n">3</span>, <span class="n">3</span>, <span class="v">T1</span>, <span class="v">R</span>);
+    <span class="i">double</span> * <span class="v">G</span>  = gfxMMul(<span class="n">3</span>, <span class="n">3</span>, <span class="n">3</span>, <span class="v">E</span>, <span class="v">T2</span>);
+    <span class="v">Sint32</span> * <span class="v">F</span>  = gfx2DCopyPoly(<span class="v">figure</span>);
+    gfx2DTransform(<span class="v">F</span>, <span class="v">G</span>);
+    gfx2DDrawPoly(<span class="v">screen</span>, <span class="v">F</span>, <span class="n">0xffff00</span>);
+    <span class="i">delete</span> [] <span class="v">T1</span>;
+    <span class="i">delete</span> [] <span class="v">R</span>;
+    <span class="i">delete</span> [] <span class="v">T2</span>;
+    <span class="i">delete</span> [] <span class="v">E</span>;
+    <span class="i">delete</span> [] <span class="v">F</span>;
+    <span class="i">delete</span> [] <span class="v">G</span>;
+  }
+  
+  gfxLine(<span class="v">screen</span>, <span class="v">screen</span>-&gt;<span class="v">w</span> &gt;&gt; <span class="n">1</span>, (<span class="v">screen</span>-&gt;<span class="v">h</span> &gt;&gt; <span class="n">1</span>) - <span class="n">5</span>,
+                  <span class="v">screen</span>-&gt;<span class="v">w</span> &gt;&gt; <span class="n">1</span>, (<span class="v">screen</span>-&gt;<span class="v">h</span> &gt;&gt; <span class="n">1</span>) + <span class="n">5</span>, <span class="n">0xff0000</span>);
+  gfxLine(<span class="v">screen</span>, (<span class="v">screen</span>-&gt;<span class="v">w</span> &gt;&gt; <span class="n">1</span>) - <span class="n">5</span>, <span class="v">screen</span>-&gt;<span class="v">h</span> &gt;&gt; <span class="n">1</span>,
+                  (<span class="v">screen</span>-&gt;<span class="v">w</span> &gt;&gt; <span class="n">1</span>) + <span class="n">5</span>, <span class="v">screen</span>-&gt;<span class="v">h</span> &gt;&gt; <span class="n">1</span>, <span class="n">0xff0000</span>);
+                  
+  RestoreClip(<span class="n">2</span>);
+}
+
+<span class="c">// Skalowanie
+//-----------</span>
+
+<span class="i">double</span> <span class="v">Sx</span>[<span class="v">MAXF</span>], <span class="v">Sy</span>[<span class="v">MAXF</span>], <span class="v">dSx</span>[<span class="v">MAXF</span>], <span class="v">dSy</span>[<span class="v">MAXF</span>];
+
+<span class="i">void</span> InitScale()
+{
+  <span class="i">for</span>(<span class="i">int</span> <span class="v">i</span> = <span class="n">0</span>; <span class="v">i</span> &lt; <span class="v">MAXF</span>; <span class="v">i</span>++)
+  {
+    <span class="v">Tx</span>[<span class="v">i</span>] = rand() % (<span class="v">screen</span>-&gt;<span class="v">w</span>);
+    <span class="v">Ty</span>[<span class="v">i</span>] = rand() &amp; (<span class="v">screen</span>-&gt;<span class="v">h</span>);
+    <span class="v">Sx</span>[<span class="v">i</span>] = <span class="n">0.5</span>; <span class="v">dSx</span>[<span class="v">i</span>] = <span class="n">1</span> / (<span class="i">double</span>)(<span class="n">200</span> + rand() % <span class="n">200</span>);
+    <span class="v">Sy</span>[<span class="v">i</span>] = <span class="n">0.5</span>; <span class="v">dSy</span>[<span class="v">i</span>] = <span class="n">1</span> / (<span class="i">double</span>)(<span class="n">200</span> + rand() % <span class="n">200</span>);
+  }
+}
+
+<span class="i">void</span> Scale()
+{
+  SetClip();
+
+  <span class="i">for</span>(<span class="i">int</span> <span class="v">i</span> = <span class="n">0</span>; <span class="v">i</span> &lt; <span class="v">MAXF</span>; <span class="v">i</span>++)
+  {
+    <span class="i">if</span>((<span class="v">Sx</span>[<span class="v">i</span>] &lt; <span class="n">-2</span>) || (<span class="v">Sx</span>[<span class="v">i</span>] &gt; <span class="n">2</span>)) <span class="v">dSx</span>[<span class="v">i</span>] = - <span class="v">dSx</span>[<span class="v">i</span>];
+    <span class="i">if</span>((<span class="v">Sy</span>[<span class="v">i</span>] &lt; <span class="n">-2</span>) || (<span class="v">Sy</span>[<span class="v">i</span>] &gt; <span class="n">2</span>)) <span class="v">dSy</span>[<span class="v">i</span>] = - <span class="v">dSy</span>[<span class="v">i</span>];
+    <span class="v">Sx</span>[<span class="v">i</span>] += <span class="v">dSx</span>[<span class="v">i</span>];
+    <span class="v">Sy</span>[<span class="v">i</span>] += <span class="v">dSy</span>[<span class="v">i</span>];    
+    <span class="i">double</span> * <span class="v">T1</span> = gfx2DTrans(<span class="n">-30</span>, <span class="n">-30</span>);
+    <span class="i">double</span> * <span class="v">S</span>  = gfx2DScale(<span class="v">Sx</span>[<span class="v">i</span>], <span class="v">Sy</span>[<span class="v">i</span>]);
+    <span class="i">double</span> * <span class="v">T2</span> = gfx2DTrans(<span class="v">Tx</span>[<span class="v">i</span>] + <span class="n">30</span>,<span class="v"> Ty</span>[<span class="v">i</span>] + <span class="n">30</span>);
+    <span class="i">double</span> * <span class="v">E</span>  = gfxMMul(<span class="n">3</span>, <span class="n">3</span>, <span class="n">3</span>, <span class="v">T1</span>, <span class="v">S</span>);
+    <span class="i">double</span> * <span class="v">G</span>  = gfxMMul(<span class="n">3</span>, <span class="n">3</span>, <span class="n">3</span>, <span class="v">E</span>, <span class="v">T2</span>);
+    <span class="v">Sint32</span> * <span class="v">F</span>  = gfx2DCopyPoly(<span class="v">figure</span>);
+    gfx2DTransform(<span class="v">F</span>, <span class="v">G</span>);
+    gfx2DDrawPoly(<span class="v">screen</span>, <span class="v">F</span>, <span class="n">0xffff00</span>);
+    <span class="i">delete</span> [] <span class="v">T1</span>;
+    <span class="i">delete</span> [] <span class="v">S</span>;
+    <span class="i">delete</span> [] <span class="v">T2</span>;
+    <span class="i">delete</span> [] <span class="v">E</span>;
+    <span class="i">delete</span> [] <span class="v">F</span>;
+    <span class="i">delete</span> [] <span class="v">G</span>;
+  }
+                  
+  RestoreClip(<span class="n">3</span>);
+}
+
+<span class="c">// Jednokładność
+//-----------</span>
+
+<span class="i">double</span> <span class="v">kH</span>[<span class="v">MAXF</span>], <span class="v">dkH</span>[<span class="v">MAXF</span>];
+
+<span class="i">void</span> InitHomoth()
+{
+  <span class="i">for</span>(<span class="i">int</span> <span class="v">i</span> = <span class="n">0</span>; <span class="v">i</span> &lt; <span class="v">MAXF</span>; <span class="v">i</span>++)
+  {
+    <span class="v">Tx</span>[<span class="v">i</span>] = rand() % (<span class="v">screen</span>-&gt;<span class="v">w</span>);
+    <span class="v">Ty</span>[<span class="v">i</span>] = rand() &amp; (<span class="v">screen</span>-&gt;<span class="v">h</span>);
+    <span class="v">kH</span>[<span class="v">i</span>] = <span class="n">1</span>; <span class="v">dkH</span>[<span class="v">i</span>] = <span class="n">1</span> / (<span class="i">double</span>)(<span class="n">200</span> + rand() % <span class="n">200</span>);
+  }     
+}
+
+<span class="i">void</span> Homoth()
+{
+  SetClip();
+
+  <span class="i">for</span>(<span class="i">int</span> <span class="v">i</span> = <span class="n">0</span>; <span class="v">i</span> &lt; <span class="v">MAXF</span>; <span class="v">i</span>++)
+  {
+    <span class="i">if</span>((<span class="v">kH</span>[<span class="v">i</span>] &lt; <span class="n">-2</span>) || (<span class="v">kH</span>[<span class="v">i</span>] &gt; <span class="n">2</span>)) <span class="v">dkH</span>[<span class="v">i</span>] = - <span class="v">dkH</span>[<span class="v">i</span>];
+    <span class="v">kH</span>[<span class="v">i</span>] += <span class="v">dkH</span>[<span class="v">i</span>];
+    <span class="i">double</span> * <span class="v">T</span>  = gfx2DTrans(<span class="v">Tx</span>[<span class="v">i</span>], <span class="v">Ty</span>[<span class="v">i</span>]);    
+    <span class="i">double</span> * <span class="v">H</span>  = gfx2DHomoth(<span class="v">screen</span>-&gt;<span class="v">w</span> &gt;&gt; <span class="n">1</span>, <span class="v">screen</span>-&gt;<span class="v">h</span> &gt;&gt; <span class="n">1</span>, <span class="v">kH</span>[<span class="v">i</span>]);
+    <span class="i">double</span> * <span class="v">G</span>  = gfxMMul(<span class="n">3</span>, <span class="n">3</span>, <span class="n">3</span>, <span class="v">T</span>, <span class="v">H</span>);
+    <span class="v">Sint32</span> * <span class="v">F</span>  = gfx2DCopyPoly(<span class="v">figure</span>);
+    gfx2DTransform(<span class="v">F</span>, <span class="v">G</span>);
+    gfx2DDrawPoly(<span class="v">screen</span>, <span class="v">F</span>, <span class="n">0xffff00</span>);
+    gfxLine(<span class="v">screen</span>, <span class="v">screen</span>-&gt;<span class="v">w</span> &gt;&gt; <span class="n">1</span>, (<span class="v">screen</span>-&gt;<span class="v">h</span> &gt;&gt; <span class="n">1</span>) - <span class="n">5</span>,
+                    <span class="v">screen</span>-&gt;<span class="v">w</span> &gt;&gt; <span class="n">1</span>, (<span class="v">screen</span>-&gt;<span class="v">h</span> &gt;&gt; <span class="n">1</span>) + <span class="n">5</span>, <span class="n">0xff0000</span>);
+    gfxLine(<span class="v">screen</span>, (<span class="v">screen</span>-&gt;<span class="v">w</span> &gt;&gt; <span class="n">1</span>) - <span class="n">5</span>, <span class="v">screen</span>-&gt;<span class="v">h</span> &gt;&gt; <span class="n">1</span>,<span class="n">
+</span>                    (<span class="v">screen</span>-&gt;<span class="v">w</span> &gt;&gt; <span class="n">1</span>) + <span class="n">5</span>, <span class="v">screen</span>-&gt;<span class="v">h</span> &gt;&gt; <span class="n">1</span>, <span class="n">0xff0000</span>);
+    <span class="i">delete</span> [] <span class="v">T</span>;
+    <span class="i">delete</span> [] <span class="v">H</span>;
+    <span class="i">delete</span> [] <span class="v">G</span>;
+    <span class="i">delete</span> [] <span class="v">F</span>;
+  }
+                  
+  RestoreClip(<span class="n">4</span>);   
+}
+
+<span class="c">// Powinowactwo
+//-------------</span>
+
+<span class="i">void</span> Affine()
+{
+  SetClip();
+
+  <span class="i">for</span>(<span class="i">int</span> <span class="v">i</span> = <span class="n">0</span>; <span class="v">i</span> &lt; <span class="v">MAXF</span>; <span class="v">i</span>++)
+  {
+    <span class="i">if</span>((<span class="v">kH</span>[<span class="v">i</span>] &lt; <span class="n">-2</span>) || (<span class="v">kH</span>[<span class="v">i</span>] &gt; <span class="n">2</span>)) <span class="v">dkH</span>[<span class="v">i</span>] = - <span class="v">dkH</span>[<span class="v">i</span>];
+    <span class="v">kH</span>[<span class="v">i</span>] += <span class="v">dkH</span>[<span class="v">i</span>];
+    <span class="i">double</span> * <span class="v">T</span> = gfx2DTrans(<span class="v">Tx</span>[<span class="v">i</span>], <span class="v">Ty</span>[<span class="v">i</span>]);    
+    <span class="i">double</span> * <span class="v">A</span> = gfx2DAffine(-<span class="v">screen</span>-&gt;<span class="v">h </span>+ <span class="n">1</span>, <span class="v">screen</span>-&gt;<span class="v">w </span>- <span class="n">1</span>, <span class="n">0</span>, <span class="v">kH</span>[<span class="v">i</span>]);
+    <span class="i">double</span> * <span class="v">G</span> = gfxMMul(<span class="n">3</span>, <span class="n">3</span>, <span class="n">3</span>, <span class="v">T</span>, <span class="v">A</span>);
+    <span class="v">Sint32</span> * <span class="v">F</span> = gfx2DCopyPoly(<span class="v">figure</span>);
+    gfx2DTransform(<span class="v">F</span>, <span class="v">G</span>);
+    gfx2DDrawPoly(<span class="v">screen</span>, <span class="v">F</span>, <span class="n">0xffff00</span>);
+    gfxClipLine(<span class="v">screen</span>, <span class="n">0</span>,<span class="n">0</span>,<span class="v">screen</span>-&gt;<span class="v">w</span> - <span class="n">1</span>, <span class="v">screen</span>-&gt;<span class="v">h</span> - <span class="n">1</span>, <span class="n">0xff0000</span>);
+    <span class="i">delete</span> [] <span class="v">T</span>;
+    <span class="i">delete</span> [] <span class="v">A</span>;
+    <span class="i">delete</span> [] <span class="v">G</span>;
+    <span class="i">delete</span> [] <span class="v">F</span>;
+  }
+                  
+  RestoreClip(<span class="n">5</span>);
+}
+
+<span class="c">// Ścinanie
+//---------</span>
+
+<span class="i">double</span> <span class="v">kx</span>[<span class="v">MAXF</span>], <span class="v">dkx</span>[<span class="v">MAXF</span>], <span class="v">ky</span>[<span class="v">MAXF</span>], <span class="v">dky</span>[<span class="v">MAXF</span>];
+
+<span class="i">void</span> InitShear()
+{
+  <span class="i">for</span>(<span class="i">int</span> <span class="v">i</span> = <span class="n">0</span>; <span class="v">i</span> &lt; <span class="v">MAXF</span>; <span class="v">i</span>++)
+  {
+    <span class="v">Tx</span>[<span class="v">i</span>] = rand() % (<span class="v">screen</span>-&gt;<span class="v">w</span>);
+    <span class="v">Ty</span>[<span class="v">i</span>] = rand() % (<span class="v">screen</span>-&gt;<span class="v">h</span>);
+    <span class="v">kx</span>[<span class="v">i</span>] = <span class="n">0</span>; <span class="v">dkx</span>[<span class="v">i</span>] = <span class="n">1</span> / (<span class="i">double</span>)(<span class="n">200</span> + rand() % <span class="n">200</span>);
+    <span class="v">ky</span>[<span class="v">i</span>] = <span class="n">0</span>; <span class="v">dky</span>[<span class="v">i</span>] = <span class="n">1</span> / (<span class="i">double</span>)(<span class="n">200</span> + rand() % <span class="n">200</span>);
+  } 
+}
+
+<span class="i">void</span> Shear()
+{
+  SetClip();
+
+  <span class="i">for</span>(<span class="i">int</span> <span class="v">i</span> = <span class="n">0</span>; <span class="v">i</span> &lt; <span class="v">MAXF</span>; <span class="v">i</span>++)
+  {
+    <span class="i">if</span>((<span class="v">kx</span>[<span class="v">i</span>] &lt; <span class="n">-2</span>) || (<span class="v">kx</span>[<span class="v">i</span>] &gt; <span class="n">2</span>)) <span class="v">dkx</span>[<span class="v">i</span>] = - <span class="v">dkx</span>[<span class="v">i</span>];
+    <span class="i">if</span>((<span class="v">ky</span>[<span class="v">i</span>] &lt; <span class="n">-2</span>) || (<span class="v">ky</span>[<span class="v">i</span>] &gt; <span class="n">2</span>)) <span class="v">dky</span>[<span class="v">i</span>] = - <span class="v">dky</span>[<span class="v">i</span>];
+    <span class="v">kx</span>[<span class="v">i</span>] += <span class="v">dkx</span>[<span class="v">i</span>];
+    <span class="v">ky</span>[<span class="v">i</span>] += <span class="v">dky</span>[<span class="v">i</span>];
+    <span class="i">double</span> * <span class="v">S</span> = gfx2DShear(<span class="v">kx</span>[<span class="v">i</span>], <span class="v">ky</span>[<span class="v">i</span>]);
+    <span class="i">double</span> * <span class="v">T</span> = gfx2DTrans(<span class="v">Tx</span>[<span class="v">i</span>], <span class="v">Ty</span>[<span class="v">i</span>]);
+    <span class="i">double</span> * <span class="v">G</span> = gfxMMul(<span class="n">3</span>, <span class="n">3</span>, <span class="n">3</span>, <span class="v">S</span>, <span class="v">T</span>);
+    <span class="v">Sint32</span> * <span class="v">F</span> = gfx2DCopyPoly(<span class="v">figure</span>);
+    gfx2DTransform(<span class="v">F</span>, <span class="v">G</span>);
+    gfx2DDrawPoly(<span class="v">screen</span>, <span class="v">F</span>, <span class="n">0xffff00</span>);
+    <span class="i">delete</span> [] <span class="v">T</span>;
+    <span class="i">delete</span> [] <span class="v">S</span>;
+    <span class="i">delete</span> [] <span class="v">G</span>;
+    <span class="i">delete</span> [] <span class="v">F</span>;
+  }
+
+  RestoreClip(<span class="n">6</span>); 
+}
+
+<span class="c">// Funkcja obsługująca przyciski
+//------------------------------</span>
+
+<span class="i">void</span> bfn(<span class="v">gfxGUIObject</span> * <span class="v">sender</span>)
+{
+  <span class="i">switch</span>(<span class="v">sender</span>-&gt;<span class="v">tag</span>)
+  {
+    <span class="i">case</span> <span class="n">1</span>: InitTrans();  <span class="v">action</span> = Trans; <span class="i"> break</span>;
+    <span class="i">case</span> <span class="n">2</span>: InitRot();    <span class="v">action</span> = Rot; <span class="i">   break</span>;
+    <span class="i">case</span> <span class="n">3</span>: InitScale();  <span class="v">action</span> = Scale; <span class="i"> break</span>;
+    <span class="i">case</span> <span class="n">4</span>: InitHomoth(); <span class="v">action</span> = Homoth; <span class="i">break</span>;
+    <span class="i">case</span> <span class="n">5</span>: InitHomoth(); <span class="v">action</span> = Affine; <span class="i">break</span>;
+    <span class="i">case</span> <span class="n">6</span>: InitShear();  <span class="v">action</span> = Shear;  <span class="i">break</span>;
+    <span class="i">case</span> <span class="n">7</span>: exit(<span class="n">0</span>);
+  }
+}
+
+<span class="c">//***********************
+// *** Program główny ***
+//***********************</span>
+
+<span class="i">int</span> main(<span class="i">int</span> <span class="v">argc</span>, <span class="i">char</span> * <span class="v">argv</span>[])
+{
+  
+<span class="c">// Tablica siedmiu wskaźników do przycisków</span>
+
+  <span class="v">gfxButton</span> * <span class="v">b</span>[<span class="n">7</span>];
+  
+  <span class="i">if</span>(SDL_Init(<span class="n">SDL_INIT_VIDEO</span>)) exit(<span class="n">-1</span>);
+
+  atexit(SDL_Quit);
+  
+  <span class="i">if</span>(!(<span class="v">screen</span> = SDL_SetVideoMode(<span class="v">SCRX</span>, <span class="v">SCRY</span>, <span class="n">32</span>, <span class="n">SDL_HWSURFACE</span>))) exit(<span class="n">-1</span>);
+
+  SDL_WM_SetCaption(<span class="v">t</span>[<span class="n">0</span>], <span class="t">""</span>); 
+    
+<span class="c">// Tworzymy przyciski akcji</span>
+
+  <span class="v">SDL_Rect r</span>;
+
+  <span class="v">r</span>.<span class="v">x</span> = <span class="v">r</span>.<span class="v">y</span> = <span class="v">r</span>.<span class="v">w</span> = <span class="n">0</span>;
+  <span class="v">r</span>.<span class="v">h</span> = <span class="v">font</span>-&gt;<span class="v">h</span> + <span class="n">8</span>;
+    
+  <span class="i">for</span>(<span class="i">int</span> <span class="v">i</span> = <span class="n">1</span>; <span class="v">i</span> &lt;= <span class="n">7</span>; <span class="v">i</span>++)
+  {
+    <span class="v">b</span>[<span class="v">i</span>] = <span class="i">new</span> gfxButton(<span class="v">i</span>, <span class="n">true</span>, <span class="v">screen</span>, <span class="v">font</span>, &amp;<span class="v">r</span>, <span class="v">t</span>[<span class="v">i</span>], <span class="v">bfn</span>);
+    <span class="v">r</span>.<span class="v">x</span> += gfxTextLength(<span class="v">font</span>,<span class="v"> t</span>[<span class="v">i</span>]) + <span class="n">4</span>;
+  }
+   
+<span class="c">// Inicjujemy generator liczb pseudolosowych</span>
+
+  srand((<span class="i">unsigned</span>)time(<span class="n">NULL</span>));
+  
+<span class="c">// Inicjujemy animacje</span>
+
+  InitTrans();
+  <span class="v">action</span> = Trans;
+  
+<span class="c">// Obsługujemy zdarzenia</span>
+
+  <span class="v">SDL_Event</span> <span class="v">event</span>;
+  
+  <span class="i">bool</span> <span class="v">running</span> = <span class="n">true</span>;  
+  <span class="i">while</span>(<span class="v">running</span>)
+  {
+    SDL_Delay(<span class="n">1</span>);
+    (* <span class="v">action</span>)(); <span class="c">// wywołujemy funkcję obsługi animacji</span>
+    <span class="i">while</span>(SDL_PollEvent(&amp;<span class="v">event</span>))
+    {
+      <span class="i">bool</span> <span class="v">eventfree</span>;
+      <span class="i">for</span>(<span class="i">int</span> <span class="v">i</span> = <span class="n">1</span>; <span class="v">i</span> &lt;= <span class="n">7</span>; <span class="v">i</span>++)
+        <span class="i">if</span>(!(<span class="v">eventfree</span> = <span class="v">b</span>[<span class="v">i</span>]-&gt;DoEvents(&amp;<span class="v">event</span>))) <span class="i">break</span>;
+      <span class="i">if</span>(<span class="v">eventfree</span> &amp;&amp; (<span class="v">event</span>.<span class="v">type</span> == <span class="n">SDL_QUIT</span>))
+      {
+        <span class="v">running</span> = <span class="n">false</span>;
+        <span class="i">break</span>;
+      }
+    }
+  }
+  
+<span class="c">// zamykamy czcionkę
+</span>
+  gfxCloseFont(<span class="v">font</span>);
+
+<span class="c">// Usuwamy przyciski
+</span>
+  <span class="i">for</span>(<span class="i">int</span> <span class="v">i</span> = <span class="n">1</span>; <span class="v">i</span> &lt;= <span class="n">7</span>; <span class="v">i</span>++) <span class="i">delete</span> <span class="v">b</span>[<span class="v">i</span>];
+  <span class="i">return</span> <span class="n">0</span>;
+}</pre>
+  </blockquote>
+</blockquote>
+<p style="text-align: center">
+<img src="Przekszta%C5%82cenia%202D_pliki/ol051_08.gif" border="0" width="646" height="512"></p>
+<blockquote>
+  <hr size="1" color="#0099CC">
+  <p><a href="http://eduinf.waw.pl/inf/utils/002_roz/sdl010.php">Podsumowanie</a></p>
+</blockquote>
+<p>
+</p><hr size="1" color="#C0C0C0">
+<br>
+<form name="frmadminemail" method="post" action="http://eduinf.waw.pl/phpscripts/email_admin.php" class="bs1">
+  <input name="adminemail_tytul" value="Przekształcenia 2D" type="hidden">
+  <div align="center">
+    <table style="border-collapse: collapse" border="0" cellpadding="4">
+      <tbody><tr>
+        <td nowrap="nowrap">
+          <div align="center">
+            <h3 style="text-align: center">List do administratora Serwisu Edukacyjnego Nauczycieli I LO</h3>
+            <table style="border-collapse: collapse" border="0" cellpadding="4">
+              <tbody><tr>
+                <td align="right">Twój email:</td>
+		<td><input class="respond" name="adminemail_adres" size="44" onchange="sprawdz_adres()" onkeyup="sprawdz_adres()" onkeypress="sprawdz_adres()" type="text"> <span class="t">(jeśli chcesz otrzymać odpowiedź)</span></td>
+              </tr>
+              <tr>
+                <td align="right">Temat:</td>
+                <td><input class="respond" name="adminemail_temat" size="44" onchange="sprawdz_temat()" onkeyup="sprawdz_temat()" onkeypress="sprawdz_temat()" type="text"></td>
+              </tr>
+              <tr>
+                <td align="right"><span class="t">Uwaga:</span></td>
+                <td><input class="respond" name="adminemail_sp" size="10" onchange="sprawdz_sp()" onkeyup="sprawdz_sp()" onkeypress="sprawdz_sp()" type="text"> <b>&#8592; tutaj wpisz wyraz <span style="background-color: #FFFFFF">&nbsp;<font color="#FF0000">ilo</font></span>&nbsp;, inaczej list zostanie <span class="t">zignorowany</span></b></td>
+              </tr>
+            </tbody></table>
+          </div>
+<p style="text-align: center" align="right">Poniżej wpisz swoje uwagi lub pytania dotyczące tego rozdziału <span class="rem">(max. 2048 znaków)</span>.</p>
+<p style="text-align: center" align="right"> <textarea rows="10" name="adminemail_wiadomosc" cols="80" class="respond" onchange="zlicz_znaki()" onkeyup="zlicz_znaki()" onkeypress="zlicz_znaki()"></textarea></p>
+<p style="text-align: center" align="right">Liczba znaków do wykorzystania: <span id="char_count">2048</span></p>
+<p style="text-align: center" align="right"><input value="Wyślij" type="submit"> <input value="Kasuj" type="reset"><input name="feedback" value="/inf/utils/002_roz/2008_21.php" type="hidden"></p></td>
+<td>&nbsp;</td>
+<td>
+<iframe id="o1fux7fo" name="o1fux7fo" src="Przekszta%C5%82cenia%202D_pliki/afr.html" scrolling="no" width="125" height="125" frameborder="0">
+&lt;a 
+href='http://kreacje.ogicom.pl/www/delivery/ck.php?n=o1fux7fo&amp;cb=355873114'
+ target='_blank'&gt;
+&lt;img 
+src='http://kreacje.ogicom.pl/www/delivery/avw.php?zoneid=6&amp;cb=355873114&amp;n=o1fux7fo'
+ border='0' alt='' /&gt;&lt;/a&gt;
+</iframe>
+</td>
+</tr>
+</tbody></table>
+</div>
+
+<script type="text/javascript">
+function zlicz_znaki()
+{
+   a = 2048-document.frmadminemail.adminemail_wiadomosc.value.length
+   if(a < 0)
+   {
+      wiadomosc = document.frmadminemail.adminemail_wiadomosc.value
+      wiadomosc = wiadomosc.substr(0,2048)
+      document.frmadminemail.adminemail_wiadomosc.value = wiadomosc
+      a = 0
+   }
+   document.getElementById("char_count").innerHTML = a;
+}
+
+function sprawdz_adres()
+{
+   if(document.frmadminemail.adminemail_adres.value.length > 128)
+   {
+      wiadomosc = document.frmadminemail.adminemail_adres.value
+      wiadomosc = wiadomosc.substr(0,128)
+      document.frmadminemail.adminemail_adres.value = wiadomosc
+   }
+}
+
+function sprawdz_temat()
+{
+   if(document.frmadminemail.adminemail_temat.value.length > 256)
+   {
+      wiadomosc = document.frmadminemail.adminemail_temat.value
+      wiadomosc = wiadomosc.substr(0,256)
+      document.frmadminemail.adminemail_temat.value = wiadomosc
+   }
+}
+
+function sprawdz_sp()
+{
+   if(document.frmadminemail.adminemail_sp.value.length > 3)
+   {
+      wiadomosc = document.frmadminemail.adminemail_sp.value
+      wiadomosc = wiadomosc.substr(0,3)
+      document.frmadminemail.adminemail_sp.value = wiadomosc
+   }
+}
+
+</script>
+
+  </form>
+<p style="text-align: center"><b><span class="t">W związku z dużą liczbą
+ listów do naszego serwisu edukacyjnego nie będziemy udzielać odpowiedzi
+ na prośby rozwiązywania zadań, pisania programów zaliczeniowych, 
+przesyłania materiałów czy też tłumaczenia zagadnień szeroko opisywanych
+ w podręcznikach.</span></b></p>
+<br>
+<hr size="1" color="#C0C0C0">
+<div align="left">
+  <table style="float: right; BORDER-COLLAPSE: collapse; padding-left:8px; padding-right:8px; padding-top:1px; padding-bottom:1px; cellPadding=" 4"="" border="0">
+    <tbody><tr>
+      <td><img src="Przekszta%C5%82cenia%202D_pliki/i-lo_budynek.jpg"></td><td valign="top"><p style="text-align: center" align="center">&nbsp;&nbsp;&nbsp;I Liceum Ogólnokształcące&nbsp;&nbsp;&nbsp;<br><span class="small">im. Kazimierza Brodzińskiego<br> w Tarnowie</span><br><span class="small">&#169;2018 mgr Jerzy Wałaszek</span></p></td>
+    </tr>
+  </tbody></table>
+</div>
+<span class="small">Dokument ten rozpowszechniany jest zgodnie z zasadami licencji<br>
+<b>GNU Free Documentation License</b>.</span>
+<script language="javascript">
+  document.frmadminemail.adminemail_tytul.value = document.title;
+</script>
+<br><br><br><br><br><p></p>
+
+
+
+
+</body></html>
