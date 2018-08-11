@@ -21,7 +21,7 @@ class Simulation{
 	static int i = 0;
 
 	// static String file = "finale_shape.txt";
-	static String file = "L2.txt";
+	static String file = "finale_shape.txt";
 	// static String file = "initial_shape.txt";
 	static String file_folder = "./shapes";
 
@@ -42,7 +42,8 @@ class Simulation{
 		    System.err.format("IOException: %s%n", x);
 		}
 		panel.programData.marker = new Marker(new Point(114, 3));
-		panel.programData.marker.scale(3);
+		panel.programData.marker.scale(4);
+		panel.programData.grid_size = 15;
 		panel.repaint();
 	}
 }

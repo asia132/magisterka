@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelListener;
 
 import java.util.ArrayList;
+import java.util.StringJoiner;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -18,22 +19,90 @@ import java.lang.Math;
 
 public class MainPanel extends JPanel implements MouseListener, MouseWheelListener, MouseMotionListener {
 	static final long serialVersionUID = 42L;
-	private int x, y;
 	int x1, y1;
-	private int x2, y2;
+	protected int x2, y2;
 	int screenWidth, screenHeight;
 	MainData programData = new MainData();
-	boolean ruleAdding;
 	boolean newLine = false;
 	boolean moveMarker = false;
-	public MainPanel(int screenWidth, int screenHeight, boolean ruleAdding) {
+	public MainPanel(int screenWidth, int screenHeight) {
 		this.screenWidth = screenWidth;
 		this.screenHeight = screenHeight;
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		addMouseWheelListener(this);
 		setPreferredSize(new Dimension(screenWidth, screenHeight));
-		this.ruleAdding = ruleAdding;
+	}
+	public void addLine(int x1, int y1, int x2, int y2){
+		programData.lines.add(new Line(x1, y1, x2, y2));
+	}
+	public void addMarker(int x, int y){
+		if (this.programData.marker == null)
+			this.programData.marker = new Marker(x, y);
+		else
+			this.programData.marker.setXY(x, y);
+		this.repaint();
+	}
+	public void removeMarker(){
+		this.programData.marker = null;
+		this.repaint();
+	}
+	public void removeSelectedLines(){
+		for (Line line: this.programData.getModified())
+			this.programData.lines.remove(line);
+		this.programData.clearModified();
+		this.programData.clearModifiedMarker();
+		this.repaint();
+	}
+	public void copyLines(){
+		this.programData.copyModyfied();
+		this.programData.clearModified();
+		this.programData.clearModifiedMarker();
+		this.repaint();
+	}
+	public void pasteLines(int x, int y){
+		this.programData.pasteCopied(x, y);
+		this.repaint();
+	}
+	public void moveMarker(int x2, int y2){
+		this.programData.marker.setXY(x2, y2);
+	}
+	public void paintLines(Graphics2D g2d){
+		programData.drawLines(g2d);
+	}
+	public void moveLines(int x1, int y1, int x2, int y2){
+		
+		for (Line line: programData.lines){
+			line.move(x2 - x1, y2 - y1);
+		}
+		if (programData.marker != null)
+			this.programData.marker.move(x2 - x1, y2 - y1);
+		this.repaint();
+	}
+	public void resizeMarker(int x1, int y1, int x2, int y2){
+		if (programData.marker != null){
+			if (programData.marker.tryToResize(x1, y1, x2, y2) == true)
+				newLine = false;
+		}
+	}
+	public void modifyLines(int x1, int y1, int x2, int y2){
+		Line line = programData.tempShapeFirstLine();
+		if (programData.distans(line.getX_a(), line.getY_a(), x2, y2) < programData.distans(line.getX_b(), line.getY_b(), x2, y2)){
+			line.setXY_a(x2, y2);
+		}
+		else{
+			line.setXY_b(x2, y2);
+		}
+	}
+	public void moveLinesOfTempShape(int x1, int y1, int x2, int y2){
+		for (int i = 0; i < programData.getModified().size(); i++){	
+			programData.tempShapeMove(i, x1, y1, x2, y2);
+		}
+	}
+	@Override
+	public String toString(){
+		StringJoiner info = new StringJoiner("");
+		return info.add(programData.markerToString()).add(programData.linesToString()).add(programData.rulesToString()).toString();
 	}
 	@Override
     public Dimension getPreferredSize() {
@@ -47,8 +116,8 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
 		if (programData.SHOW_GRID)
 			programData.paintGrid(g2d, screenWidth, screenHeight);
-		programData.drawLines(g2d);
-		if (!programData.temp_shape.isEmpty()){
+		paintLines(g2d);
+		if (!programData.tempShapeIsEmpty()){
 			programData.drawTempLine(g2d);
 		}
 		if (programData.checkingRect != null){
@@ -56,10 +125,6 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		}
 		if (programData.marker != null){
 			programData.marker.drawLine(g2d);
-			// System.out.println("Marker: " + programData.marker.p.x + " " + programData.marker.p.y + " " + programData.marker.getD() + " " + programData.marker.h);
-	
-			// for (Line line: programData.lines)
-			// 	System.out.println(line.getX_a() + " " + line.getY_a() + " " + line.getX_b() + " " + line.getY_b());
 		}
 	}
 	@Override
@@ -89,14 +154,14 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 			else{
 				if (!programData.isEmptyModified()){
 					for (Line line: programData.getModified()){
-						programData.temp_shape.add(line);
+						programData.tempShapeAddLine(line);
 					}
 				}
 				else if (programData.marker != null && programData.marker.isMiddle(x1, y1)){
 					this.moveMarker = true;
 				}
 				else {
-					programData.temp_shape.add(new Line(x1, y1, x1, y1));
+					programData.tempShapeAddLine(new Line(x1, y1, x1, y1));
 					newLine = true; 
 				}
 			}
@@ -108,35 +173,22 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		this.y2 = e.getY();
 		if (programData.MIDDLE){
 			if (programData.wasMoved(x1, y1, x2, y2)){
-				for (Line line: programData.lines){
-					line.move(x2 - x1, y2 - y1);
-				}
-				if (programData.marker != null)
-					programData.marker.move(x2 - x1, y2 - y1);
-				this.repaint();
+				moveLines(x1, y1, x2, y2);
 			}
 			programData.MIDDLE = false;
 		}else{
 			if (!programData.RIGHT){
-				if (programData.marker != null){
-					if (programData.marker.tryToResize(x1, y1, x2, y2) == true)
-						newLine = false;
-				}
-				// if (programData.wasMoved(x1, y1, x2, y2) && !programData.isEmptyModified() && programData.temp_shape.size() > 1){
-				// 	for (Line line: programData.getModified()){
-				// 		line.move(x2-x1, y2-y1);
-				// 	}
-				// }
-				programData.temp_shape.clear();
+				resizeMarker(x1, y1, x2, y2);
+				programData.tempShapeClear();
 				if (newLine == true && programData.wasMoved(x1, y1, x2, y2)){
-					programData.lines.add(new Line(x1, y1, x2, y2));
+					this.addLine(x1, y1, x2, y2);
 				}
 				newLine = false;
 				this.moveMarker = false;
 			}
 			else{
 				if (!programData.wasMoved(x1, y1, x2, y2)){
-					PopUpMenu menu = new PopUpMenu(this, ruleAdding);
+					PopUpMenu menu = new PopUpMenu(this);
 					menu.show(e.getComponent(), e.getX(), e.getY());
 				}else{
 					if (programData.checkingRect != null){
@@ -175,39 +227,12 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		this.x2 = e.getX();
 		this.y2 = e.getY();
 		if (!programData.RIGHT){
-			if (this.moveMarker == true){
-				this.programData.marker.setXY(x2, y2);
-			}
-			else if (newLine == true){
-				programData.temp_shape.get(0).setXY_b(x2, y2);
-
-			}
-			else{
-				if (programData.temp_shape.size() == 1){
-					Line line = programData.temp_shape.get(0);
-					if (programData.distans(line.getX_a(), line.getY_a(), x2, y2) < 
-							programData.distans(line.getX_b(), line.getY_b(), x2, y2)){
-						line.setXY_a(x2, y2);
-					}
-					else{
-						line.setXY_b(x2, y2);
-					}
-				}else{
-					if (programData.wasMoved(x1, y1, x2, y2) && programData.getModified().size() > 1){
-						for (int i = 0; i < programData.getModified().size(); i++){
-							// programData.temp_shape.get(i).setXY_a(x2 + programData.initialLines.get(i).getX_a() - x1, y2 + programData.initialLines.get(i).getY_a() - y1);
-							// programData.temp_shape.get(i).setXY_b(x2 + programData.initialLines.get(i).getX_b() - x1, y2 + programData.initialLines.get(i).getY_b() - y1);
-						
-							programData.temp_shape.get(i).move(x2 - x1, y2 - y1);
-							programData.temp_shape.get(i).move(x2 - x1, y2 - y1);
-						}
-					}
-				}
-			}
+			if (this.moveMarker == true)	this.moveMarker(x2, y2);
+			else if (newLine == true)	programData.tempShapeFirstLine().setXY_b(x2, y2);
+			else if (programData.tempShapeSize() == 1)	modifyLines(x1, y1, x2, y2);
+			else if (programData.wasMoved(x1, y1, x2, y2) && programData.getModified().size() > 1)	moveLinesOfTempShape(x1, y1, x2, y2);
 		}
-		else{
-			programData.checkingRect = new Rectangle(x1, y1, x2, y2);
-		}
+		else	programData.checkingRect = new Rectangle(x1, y1, x2, y2);
 		this.repaint();
 	} 
 }

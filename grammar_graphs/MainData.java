@@ -3,28 +3,33 @@ package grammar_graphs;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+
 import java.util.ArrayList;
+import java.util.StringJoiner;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
 import java.lang.Math;
 
 class MainData {
-	MainData() {
-	}
+	MainData() {}
 	boolean RIGHT = false;
 	boolean MIDDLE = false;
 	static boolean showDist = false;
 	Rectangle checkingRect = null;
-	ArrayList <Line> lines = new ArrayList<Line>();
 	Marker marker = null;
 	Marker modified_marker = null;
-	private ArrayList <Line> modyfiedLines = new ArrayList<Line>();
+
+	ArrayList <Line> lines = new ArrayList<Line>();
+	ArrayList <Line> modyfiedLines = new ArrayList<Line>();
 	ArrayList <Line> initialLines = new ArrayList<Line>();
-	ArrayList <Line> temp_shape = new ArrayList<Line>();
+	private ArrayList <Line> temp_shape = new ArrayList<Line>();
+	static ArrayList <Line> copiedLines = new ArrayList<Line>();
+
 	static int grid_size = 20;
 	static ArrayList <Rule> ruleList = new ArrayList<>(); 
-	static ArrayList <Line> copiedLines = new ArrayList<Line>();
+	static ArrayList <Rule> ruleAppList = new ArrayList<>(); 
 	static boolean SHOW_GRID = true;
 	// BLACK BLUE CYAN DARK_GRAY GRAY GREEN LIGHT_GRAY MAGENTA ORANGE PINK RED WHITE YELLOW
 	static Color default_figure_color = Color.BLACK;
@@ -35,11 +40,79 @@ class MainData {
 	static Color default_marker_color = Color.CYAN;
 	static Color default_grid_color = Color.LIGHT_GRAY;
 
+
+	static Rule getRuleOfName(String name){
+		for (Rule rule : ruleList)
+			if (rule.getName().equals(name))
+				return rule;
+		return null;
+	}
+	int tempShapeSize(){
+		return temp_shape.size();
+	}
+	Line tempShapeFirstLine(){
+		return temp_shape.get(0);
+	}
+	Line tempShapeGetLine(int i){
+		return temp_shape.get(i);
+	}
+	void tempShapeClear(){
+		temp_shape.clear();
+		initialLines.clear();
+	}
+	void tempShapeAddLine(Line line){
+		temp_shape.add(line);
+		initialLines.add(line.copy());
+	}
+	boolean tempShapeIsEmpty(){
+		return temp_shape.isEmpty();
+	}
+	void tempShapeMove(int i, int x1, int y1, int x2, int y2){
+		temp_shape.get(i).setXY_a(initialLines.get(i).getX_a() + x2 - x1, initialLines.get(i).getY_a() + y2 - y1);
+		temp_shape.get(i).setXY_b(initialLines.get(i).getX_b() + x2 - x1, initialLines.get(i).getY_b() + y2 - y1);
+	}
+	void clear(){
+		this.marker = null;
+		this.modified_marker = null;
+
+		this.ruleList.clear();
+		this.ruleAppList.clear();
+		
+		this.modyfiedLines.clear();
+		this.lines.clear();
+		this.tempShapeClear();
+		this.copiedLines.clear();
+	}
+	boolean inRuleList(String name){
+		for (Rule rule : ruleList) {
+			if (name.equals(rule.getName()))
+				return true;
+		}
+		return false;
+	}
 	void printAllLines(){
 		for (Line line : lines){
 			line.print();
 		}
 		System.out.println("------------------------------");
+	}
+	String markerToString(){
+		StringJoiner info = new StringJoiner("\t");
+		return info.add(FileSaver.inputTag).add(FileSaver.iSideTag).add(marker.toString()).toString();
+	}
+	String linesToString(){
+		StringJoiner info = new StringJoiner("");
+		for (Line line : lines){
+			info.add(FileSaver.inputTag).add("\t").add(FileSaver.iSideTag).add("\t").add(line.toString());
+		}
+		return info.toString();
+	}
+	String rulesToString(){
+		StringJoiner info = new StringJoiner("\n");
+		for (Rule rule : ruleList){
+			info.add(rule.toString());
+		}
+		return info.toString();
 	}
 	ArrayList <Line> copy(){
 		ArrayList <Line> copy = new ArrayList<Line>();
@@ -53,6 +126,12 @@ class MainData {
 			return (int)Math.floor((x/grid_size)*1);
 		}
 		return (int)Math.ceil((x/grid_size)*1);
+	}
+	static boolean isOnGrid(double x, double y){
+		return x % grid_size == 0.0 && y % grid_size == 0.0;
+	}
+	static boolean isOnGrid(double value){
+		return value % grid_size == 0.0;
 	}
 	void addMarkerToModified(){
 		modified_marker = marker;
@@ -217,7 +296,6 @@ class MainData {
 		for (Line line: lines){
 			if (checkingRect.insideRect(line)){
 				addToModified(line);
-				initialLines.add(line.copy());
 			}
 		}
 		if (marker != null && checkingRect.insideRect(marker)){

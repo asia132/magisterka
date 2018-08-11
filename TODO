@@ -1,0 +1,52 @@
+Bugs:
+  ☐ linie z lewej strony reguły muszą przesuwać wiele i pojedynczą linię z prawej strony @high
+  ☐ okno z listą reguł musi pozwalać na przesuwanie reguł w górę @high
+  ☐ przegrupowanie poleceń w menu @low
+  ☐ skopiowane linie w input pic nie mogą być dzielone z oknem dodawania reguł @low
+  ☐ pionowe linie nie chcą się zapisywać w regule @high
+  ☐ poprawić dodawanie linii dla reguł modyfikujących marker przy:
+    ☐ obracaniu @high
+  ☐ przy edycji regul wspolrzedne markera sie nie zgadzaja
+--- ✄ -----------------------
+BRs:
+  ☐ dokumentacja @low
+  ☐ symulacja @critical @started
+  Gramatyka:
+    ☐ reguły kolorowania @critical
+  dod. funkcjonalności:
+  GUI:
+    ☐ przy dodawaniu nowej reguły na podstawie linii, widok right i left ma być dodstosowany do wielkości linii @low
+    ☐ dodać obroty wielu zaznaczonych linii (tylko o 90 st) @low
+    ☐ skalowanie wielu linii @low
+    ☐ różne grid_size dla różnych okienek @low
+    ☐ okno rules musi być skalowalne @high
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+Archive:
+ ✘ słaba precyzja przy dodawaniu nowej linii @cancelled (18-08-11 13:06) @project(Bugs)
+ ✘ słaba precyzja przy dodawaniu markera @cancelled (18-08-11 13:06) @project(Bugs)
+ ✘ nazwa reguł nie może zawierać znaku '#' ani białych znaków @cancelled (18-08-11 13:06) @project(Bugs)
+ ✔ przesuwanie obrazu nie przesuwa markera @done (18-08-11 12:38) @project(Bugs)
+ ✔ linie usunięte z lewej strony musza być usuwalne z prawej strony @done (18-08-11 11:48) @project(Bugs)
+ ✔ linie z prawej strony mają być nieedytowalne po lewej stronie @done (18-08-10 15:02) @project(BRs / Gramatyka)
+ ✔ zbyt 'szybkie' przesuwanie wielu linii @done (18-08-10 14:35) @project(Bugs)
+ ✔ linie dodawane po prawej stronie mają być automatycznie dodane też po lewej @done (18-08-09 15:43) @project(BRs / Gramatyka)
+ ✔ stworzyć okno z listą reguł i możliwością edycji kolejności ich aplikowania @done (18-08-09 12:52) @project(BRs / Gramatyka)
+ ✔ poprawić stosowanie grupowania + znajdywania podlinii dla linii pionowych @done (18-08-06 16:52) @project(Bugs)
+ ✔ poprawić stosowanie grupowania + znajdywania podlinii @done (18-08-06 11:59) @project(Bugs)
+ ✔ regula usuwania markera nie może dodawać nowych linii @done (18-08-03 10:52) @project(Bugs)
+ ✔ skalowaniu @done (18-08-03 10:30) @project(Bugs)
+ ✔ przesuwaniu @done (18-08-03 10:30) @project(Bugs)
+ ✔ marker musi być przesuwalny przez regułę @done (18-08-02 15:52) @project(BRs / Gramatyka)
+ ✔ marker musi być obracalny przez regułę @done (18-08-02 15:44) @project(BRs / Gramatyka)
+ ✔ marker musi być usuwalny przez regułę @done (18-08-02 11:22) @project(BRs / Gramatyka)
+ ✔ marker musi być skalowalny przez regułę @done (18-08-02 11:11) @project(BRs / Gramatyka)
+ ✔ zapis linii i reguł do pliku @done (18-08-01 15:54) @project(BRs / dod. funkcjonalności)
+ ✔ odczyc linii z pliku @done (18-08-01 15:54) @project(BRs / dod. funkcjonalności)
+ ✔ lista rules do poprawki @done (18-07-28 11:44) @project(Bugs)
+ ✔ defekt3: Line.getFunParams powinno rzucać wyjątek dla funkcji typu x = 1 @done (18-07-28 11:44) @project(Bugs)
+ ✔ jeden duży odcinek = wiele małych @done (18-07-28 10:43) @project(BRs / Gramatyka)
+ ✔ dodać przycis 'reset' @done (18-07-27 12:04) @project(BRs / GUI)
+ ✔ wiele małych odcinków = jeden duży @done (18-07-18 11:51) @project(BRs / Gramatyka)
+ ✔ sprawdzenie, czy istnieje marker, przed zaaplikowaniem reguły @done (18-07-17 19:46) @project(Bugs)
+ ✔ sprawdzenie, czy istnieje marker, przed dodaniem nowej reguły @done (18-07-17 19:35) @project(Bugs)

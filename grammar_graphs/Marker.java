@@ -6,6 +6,9 @@ import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 
 import java.lang.Math;
+import java.lang.IllegalArgumentException;
+
+import java.util.StringJoiner;
 
 class Marker{
 	Point p;
@@ -19,23 +22,37 @@ class Marker{
 		}
 		return (int)Math.ceil((x/MainData.grid_size)*1);
 	}
+// constructors
+	// based on coordinators
 	Marker(int x, int y){
 		this.p = new Point(toGrid(x), toGrid(y));
 		this.r = 2;
 		this.dir = Direct.N;
 		this.color = MainData.default_marker_color;
 	}
+	// based on other Marker object 
 	Marker(Marker marker){
 		this.p = new Point(marker.p.x, marker.p.y);
 		this.r = marker.r;
 		this.dir = marker.dir;
 		this.color = MainData.default_marker_color;
 	}
+	// Based on Point
 	Marker(Point p){
 		this.p = p;
 		this.r = 2;
 		this.dir = Direct.N;
 		this.color = MainData.default_marker_color;
+	}
+	// Based on Point
+	Marker(){
+		this.color = MainData.default_marker_color;
+	}
+//
+	@Override
+	public String toString(){
+		StringJoiner info = new StringJoiner("\t");
+		return info.add("#M").add(dir.toString()).add(Integer.toString(r)).add("" + p.x).add(p.y + "\n").toString();
 	}
 	boolean isMiddle(int x, int y){
 		if (Math.abs(getX() - x) < MainData.grid_size * 0.5 && Math.abs(getY() - y) < MainData.grid_size * 0.5){
@@ -112,9 +129,20 @@ class Marker{
 	void scale(int i){
 		r += i;
 	}
+	void scale(double k) throws Exception{
+		double newR = r * k;
+		if (newR >= 1)
+			r = (int)newR;
+		else
+			throw new Exception("The marker radius cannot be smaller than 1.");
+	}
 	void move(int xt, int yt){
 		this.p.x += toGrid(xt);
 		this.p.y += toGrid(yt);
+	}
+	void move(Point a, Point b){
+		this.p.x += b.x - a.x;
+		this.p.y += b.y - a.y;
 	}
 // ABC
 	int getAx(){
@@ -292,57 +320,66 @@ class Marker{
 		return false;
 	}
 //
+	void increaseR(int i){
+		this.r += toGrid(i);
+	}
+	void decreaseR(int i){
+		this.r -= toGrid(i);
+	}
+	boolean checkR(int i){
+		return r > toGrid(i);
+	}
 	boolean tryToResize(int x1, int y1, int x2, int y2){
 		int precision = (int)(MainData.grid_size*0.5);
 		if (this.checkA(x1, y1) == true){
 			if (this.dir == Direct.N){
 				if (x1 - x2 > precision) rotateL();
 				if (x2 - x1 > precision) rotateR();
-				if (y1 - y2 > precision) r++;
-				if (y2 - y1 > precision && r > 1) r--;
+				if (y1 - y2 > precision) increaseR(y1 - y2);
+				if (y2 - y1 > precision && checkR(y2 - y1)) decreaseR(y2 - y1);
 			}
 			else if (this.dir == Direct.S){
 				if (x1 - x2 > precision) rotateR();
 				if (x2 - x1 > precision) rotateL();
-				if (y1 - y2 > precision && r > 1) r--;
-				if (y2 - y1 > precision) r++;
+				if (y1 - y2 > precision && checkR(y1 - y2)) decreaseR(y1 - y2);
+				if (y2 - y1 > precision) increaseR(y2 - y1);
 			}
 			else if (this.dir == Direct.E){
 				if (y1 - y2 > precision) rotateL();
 				if (y2 - y1 > precision) rotateR();
-				if (x1 - x2 > precision && r > 1) r--;
-				if (x2 - x1 > precision) r++;
+				if (x1 - x2 > precision && checkR(x1 - x2)) decreaseR(x1 - x2);
+				if (x2 - x1 > precision) increaseR(x2 - x1);
 			}
 			else if (this.dir == Direct.W){
 				if (y1 - y2 > precision) rotateR();
 				if (y2 - y1 > precision) rotateL();
-				if (x1 - x2 > precision) r++;
-				if (x2 - x1 > precision && r > 1) r--;
+				if (x1 - x2 > precision) increaseR(x1 - x2);
+				if (x2 - x1 > precision && checkR(x2 - x1)) decreaseR(x2 - x1);
 			}
 			return true;
 		}
 		else if (this.checkB(x1, y1) == true){
 			if (this.dir == Direct.N){
-				if (x1 - x2 > precision) r++;
-				if (x2 - x1 > precision && r > 1) r--;
+				if (x1 - x2 > precision) increaseR(x1 - x2);
+				if (x2 - x1 > precision && checkR(x2 - x1)) decreaseR(x2 - x1);
 				if (y1 - y2 > precision) rotateR();
 				if (y2 - y1 > precision) rotateL();
 			}
 			else if (this.dir == Direct.S){
-				if (x1 - x2 > precision && r > 1) r--;
-				if (x2 - x1 > precision) r++;
+				if (x1 - x2 > precision && checkR(x1 - x2)) decreaseR(x1 - x2);
+				if (x2 - x1 > precision) increaseR(x2 - x1);
 				if (y1 - y2 > precision) rotateL();
 				if (y2 - y1 > precision) rotateR();
 			}
 			else if (this.dir == Direct.E){
-				if (y1 - y2 > precision) r++;
-				if (y2 - y1 > precision && r > 1) r--;
+				if (y1 - y2 > precision) increaseR(y1 - y2);
+				if (y2 - y1 > precision && checkR(y2 - y1)) decreaseR(y2 - y1);
 				if (x1 - x2 > precision) rotateL();
 				if (x2 - x1 > precision) rotateR();
 			}
 			else if (this.dir == Direct.W){
-				if (y1 - y2 > precision && r > 1) r--;
-				if (y2 - y1 > precision) r++;
+				if (y1 - y2 > precision && checkR(y1 - y2)) decreaseR(y1 - y2);
+				if (y2 - y1 > precision) increaseR(y2 - y1);
 				if (x1 - x2 > precision) rotateR();
 				if (x2 - x1 > precision) rotateL();
 			}
@@ -352,51 +389,51 @@ class Marker{
 			if (this.dir == Direct.N){
 				if (x1 - x2 > precision) rotateR();
 				if (x2 - x1 > precision) rotateL();
-				if (y1 - y2 > precision && r > 1) r--;
-				if (y2 - y1 > precision) r++;
+				if (y1 - y2 > precision && checkR(y1 - y2)) decreaseR(y1 - y2);
+				if (y2 - y1 > precision) increaseR(y2 - y1);
 			}
 			else if (this.dir == Direct.S){
 				if (x1 - x2 > precision) rotateL();
 				if (x2 - x1 > precision) rotateR();
-				if (y1 - y2 > precision) r++;
-				if (y2 - y1 > precision && r > 1) r--;
+				if (y1 - y2 > precision) increaseR(y1 - y2);
+				if (y2 - y1 > precision && checkR(y2 - y1)) decreaseR(y2 - y1);
 			}
 			else if (this.dir == Direct.E){
 				if (y1 - y2 > precision) rotateR();
 				if (y2 - y1 > precision) rotateL();
-				if (x1 - x2 > precision) r++;
-				if (x2 - x1 > precision && r > 1) r--;
+				if (x1 - x2 > precision) increaseR(x1 - x2);
+				if (x2 - x1 > precision && checkR(x2 - x1)) decreaseR(x2 - x1);
 			}
 			else if (this.dir == Direct.W){
 				if (y1 - y2 > precision) rotateL();
 				if (y2 - y1 > precision) rotateR();
-				if (x1 - x2 > precision && r > 1) r--;
-				if (x2 - x1 > precision) r++;
+				if (x1 - x2 > precision && checkR(x1 - x2)) decreaseR(x1 - x2);
+				if (x2 - x1 > precision) increaseR(x2 - x1);
 			}
 			return true;
 		}
 		else if (this.checkD(x1, y1) == true){
 			if (this.dir == Direct.N){
-				if (x1 - x2 > precision && r > 1) r--;
-				if (x2 - x1 > precision) r++;
+				if (x1 - x2 > precision && checkR(x1 - x2)) decreaseR(x1 - x2);
+				if (x2 - x1 > precision) increaseR(x2 - x1);
 				if (y1 - y2 > precision) rotateL();
 				if (y2 - y1 > precision) rotateR();
 			}
 			else if (this.dir == Direct.S){
-				if (x1 - x2 > precision) r++;
-				if (x2 - x1 > precision && r > 1) r--;
+				if (x1 - x2 > precision) increaseR(x1 - x2);
+				if (x2 - x1 > precision && checkR(x2 - x1)) decreaseR(x2 - x1);
 				if (y1 - y2 > precision) rotateR();
 				if (y2 - y1 > precision) rotateL();
 			}
 			else if (this.dir == Direct.E){
-				if (y1 - y2 > precision && r > 1) r--;
-				if (y2 - y1 > precision) r++;
+				if (y1 - y2 > precision && checkR(y1 - y2)) decreaseR(y1 - y2);
+				if (y2 - y1 > precision) increaseR(y2 - y1);
 				if (x1 - x2 > precision) rotateR();
 				if (x2 - x1 > precision) rotateL();
 			}
 			else if (this.dir == Direct.W){
-				if (y1 - y2 > precision) r++;
-				if (y2 - y1 > precision && r > 1) r--;
+				if (y1 - y2 > precision) increaseR(y1 - y2);
+				if (y2 - y1 > precision && checkR(y2 - y1)) decreaseR(y2 - y1);
 				if (x1 - x2 > precision) rotateL();
 				if (x2 - x1 > precision) rotateR();
 			}
@@ -416,6 +453,26 @@ class Marker{
 		else if (this.dir == Direct.E) 	this.dir = Direct.N;
 		else if (this.dir == Direct.S) 	this.dir = Direct.E;
 		else if (this.dir == Direct.W) 	this.dir = Direct.S;
+	}
+	void rotateBasedOnDirSub(Direct inDir, Direct finDir){
+		int qty = 0;
+		try{
+			qty = inDir.rotationRQty(finDir);
+			while (qty > 0){
+				qty--;
+				this.rotateR();
+			}
+		}catch (Exception e1) {
+			try{
+				qty = inDir.rotationLQty(finDir);
+				while (qty > 0){
+					qty--;
+					this.rotateL();
+				}
+			}catch (Exception e2) {;
+				// System.out.println("Cannot find rotation. " + e1.getMessage() + " " + e2.getMessage());
+			}
+		}
 	}
 //
 	String getD(){
@@ -437,12 +494,12 @@ class Marker{
 		return norm;
 	}
 	double calcRotation(Direct otherDir){
-		int v = this.dir.value() - otherDir.value();
+		int v = this.dir.getNum() - otherDir.getNum();
 		if (v == -1 || v == 3){	
-			return Math.PI * 3 / 2;
+			return Math.PI;
 		}
 		if (v == -2 || v == 2){	
-			return Math.PI;
+			return Math.PI * 3 / 2;
 		}
 		if (v == -3 || v == 1){	
 			return Math.PI / 2;
@@ -452,15 +509,56 @@ class Marker{
 }
 enum Direct{
 	N, E, S, W;
-	private int value;
+	private char value;
+	private int num;
 	static {
-		N.value = 1;
-		E.value = 2;
-		W.value = 4;
-		S.value = 3;
+		N.value = 'N';
+		E.value = 'E';
+		W.value = 'W';
+		S.value = 'S';
+
+		N.num = 1;
+		E.num = 2;
+		W.num = 3;
+		S.num = 4;
 	}
-	public int value(){
+	public char value(){
 		return value;
+	}
+	@Override
+	public String toString(){
+		return "" + value;
+	}
+	public boolean equals(Direct dir){
+		if (dir.value == this.value)	return true;
+		return false;
+	}
+	public int getNum(){
+		return num;
+	}
+	public static Direct parseValue(char value) throws IllegalArgumentException{
+		if (value == 'N')   return N;
+		if (value == 'E')   return E;
+		if (value == 'W')   return W;
+		if (value == 'S')   return S;
+		throw new IllegalArgumentException("Wrong value " + value);
+	}
+	public static Direct parseValue(String value) throws IllegalArgumentException{
+		if (value.equals("N"))   return N;
+		if (value.equals("E"))   return E;
+		if (value.equals("W"))   return W;
+		if (value.equals("S"))   return S;
+		throw new IllegalArgumentException("Wrong value " + value);
+	}
+	public int rotationRQty(Direct otherDir) throws Exception{
+		if (otherDir.getNum() - this.num > 0)
+			return otherDir.getNum() - this.num;
+		throw new Exception("It is beter to use left rotation in this case.");
+	}
+	public int rotationLQty(Direct otherDir) throws Exception{
+		if (this.num - otherDir.getNum() > 0)
+			return this.num - otherDir.getNum();
+		throw new Exception("It is beter to use right rotation in this case.");
 	}
 };
 
