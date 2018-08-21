@@ -48,6 +48,21 @@ class Marker{
 	Marker(){
 		this.color = MainData.default_marker_color;
 	}
+	void print(){
+		System.out.println(dir.toString() + ", " + r + " [" + p.x + ", " + p.y + "]");
+	}
+	void mirrorX(int x){
+		p.x = 2*x - p.x;
+	}
+	void mirrorY(int y){
+		p.y = 2*y - p.y;
+	}
+	void mirrorDir(){
+		if (this.dir == Direct.N)	this.dir = Direct.S;
+		else if (this.dir == Direct.S)	this.dir = Direct.N;
+		else if (this.dir == Direct.E)	this.dir = Direct.W;
+		else if (this.dir == Direct.W)	this.dir = Direct.E;
+	}
 //
 	@Override
 	public String toString(){
@@ -61,18 +76,9 @@ class Marker{
 		return false;
 	}
 	void drawLine(Graphics2D g2d){
-		g2d.setStroke(new BasicStroke(3));
-		g2d.setColor(MainData.default_rect_color);
-		g2d.drawOval(getX(), getY(), 1, 1);
-
-		if (MainData.showDist == true){
-			g2d.drawString(getD(), getX()+ 2, getY() - 2);
-			g2d.drawString("A", this.getAx(), this.getAy());
-			g2d.drawString("B", this.getBx(), this.getBy());
-			g2d.drawString("C", this.getCx(), this.getCy());
-			g2d.drawString("D", this.getDx(), this.getDy());
-		}
 		g2d.setColor(color);
+		g2d.setStroke(new BasicStroke(3));
+		g2d.drawOval(getX(), getY(), 1, 1);
 
 		int d = getR() * 2;
 		int x = getX()-getR(), y = getY()-getR();
@@ -105,6 +111,15 @@ class Marker{
 					break;
 				}
 		}
+		
+		g2d.setColor(MainData.default_rect_color);
+		if (MainData.showDist == true){
+			g2d.drawString(getD(), getX()+ 2, getY() - 2);
+			g2d.drawString("A", this.getAx(), this.getAy());
+			g2d.drawString("B", this.getBx(), this.getBy());
+			g2d.drawString("C", this.getCx(), this.getCy());
+			g2d.drawString("D", this.getDx(), this.getDy());
+		}
 	}
 	void setXY(int x, int y){
 		this.p = new Point(toGrid(x), toGrid(y));
@@ -136,6 +151,20 @@ class Marker{
 		else
 			throw new Exception("The marker radius cannot be smaller than 1.");
 	}
+	void move(int xt, int yt, double angle){
+
+		// int x = (int)Math.round(Math.cos(angle) * this.p.x*1. - (Math.sin(angle) * this.p.y*1.) + (xt*1. * (1. - Math.cos(angle))) + (yt*1. * Math.sin(angle)));
+		// int y = (int)Math.round(Math.sin(angle) * this.p.x*1. + (Math.cos(angle) * this.p.y*1.) + (yt*1. * (1. - Math.cos(angle))) - (xt*1. * Math.sin(angle)));
+
+		int x = (int)Math.round(Math.cos(angle) * xt*1. - (Math.sin(angle) * yt*1.));
+		int y = (int)Math.round(Math.sin(angle) * xt*1. + (Math.cos(angle) * yt*1.));
+		
+		// System.out.println(xt + " -> " + x);
+		// System.out.println(yt + " -> " + y);
+
+		this.p.x += toGrid(x);
+		this.p.y += toGrid(y);
+	}
 	void move(int xt, int yt){
 		this.p.x += toGrid(xt);
 		this.p.y += toGrid(yt);
@@ -146,76 +175,28 @@ class Marker{
 	}
 // ABC
 	int getAx(){
-		switch (dir){
-			case N: return getX();
-			case W:	return getX() - getR();
-			case S: return getX();
-			case E:	return getX() + getR();
-		}
-		return 0;
+		return getax() * MainData.grid_size;
 	}
 	int getBx(){
-		switch (dir){
-			case N:	return getX() - getR();
-			case W:	return getX();
-			case S:	return getX() + getR();
-			case E:	return getX();
-		}
-		return 0;
+		return getbx() * MainData.grid_size;
 	}
 	int getCx(){
-		switch (dir){
-			case N:	return getX();
-			case W:	return getX() + getR();
-			case S:	return getX();
-			case E:	return getX() - getR();
-		}
-		return 0;
+		return getcx() * MainData.grid_size;
 	}
 	int getDx(){
-		switch (dir){
-			case N:	return getX() + getR();
-			case W:	return getX();
-			case S:	return getX() - getR();
-			case E:	return getX();
-		}
-		return 0;
+		return getdx() * MainData.grid_size;
 	}
 	int getAy(){
-		switch (dir){
-			case N:	return getY() - getR();
-			case W:	return getY();
-			case S:	return getY() + getR();
-			case E:	return getY();
-		}
-		return 0;
+		return getay() * MainData.grid_size;
 	}
 	int getBy(){
-		switch (dir){
-			case N:	return getY();
-			case W:	return getY() + getR();
-			case S:	return getY();
-			case E:	return getY() - getR();
-		}
-		return 0;
+		return getby() * MainData.grid_size;
 	}
 	int getCy(){
-		switch (dir){
-			case N:	return getY() + getR();
-			case W:	return getY();
-			case S:	return getY() - getR();
-			case E:	return getY();
-		}
-		return 0;
+		return getcy() * MainData.grid_size;
 	}
 	int getDy(){
-		switch (dir){
-			case N:	return getY();
-			case W:	return getY() - getR();
-			case S:	return getY();
-			case E:	return getY() + getR();
-		}
-		return 0;
+		return getdy() * MainData.grid_size;
 	}
 // abc
 	int getax(){
@@ -454,7 +435,7 @@ class Marker{
 		else if (this.dir == Direct.S) 	this.dir = Direct.E;
 		else if (this.dir == Direct.W) 	this.dir = Direct.S;
 	}
-	void rotateBasedOnDirSub(Direct inDir, Direct finDir){
+	void rotateBasedOnDirSub(Direct inDir, Direct finDir, boolean mirror){
 		int qty = 0;
 		try{
 			qty = inDir.rotationRQty(finDir);
@@ -462,6 +443,7 @@ class Marker{
 				qty--;
 				this.rotateR();
 			}
+			if (mirror)	this.mirrorDir();
 		}catch (Exception e1) {
 			try{
 				qty = inDir.rotationLQty(finDir);
@@ -469,6 +451,7 @@ class Marker{
 					qty--;
 					this.rotateL();
 				}
+				if (mirror)	this.mirrorDir();
 			}catch (Exception e2) {;
 				// System.out.println("Cannot find rotation. " + e1.getMessage() + " " + e2.getMessage());
 			}
@@ -494,15 +477,18 @@ class Marker{
 		return norm;
 	}
 	double calcRotation(Direct otherDir){
-		int v = this.dir.getNum() - otherDir.getNum();
-		if (v == -1 || v == 3){	
+		int v = otherDir.getNum() - this.dir.getNum();
+		if (v == -1 || v == 3){
+			// System.out.println((Math.PI / 2) + " (90) " + v + ". Input " + this.dir.value() + ". Initial " + otherDir.value());
+			return Math.PI / 2;
+		}
+		if (v == -2 || v == 2){
+			// System.out.println(Math.PI + " (180) " + v + ". Input " + this.dir.value() + ". Initial " + otherDir.value());
 			return Math.PI;
 		}
-		if (v == -2 || v == 2){	
+		if (v == -3 || v == 1){
+			// System.out.println((Math.PI * 3 / 2) + " (270) " + v + ". Input " + this.dir.value() + ". Initial " + otherDir.value());
 			return Math.PI * 3 / 2;
-		}
-		if (v == -3 || v == 1){	
-			return Math.PI / 2;
 		}
 		return 0;
 	}
@@ -519,8 +505,8 @@ enum Direct{
 
 		N.num = 1;
 		E.num = 2;
-		W.num = 3;
-		S.num = 4;
+		S.num = 3;
+		W.num = 4;
 	}
 	public char value(){
 		return value;

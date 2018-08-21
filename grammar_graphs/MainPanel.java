@@ -71,7 +71,6 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		programData.drawLines(g2d);
 	}
 	public void moveLines(int x1, int y1, int x2, int y2){
-		
 		for (Line line: programData.lines){
 			line.move(x2 - x1, y2 - y1);
 		}

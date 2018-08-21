@@ -42,4 +42,14 @@ class LeftRulePanel extends MainPanel {
 		}
 		rigthRulePanel.repaint();
 	}
+	@Override
+	public void moveLines(int x1, int y1, int x2, int y2){
+		for (Line line: programData.lines){
+			line.move(x2 - x1, y2 - y1);
+		}
+		if (programData.marker != null)
+			this.programData.marker.move(x2 - x1, y2 - y1);
+		this.repaint();
+		this.rigthRulePanel.moveLines(x1, y1, x2, y2);
+	}
 }

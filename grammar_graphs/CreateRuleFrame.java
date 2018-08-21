@@ -27,7 +27,6 @@ class CreateRuleFrame extends JFrame {
 	JButton removeButton;
 	JButton cancelButton;
 	LeftRulePanel panelL;
-	// MainPanel panelL.rigthRulePanel;
 	JPanel panelB;
 
 	int screenHeight;
@@ -55,14 +54,13 @@ class CreateRuleFrame extends JFrame {
 		this.pack();
 		this.setVisible(true);
 	}
-
-	CreateRuleFrame(int ruleindex) {
+	CreateRuleFrame(Rule rule) {
 		super(ProgramLabels.rulleWinName);
 		loadFrameData();
-		this.ruleName = MainData.ruleList.get(ruleindex).name;
-
-		this.loadLeftPanel(MainData.ruleList.get(ruleindex).getInitialLines(), MainData.ruleList.get(ruleindex).getInitialMarker());
-		this.loadRightPanel(MainData.ruleList.get(ruleindex).getInitialLines(), MainData.ruleList.get(ruleindex).getFinalLines(), MainData.ruleList.get(ruleindex).getFinalMarker());
+		this.ruleName = rule.name;
+		
+		this.loadLeftPanel(rule.getInitialLines(), rule.getInitialMarker());
+		this.loadRightPanel(rule.getInitialLines(), rule.getFinalLines(), rule.getFinalMarker());
 		this.loadBottomPanel();
 
 		splitPanel();
@@ -137,7 +135,7 @@ class CreateRuleFrame extends JFrame {
 			panelL.programData.lines.add(newLine);
 		}
 		if (initialmarker != null){
-			panelL.programData.marker = initialmarker;
+			panelL.programData.marker = initialmarker.copy();
 			panelL.programData.marker.move(-tran[2] + panelL.programData.grid_size, -tran[3] + panelL.programData.grid_size);
 		}
 	}
@@ -148,7 +146,7 @@ class CreateRuleFrame extends JFrame {
 
 		ArrayList <Line> lines = new ArrayList<>();
 		lines.addAll(initialLines);
-		lines.addAll(finalLines);
+		if (finalLines != null && !finalLines.isEmpty()) lines.addAll(finalLines);
 
 		int [] tran = extremeXY(lines, finalmarker);
 		tran[2] -=  (int)(width*0.2);
@@ -158,15 +156,18 @@ class CreateRuleFrame extends JFrame {
 			Line newLine = line.copy();
 			newLine.move(-tran[2] + panelL.rigthRulePanel.programData.grid_size, -tran[3] + panelL.rigthRulePanel.programData.grid_size);
 			panelL.rigthRulePanel.programData.lines.add(newLine);
+			panelL.rigthRulePanel.leftLines.add(newLine);
 		}
-		for (Line line : finalLines){
-			Line newLine = line.copy();
-			newLine.move(-tran[2] + panelL.rigthRulePanel.programData.grid_size, -tran[3] + panelL.rigthRulePanel.programData.grid_size);
-			panelL.rigthRulePanel.programData.lines.add(newLine);
+		if (finalLines != null && !finalLines.isEmpty()){
+			for (Line line : finalLines){
+				Line newLine = line.copy();
+				newLine.move(-tran[2] + panelL.rigthRulePanel.programData.grid_size, -tran[3] + panelL.rigthRulePanel.programData.grid_size);
+				panelL.rigthRulePanel.programData.lines.add(newLine);
+			}
 		}
 		if (finalmarker != null){
-			panelL.rigthRulePanel.programData.marker = finalmarker;
-			panelL.rigthRulePanel.programData.marker.move(-tran[2] + panelL.programData.grid_size, -tran[3] + panelL.programData.grid_size);
+			panelL.rigthRulePanel.programData.marker = finalmarker.copy();
+			panelL.rigthRulePanel.programData.marker.move(-tran[2] + panelL.rigthRulePanel.programData.grid_size, -tran[3] + panelL.rigthRulePanel.programData.grid_size);
 		}
 	}
 	void loadBottomPanel() {
@@ -206,13 +207,9 @@ class CreateRuleFrame extends JFrame {
 					panelL.programData.ruleList.add(new Rule(theName, panelL.programData.copy(), panelL.rigthRulePanel.programData.copy(), panelL.programData.marker, panelL.rigthRulePanel.programData.marker));			
 					closeFrame();
 				}
-				catch(Rule.NoMarkerException exc){
+				catch(Exception exc){
 					MessageFrame error = new MessageFrame(exc.getMessage());
-				}
-				catch(Rule.MarkerRemovingRule war){
-					MessageFrame error = new MessageFrame(war.getMessage());
-				}
-				
+				}				
 			}
 		});
 		panel.add(saveButton, BorderLayout.LINE_START);

@@ -24,6 +24,14 @@ class Line{
 		this.pa = a;
 		this.pb = b;
 	}
+	void mirrorX(int x){
+		pa.x = 2*x - pa.x;
+		pb.x = 2*x - pb.x;
+	}
+	void mirrorY(int y){
+		pa.y = 2*y - pa.y;
+		pb.y = 2*y - pb.y;
+	}
 	int round(double v, int x, double s){
 		double xx = (double)(x);
 		if (s > 1){
@@ -36,8 +44,12 @@ class Line{
 		}
 	}
 	void scale(int x, int y, double s){
-		pa.x = round((pa.x - x) * s + x, x, s);
-		pb.x = round((pb.x - x) * s + x, x, s);
+		// pa.x = round((pa.x - x) * s + x, x, s);
+		// pb.x = round((pb.x - x) * s + x, x, s);
+		// pa.y = round((pa.y - y) * s + y, y, s);
+		// pb.y = round((pb.y - y) * s + y, y, s);
+		pa.x = (int)Math.round((pa.x - x) * s + x);
+		pb.x = (int)Math.round((pb.x - x) * s + x);
 		pa.y = (int)Math.round((pa.y - y) * s + y);
 		pb.y = (int)Math.round((pb.y - y) * s + y);
 	}
@@ -162,7 +174,7 @@ class Line{
 		this.pb.y = points[1];
 	}
 	void move(int x, int y){
-		this.pa.x += toGrid(x);
+		this.pa.x += toGrid(x); 
 		this.pa.y += toGrid(y);
 		this.pb.x += toGrid(x);
 		this.pb.y += toGrid(y);

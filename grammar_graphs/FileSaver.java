@@ -43,6 +43,13 @@ class FileSaver{
 	Line parseLine(String [] lineData){
 		return new Line(new Point(Integer.parseInt(lineData[3]), Integer.parseInt(lineData[4])), new Point(Integer.parseInt(lineData[5]), Integer.parseInt(lineData[6])));
 	}
+	ArrayList <Line> getArrayCopy(ArrayList <Line> lineSet){
+		ArrayList <Line> newLineSet = new ArrayList<>();
+		for (Line line: lineSet) {
+			newLineSet.add(line.copy());
+		}
+		return newLineSet;
+	}
 	void openDataFile(MainPanel panel){
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))){
 			panel.programData.clear();
@@ -66,9 +73,35 @@ class FileSaver{
 					}
 				}else{
 					String ruleName = lineContent[0].substring(1);
+					if (!newRuleName.equals(ruleName)){
+						if (!newRuleName.equals("")){
+							try{
+								linesBSide.addAll(linesASide);
+								System.out.println("Add new rule: " + newRuleName + " linesASide size: " + linesASide.size());
+								if (markerBSide != null)	panel.programData.ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), markerBSide.copy()));
+								else panel.programData.ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), null));
+							}catch (Exception e) {
+								System.out.println("WARNING: Rule " + newRuleName + " was not added. " + e.getMessage());
+								System.out.println((markerBSide.copy() == null) + " " + (markerASide.copy() == null));
+							}
+						}
+						newRuleName = ruleName;
+						linesASide = new ArrayList<>();
+						linesBSide = new ArrayList<>();
+						markerBSide = null;
+						markerASide = null;
+					}
 					if (newRuleName.equals(ruleName)){
 						if (aSideTag.equals(lineContent[1])){
-							linesASide.add(this.parseLine(lineContent));
+							if (lineTag.equals(lineContent[2]))
+								linesASide.add(this.parseLine(lineContent));
+							if (markerTag.equals(lineContent[2])){
+								try{
+									markerASide = this.parseMarker(lineContent);
+								}catch (Exception e) {
+									System.out.println("WARNING: Marker was not added to A side of Rule. " + e.getMessage());
+								}
+							}
 						}else{
 							if (markerTag.equals(lineContent[2])){
 								try{
@@ -80,30 +113,15 @@ class FileSaver{
 								linesBSide.add(this.parseLine(lineContent));
 							}
 						}
-					}else{
-						if (!newRuleName.equals("") && markerBSide != null  && linesBSide.size() > 0){
-							try{
-								panel.programData.ruleList.add(new Rule(newRuleName, linesASide, linesBSide, markerASide, markerBSide));
-							}catch (Exception e) {
-								System.out.println("WARNING: Rule was not added. " + e.getMessage());
-							}
-						}
-						newRuleName = ruleName;
-						linesASide = new ArrayList<>();
-						linesBSide = new ArrayList<>();
-						try{
-							markerASide = this.parseMarker(lineContent);
-						}catch (Exception e) {
-								System.out.println("WARNING: Marker was not added to A side of Rule. " + e.getMessage());
-							}
-						markerBSide = null;
 					}
 				}
 			}
 			if (!newRuleName.equals("") && markerASide != null){
 				try{
+					System.out.println("Add new rule at the end: " + newRuleName);
 					linesBSide.addAll(linesASide);
-					panel.programData.ruleList.add(new Rule(newRuleName, linesASide, linesBSide, markerASide, markerBSide));
+					if (markerBSide != null)	panel.programData.ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), markerBSide.copy()));
+					else	panel.programData.ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), null));
 				}catch (Exception e) {
 					System.out.println("WARNING: Rule was not added. " + e.getMessage());
 				}

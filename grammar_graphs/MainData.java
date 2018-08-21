@@ -40,7 +40,20 @@ class MainData {
 	static Color default_marker_color = Color.CYAN;
 	static Color default_grid_color = Color.LIGHT_GRAY;
 
-
+	static ArrayList <Line> RelativeComplement(ArrayList <Line> setA, ArrayList <Line> setB){
+		ArrayList <Line> resultSet = new ArrayList<>();
+		for (Line lineA: setA){
+			boolean isInB = false;
+			for (Line lineB: setB){
+				if (lineA.isTheSameLine(lineB) == true){
+					isInB = true;
+					break;
+				}
+			}
+			if (isInB == false) resultSet.add(lineA);
+		}
+		return resultSet;
+	}
 	static Rule getRuleOfName(String name){
 		for (Rule rule : ruleList)
 			if (rule.getName().equals(name))
@@ -108,7 +121,7 @@ class MainData {
 		return info.toString();
 	}
 	String rulesToString(){
-		StringJoiner info = new StringJoiner("\n");
+		StringJoiner info = new StringJoiner("");
 		for (Rule rule : ruleList){
 			info.add(rule.toString());
 		}
