@@ -12,6 +12,7 @@ import javax.swing.SwingUtilities;
 
 import java.lang.Math;
 
+
 class MainData {
 	MainData() {}
 	boolean RIGHT = false;
@@ -21,16 +22,22 @@ class MainData {
 	Marker marker = null;
 	Marker modified_marker = null;
 
-	ArrayList <Line> lines = new ArrayList<Line>();
+	private ArrayList <Line> lines = new ArrayList<Line>();
+	static ColoringRule coloringRule = null;
+
+
 	ArrayList <Line> modyfiedLines = new ArrayList<Line>();
 	ArrayList <Line> initialLines = new ArrayList<Line>();
 	private ArrayList <Line> temp_shape = new ArrayList<Line>();
 	static ArrayList <Line> copiedLines = new ArrayList<Line>();
 
 	static int grid_size = 20;
+	
 	static ArrayList <Rule> ruleList = new ArrayList<>(); 
-	static ArrayList <Rule> ruleAppList = new ArrayList<>(); 
+	static ArrayList <Rule> ruleAppList = new ArrayList<>();
+
 	static boolean SHOW_GRID = true;
+	static boolean COLOR_RULES = false;
 	// BLACK BLUE CYAN DARK_GRAY GRAY GREEN LIGHT_GRAY MAGENTA ORANGE PINK RED WHITE YELLOW
 	static Color default_figure_color = Color.BLACK;
 	static Color default_background_color = Color.WHITE;
@@ -40,6 +47,46 @@ class MainData {
 	static Color default_marker_color = Color.CYAN;
 	static Color default_grid_color = Color.LIGHT_GRAY;
 
+	void addLinesByRule(ArrayList <Line> newlines){
+		this.lines.addAll(newlines);
+	}
+	void addLine(Line line, boolean mainPanel){
+		this.lines.add(line);
+		if (mainPanel){
+			coloringRule.updateLevel0(line);
+		}
+	}
+	void removeLine(Line line){
+		this.lines.remove(line);
+		coloringRule.levels.get(0).levelLines.remove(line);
+	}
+	void moveLines(int x1, int y1, int x2, int y2, boolean mainPanel){
+		for (Line line: this.lines){
+			line.move(x2 - x1, y2 - y1);
+		}
+		if (mainPanel){
+			for (Line line: coloringRule.levels.get(0).levelLines){
+				line.move(x2 - x1, y2 - y1);
+			}
+		}
+	}
+	ArrayList <Line> getLines(){
+		return this.lines;
+	}
+	Line getLine(int i){
+		return this.lines.get(i);
+	}
+	int getLinesSize(){
+		return this.lines.size();
+	}
+
+	String ruleAppListToString(){
+		StringJoiner info = new StringJoiner("");
+		for (Rule rule : ruleAppList){
+			info.add(FileSaver.ruleList).add("\t").add(rule.getName()).add("\n");
+		}
+		return info.toString();		
+	}
 	static ArrayList <Line> RelativeComplement(ArrayList <Line> setA, ArrayList <Line> setB){
 		ArrayList <Line> resultSet = new ArrayList<>();
 		for (Line lineA: setA){

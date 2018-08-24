@@ -7,9 +7,12 @@ class LeftRulePanel extends MainPanel {
 	LeftRulePanel(int screenWidth, int screenHeight){
 		super(screenWidth, screenHeight);
 	}
+	LeftRulePanel(){
+		super();
+	}
 	@Override
 	public void addLine(int x1, int y1, int x2, int y2){
-		programData.lines.add(new Line(x1, y1, x2, y2));
+		programData.addLine(new Line(x1, y1, x2, y2), false);
 		rigthRulePanel.addLeftLine(x1, y1, x2, y2);
 	}
 	@Override
@@ -22,7 +25,7 @@ class LeftRulePanel extends MainPanel {
 	public void removeSelectedLines(){
 		this.rigthRulePanel.makeLineRemovable(this.programData.getModified());
 		for (Line line: this.programData.getModified())
-			this.programData.lines.remove(line);
+			this.programData.removeLine(line);
 		this.programData.clearModified();
 		this.programData.clearModifiedMarker();
 		this.repaint();
@@ -44,9 +47,7 @@ class LeftRulePanel extends MainPanel {
 	}
 	@Override
 	public void moveLines(int x1, int y1, int x2, int y2){
-		for (Line line: programData.lines){
-			line.move(x2 - x1, y2 - y1);
-		}
+		programData.moveLines(x1, y1, x2, y2, false);
 		if (programData.marker != null)
 			this.programData.marker.move(x2 - x1, y2 - y1);
 		this.repaint();

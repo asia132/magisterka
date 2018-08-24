@@ -132,7 +132,7 @@ class CreateRuleFrame extends JFrame {
 		for (Line line : lines){
 			Line newLine = line.copy();
 			newLine.move(-tran[2] + panelL.programData.grid_size, -tran[3] + panelL.programData.grid_size);
-			panelL.programData.lines.add(newLine);
+			panelL.programData.addLine(newLine, false);
 		}
 		if (initialmarker != null){
 			panelL.programData.marker = initialmarker.copy();
@@ -155,14 +155,14 @@ class CreateRuleFrame extends JFrame {
 		for (Line line : initialLines){
 			Line newLine = line.copy();
 			newLine.move(-tran[2] + panelL.rigthRulePanel.programData.grid_size, -tran[3] + panelL.rigthRulePanel.programData.grid_size);
-			panelL.rigthRulePanel.programData.lines.add(newLine);
+			panelL.rigthRulePanel.programData.addLine(newLine, false);
 			panelL.rigthRulePanel.leftLines.add(newLine);
 		}
 		if (finalLines != null && !finalLines.isEmpty()){
 			for (Line line : finalLines){
 				Line newLine = line.copy();
 				newLine.move(-tran[2] + panelL.rigthRulePanel.programData.grid_size, -tran[3] + panelL.rigthRulePanel.programData.grid_size);
-				panelL.rigthRulePanel.programData.lines.add(newLine);
+				panelL.rigthRulePanel.programData.addLine(newLine, false);
 			}
 		}
 		if (finalmarker != null){
@@ -192,7 +192,7 @@ class CreateRuleFrame extends JFrame {
 		panel.add(newRuleName, BorderLayout.LINE_START);
 	}
 	void showSaveButton(JPanel panel){
-		saveButton = new JButton(ProgramLabels.saveRule);
+		saveButton = new JButton(ProgramLabels.save);
 		saveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				String theName = newRuleName.getText();
@@ -215,7 +215,7 @@ class CreateRuleFrame extends JFrame {
 		panel.add(saveButton, BorderLayout.LINE_START);
 	}
 	void showCancelButton(JPanel panel){
-		cancelButton = new JButton(ProgramLabels.cancelRule);
+		cancelButton = new JButton(ProgramLabels.cancel);
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeFrame();

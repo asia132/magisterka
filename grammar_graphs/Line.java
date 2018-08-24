@@ -61,6 +61,12 @@ class Line{
 		pa.y = (int)Math.round(Math.sin(alpha) * pax + (Math.cos(alpha) * pay) + (y * (1 - Math.cos(alpha))) - (x * Math.sin(alpha)));
 		pb.y = (int)Math.round(Math.sin(alpha) * pbx + (Math.cos(alpha) * pby) + (y * (1 - Math.cos(alpha))) - (x * Math.sin(alpha)));
 	}
+	boolean sameA(Line line){
+		return (line.pa.x == this.pa.x && line.pa.y == this.pa.y) || (line.pb.x == this.pa.x && line.pb.y == this.pa.y);
+	}
+	boolean sameB(Line line){
+		return (line.pa.x == this.pb.x && line.pa.y == this.pb.y) || (line.pb.x == this.pb.x && line.pb.y == this.pb.y);
+	}
 	static int toGrid(int x){
 		int gs = MainData.grid_size;
 		int modX = x%gs;

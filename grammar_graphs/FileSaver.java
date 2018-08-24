@@ -19,6 +19,7 @@ class FileSaver{
 	static String lineTag = "#L";
 	static String aSideTag = "#A";
 	static String bSideTag = "#B";
+	static String ruleList = "#RULELIST";
 
 	FileSaver(File file){
 		this.file = file;
@@ -59,9 +60,24 @@ class FileSaver{
 			ArrayList <Line> linesBSide = new ArrayList<>();
 			Marker markerBSide = new Marker();
 			String newRuleName = "";
+			String [] lineContent =  new String [1];
 			while ((line = reader.readLine()) != null) {
-				String [] lineContent = line.split("\t");
+				lineContent = line.split("\t");
+				if (ruleList.equals(lineContent[0])) {
+					if (!newRuleName.equals("") && markerASide != null){
+						try{
+							System.out.println("Add new rule at the end: " + newRuleName);
+							linesBSide.addAll(linesASide);
+							if (markerBSide != null)	panel.programData.ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), markerBSide.copy()));
+							else	panel.programData.ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), null));
+						}catch (Exception e) {
+							System.out.println("WARNING: Rule was not added. " + e.getMessage());
+						}
+					}
+					break;
+				}
 				if (inputTag.equals(lineContent[0])){
+					System.out.println("INPUT");
 					if (markerTag.equals(lineContent[2])){
 						try{
 							panel.programData.marker = this.parseMarker(lineContent);
@@ -69,7 +85,7 @@ class FileSaver{
 							System.out.println("WARNING: Marker was not added to input picture. " + e.getMessage());
 						}
 					}else{
-						panel.programData.lines.add(this.parseLine(lineContent));
+						panel.programData.addLine(this.parseLine(lineContent), true);
 					}
 				}else{
 					String ruleName = lineContent[0].substring(1);
@@ -103,30 +119,41 @@ class FileSaver{
 								}
 							}
 						}else{
-							if (markerTag.equals(lineContent[2])){
+							if (lineContent.length > 2 && markerTag.equals(lineContent[2])){
 								try{
 									markerBSide = this.parseMarker(lineContent);
 								}catch (Exception e) {
 									System.out.println("WARNING: Marker was not added to B side of Rule. " + e.getMessage());
 								}
 							}else{
-								linesBSide.add(this.parseLine(lineContent));
+								if (lineContent.length > 6)
+									linesBSide.add(this.parseLine(lineContent));
 							}
 						}
 					}
 				}
 			}
-			if (!newRuleName.equals("") && markerASide != null){
-				try{
-					System.out.println("Add new rule at the end: " + newRuleName);
-					linesBSide.addAll(linesASide);
-					if (markerBSide != null)	panel.programData.ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), markerBSide.copy()));
-					else	panel.programData.ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), null));
-				}catch (Exception e) {
-					System.out.println("WARNING: Rule was not added. " + e.getMessage());
+			if (ruleList.equals(lineContent[0])){
+				panel.programData.ruleAppList.add(MainData.getRuleOfName(lineContent[1]));
+				while ((line = reader.readLine()) != null) {
+					System.out.println(line);
+					lineContent = line.split("\t");
+					panel.programData.ruleAppList.add(MainData.getRuleOfName(lineContent[1]));
+				}
+			}else{
+				if (!newRuleName.equals("") && markerASide != null){
+					try{
+						System.out.println("Add new rule at the end: " + newRuleName);
+						linesBSide.addAll(linesASide);
+						if (markerBSide != null)	panel.programData.ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), markerBSide.copy()));
+						else	panel.programData.ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), null));
+					}catch (Exception e) {
+						System.out.println("WARNING: Rule was not added. " + e.getMessage());
+					}
 				}
 			}
 			reader.close();
+			MainData.coloringRule = new ColoringRule(panel);
 			panel.repaint();
 		}catch (IOException e) {
 			System.out.println(e.getMessage());

@@ -19,10 +19,19 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
 
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent; 
+
+import java.util.List;
+
 public class RuleListPrepraration extends JFrame {
-	private JTextField newTextField = new JTextField(10);
 	private JList<String> sourceList = new JList<>(new DefaultListModel<>());
 	private JList<String> destList = new JList<>(new DefaultListModel<>());
+
+	private JButton saveButton;
+	private JButton cancelButton;
+
 	public RuleListPrepraration() {
 		
 		for (int i = 0; i < MainData.ruleList.size(); i++) {
@@ -32,6 +41,9 @@ public class RuleListPrepraration extends JFrame {
 		for (int i = 0; i < MainData.ruleAppList.size(); i++) {
 			((DefaultListModel<String>) destList.getModel()).add(i, MainData.ruleAppList.get(i).getName());
 		}
+		Box buttonBox = Box.createHorizontalBox();
+		showSaveButton(buttonBox);
+		showCancelButton(buttonBox);
 
 		Box sourceBox = Box.createVerticalBox();
 		sourceBox.add(new JLabel("Rule List:"));
@@ -46,6 +58,7 @@ public class RuleListPrepraration extends JFrame {
 		listBox.add(destBox);
 
 		Box allBox = Box.createVerticalBox();
+		allBox.add(buttonBox);
 		allBox.add(listBox);
 
 		this.getContentPane().add(allBox, BorderLayout.CENTER);
@@ -53,21 +66,45 @@ public class RuleListPrepraration extends JFrame {
 		sourceList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		destList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		newTextField.setDragEnabled(true);
 		sourceList.setDragEnabled(true);
 		destList.setDragEnabled(true);
 
 		sourceList.setDropMode(DropMode.INSERT);
 		destList.setDropMode(DropMode.INSERT);
 
-		sourceList.setTransferHandler(new ListTransferHandler());
-		destList.setTransferHandler(new ListTransferHandler());
+		sourceList.setTransferHandler(new SourceListTransferHandler());
+		destList.setTransferHandler(new DestListTransferHandler());
 
 		this.pack();
 		this.setVisible(true);
+
+	}
+	void closeFrame(){
+		super.dispose();
+	}
+	void showSaveButton(Box box){
+		saveButton = new JButton(ProgramLabels.save);
+		saveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				for (int i = 0; i < destList.getModel().getSize(); ++i) {
+					MainData.ruleAppList.add(MainData.getRuleOfName(destList.getModel().getElementAt(i)));				
+				}
+				closeFrame();
+			}
+		});
+		box.add(saveButton);
+	}
+	void showCancelButton(Box box){
+		cancelButton = new JButton(ProgramLabels.cancel);
+		cancelButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {;
+				closeFrame();
+			}
+		});
+		box.add(cancelButton);
 	}
 }
-class ListTransferHandler extends TransferHandler {
+class SourceListTransferHandler extends TransferHandler {
 	@Override
 	public int getSourceActions(JComponent c) {
 		return TransferHandler.COPY_OR_MOVE;
@@ -112,8 +149,44 @@ class ListTransferHandler extends TransferHandler {
 			e.printStackTrace();
 			return false;
 		}
-		JList.DropLocation dropLocation = (JList.DropLocation) support
-				.getDropLocation();
+		JList.DropLocation dropLocation = (JList.DropLocation) support.getDropLocation();
+		int dropIndex = dropLocation.getIndex();
+		@SuppressWarnings("unchecked")
+		JList<String> targetList = (JList<String>) support.getComponent();
+		@SuppressWarnings("unchecked")
+		DefaultListModel<String> listModel = (DefaultListModel<String>) targetList.getModel();
+		return true;
+	}
+}
+class DestListTransferHandler extends SourceListTransferHandler {
+	@Override
+	protected void exportDone(JComponent source, Transferable data, int action) {
+		@SuppressWarnings("unchecked")
+		JList<String> sourceList = (JList<String>) source;
+		String movedItem = sourceList.getSelectedValue();
+		if (action == TransferHandler.MOVE) {
+			DefaultListModel<String> listModel = (DefaultListModel<String>) sourceList.getModel();
+			listModel.removeElement(movedItem);
+			MainData.ruleAppList.remove(MainData.getRuleOfName(movedItem));
+		}
+	}
+	@Override
+	public boolean importData(TransferHandler.TransferSupport support) {
+		if (!this.canImport(support)) {
+			return false;
+		}
+		Transferable t = support.getTransferable();
+		String data = null;
+		try {
+			data = (String) t.getTransferData(DataFlavor.stringFlavor);
+			if (data == null) {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		JList.DropLocation dropLocation = (JList.DropLocation) support.getDropLocation();
 		int dropIndex = dropLocation.getIndex();
 		@SuppressWarnings("unchecked")
 		JList<String> targetList = (JList<String>) support.getComponent();
@@ -121,11 +194,7 @@ class ListTransferHandler extends TransferHandler {
 		DefaultListModel<String> listModel = (DefaultListModel<String>) targetList.getModel();
 		if (dropLocation.isInsert()) {
 			listModel.add(dropIndex, data);
-			MainData.ruleAppList.add(dropIndex, MainData.getRuleOfName(data));
-		} else {
-			listModel.set(dropIndex, data);
-			MainData.ruleAppList.set(dropIndex, MainData.getRuleOfName(data));
-		}
+		} 
 		return true;
 	}
 }

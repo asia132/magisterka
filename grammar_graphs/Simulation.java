@@ -27,7 +27,7 @@ class Simulation{
 
 	static void runSimulation(MainPanel panel){
 		SIMULATE = true;
-		panel.programData.lines.clear();
+		panel.programData.clear();
 		Path path = FileSystems.getDefault().getPath(file_folder, file);
 		Charset charset = Charset.forName("US-ASCII");
 		try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
@@ -36,7 +36,7 @@ class Simulation{
 		        String [] spoint = line.split(" ");
 		        Point a = new Point(Integer.parseInt(spoint[0]), Integer.parseInt(spoint[1]));
 		        Point b = new Point(Integer.parseInt(spoint[2]), Integer.parseInt(spoint[3]));
-		        panel.programData.lines.add(new Line(a, b));
+		        panel.programData.addLine(new Line(a, b), !(panel instanceof LeftRulePanel) && !(panel instanceof RigthRulePanel));
 		    }
 		} catch (IOException x) {
 		    System.err.format("IOException: %s%n", x);

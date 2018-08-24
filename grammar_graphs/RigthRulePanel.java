@@ -8,11 +8,35 @@ class RigthRulePanel extends MainPanel{
 	RigthRulePanel(int screenWidth, int screenHeight){
 		super(screenWidth, screenHeight);
 	}
+	RigthRulePanel(){
+		super();
+	}
+	@Override
+	public void moveLines(int x1, int y1, int x2, int y2){
+		for (Line line: programData.getLines()){
+			if (!this.leftLines.contains(line))		line.move(x2 - x1, y2 - y1);
+		}
+		if (programData.marker != null)
+			this.programData.marker.move(x2 - x1, y2 - y1);
+		this.repaint();
+	}
 	public void addLeftLine(int x1, int y1, int x2, int y2){
 		Line newLine = new Line(x1, y1, x2, y2);
 		this.leftLines.add(newLine);
-		this.programData.lines.add(newLine);
+		this.programData.addLine(newLine, false);
 		this.repaint();
+	}
+	@Override
+	public void modifyLines(int x1, int y1, int x2, int y2){
+		Line line = programData.tempShapeFirstLine();
+		if (!this.leftLines.contains(line)){
+			if (programData.distans(line.getX_a(), line.getY_a(), x2, y2) < programData.distans(line.getX_b(), line.getY_b(), x2, y2)){
+				line.setXY_a(x2, y2);
+			}
+			else{
+				line.setXY_b(x2, y2);
+			}
+		}
 	}
 	@Override
 	public void pasteLines(int x, int y){
@@ -23,9 +47,9 @@ class RigthRulePanel extends MainPanel{
 			for (Line line: this.programData.copiedLines) {
 				line.move(x - point[0], y - point[1]);
 				Line newLine = line.copy();
-				this.programData.lines.add(newLine);
+				this.programData.addLine(newLine, false);
 				leftLines.add(newLine);
-				this.programData.modyfiedLines.add(this.programData.lines.get(this.programData.lines.size() - 1));
+				this.programData.modyfiedLines.add(this.programData.getLine(this.programData.getLinesSize() - 1));
 				this.programData.modyfiedLines.get(this.programData.modyfiedLines.size() - 1).changeColor(this.programData.default_check_color);
 			}
 		}
@@ -35,7 +59,7 @@ class RigthRulePanel extends MainPanel{
 	public void removeSelectedLines(){
 		for (Line line: this.programData.getModified()){
 			if (!this.leftLines.contains(line)){
-				this.programData.lines.remove(line);
+				this.programData.removeLine(line);
 				this.leftLines.remove(line);
 			}
 		}

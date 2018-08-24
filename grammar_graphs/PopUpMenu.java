@@ -26,17 +26,18 @@ class PopUpMenu extends JPopupMenu {
 
 	PopUpMenu(MainPanel panel){
 		if(!(panel instanceof LeftRulePanel) && !(panel instanceof RigthRulePanel)){
-			showRulesChanging(panel);
-			showRuleApplicationList(panel);
-			showApplyRuleApplicationList(panel);
-			showSimulate(panel);
-			showResetOption(panel);
-			showSaveFile(panel);
-			showOpenFile(panel);
+			if (!MainData.COLOR_RULES){
+				showRulesChanging(panel);
+				showRuleListOptions(panel);
+				showGrammarOptions(panel);
+			}
+			showColoringRules(panel);
 		}
-		showViewSettings(panel);
-		showElemEdit(panel);
-		showMarker(panel);
+		if (!MainData.COLOR_RULES){
+			showViewSettings(panel);
+			showElemEdit(panel);
+			showMarker(panel);
+		}
 	}
 // change rules
 	JMenuItem addRuleForLines(MainPanel panel){
@@ -68,23 +69,12 @@ class PopUpMenu extends JPopupMenu {
 	}
 	void showRulesChanging(MainPanel panel){
 		JMenu rulesMenu = new JMenu(ProgramLabels.rulleList);
-		if (!panel.programData.isEmptyModified())
-			rulesMenu.add(addRuleForLines(panel));
-		rulesMenu.add(addRule(panel));
 		
 		JMenu [] rulesList = new JMenu [panel.programData.ruleList.size()];
 		int i = 0;
 
 		for (Rule changedRule: panel.programData.ruleList){
 			rulesList[i] = new JMenu(panel.programData.ruleList.get(i).getName());
-
-			JMenuItem removeRule = new JMenuItem("Remove");
-			removeRule.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					panel.programData.ruleList.remove(changedRule);
-				}
-			});
-			rulesList[i].add(removeRule);
 
 			JMenuItem applyRule = new JMenuItem("Apply");
 			applyRule.addActionListener(new ActionListener() {
@@ -107,10 +97,23 @@ class PopUpMenu extends JPopupMenu {
 				}
 			});
 			rulesList[i].add(editRule);
+			
+			JMenuItem removeRule = new JMenuItem("Remove");
+			removeRule.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					panel.programData.ruleList.remove(changedRule);
+				}
+			});
+			rulesList[i].add(removeRule);
 
 			rulesMenu.add(rulesList[i]);
 			i++;
 		}
+
+		if (!panel.programData.isEmptyModified())
+			rulesMenu.add(addRuleForLines(panel));
+		rulesMenu.add(addRule(panel));
+
 		add(rulesMenu);
 	}
 // change view settings
@@ -148,7 +151,10 @@ class PopUpMenu extends JPopupMenu {
 		});
 		panelSettings.add(gridButton);
 		JMenuItem markerSimulate = new JMenuItem();
-		markerSimulate.setText(ProgramLabels.showDist);
+		if (panel.programData.showDist)
+			markerSimulate.setText(ProgramLabels.hideDist);
+		else
+			markerSimulate.setText(ProgramLabels.showDist);
 		markerSimulate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				panel.programData.showDist = !panel.programData.showDist;
@@ -157,6 +163,40 @@ class PopUpMenu extends JPopupMenu {
 		});
 		panelSettings.add(markerSimulate);
 		add(panelSettings);
+	}
+// coloring rules
+	void showColoringRules(MainPanel panel){
+		JMenu ruleList = new JMenu(ProgramLabels.rulleAppListOpt);
+
+		ruleList.add(showColorRuleOption(panel));
+		ruleList.add(showColorRuleSettings(panel));
+
+		add(ruleList);
+	}
+	JMenuItem showColorRuleOption(MainPanel panel){
+		JMenuItem colorRuleOption = new JMenuItem();
+		if (MainData.COLOR_RULES)
+			colorRuleOption.setText(ProgramLabels.colorRuleOptionOff);
+		else
+			colorRuleOption.setText(ProgramLabels.colorRuleOptionOn);
+		colorRuleOption.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				MainData.COLOR_RULES = !MainData.COLOR_RULES;
+				
+			}
+		});
+		return colorRuleOption;
+	}
+	JMenuItem showColorRuleSettings(MainPanel panel){
+		JMenuItem colorRuleOption = new JMenuItem();
+		colorRuleOption.setText(ProgramLabels.colorRuleSettings);
+		colorRuleOption.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				;
+				
+			}
+		});
+		return colorRuleOption;
 	}
 // edit selected elements
 	void showElemEdit(MainPanel panel){
@@ -228,8 +268,19 @@ class PopUpMenu extends JPopupMenu {
 			add(marker);
 		}
 	}
-// run simulation
-	void showSimulate(MainPanel panel){
+// grammar options
+	void showGrammarOptions(MainPanel panel){
+		JMenu grammar = new JMenu(ProgramLabels.grammar);
+
+		grammar.add(showOpenFile(panel));
+		grammar.add(showSaveFile(panel));
+		grammar.add(showSimulate(panel));
+		grammar.add(showResetOption(panel));
+
+		add(grammar);
+	}
+	// run simulation
+	JMenuItem showSimulate(MainPanel panel){
 		JMenuItem markerSimulate = new JMenuItem();
 		markerSimulate.setText(ProgramLabels.runSimulation);
 		markerSimulate.addActionListener(new ActionListener() {
@@ -238,23 +289,24 @@ class PopUpMenu extends JPopupMenu {
 				panel.repaint();
 			}
 		});
-		add(markerSimulate);
+		return markerSimulate;
 	}
-// remove all rules and lines
-	void showResetOption(MainPanel panel){
+	// remove all rules and lines
+	JMenuItem showResetOption(MainPanel panel){
 		JMenuItem resetButton = new JMenuItem();
 		resetButton.setText(ProgramLabels.reset);
 		resetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				panel.programData.clear();
+				MainData.coloringRule = new ColoringRule(panel);
 				panel.repaint();
 				System.out.println("-------------------RESET-------------------");
 			}
 		});
-		add(resetButton);
+		return resetButton;
 	}
-// save document
-	void showSaveFile(MainPanel panel){
+	// save document
+	JMenuItem showSaveFile(MainPanel panel){
 		JFileChooser fc = new JFileChooser("./temp/");
 		fc.setFileFilter(new FileNameExtensionFilter(ProgramLabels.extensionGrammarInfo, ProgramLabels.extensionGrammar));
 		fc.setSelectedFile(new File("." + ProgramLabels.extensionGrammar));
@@ -270,10 +322,10 @@ class PopUpMenu extends JPopupMenu {
 				panel.repaint();
 			}
 		});
-		add(resetButton);
+		return resetButton;
 	}
-// open document
-	void showOpenFile(MainPanel panel){
+	// open document
+	JMenuItem showOpenFile(MainPanel panel){
 		JFileChooser fc = new JFileChooser("./temp/");
 		fc.setFileFilter(new FileNameExtensionFilter(ProgramLabels.extensionGrammarInfo, ProgramLabels.extensionGrammar));
 		fc.setSelectedFile(new File("." + ProgramLabels.extensionGrammar));
@@ -290,10 +342,18 @@ class PopUpMenu extends JPopupMenu {
 				panel.repaint();
 			}
 		});
-		add(resetButton);
+		return resetButton;
 	}
 // prepare rule application list
-	void showRuleApplicationList(MainPanel panel){
+	void showRuleListOptions(MainPanel panel){
+		JMenu ruleList = new JMenu(ProgramLabels.rulleAppListOpt);
+
+		ruleList.add(showRuleApplicationList(panel));
+		ruleList.add(showApplyRuleApplicationList(panel));
+
+		add(ruleList);
+	}
+	JMenuItem showRuleApplicationList(MainPanel panel){
 		JMenuItem resetButton = new JMenuItem();
 		resetButton.setText(ProgramLabels.ruleAppList);
 		resetButton.addActionListener(new ActionListener() {
@@ -301,9 +361,9 @@ class PopUpMenu extends JPopupMenu {
 				RuleListPrepraration frame = new RuleListPrepraration();
 			}
 		});
-		add(resetButton);
+		return resetButton;
 	}// apply rule application list
-	void showApplyRuleApplicationList(MainPanel panel){
+	JMenuItem showApplyRuleApplicationList(MainPanel panel){
 		JMenuItem resetButton = new JMenuItem();
 		resetButton.setText(ProgramLabels.applyruleAppList);
 		resetButton.addActionListener(new ActionListener() {
@@ -317,6 +377,6 @@ class PopUpMenu extends JPopupMenu {
 				}
 			}
 		});
-		add(resetButton);
+		return resetButton;
 	}
 }

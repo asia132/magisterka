@@ -28,6 +28,7 @@ final class Rule{
 		if (finalmarker != null)
 			this.finalshape = new Shape(addedLines, finalmarker);
 		else{
+			this.finalshape = new Shape();
 			if (!addedLines.isEmpty())
 				throw new MarkerRemovingRule();
 		}
@@ -39,13 +40,64 @@ final class Rule{
 			cat = Category.C;
 		}
 	}
+	Category getCategory(){
+		return this.cat;
+	}
+	void apply(MainPanel panel) throws NoMarkerException{
+		if (panel.programData.marker == null)
+			throw new NoMarkerException("Please add a marker to main panel\n");
+		if (initialshape.marker == null)
+			throw new NoMarkerException("Please add a marker to left side of rule\n");
+		Shape inputshape = new Shape(panel.programData.getLines(), panel.programData.marker, "Input");
+
+		System.out.println(cat.getChar() + " " + cat.toString());
+
+		MainData.coloringRule.updateWithRule(this);
+
+		ArrayList <Line> found_lines = initialshape.findMatch(inputshape);
+		if (finalshape != null)
+			finalshape.needsToBeMirrored = inputshape.needsToBeMirrored;
+
+		if (found_lines.size() >= initialshape.lines_dist.size()){
+			if (finalshape != null && finalshape.marker != null){
+				Marker inputMarker = panel.programData.marker.copy();
+
+				try{
+					double k = initialshape.marker.length() / inputshape.marker.length();
+					panel.programData.marker.move((int)((finalshape.marker.getX() - initialshape.marker.getX())/k), (int)((finalshape.marker.getY() - initialshape.marker.getY())/k), inputshape.marker.calcRotation(initialshape.marker.dir));
+					panel.programData.marker.rotateBasedOnDirSub(initialshape.marker.dir, finalshape.marker.dir, finalshape.needsToBeMirrored);
+				
+					panel.programData.marker.scale(this.findMarkerScaleParam());
+					if (finalshape.needsToBeMirrored){
+						System.out.println("MIRROR");
+						if (inputMarker.dir.equals(Direct.N) || inputMarker.dir.equals(Direct.S)){
+							panel.programData.marker.mirrorX(inputMarker.p.x);
+						}
+						else{
+							panel.programData.marker.mirrorY(inputMarker.p.y);
+						}
+					}
+					panel.programData.addLinesByRule(finalshape.setInPlace(inputMarker, initialshape.marker));
+				}catch (Exception e) {
+					new MessageFrame("Rule could not be applicated. " + e.getMessage());
+					panel.programData.marker = inputMarker;
+				}
+			}
+			else{
+				panel.programData.marker = null;
+			}
+			panel.repaint();
+		}
+	}
 	@Override
 	public String toString(){
 		StringJoiner info = new StringJoiner("");
 		info.add(initialshape.markerToString(name, FileSaver.aSideTag));
 		info.add(initialshape.linesDistToString(name, FileSaver.aSideTag));
-		if (finalshape.marker != null)	info.add(finalshape.markerToString(name, FileSaver.bSideTag));
-		info.add(finalshape.linesDistToString(name, FileSaver.bSideTag));
+		if (finalshape != null){
+			if (finalshape.marker != null)	info.add(finalshape.markerToString(name, FileSaver.bSideTag));
+			info.add(finalshape.linesDistToString(name, FileSaver.bSideTag));
+		}
 		return info.toString();
 	}
 	String getName(){
@@ -67,48 +119,6 @@ final class Rule{
 	}
 	double findMarkerScaleParam(){
 		return 1.*finalshape.marker.r / (1.*initialshape.marker.r);
-	}
-	void apply(MainPanel panel) throws NoMarkerException{
-		if (panel.programData.marker == null)
-			throw new NoMarkerException("Please add a marker to main panel\n");
-		if (initialshape.marker == null)
-			throw new NoMarkerException("Please add a marker to left side of rule\n");
-		Shape inputshape = new Shape(panel.programData.lines, panel.programData.marker, "Input");
-
-		ArrayList <Line> found_lines = initialshape.findMatch(inputshape);
-
-		finalshape.needsToBeMirrored = inputshape.needsToBeMirrored;
-
-		if (found_lines.size() >= initialshape.lines_dist.size()){
-			if (finalshape.marker != null){
-				Marker inputMarker = panel.programData.marker.copy();
-
-				try{
-					double k = initialshape.marker.length() / inputshape.marker.length();
-					panel.programData.marker.move((int)((finalshape.marker.getX() - initialshape.marker.getX())/k), (int)((finalshape.marker.getY() - initialshape.marker.getY())/k), inputshape.marker.calcRotation(initialshape.marker.dir));
-					panel.programData.marker.rotateBasedOnDirSub(initialshape.marker.dir, finalshape.marker.dir, finalshape.needsToBeMirrored);
-				
-					panel.programData.marker.scale(this.findMarkerScaleParam());
-					if (finalshape.needsToBeMirrored){
-						System.out.println("MIRROR");
-						if (inputMarker.dir.equals(Direct.N) || inputMarker.dir.equals(Direct.S)){
-							panel.programData.marker.mirrorX(inputMarker.p.x);
-						}
-						else{
-							panel.programData.marker.mirrorY(inputMarker.p.y);
-						}
-					}
-					panel.programData.lines.addAll(finalshape.setInPlace(inputMarker, initialshape.marker));
-				}catch (Exception e) {
-					new MessageFrame("Rule could not be applicated. " + e.getMessage());
-					panel.programData.marker = inputMarker;
-				}
-			}
-			else{
-				panel.programData.marker = null;
-			}
-			panel.repaint();
-		}
 	}
 	public class NoMarkerException extends Exception {
 		public NoMarkerException(String message) {

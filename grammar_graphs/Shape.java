@@ -25,11 +25,11 @@ class Shape{
 		this.lines_dist = new HashMap<Line, Dist>();
 		this.marker_norm = marker.getNormalized();
 		this.name = name;
-		int before = lines.size();
-		do{
-			before = lines.size();
-			lines = groupLines(lines);
-		}while (before != lines.size());
+		// int before = lines.size();
+		// do{
+		// 	before = lines.size();
+		// 	lines = groupLines(lines);
+		// }while (before != lines.size());
 		for (Line line: lines){
 			this.lines_dist.put(line.copy(), new Dist(line, marker));
 		}
