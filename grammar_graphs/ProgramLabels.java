@@ -8,6 +8,10 @@ public class ProgramLabels{
 	static String rulleAdding = "Add new rule";
 	static String rulleAddingForLines = "Add new rule for choosen lines";
 
+	static String rulleAppListOpt = "Rule Application options";
+	static String ruleAppList = "Prepare rule application list";
+	static String applyruleAppList = "Apply rule list";
+
 	static String goToStep = "Go to step...";
 	
 	static String panelSettings = "View";
@@ -22,12 +26,12 @@ public class ProgramLabels{
 	static String elemCopy = "Copy elements";
 	static String elemPaste = "Paste elements";
 
-	static String saveRule = "Add";
-	static String removeRule = "Remove";
-	static String cancelRule = "Cancel";
+	static String save = "Save";
+	static String remove = "Remove";
+	static String cancel = "Cancel";
 
 	static String newRuleLabel = "Please, provide the name of rule";
-	static String defaultNewRule = "New Rule";
+	static String defaultNewRule = "New_Rule";
 
 	static String marker = "Marker";
 	static String addMarker = "Add Marker Here";
@@ -36,4 +40,17 @@ public class ProgramLabels{
 
 	static String runSimulation = "Run Simulation";
 	static String showDist = "Show length";
+	static String hideDist = "Hide length";
+	static String reset = "Reset";
+
+	static String colorRuleOptionOn = "Turn on coloring rules";
+	static String colorRuleOptionOff = "Turn off coloring rules";
+	static String colorRuleSettings = "Choose colors for levels";
+
+	static String saveGrammar = "Save";
+	static String openGrammar = "Open";
+	static String extensionGrammar = "grammar";
+	static String extensionGrammarInfo = "Grammar file";
+	
+	static String grammar = "Grammar Options";
 }

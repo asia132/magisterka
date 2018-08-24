@@ -26,8 +26,7 @@ class CreateRuleFrame extends JFrame {
 	JButton saveButton;
 	JButton removeButton;
 	JButton cancelButton;
-	MainPanel panelL;
-	MainPanel panelR;
+	LeftRulePanel panelL;
 	JPanel panelB;
 
 	int screenHeight;
@@ -55,14 +54,13 @@ class CreateRuleFrame extends JFrame {
 		this.pack();
 		this.setVisible(true);
 	}
-
-	CreateRuleFrame(int ruleindex) {
+	CreateRuleFrame(Rule rule) {
 		super(ProgramLabels.rulleWinName);
 		loadFrameData();
-		this.ruleName = MainData.ruleList.get(ruleindex).name;
-
-		this.loadLeftPanel(MainData.ruleList.get(ruleindex).getInitialLines(), MainData.ruleList.get(ruleindex).getInitialMarker());
-		this.loadRightPanel(MainData.ruleList.get(ruleindex).getInitialLines(), MainData.ruleList.get(ruleindex).getFinalLines(), MainData.ruleList.get(ruleindex).getFinalMarker());
+		this.ruleName = rule.name;
+		
+		this.loadLeftPanel(rule.getInitialLines(), rule.getInitialMarker());
+		this.loadRightPanel(rule.getInitialLines(), rule.getFinalLines(), rule.getFinalMarker());
 		this.loadBottomPanel();
 
 		splitPanel();
@@ -90,7 +88,7 @@ class CreateRuleFrame extends JFrame {
 
 		JSplitPane splitPaneH = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		splitPaneH.setLeftComponent(panelL);
-		splitPaneH.setRightComponent(panelR);
+		splitPaneH.setRightComponent(panelL.rigthRulePanel);
 
 		splitPaneV.setLeftComponent(splitPaneH);
 		splitPaneV.setRightComponent(panelB);
@@ -125,44 +123,51 @@ class CreateRuleFrame extends JFrame {
 	void loadLeftPanel(ArrayList <Line> lines, Marker initialmarker) {
 		int width = (int)(screenWidth*rfScale*0.5);
 		int height = (int)(screenHeight*rfScale*panScale);
-		panelL = new MainPanel(width, height, true);
+		panelL = new LeftRulePanel(width, height);
 
 		int [] tran = extremeXY(lines, initialmarker);
+		tran[2] -=  (int)(width*0.2);
+		tran[3] -=  (int)(height*0.2);
 
 		for (Line line : lines){
 			Line newLine = line.copy();
 			newLine.move(-tran[2] + panelL.programData.grid_size, -tran[3] + panelL.programData.grid_size);
-			panelL.programData.lines.add(newLine);
+			panelL.programData.addLine(newLine, false);
 		}
 		if (initialmarker != null){
-			panelL.programData.marker = initialmarker;
+			panelL.programData.marker = initialmarker.copy();
 			panelL.programData.marker.move(-tran[2] + panelL.programData.grid_size, -tran[3] + panelL.programData.grid_size);
 		}
 	}
 	void loadRightPanel(ArrayList <Line> initialLines, ArrayList <Line> finalLines, Marker finalmarker) {
 		int width = (int)(screenWidth*rfScale*0.5);
 		int height = (int)(screenHeight*rfScale*panScale);
-		panelR = new MainPanel(width, height, true);
+		panelL.rigthRulePanel = new RigthRulePanel(width, height);
 
 		ArrayList <Line> lines = new ArrayList<>();
 		lines.addAll(initialLines);
-		lines.addAll(finalLines);
+		if (finalLines != null && !finalLines.isEmpty()) lines.addAll(finalLines);
 
 		int [] tran = extremeXY(lines, finalmarker);
+		tran[2] -=  (int)(width*0.2);
+		tran[3] -=  (int)(height*0.2);
 
 		for (Line line : initialLines){
 			Line newLine = line.copy();
-			newLine.move(-tran[2] + panelR.programData.grid_size, -tran[3] + panelR.programData.grid_size);
-			panelR.programData.lines.add(newLine);
+			newLine.move(-tran[2] + panelL.rigthRulePanel.programData.grid_size, -tran[3] + panelL.rigthRulePanel.programData.grid_size);
+			panelL.rigthRulePanel.programData.addLine(newLine, false);
+			panelL.rigthRulePanel.leftLines.add(newLine);
 		}
-		for (Line line : finalLines){
-			Line newLine = line.copy();
-			newLine.move(-tran[2] + panelR.programData.grid_size, -tran[3] + panelR.programData.grid_size);
-			panelR.programData.lines.add(newLine);
+		if (finalLines != null && !finalLines.isEmpty()){
+			for (Line line : finalLines){
+				Line newLine = line.copy();
+				newLine.move(-tran[2] + panelL.rigthRulePanel.programData.grid_size, -tran[3] + panelL.rigthRulePanel.programData.grid_size);
+				panelL.rigthRulePanel.programData.addLine(newLine, false);
+			}
 		}
 		if (finalmarker != null){
-			panelR.programData.marker = finalmarker;
-			panelR.programData.marker.move(-tran[2] + panelL.programData.grid_size, -tran[3] + panelL.programData.grid_size);
+			panelL.rigthRulePanel.programData.marker = finalmarker.copy();
+			panelL.rigthRulePanel.programData.marker.move(-tran[2] + panelL.rigthRulePanel.programData.grid_size, -tran[3] + panelL.rigthRulePanel.programData.grid_size);
 		}
 	}
 	void loadBottomPanel() {
@@ -187,9 +192,9 @@ class CreateRuleFrame extends JFrame {
 		panel.add(newRuleName, BorderLayout.LINE_START);
 	}
 	void showSaveButton(JPanel panel){
-		saveButton = new JButton(ProgramLabels.saveRule);
+		saveButton = new JButton(ProgramLabels.save);
 		saveButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e){
 				String theName = newRuleName.getText();
 				for (Rule rule: panelL.programData.ruleList){
 					if (rule.getName().equals(theName)){
@@ -198,23 +203,19 @@ class CreateRuleFrame extends JFrame {
 						break;
 					}
 				}
-				panelL.programData.ruleList.add(new Rule(theName, panelL.programData.copy(), panelR.programData.copy(), panelL.programData.marker, panelR.programData.marker));
-				closeFrame();
+				try{
+					panelL.programData.ruleList.add(new Rule(theName, panelL.programData.copy(), panelL.rigthRulePanel.programData.copy(), panelL.programData.marker, panelL.rigthRulePanel.programData.marker));			
+					closeFrame();
+				}
+				catch(Exception exc){
+					MessageFrame error = new MessageFrame(exc.getMessage());
+				}				
 			}
 		});
 		panel.add(saveButton, BorderLayout.LINE_START);
 	}
-	void showRemoveButton(JPanel panel){
-		removeButton = new JButton(ProgramLabels.removeRule);
-		removeButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("REMOVE");
-			}
-		});
-		panel.add(removeButton, BorderLayout.LINE_START);
-	}
 	void showCancelButton(JPanel panel){
-		cancelButton = new JButton(ProgramLabels.cancelRule);
+		cancelButton = new JButton(ProgramLabels.cancel);
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeFrame();

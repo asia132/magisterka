@@ -4,7 +4,10 @@ import java.awt.Point;
 import java.awt.Color;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
+
 import java.lang.Math;
+
+import java.util.StringJoiner;
 
 class Line{
 	Point pa;
@@ -21,6 +24,14 @@ class Line{
 		this.pa = a;
 		this.pb = b;
 	}
+	void mirrorX(int x){
+		pa.x = 2*x - pa.x;
+		pb.x = 2*x - pb.x;
+	}
+	void mirrorY(int y){
+		pa.y = 2*y - pa.y;
+		pb.y = 2*y - pb.y;
+	}
 	int round(double v, int x, double s){
 		double xx = (double)(x);
 		if (s > 1){
@@ -33,8 +44,12 @@ class Line{
 		}
 	}
 	void scale(int x, int y, double s){
-		pa.x = round((pa.x - x) * s + x, x, s);
-		pb.x = round((pb.x - x) * s + x, x, s);
+		// pa.x = round((pa.x - x) * s + x, x, s);
+		// pb.x = round((pb.x - x) * s + x, x, s);
+		// pa.y = round((pa.y - y) * s + y, y, s);
+		// pb.y = round((pb.y - y) * s + y, y, s);
+		pa.x = (int)Math.round((pa.x - x) * s + x);
+		pb.x = (int)Math.round((pb.x - x) * s + x);
 		pa.y = (int)Math.round((pa.y - y) * s + y);
 		pb.y = (int)Math.round((pb.y - y) * s + y);
 	}
@@ -45,6 +60,12 @@ class Line{
 		pb.x = (int)Math.round(Math.cos(alpha) * pbx - (Math.sin(alpha) * pby) + (x * (1 - Math.cos(alpha))) + (y * Math.sin(alpha)));
 		pa.y = (int)Math.round(Math.sin(alpha) * pax + (Math.cos(alpha) * pay) + (y * (1 - Math.cos(alpha))) - (x * Math.sin(alpha)));
 		pb.y = (int)Math.round(Math.sin(alpha) * pbx + (Math.cos(alpha) * pby) + (y * (1 - Math.cos(alpha))) - (x * Math.sin(alpha)));
+	}
+	boolean sameA(Line line){
+		return (line.pa.x == this.pa.x && line.pa.y == this.pa.y) || (line.pb.x == this.pa.x && line.pb.y == this.pa.y);
+	}
+	boolean sameB(Line line){
+		return (line.pa.x == this.pb.x && line.pa.y == this.pb.y) || (line.pb.x == this.pb.x && line.pb.y == this.pb.y);
 	}
 	static int toGrid(int x){
 		int gs = MainData.grid_size;
@@ -57,7 +78,7 @@ class Line{
 	double length(){
 		return MainData.distans(this.getX_a(), this.getY_a(), this.getX_b(), this.getY_b());
 	}
-	double [] getNormalized(){
+	double [] getDoubleCoordinates(){
 		double [] norm = new double [4];
 		norm[0] = this.pa.x * 1.;
 		norm[1] = this.pa.y * 1.;
@@ -73,7 +94,7 @@ class Line{
 		
 		if (MainData.showDist == true){
 			int x = (int)((getX_a() + getX_b()) * 0.5);
-			int y = (int)((getY_a() + getY_b()) * 0.5);
+			int y = (int)((getY_a() + getY_b()) * 0.5) - (int)(MainData.grid_size*0.5);
 			String text = Integer.toString((int)Math.floor(disx()))  + ", " + Integer.toString((int)Math.floor(disy()));
 			g2d.setColor(MainData.default_rect_color);
 			g2d.drawString(text, x + 1, y + 1);
@@ -117,10 +138,12 @@ class Line{
 		}
 		return ab;
 	}
-	double [] getFunctionParams(){
-		if (this.getX_a() == this.getX_b()){
-			double [] result = {0, 0};
-			return result;
+	boolean isPartOfLinearFun(){
+		return this.pa.x != this.pb.x;
+	}
+	double [] getFunctionParams() throws NotALinearFunction{
+		if (!this.isPartOfLinearFun()){
+			throw new NotALinearFunction(this.pa.x);
 		}
 		else{
 			double a = (this.getY_b()*1. - this.getY_a()*1.)/(this.getX_b()*1. - this.getX_a()*1.);
@@ -129,17 +152,16 @@ class Line{
 			return result;
 		}
 	}
-	double [] changeDistFromA(double new_dist){
-		double [] funParams = this.getFunctionParams();
-		double dist = MainData.distans(this.pa.x, this.pa.y, this.pb.x, this.pb.y);
-
-		double newAx1 = this.getX_a() - dist / Math.sqrt(1 + funParams[0] * funParams[0]);
-		double newAx2 = this.getX_a() + dist / Math.sqrt(1 + funParams[0] * funParams[0]);
-
-		double newAy1 = newAx1 * funParams[0] + funParams[1];
-		double newAy2 = newAx2 * funParams[0] + funParams[1];
-
-		return new double [4];
+	double [] getFunctionParamsOnGrid() throws NotALinearFunction{
+		if (!this.isPartOfLinearFun()){
+			throw new NotALinearFunction(this.pa.x);
+		}
+		else{
+			double a = (this.pb.y*1. - this.pa.y*1.)/(this.pb.x*1. - this.pa.x*1.);
+			double b = this.pa.y - a * this.pa.x;
+			double [] result = {a, b};
+			return result;
+		}
 	}
 	void setXY_a(int x_a, int y_a){
 		this.pa.x = toGrid(x_a);
@@ -158,13 +180,18 @@ class Line{
 		this.pb.y = points[1];
 	}
 	void move(int x, int y){
-		this.pa.x += toGrid(x);
+		this.pa.x += toGrid(x); 
 		this.pa.y += toGrid(y);
 		this.pb.x += toGrid(x);
 		this.pb.y += toGrid(y);
 	}
+	// check if the other line has the same a nad b params as the line
+	boolean compareABParams(Line otherLine){
+		return this.onLine(otherLine.getX_a(), otherLine.getY_a(), MainData.grid_size) || this.onLine(otherLine.getX_b(), otherLine.getY_b(), MainData.grid_size);
+	}
+	// check if the point of x and y coordinates are in the line
 	boolean onLine(int x, int y, int grid_size){
-		if (this.getX_a() != this.getX_b()){
+		try{
 			int x_1, x_2;
 			if (this.getX_a() < this.getX_b()){
 				x_1 = this.getX_a();
@@ -181,7 +208,7 @@ class Line{
 				return true;
 			}
 		}
-		else{
+		catch(NotALinearFunction error){
 			int y_1, y_2;
 			if (this.getY_a() < this.getY_b()){
 				y_1 = this.getY_a();
@@ -227,11 +254,30 @@ class Line{
 	void print(){
 		System.out.println("Line: A("+pa.x+", "+pa.y+") - B("+pb.x+", "+pb.y+")");
 	}
+	@Override
+	public String toString(){
+		StringJoiner info = new StringJoiner("\t");
+		return info.add(FileSaver.lineTag).add("" + pa.x).add("" + pa.y).add("" + pb.x).add(pb.y + "\n").toString();
+	}
 	boolean isTheSameLine(Line other){
 		if (this.pa.x != other.pa.x) return false;
 		if (this.pa.y != other.pa.y) return false;
 		if (this.pb.x != other.pb.x) return false;
 		if (this.pb.y != other.pb.y) return false;
 		return true;
+	}
+	class NotALinearFunction extends Exception{
+		private int x;
+		NotALinearFunction(String message, int x){
+			super(message);
+			this.x = x;
+		}
+		NotALinearFunction(int x){
+			super("Cannot find params a and b.\nThe function is not unique for y coordinate, but it can be defined as X = " + x);
+			this.x = x;
+		}
+		int getX(){
+			return x;
+		}
 	}
 }
