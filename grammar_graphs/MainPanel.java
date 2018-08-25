@@ -89,6 +89,12 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 				newLine = false;
 		}
 	}
+	public void tempShapeAddLine(Line line){
+		programData.tempShapeAddLine(line);
+	}
+	public void tempShapeClear(){
+		programData.tempShapeClear();
+	}
 	public void modifyLines(int x1, int y1, int x2, int y2){
 		Line line = programData.tempShapeFirstLine();
 		if (programData.distans(line.getX_a(), line.getY_a(), x2, y2) < programData.distans(line.getX_b(), line.getY_b(), x2, y2)){
@@ -120,6 +126,7 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
 		if (MainData.COLOR_RULES){
 			MainData.coloringRule.paintLevels(g2d);
+			this.repaint();
 		}else{
 			if (programData.SHOW_GRID)
 				programData.paintGrid(g2d, screenWidth, screenHeight);
@@ -162,14 +169,14 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 			else{
 				if (!programData.isEmptyModified()){
 					for (Line line: programData.getModified()){
-						programData.tempShapeAddLine(line);
+						this.tempShapeAddLine(line);
 					}
 				}
 				else if (programData.marker != null && programData.marker.isMiddle(x1, y1)){
 					this.moveMarker = true;
 				}
 				else {
-					programData.tempShapeAddLine(new Line(x1, y1, x1, y1));
+					this.tempShapeAddLine(new Line(x1, y1, x1, y1));
 					newLine = true; 
 				}
 			}
@@ -187,7 +194,7 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		}else{
 			if (!programData.RIGHT){
 				resizeMarker(x1, y1, x2, y2);
-				programData.tempShapeClear();
+				this.tempShapeClear();
 				if (newLine == true && programData.wasMoved(x1, y1, x2, y2)){
 					this.addLine(x1, y1, x2, y2);
 				}

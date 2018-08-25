@@ -1,19 +1,13 @@
 Bugs:
-  ☐ przegrupowanie poleceń w menu @low
   ☐ skopiowane linie w input pic nie mogą być dzielone z oknem dodawania reguł @low
-  ☐ linie z lewej strony reguły muszą przesuwać wiele i pojedynczą linię z prawej strony @high
   ☐ poprawić precyzję skalowania @low
   ☐ okno, w którym będzie można przypisać levelom kolory (ewentualnie tekstury i gradienty) @critical
-  ☐ do levelu muszą być przypisane wszystkie podkształty
-  ☐ linie dodane do levelu muszą być przekształcone zgodnie z tym co jest mainpanel
-  ☐ paste elements w right side są nieprzesuwalne
+  ☐ możliwość zdefiniowania max level qty
+  ☐ do levelu muszą być przypisane wszystkie podkształty, a ich malowanie musi być zależne od ich położenia (SG4)
   ☐ grouping się zepsuł
+  ☐ sublines się zepsuły
 --- ✄ -----------------------
-Tests:
-  ☐ test:
-    ☐ poprawić precyzę skali @high
 BRs:
-  ☐ dokumentacja @low
   ☐ symulacja @critical @started
   Gramatyka:
   dod. funkcjonalności:
@@ -23,6 +17,12 @@ BRs:
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ linie z left side nie przesuwają się podczas przesuwania widoku w right side @done (18-08-25 16:26) @project(Bugs)
+ ✔ przegrupowanie poleceń w menu @low @done (18-08-25 12:38) @project(Bugs)
+ ✔ linie z lewej strony reguły muszą przesuwać wiele i pojedynczą linię z prawej strony @high @done (18-08-25 12:35) @project(Bugs)
+ ✘ dokumentacja @low @cancelled (18-08-25 11:54) @project(BRs)
+ ✔ linie dodane do levelu muszą być przekształcone zgodnie z tym co jest mainpanel @done (18-08-25 11:53) @project(Bugs)
+ ✔ paste elements w right side są nieprzesuwalne @done (18-08-25 11:52) @project(Bugs)
  ✔ punkty, według których się maluje muszą być posortowane @critical @done (18-08-23 20:53) @project(Bugs)
  ✔ wprowadzenie reguł kolorowania @critical @done (18-08-23 17:23) @project(BRs / Gramatyka)
  ✔ wprowadzenie poziomów kształtów terminalnych @critical @done (18-08-23 17:22) @project(BRs / Gramatyka)

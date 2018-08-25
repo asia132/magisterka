@@ -20,6 +20,14 @@ class RigthRulePanel extends MainPanel{
 			this.programData.marker.move(x2 - x1, y2 - y1);
 		this.repaint();
 	}
+	public void moveAllLines(int x1, int y1, int x2, int y2){
+		for (Line line: programData.getLines()){
+			line.move(x2 - x1, y2 - y1);
+		}
+		if (programData.marker != null)
+			this.programData.marker.move(x2 - x1, y2 - y1);
+		this.repaint();
+	}
 	public void addLeftLine(int x1, int y1, int x2, int y2){
 		Line newLine = new Line(x1, y1, x2, y2);
 		this.leftLines.add(newLine);
@@ -38,8 +46,7 @@ class RigthRulePanel extends MainPanel{
 			}
 		}
 	}
-	@Override
-	public void pasteLines(int x, int y){
+	public void pasteLinesFromLetf(int x, int y){
 		if (!this.programData.copiedLines.isEmpty()){
 			this.programData.changeModifiedColor(this.programData.default_figure_color);
 			this.programData.modyfiedLines.clear();
@@ -74,6 +81,17 @@ class RigthRulePanel extends MainPanel{
 				programData.tempShapeMove(i, x1, y1, x2, y2);
 		}
 		this.repaint();
+	}
+	public void modifyLines(int i ,int x1, int y1, int x2, int y2){
+		if (i >= 0){
+			Line line = leftLines.get(i);
+			if (programData.distans(line.getX_a(), line.getY_a(), x2, y2) < programData.distans(line.getX_b(), line.getY_b(), x2, y2)){
+				line.setXY_a(x2, y2);
+			}
+			else{
+				line.setXY_b(x2, y2);
+			}
+		}
 	}
 	void makeLineRemovable(ArrayList <Line> linesRemovedFromLeftSide){
 		for (Line lLine: linesRemovedFromLeftSide){

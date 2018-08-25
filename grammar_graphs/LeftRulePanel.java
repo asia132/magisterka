@@ -19,7 +19,7 @@ class LeftRulePanel extends MainPanel {
 	public void pasteLines(int x, int y){
 		this.programData.pasteCopied(x, y);
 		this.repaint();
-		this.rigthRulePanel.pasteLines(x, y);
+		this.rigthRulePanel.pasteLinesFromLetf(x, y);
 	}
 	@Override
 	public void removeSelectedLines(){
@@ -32,16 +32,15 @@ class LeftRulePanel extends MainPanel {
 	}
 	@Override
 	public void moveLinesOfTempShape(int x1, int y1, int x2, int y2){
-		for (Line line: programData.getModified()){
+		for (int i = 0; i < programData.getModified().size(); i++){
+			Line line = programData.getModified().get(i).copy();
+			programData.tempShapeMove(i, x1, y1, x2, y2);
 			for (Line rline: rigthRulePanel.leftLines){
 				if (rline.isTheSameLine(line)){
-					rline.setXY_a(line.getX_a() + x2 - x1, line.getY_a() + y2 - y1);
-					rline.setXY_b(line.getX_b() + x2 - x1, line.getY_b() + y2 - y1);
+					rline.setXY_a(programData.getModified().get(i).getX_a(), programData.getModified().get(i).getY_a());
+					rline.setXY_b(programData.getModified().get(i).getX_b(), programData.getModified().get(i).getY_b());
 				}
 			}
-		}
-		for (int i = 0; i < programData.getModified().size(); i++){	
-			programData.tempShapeMove(i, x1, y1, x2, y2);
 		}
 		rigthRulePanel.repaint();
 	}
@@ -51,6 +50,21 @@ class LeftRulePanel extends MainPanel {
 		if (programData.marker != null)
 			this.programData.marker.move(x2 - x1, y2 - y1);
 		this.repaint();
-		this.rigthRulePanel.moveLines(x1, y1, x2, y2);
+		this.rigthRulePanel.moveAllLines(x1, y1, x2, y2);
+	}
+	@Override
+	public void modifyLines(int x1, int y1, int x2, int y2){
+		Line line = programData.tempShapeFirstLine();
+		if (programData.distans(line.getX_a(), line.getY_a(), x2, y2) < programData.distans(line.getX_b(), line.getY_b(), x2, y2)){
+			line.setXY_a(x2, y2);
+		}
+		else{
+			line.setXY_b(x2, y2);
+		}
+
+		int i = programData.getLines().indexOf(line);
+		rigthRulePanel.modifyLines(i, x1, y1, x2, y2);
+
+		rigthRulePanel.repaint();
 	}
 }
