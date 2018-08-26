@@ -11,53 +11,53 @@ import java.awt.Point;
 import java.lang.Math;
 
 class ColoringRule {
-	static ArrayList <Level> levels;
+	static Level levels[];
 	private int n;
-	private MainPanel panel;
+	int max_n_allowed;
+	private boolean n_change = false;
 
 	ColoringRule(MainPanel panel){
-		this.levels = new ArrayList<>();
-		levels.add(new Level());
-		n = 1;
-		this.panel = panel;
-		print();
+		this.n = 0;
+		this.max_n_allowed = 10;
+		this.levels = new Level [100];
+
+		for (int i = 0; i < this.max_n_allowed; ++i)
+			this.levels[i] = new Level();
+		this.print();
 	}
 	void updateLevel0(Line newLine){
-		levels.get(0).levelLines.add(newLine);
+		this.levels[0].levelLines.add(newLine);
 	}
-	void updateWithRule(Rule rule){
-		if (rule.getCategory() == Category.A){
-			if (levels.size() == n)
-				// levels.add(n, new Level(rule.getInitialLines()));
-				levels.add(n, new Level(rule.initialshape.setInPlace(panel.programData.marker, rule.initialshape.marker) ));
-			else
-				levels.get(n).update(rule.initialshape.setInPlace(panel.programData.marker, rule.initialshape.marker ));
-		}else if (rule.getCategory() == Category.B){
-			if (levels.size() == n)
-				levels.add(n, new Level(rule.initialshape.setInPlace(panel.programData.marker, rule.initialshape.marker) ));
-			else
-				levels.get(n).update(rule.initialshape.setInPlace(panel.programData.marker, rule.initialshape.marker) );
-			levels.add(++n, new Level(rule.initialshape.setInPlace(panel.programData.marker, rule.initialshape.marker) ));
-		}else if (rule.getCategory() == Category.C){
-			if (levels.size() == n)
-				levels.add(n, new Level(rule.finalshape.setInPlace(panel.programData.marker, rule.initialshape.marker) ));
-			else
-				levels.add(++n, new Level(rule.finalshape.setInPlace(panel.programData.marker, rule.initialshape.marker) ));
+	void updateWithRule(Category ruleCat, ArrayList <Line> ruleInitialLines, ArrayList <Line> ruleFinalLines){
+		if (ruleCat == Category.A){ // left side => n 
+			levels[n].update(ruleInitialLines);
+		}else if (ruleCat == Category.B){ // left side => n | right side => n+1
+			levels[n].update(ruleInitialLines);
+			if (this.n_change){
+				n++;
+				this.n_change = false;
+			}
+			if (n+1 < max_n_allowed)	levels[n+1].update(ruleInitialLines);
+		}else if (ruleCat == Category.C){ // right side - left side => n+1
+			if (n+1 < max_n_allowed)	levels[n+1].update(ruleFinalLines);
+			this.n_change = true;
 		}
+		System.out.println("KONTROLA N: n = " + n + ", ilosc leveli: " + levels.length);
 		print();
 	}
 	void print(){
-		int i = 0;
-		for (Level level: levels){
-			System.out.println("Level " + i++);
-			level.print();
+		
+		for (int i = 0; i < max_n_allowed; ++i){
+			System.out.println("Level " + i);
+			levels[i].print();
 		}
 	}
 	void paintLevels(Graphics2D g2d){
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
-		for (Level level: levels) {
+		for (int i = 0; i < max_n_allowed; ++i) {
+			Level level = levels[i];
 			if (level.levelLines.size() <= 2) continue;
 			try{
 				g2d.setPaint(level.getColor());
@@ -107,12 +107,13 @@ class Level {
 		points[1][0] = p.x*1.*MainData.grid_size;
 		points[1][1] = p.y*1.*MainData.grid_size;
 		int index = 2;
+		// int break_index = -1;
 
-		int externalSizeControl = 0;
+		// int externalSizeControl = 0;
 
-		while (lines.size() > 1 && externalSizeControl != lines.size()){
+		// while (lines.size() > 1 && externalSizeControl != lines.size()){
 			int sizeControl = 0;
-			externalSizeControl = lines.size();
+		// 	externalSizeControl = lines.size();
 
 			while(sizeControl != lines.size()){
 				sizeControl = lines.size();
@@ -134,14 +135,14 @@ class Level {
 					}
 				}
 			}
-			
-		}
-
-		// if (lines.size() > 1){
-		// 	throw new NotClosedShape();
+		// 	break_index = index;
 		// }
-		// if (points[points.length-1][0] != points[0][0] && points[points.length-1][1] != points[0][1])
-		// 	throw new NotClosedShape();
+
+		if (lines.size() > 1){
+			throw new NotClosedShape();
+		}
+		if (points[points.length-1][0] != points[0][0] && points[points.length-1][1] != points[0][1])
+			throw new NotClosedShape();
 		return points;
 	}
 	Level(ArrayList <Line> levelLines){
@@ -152,12 +153,24 @@ class Level {
 		this.levelLines = new ArrayList <Line>();
 		this.randColor();
 	}
-	void update(ArrayList <Line> levelLines){
-		this.levelLines.addAll(levelLines);
+	void update(ArrayList <Line> newLevelLines){
+		int controlSize = this.levelLines.size();
+		for (Line newline: newLevelLines){
+			boolean shouldBeAdded = true;
+			for (int i = 0; i < controlSize; ++i){
+				if (this.levelLines.get(i).isTheSameLine(newline)){
+					shouldBeAdded = false;
+					break;
+				}
+			}
+			if (shouldBeAdded)	this.levelLines.add(newline);
+		}
 	}
 	void print(){
 		System.out.println(this.color.toString());
+		int i = 1;
 		for (Line line: this.levelLines) {
+			System.out.print(i++ + ". ");
 			line.print();
 		}
 	}

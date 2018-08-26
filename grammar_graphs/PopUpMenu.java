@@ -170,8 +170,21 @@ class PopUpMenu extends JPopupMenu {
 
 		ruleList.add(showColorRuleOption(panel));
 		ruleList.add(showColorRuleSettings(panel));
+		if (!MainData.COLOR_RULES)
+			ruleList.add(showResetLevels(panel));
 
 		add(ruleList);
+	}
+	JMenuItem showResetLevels(MainPanel panel){
+		JMenuItem colorRuleOption = new JMenuItem();
+		colorRuleOption.setText(ProgramLabels.resetLevels);
+		colorRuleOption.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				MainData.coloringRule = new ColoringRule(panel);
+				panel.programData.fillColoringRuleWithInput();
+			}
+		});
+		return colorRuleOption;
 	}
 	JMenuItem showColorRuleOption(MainPanel panel){
 		JMenuItem colorRuleOption = new JMenuItem();

@@ -47,6 +47,11 @@ class MainData {
 	static Color default_marker_color = Color.CYAN;
 	static Color default_grid_color = Color.LIGHT_GRAY;
 
+	void fillColoringRuleWithInput(){
+		for (Line line: lines) {
+			coloringRule.updateLevel0(line);
+		}
+	}
 	void addLinesByRule(ArrayList <Line> newlines){
 		this.lines.addAll(newlines);
 	}
@@ -58,16 +63,11 @@ class MainData {
 	}
 	void removeLine(Line line){
 		this.lines.remove(line);
-		coloringRule.levels.get(0).levelLines.remove(line);
+		coloringRule.levels[0].levelLines.remove(line);
 	}
 	void moveLines(int x1, int y1, int x2, int y2, boolean mainPanel){
 		for (Line line: this.lines){
 			line.move(x2 - x1, y2 - y1);
-		}
-		if (mainPanel){
-			for (Line line: coloringRule.levels.get(0).levelLines){
-				line.move(x2 - x1, y2 - y1);
-			}
 		}
 	}
 	ArrayList <Line> getLines(){

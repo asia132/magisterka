@@ -52,7 +52,6 @@ final class Rule{
 
 		System.out.println(cat.getChar() + " " + cat.toString());
 
-		MainData.coloringRule.updateWithRule(this);
 
 		ArrayList <Line> found_lines = initialshape.findMatch(inputshape);
 		if (finalshape != null)
@@ -77,7 +76,9 @@ final class Rule{
 							panel.programData.marker.mirrorY(inputMarker.p.y);
 						}
 					}
-					panel.programData.addLinesByRule(finalshape.setInPlace(inputMarker, initialshape.marker));
+					ArrayList <Line> finalLines = finalshape.setInPlace(inputMarker, initialshape.marker);
+					panel.programData.addLinesByRule(finalLines);
+					MainData.coloringRule.updateWithRule(this.cat, found_lines, finalLines);
 				}catch (Exception e) {
 					new MessageFrame("Rule could not be applicated. " + e.getMessage());
 					panel.programData.marker = inputMarker;

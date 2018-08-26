@@ -46,6 +46,7 @@ public class ProgramLabels{
 	static String colorRuleOptionOn = "Turn on coloring rules";
 	static String colorRuleOptionOff = "Turn off coloring rules";
 	static String colorRuleSettings = "Choose colors for levels";
+	static String resetLevels = "Reset Levels";
 
 	static String saveGrammar = "Save";
 	static String openGrammar = "Open";
