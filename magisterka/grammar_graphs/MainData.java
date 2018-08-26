@@ -57,8 +57,6 @@ class MainData {
 	}
 	void addLine(Line line, boolean mainPanel){
 		this.lines.add(line);
-		System.out.print("New line: "); line.print();
-
 		if (mainPanel){
 			coloringRule.updateLevel0(line);
 		}

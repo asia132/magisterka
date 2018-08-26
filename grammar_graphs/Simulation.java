@@ -23,6 +23,7 @@ class Simulation{
 	static String file = "initial_shape.txt";
 	static String fileL2 = "L2.txt";
 	static String fileFinale = "finale_shape.txt";
+
 	static String file_folder = "./shapes";
 
 	static void runSimulation(MainPanel panel){
