@@ -53,6 +53,8 @@ class ColoringRule {
 		}
 	}
 	void paintLevels(Graphics2D g2d){
+		this.print();
+
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
@@ -166,6 +168,18 @@ class Level {
 			if (shouldBeAdded)	this.levelLines.add(newline);
 		}
 	}
+	void addLine(Line newline){
+		int controlSize = this.levelLines.size();
+		boolean shouldBeAdded = true;
+		for (int i = 0; i < controlSize; ++i){
+			if (this.levelLines.get(i).isTheSameLine(newline)){
+				shouldBeAdded = false;
+				break;
+			}
+		}
+		if (shouldBeAdded)	this.levelLines.add(newline);
+	}
+
 	void print(){
 		System.out.println(this.color.toString());
 		int i = 1;
