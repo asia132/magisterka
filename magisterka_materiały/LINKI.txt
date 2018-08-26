@@ -1,9 +1,0 @@
-https://www.python.org/dev/peps/pep-0008/
-http://home.agh.edu.pl/~kzajac/dydakt/matp/
-
-http://home.fa.utl.pt/~albertidigital/AD_VER1011/files/aula05/aula05_shapeGrammars.pdf - aula05_shapeGrammars.pdf
-
-http://webstaff.itn.liu.se/~jonun/web/teaching/2009-TNCG13/Siggraph09/courses/shape-grammars.pdf - shape-grammars.pdf
-
-
-
