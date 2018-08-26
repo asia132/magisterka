@@ -1,0 +1,10 @@
+#INPUT	#I	#M	N	1	62	11
+#INPUT	#I	#L	55	16	61	16
+#INPUT	#I	#L	61	16	61	10
+#Rule	#A	#M	N	1	13	3
+#Rule	#A	#L	12	2	12	8
+#Rule	#A	#L	12	8	6	8
+#Rule	#B	#M	W	2	8	16
+#Rule	#B	#L	18	14	6	14
+#Rule	#B	#L	18	2	18	14
+#Rule	#B	#L	12	2	18	2
