@@ -40,3 +40,11 @@ doc:
 #opens the documentation
 open_doc:
 	firefox ./doc/$(PACKAGE)/$(J_NAME).html
+
+git_push:
+	git add -A
+	git commit -m 'update'
+	git push origin master
+
+git_pull:
+	git pull origin master
