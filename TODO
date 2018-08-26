@@ -4,7 +4,6 @@ Bugs:
   ☐ okno, w którym będzie można przypisać levelom kolory (ewentualnie tekstury i gradienty) @critical
   ☐ możliwość zdefiniowania max level qty
   ☐ do levelu muszą być przypisane wszystkie podkształty, a ich malowanie musi być zależne od ich położenia (SG4)
-  ☐ grouping się zepsuł
   ☐ sublines się zepsuły
 --- ✄ -----------------------
 BRs:
@@ -17,6 +16,7 @@ BRs:
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ grouping się zepsuł @done (18-08-26 16:01) @project(Bugs)
  ✔ linie z left side nie przesuwają się podczas przesuwania widoku w right side @done (18-08-25 16:26) @project(Bugs)
  ✔ przegrupowanie poleceń w menu @low @done (18-08-25 12:38) @project(Bugs)
  ✔ linie z lewej strony reguły muszą przesuwać wiele i pojedynczą linię z prawej strony @high @done (18-08-25 12:35) @project(Bugs)

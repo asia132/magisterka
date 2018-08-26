@@ -57,7 +57,6 @@ class MainData {
 	}
 	void addLine(Line line, boolean mainPanel){
 		this.lines.add(line);
-		System.out.print("New line: "); line.print();
 
 		if (mainPanel){
 			coloringRule.updateLevel0(line);
@@ -160,7 +159,9 @@ class MainData {
 	}
 	String markerToString(){
 		StringJoiner info = new StringJoiner("\t");
-		return info.add(FileSaver.inputTag).add(FileSaver.iSideTag).add(marker.toString()).toString();
+		if (marker != null)
+			return info.add(FileSaver.inputTag).add(FileSaver.iSideTag).add(marker.toString()).toString();
+		return info.add(FileSaver.inputTag).add(FileSaver.iSideTag).toString();
 	}
 	String linesToString(){
 		StringJoiner info = new StringJoiner("");

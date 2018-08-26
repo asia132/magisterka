@@ -23,6 +23,7 @@ final class Rule{
 
 		this.name = name;
 		this.initialshape = new Shape(initialLines, initialmarker, "Rule A site");
+		System.out.println("Initial Shape size: [" + initialLines.size() + " vs " + initialshape.lines_dist.size() + "]");
 
 		ArrayList <Line> addedLines = MainData.RelativeComplement(finalLines, initialLines);
 		if (finalmarker != null)
@@ -49,6 +50,7 @@ final class Rule{
 		if (initialshape.marker == null)
 			throw new NoMarkerException("Please add a marker to left side of rule\n");
 		Shape inputshape = new Shape(panel.programData.getLines(), panel.programData.marker, "Input");
+		System.out.println("Input Shape size: [" + panel.programData.getLines().size() + " vs " + inputshape.lines_dist.size() + "]");
 
 		System.out.println(cat.getChar() + " " + cat.toString());
 

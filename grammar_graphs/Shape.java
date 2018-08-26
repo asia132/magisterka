@@ -25,11 +25,11 @@ class Shape{
 		this.lines_dist = new HashMap<Line, Dist>();
 		this.marker_norm = marker.getNormalized();
 		this.name = name;
-		// int before = lines.size();
-		// do{
-		// 	before = lines.size();
-		// 	lines = groupLines(lines);
-		// }while (before != lines.size());
+		int before = lines.size();
+		do{
+			before = lines.size();
+			lines = groupLines(lines);
+		}while (before != lines.size());
 		for (Line line: lines){
 			this.lines_dist.put(line.copy(), new Dist(line, marker));
 		}
@@ -216,13 +216,21 @@ class Shape{
 					try{
 						double [] funparam_j = lines.get(j).getFunctionParams();
 						int [] points_j = lines.get(j).getSortedAB();
-						if (funparam_i[0] == funparam_j[0] && funparam_i[1] == funparam_j[1]
-							&& points_i[0] <= points_j[0] && points_i[2] >= points_j[0] 
-							&& points_i[1] >= points_j[1] && points_i[3] >= points_j[1]){
-							lines.get(i).setA(findPointA(lines.get(i), lines.get(j)));
-							lines.get(i).setB(findPointB(lines.get(i), lines.get(j)));
-							points_i = lines.get(i).getSortedAB();
-							lines.remove(j);
+						if (funparam_i[0] == funparam_j[0] && funparam_i[1] == funparam_j[1]){
+							if (((lines.get(j).pa.x <= lines.get(i).pa.x && lines.get(i).pa.x <= lines.get(j).pb.x) ||
+								 (lines.get(j).pb.x <= lines.get(i).pa.x && lines.get(i).pa.x <= lines.get(j).pa.x) ||
+								 (lines.get(j).pa.x <= lines.get(i).pb.x && lines.get(i).pb.x <= lines.get(j).pb.x) ||
+								 (lines.get(j).pb.x <= lines.get(i).pb.x && lines.get(i).pb.x <= lines.get(j).pa.x)) ||
+								((lines.get(i).pa.x <= lines.get(j).pa.x && lines.get(j).pa.x <= lines.get(i).pb.x) ||
+								 (lines.get(i).pb.x <= lines.get(j).pa.x && lines.get(j).pa.x <= lines.get(i).pa.x) ||
+								 (lines.get(i).pa.x <= lines.get(j).pb.x && lines.get(j).pb.x <= lines.get(i).pb.x) ||
+								 (lines.get(i).pb.x <= lines.get(j).pb.x && lines.get(j).pb.x <= lines.get(i).pa.x))){
+								lines.get(i).setA(findPointA(lines.get(i), lines.get(j)));
+								lines.get(i).setB(findPointB(lines.get(i), lines.get(j)));
+								points_i = lines.get(i).getSortedAB();
+								lines.remove(j);
+							}
+							System.out.println();
 						}
 					}catch(Line.NotALinearFunction error){
 						continue;
@@ -230,18 +238,22 @@ class Shape{
 				}
 			}catch(Line.NotALinearFunction error){
 				int x_i = lines.get(i).pa.x;
-				int [] points_i = lines.get(i).getSortedAB();
 				for (int j = i + 1; j < lines.size(); ++j){
 					if (!lines.get(j).isPartOfLinearFun()){
 						int x_j = lines.get(j).pa.x;
-						int [] points_j = lines.get(j).getSortedAB();
-						if (x_i == x_j
-							&& ((points_i[1] > points_j[1] && points_i[3] >= points_j[1])
-								|| (points_i[1] < points_j[1] && points_i[3] <= points_j[1]))){
-							lines.get(i).setA(findPointA(lines.get(i), lines.get(j)));
-							lines.get(i).setB(findPointB(lines.get(i), lines.get(j)));
-							points_i = lines.get(i).getSortedAB();
-							lines.remove(j);
+						if (x_i == x_j){
+							if (((lines.get(j).pa.y <= lines.get(i).pa.y && lines.get(i).pa.y <= lines.get(j).pb.y) ||
+								 (lines.get(j).pb.y <= lines.get(i).pa.y && lines.get(i).pa.y <= lines.get(j).pa.y) ||
+								 (lines.get(j).pa.y <= lines.get(i).pb.y && lines.get(i).pb.y <= lines.get(j).pb.y) ||
+								 (lines.get(j).pb.y <= lines.get(i).pb.y && lines.get(i).pb.y <= lines.get(j).pa.y)) ||
+								((lines.get(i).pa.y <= lines.get(j).pa.y && lines.get(j).pa.y <= lines.get(i).pb.y) ||
+								 (lines.get(i).pb.y <= lines.get(j).pa.y && lines.get(j).pa.y <= lines.get(i).pa.y) ||
+								 (lines.get(i).pa.y <= lines.get(j).pb.y && lines.get(j).pb.y <= lines.get(i).pb.y) ||
+								 (lines.get(i).pb.y <= lines.get(j).pb.y && lines.get(j).pb.y <= lines.get(i).pa.y))){
+								lines.get(i).setA(findPointA(lines.get(i), lines.get(j)));
+								lines.get(i).setB(findPointB(lines.get(i), lines.get(j)));
+								lines.remove(j);
+							}
 						}
 					}
 				}
