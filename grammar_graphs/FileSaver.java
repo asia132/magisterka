@@ -67,7 +67,6 @@ class FileSaver{
 				if (ruleList.equals(lineContent[0])) {
 					if (!newRuleName.equals("") && markerASide != null){
 						try{
-							System.out.println("Add new rule at the end: " + newRuleName);
 							linesBSide.addAll(linesASide);
 							if (markerBSide != null)	panel.programData.ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), markerBSide.copy()));
 							else	panel.programData.ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), null));
@@ -78,7 +77,6 @@ class FileSaver{
 					break;
 				}
 				if (inputTag.equals(lineContent[0])){
-					System.out.println("INPUT");
 					if (markerTag.equals(lineContent[2])){
 						try{
 							panel.programData.marker = this.parseMarker(lineContent);
@@ -94,7 +92,6 @@ class FileSaver{
 						if (!newRuleName.equals("")){
 							try{
 								linesBSide.addAll(linesASide);
-								System.out.println("Add new rule: " + newRuleName + " linesASide size: " + linesASide.size());
 								if (markerBSide != null)	panel.programData.ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), markerBSide.copy()));
 								else panel.programData.ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), null));
 							}catch (Exception e) {
@@ -137,14 +134,12 @@ class FileSaver{
 			if (ruleList.equals(lineContent[0])){
 				panel.programData.ruleAppList.add(MainData.getRuleOfName(lineContent[1]));
 				while ((line = reader.readLine()) != null) {
-					System.out.println(line);
 					lineContent = line.split("\t");
 					panel.programData.ruleAppList.add(MainData.getRuleOfName(lineContent[1]));
 				}
 			}else{
 				if (!newRuleName.equals("") && markerASide != null){
 					try{
-						System.out.println("Add new rule at the end: " + newRuleName);
 						linesBSide.addAll(linesASide);
 						if (markerBSide != null)	panel.programData.ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), markerBSide.copy()));
 						else	panel.programData.ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), null));

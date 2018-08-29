@@ -23,7 +23,7 @@ class ColoringRule {
 
 		for (int i = 0; i < this.max_n_allowed; ++i)
 			this.levels[i] = new Level();
-		this.print();
+		// this.print();
 	}
 	void updateLevel0(Line newLine){
 		this.levels[0].levelLines.add(newLine);
@@ -42,8 +42,8 @@ class ColoringRule {
 			if (n+1 < max_n_allowed)	levels[n+1].update(ruleFinalLines);
 			this.n_change = true;
 		}
-		System.out.println("KONTROLA N: n = " + n + ", ilosc leveli: " + levels.length);
-		print();
+		// System.out.println("KONTROLA N: n = " + n + ", ilosc leveli: " + levels.length);
+		// print();
 	}
 	void print(){
 		
@@ -53,7 +53,7 @@ class ColoringRule {
 		}
 	}
 	void paintLevels(Graphics2D g2d){
-		this.print();
+		// this.print();
 
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
