@@ -6,6 +6,7 @@ Bugs:
   ☐ do levelu muszą być przypisane wszystkie podkształty, a ich malowanie musi być zależne od ich położenia (SG4)
   ☐ sublines się zepsuły - funkcja compareLineAParam nie uwzgędnia przekształceń inputu
   ☐ wprowadzić przycinanie linii na potrzeby kolorowania
+  ☐  nie da się usunąć lini z prawej strony
 --- ✄ -----------------------
 BRs:
   ☐ symulacja @critical @started

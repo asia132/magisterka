@@ -51,8 +51,9 @@ final class Rule{
 		Shape inputshape = new Shape(panel.programData.getLines(), panel.programData.marker, "Input");
 
 		ArrayList <Line> found_lines = initialshape.findMatch(inputshape);
-		if (finalshape != null)
+		if (finalshape != null){
 			finalshape.needsToBeMirrored = inputshape.needsToBeMirrored;
+		}
 
 		if (found_lines.size() >= initialshape.lines_dist.size()){
 			if (finalshape != null && finalshape.marker != null){
