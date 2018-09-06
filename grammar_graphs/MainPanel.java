@@ -33,7 +33,7 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		addMouseWheelListener(this);
 		setPreferredSize(new Dimension(screenWidth, screenHeight));
 		if(!(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel))
-			MainData.coloringRule = new ColoringRule(this);
+			MainData.coloringRuleLevels = new ColoringRuleLevels(this);
 	}
 	public MainPanel() {
 		addMouseListener(this);
@@ -81,6 +81,11 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		programData.moveLines(x1, y1, x2, y2, (!(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)));
 		if (programData.marker != null)
 			this.programData.marker.move(x2 - x1, y2 - y1);
+		if (!(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)){
+			for (Line line: programData.coloringRuleLevels.limitingShape.levelLines){
+				line.move(x2 - x1, y2 - y1);
+			}
+		}		
 		this.repaint();
 	}
 	public void resizeMarker(int x1, int y1, int x2, int y2){
@@ -125,7 +130,7 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		g2d.setColor(programData.default_background_color);
 		g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
 		if (MainData.COLOR_RULES){
-			MainData.coloringRule.paintLevels(g2d);
+			MainData.coloringRuleLevels.paintLevels(g2d);
 			this.repaint();
 		}else{
 			if (programData.SHOW_GRID)

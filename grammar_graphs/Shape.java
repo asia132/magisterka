@@ -113,9 +113,10 @@ class Shape{
 		double alpha = inputMarker.calcRotation(this.marker.dir);
 		transLine.rotate(inputMarker.p.x, inputMarker.p.y, alpha);
 
-		System.out.println("------------------------");
-		System.out.print("Checked input line: "); inputLine.print();
-		System.out.print("After translation : "); transLine.print();
+		// System.out.println("------------------------");
+		// System.out.print("Checked input line: "); inputLine.print();
+		// System.out.print("After translation : "); transLine.print();
+		// inputMarker.print();
 
 		ArrayList <Line> matchedRuleLines = compareLineAParam(transLine);
 
@@ -128,36 +129,38 @@ class Shape{
 					double distAs = this.lines_dist.get(matchedRuleLine).getMSLA();
 					double distBs = this.lines_dist.get(matchedRuleLine).getMSLB();
 					try{
+						System.out.println("find X");
 						int x_a = findXOnLine(params[0], params[1], distAs, k, markerCenter);
 						int x_b = findXOnLine(params[0], params[1], distBs, k, markerCenter);
 
+						System.out.println("find Y");
 						int y_a = findYOnLine(x_a, params[0], params[1]);
 						int y_b = findYOnLine(x_b, params[0], params[1]);
 						Line newLine = new Line(x_a*MainData.grid_size, y_a*MainData.grid_size, x_b*MainData.grid_size, y_b*MainData.grid_size);
 						newLine.rotate(inputMarker.p.x, inputMarker.p.y, -alpha);
 
 						if (!(checkY(y_a, transLine) && checkY(y_b, transLine))){
-							System.out.println("nie zgadza sie!");
+							// System.out.println("nie zgadza sie!");
 							continue;
 						}
 						if (!(checkX(x_a, transLine) && checkX(x_b, transLine))){
-							System.out.println("nie zgadza sie!");
+							// System.out.println("nie zgadza sie!");
 							continue;
 						} 
 
 						if (checkMirroringSide(k, inputMarker, matchedRuleLine, x_a, x_b, y_a, y_b)){
 							this.same += 1;
-							System.out.print("Initial line "); matchedRuleLine.print();
-							System.out.print("\nFound ok line: "); 
-							newLine.print();
+							// System.out.print("Initial line "); matchedRuleLine.print();
+							// System.out.print("\nFound ok line: "); 
+							// newLine.print();
 							return newLine;
 
 						}else{
-							System.out.print("Initial line "); matchedRuleLine.print();
-							System.out.print("\nFound skipped line: ");
+							// System.out.print("Initial line "); matchedRuleLine.print();
+							// System.out.print("\nFound skipped line: ");
 							line = newLine;
 							line.rotate(inputMarker.p.x, inputMarker.p.y, -alpha);
-							line.print();
+							// line.print();
 						}
 					}catch (PointDoesNotExist pointDoesNotExist) {
 						System.out.println(pointDoesNotExist.getMessage());
@@ -173,6 +176,8 @@ class Shape{
 					double distAs = this.lines_dist.get(matchedRuleLine).getMSLA();
 					double distBs = this.lines_dist.get(matchedRuleLine).getMSLB();
 					try{
+
+						System.out.println("find Y");
 						int y_a = findYOnLineForNonLinearFunction(x, distAs, k, markerCenter);
 						int y_b = findYOnLineForNonLinearFunction(x, distBs, k, markerCenter);
 
@@ -360,7 +365,7 @@ class Shape{
 		return null;
 	}
 	boolean isInt(double value){
-		return value % 1 < 1e-8 || 1. - (value % 1) < 1e-8;
+		return value % 1 < 1e-5 || 1. - (value % 1) < 1e-5;
 	}
 	int findYOnLineForNonLinearFunction(double x, double d, double k, int [] Mc) throws PointDoesNotExist{
 		double delta = -k*k * Mc[0]* Mc[0] + 2 * k*k * x * Mc[0] - k*k * x*x + d*d;
@@ -374,7 +379,7 @@ class Shape{
 		if (isInt(y2)) 
 			return (int)y2;
 
-		throw new PointDoesNotExist("Found x_1 [" + y1 + "] and x_2 [" + y2 + "] do not lay on the grid for k = " + k);
+		throw new PointDoesNotExist("Found y_1 [" + y1 + "] and y_2 [" + y2 + "] do not lay on the grid for k = " + k + "(" + (y1 % 1) + ", " + (y2 % 1) + ")");
 	}
 	int findXOnLine(double a, double b, double d, double k, int [] Mc) throws PointDoesNotExist{
 		double delta = (1. + a*a) * d*d - k*k * Mc[1]*Mc[1]*1. + (2. * b * k*k + 2 * a * k*k * Mc[0]*1.) * Mc[1]*1. - a*a * k*k * Mc[0]*Mc[0]*1. - 2.* a * b * k*k * Mc[0]*1. - b*b * k*k;

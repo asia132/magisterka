@@ -37,6 +37,7 @@ public class ProgramLabels{
 	static String addMarker = "Add Marker Here";
 	static String removeMarker = "Remove Marker";
 	static String moveMarker = "Move Marker Here";
+	static String copyMarker = "Copy Marker to right side";
 
 	static String runSimulation = "Run Simulation";
 	static String showDist = "Show length";
@@ -45,6 +46,8 @@ public class ProgramLabels{
 
 	static String colorRuleOptionOn = "Turn on coloring rules";
 	static String colorRuleOptionOff = "Turn off coloring rules";
+	static String limitShapeOn = "Define limiting shape";
+	static String limitShapeOff = "End defining process";
 	static String colorRuleSettings = "Choose colors for levels";
 	static String resetLevels = "Reset Levels";
 

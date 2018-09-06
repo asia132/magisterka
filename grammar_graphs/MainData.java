@@ -23,7 +23,7 @@ class MainData {
 	Marker modified_marker = null;
 
 	private ArrayList <Line> lines = new ArrayList<Line>();
-	static ColoringRule coloringRule = null;
+	static ColoringRuleLevels coloringRuleLevels = null;
 
 
 	ArrayList <Line> modyfiedLines = new ArrayList<Line>();
@@ -33,11 +33,13 @@ class MainData {
 
 	static int grid_size = 20;
 	
+	static ArrayList <ColoringRule> rulePainting = new ArrayList<>();
 	static ArrayList <Rule> ruleList = new ArrayList<>(); 
 	static ArrayList <Rule> ruleAppList = new ArrayList<>();
 
 	static boolean SHOW_GRID = true;
 	static boolean COLOR_RULES = false;
+	static boolean LIMITING_SHAPE = false;
 	// BLACK BLUE CYAN DARK_GRAY GRAY GREEN LIGHT_GRAY MAGENTA ORANGE PINK RED WHITE YELLOW
 	static Color default_figure_color = Color.BLACK;
 	static Color default_background_color = Color.WHITE;
@@ -47,28 +49,51 @@ class MainData {
 	static Color default_marker_color = Color.CYAN;
 	static Color default_grid_color = Color.LIGHT_GRAY;
 
-	void fillColoringRuleWithInput(){
+	void fillColoringRuleLevelsWithInput(){
 		for (Line line: lines) {
-			coloringRule.updateLevel0(line);
+			coloringRuleLevels.updateLevel0(line);
 		}
 	}
 	void addLinesByRule(ArrayList <Line> newlines){
 		this.lines.addAll(newlines);
 	}
 	void addLine(Line line, boolean mainPanel){
+		if (LIMITING_SHAPE){
+			line.changeColor(default_check_marker_color);
+			coloringRuleLevels.limitingShape.levelLines.add(line);
+		}
 		this.lines.add(line);
 
-		if (mainPanel){
-			coloringRule.updateLevel0(line);
+		if (mainPanel && ! LIMITING_SHAPE){
+			coloringRuleLevels.updateLevel0(line);
+		}
+	}
+	void endDefininingLimitShape(){
+		for (Line line: coloringRuleLevels.limitingShape.levelLines){
+			this.lines.remove(line);
+		}
+	}
+	void startDefininingLimitShape(){
+		for (Line line: coloringRuleLevels.limitingShape.levelLines){
+			line.changeColor(default_check_marker_color);
+			this.lines.add(line);
 		}
 	}
 	void removeLine(Line line){
 		this.lines.remove(line);
-		coloringRule.levels[0].levelLines.remove(line);
+		ColoringRuleLevels.levels[0].levelLines.remove(line);
+		if (LIMITING_SHAPE){
+			coloringRuleLevels.limitingShape.levelLines.remove(line);
+		}
 	}
 	void moveLines(int x1, int y1, int x2, int y2, boolean mainPanel){
 		for (Line line: this.lines){
 			line.move(x2 - x1, y2 - y1);
+		}
+		if (LIMITING_SHAPE){
+			for (Line line: coloringRuleLevels.limitingShape.levelLines){
+				line.move(x2 - x1, y2 - y1);
+			}
 		}
 	}
 	ArrayList <Line> getLines(){
@@ -203,7 +228,8 @@ class MainData {
 		modified_marker = null;
 	}
 	void clearModified(){
-		changeModifiedColor(default_figure_color);
+		if (LIMITING_SHAPE)	changeModifiedColor(default_check_marker_color);
+		else	changeModifiedColor(default_figure_color);
 		modyfiedLines.clear();
 	}
 	boolean isEmptyModified(){
@@ -295,13 +321,15 @@ class MainData {
 			line.changeColor(default_check_color);
 		}
 		else{
-			line.changeColor(default_figure_color);
+			if (LIMITING_SHAPE)	changeModifiedColor(default_check_marker_color);
+			else	line.changeColor(default_figure_color);
 			modyfiedLines.remove(line);
 		}
 	}
 	void pasteCopied(int x, int y){
 		if (!copiedLines.isEmpty()){
-			changeModifiedColor(default_figure_color);
+			if (LIMITING_SHAPE)	changeModifiedColor(default_check_marker_color);
+			else	changeModifiedColor(default_figure_color);
 			modyfiedLines.clear();
 			int [] point = findCenter(copiedLines);
 			for (Line line: copiedLines) {
@@ -318,7 +346,8 @@ class MainData {
 		for (Line line: modyfiedLines) {
 			copiedLines.add(line.copy());
 		}
-		changeModifiedColor(default_figure_color);
+		if (LIMITING_SHAPE)	changeModifiedColor(default_check_marker_color);
+		else	changeModifiedColor(default_figure_color);
 		modyfiedLines.clear();
 	}
 	void allLinesScale(int i, int screenWidth, int screenHeight){

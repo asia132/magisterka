@@ -53,7 +53,7 @@ class FileSaver{
 	}
 	void openDataFile(MainPanel panel){
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))){
-			MainData.coloringRule = new ColoringRule(panel);
+			MainData.coloringRuleLevels = new ColoringRuleLevels(panel);
 			panel.programData.clear();
 			String line = null;
 			ArrayList <Line> linesASide = new ArrayList<>();

@@ -3,10 +3,12 @@ Bugs:
   ☐ poprawić precyzję skalowania @low
   ☐ okno, w którym będzie można przypisać levelom kolory (ewentualnie tekstury i gradienty) @critical
   ☐ możliwość zdefiniowania max level qty
-  ☐ do levelu muszą być przypisane wszystkie podkształty, a ich malowanie musi być zależne od ich położenia (SG4)
   ☐ sublines się zepsuły - funkcja compareLineAParam nie uwzgędnia przekształceń inputu
-  ☐ wprowadzić przycinanie linii na potrzeby kolorowania
-  ☐  nie da się usunąć lini z prawej strony
+  ☐ wprowadzić przycinanie linii na potrzeby kolorowania (SG1)
+  ☐ zaimplemntować obsługę nawiasów i ~ dla reguł kolorowania
+  ☐ przed aplikacją reguł - sprawdzić, czy użyte poziomy są domknięte
+  ☐ podczas definiowania reguł kolorowania - sprawdzać, czy nawiasy są domknięte
+  ☐ zamienić boxy na panele w CreateColorRuleFrame - może wtedy będzie dało się dodawać na bierząco pola
 --- ✄ -----------------------
 BRs:
   ☐ symulacja @critical @started
@@ -18,6 +20,9 @@ BRs:
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ do levelu muszą być przypisane wszystkie podkształty, a ich malowanie musi być zależne od ich położenia (SG4) @done (18-09-05 11:03) @project(Bugs)
+ ✔  nie da się usunąć lini z prawej strony @done (18-09-04 18:13) @project(Bugs)
+ ✔ limiting shape musi się przesuwać razem z obrazem @done (18-09-04 18:12) @project(Bugs)
  ✔ grouping się zepsuł @done (18-08-26 16:01) @project(Bugs)
  ✔ linie z left side nie przesuwają się podczas przesuwania widoku w right side @done (18-08-25 16:26) @project(Bugs)
  ✔ przegrupowanie poleceń w menu @low @done (18-08-25 12:38) @project(Bugs)

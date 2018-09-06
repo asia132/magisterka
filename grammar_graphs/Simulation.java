@@ -65,7 +65,8 @@ class Simulation{
 				Point b = new Point(Integer.parseInt(spoint[2]), Integer.parseInt(spoint[3]));
 				Line newline = new Line(a, b);
 				panel.programData.addLine(newline, false);
-				MainData.coloringRule.levels[1].addLine(newline);
+				MainData.coloringRuleLevels.levels[1].addLine(newline);
+				MainData.coloringRuleLevels.n = 1;
 			}
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);
@@ -82,7 +83,8 @@ class Simulation{
 				Point b = new Point(Integer.parseInt(spoint[2]), Integer.parseInt(spoint[3]));
 				Line newline = new Line(a, b);
 				panel.programData.addLine(newline, false);
-				MainData.coloringRule.levels[2].addLine(newline);
+				MainData.coloringRuleLevels.levels[2].addLine(newline);
+				MainData.coloringRuleLevels.n = 2;
 			}
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);

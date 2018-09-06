@@ -10,6 +10,9 @@ class LeftRulePanel extends MainPanel {
 	LeftRulePanel(){
 		super();
 	}
+	public void copyMarker(){
+		rigthRulePanel.programData.marker = this.programData.marker.copy();
+	}
 	@Override
 	public void addLine(int x1, int y1, int x2, int y2){
 		programData.addLine(new Line(x1, y1, x2, y2), false);

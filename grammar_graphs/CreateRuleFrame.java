@@ -180,7 +180,16 @@ class CreateRuleFrame extends JFrame {
 	void showNameRules(JPanel panel){
 		JTextArea label = new JTextArea(ProgramLabels.newRuleLabel);
 		label.setEditable(false);
-		newRuleName = new JTextArea(ProgramLabels.defaultNewRule);
+		
+		if (this.ruleName.equals("")){
+			System.out.println("Rule name: " + this.ruleName);
+			newRuleName = new JTextArea(ProgramLabels.defaultNewRule);
+		}
+		else{
+			System.out.println("Rule name: " + this.ruleName);
+			newRuleName = new JTextArea(this.ruleName);
+		}
+
 		newRuleName.setEditable(true);
 		newRuleName.setBackground(Color.WHITE);
 		newRuleName.setForeground(Color.BLACK);
@@ -193,9 +202,19 @@ class CreateRuleFrame extends JFrame {
 	}
 	void showSaveButton(JPanel panel){
 		saveButton = new JButton(ProgramLabels.save);
-		saveButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				String theName = newRuleName.getText();
+		saveButton.addActionListener(event -> {
+			String theName = newRuleName.getText();
+
+			if (this.ruleName.equals(theName)){
+				try{
+					panelL.programData.ruleList.remove(panelL.programData.getRuleOfName(theName));
+					panelL.programData.ruleList.add(new Rule(theName, panelL.programData.copy(), panelL.rigthRulePanel.programData.copy(), panelL.programData.marker, panelL.rigthRulePanel.programData.marker));			
+					closeFrame();
+				}
+				catch(Exception exc){
+					MessageFrame error = new MessageFrame(exc.getMessage());
+				}
+			}else{
 				for (Rule rule: panelL.programData.ruleList){
 					if (rule.getName().equals(theName)){
 						int serialNumber = panelL.programData.ruleList.size() + 1;
@@ -203,6 +222,7 @@ class CreateRuleFrame extends JFrame {
 						break;
 					}
 				}
+
 				try{
 					panelL.programData.ruleList.add(new Rule(theName, panelL.programData.copy(), panelL.rigthRulePanel.programData.copy(), panelL.programData.marker, panelL.rigthRulePanel.programData.marker));			
 					closeFrame();

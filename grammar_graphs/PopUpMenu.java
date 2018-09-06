@@ -22,21 +22,20 @@ import java.io.File;
 
 
 class PopUpMenu extends JPopupMenu {
-	// int index;
-
 	PopUpMenu(MainPanel panel){
 		if(!(panel instanceof LeftRulePanel) && !(panel instanceof RigthRulePanel)){
-			if (!MainData.COLOR_RULES){
+			if (!MainData.COLOR_RULES && !MainData.LIMITING_SHAPE){
 				showRulesChanging(panel);
 				showRuleListOptions(panel);
 				showGrammarOptions(panel);
 			}
-			showColoringRules(panel);
+			showColoringRuleLevelss(panel);
 		}
 		if (!MainData.COLOR_RULES){
 			showViewSettings(panel);
 			showElemEdit(panel);
-			showMarker(panel);
+			if (!MainData.LIMITING_SHAPE)
+				showMarker(panel);
 		}
 	}
 // change rules
@@ -90,7 +89,6 @@ class PopUpMenu extends JPopupMenu {
 			rulesList[i].add(applyRule);
 
 			JMenuItem editRule = new JMenuItem("Edit");
-			// index = panel.programData.ruleList.indexOf(changedRule);
 			editRule.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					new CreateRuleFrame(changedRule);
@@ -165,23 +163,38 @@ class PopUpMenu extends JPopupMenu {
 		add(panelSettings);
 	}
 // coloring rules
-	void showColoringRules(MainPanel panel){
+	void showColoringRuleLevelss(MainPanel panel){
 		JMenu ruleList = new JMenu(ProgramLabels.rulleAppListOpt);
-
-		ruleList.add(showColorRuleOption(panel));
-		ruleList.add(showColorRuleSettings(panel));
+		if (!MainData.LIMITING_SHAPE){
+			ruleList.add(showColorRuleOption(panel));
+			ruleList.add(addColoringRuleLevels(panel));
+			if (!MainData.COLOR_RULES){
+				ruleList.add(showColorRuleSettings(panel));
+				ruleList.add(showResetLevels(panel));
+			}
+		}
 		if (!MainData.COLOR_RULES)
-			ruleList.add(showResetLevels(panel));
-
+			ruleList.add(showColorRuleLimitingShape(panel));
 		add(ruleList);
+	}
+	JMenuItem addColoringRuleLevels(MainPanel panel){
+		JMenuItem addRules = new JMenuItem(ProgramLabels.rulleAdding);
+		addRules.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new CreateColorRuleFrame();
+			}
+		});
+		Border border = BorderFactory.createLineBorder(Color.BLACK);
+		addRules.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(3, 3, 3, 3)));
+		return addRules;
 	}
 	JMenuItem showResetLevels(MainPanel panel){
 		JMenuItem colorRuleOption = new JMenuItem();
 		colorRuleOption.setText(ProgramLabels.resetLevels);
 		colorRuleOption.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				MainData.coloringRule = new ColoringRule(panel);
-				panel.programData.fillColoringRuleWithInput();
+				MainData.coloringRuleLevels = new ColoringRuleLevels(panel);
+				panel.programData.fillColoringRuleLevelsWithInput();
 			}
 		});
 		return colorRuleOption;
@@ -196,6 +209,27 @@ class PopUpMenu extends JPopupMenu {
 			public void actionPerformed(ActionEvent ev) {
 				MainData.COLOR_RULES = !MainData.COLOR_RULES;
 				
+			}
+		});
+		return colorRuleOption;
+	}
+	JMenuItem showColorRuleLimitingShape(MainPanel panel){
+		JMenuItem colorRuleOption = new JMenuItem();
+		if (MainData.LIMITING_SHAPE){
+			colorRuleOption.setText(ProgramLabels.limitShapeOff);
+		}
+		else
+			colorRuleOption.setText(ProgramLabels.limitShapeOn);
+		colorRuleOption.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				if (MainData.LIMITING_SHAPE){
+					panel.programData.endDefininingLimitShape();
+					panel.repaint();
+				}else{
+					panel.programData.startDefininingLimitShape();
+					panel.repaint();
+				}
+				MainData.LIMITING_SHAPE = !MainData.LIMITING_SHAPE;
 			}
 		});
 		return colorRuleOption;
@@ -278,6 +312,19 @@ class PopUpMenu extends JPopupMenu {
 				}
 			});
 			marker.add(removeMarkerButton);
+
+			if((panel instanceof LeftRulePanel)){
+				JMenuItem copyMarkerButton = new JMenuItem();
+				copyMarkerButton.setText(ProgramLabels.copyMarker);
+				copyMarkerButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent ev) {
+						((LeftRulePanel)panel).copyMarker();
+						((LeftRulePanel)panel).rigthRulePanel.repaint();
+					}
+				});
+				marker.add(copyMarkerButton);
+			}
+
 			add(marker);
 		}
 	}
@@ -311,7 +358,7 @@ class PopUpMenu extends JPopupMenu {
 		resetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				panel.programData.clear();
-				MainData.coloringRule = new ColoringRule(panel);
+				MainData.coloringRuleLevels = new ColoringRuleLevels(panel);
 				panel.repaint();
 				System.out.println("-------------------RESET-------------------");
 			}

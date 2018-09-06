@@ -1,196 +1,115 @@
 package grammar_graphs;
 
-import java.util.ArrayList;
-import java.util.StringJoiner;
-
-import java.awt.RenderingHints;
-import java.awt.geom.GeneralPath;
-import java.awt.Graphics2D;
+import java.awt.geom.Area;
 import java.awt.Color;
-import java.awt.Point;
-import java.lang.Math;
+import java.util.regex.Pattern;
+import java.util.function.*;
 
 class ColoringRule {
-	static Level levels[];
-	private int n;
-	int max_n_allowed;
-	private boolean n_change = false;
+	Area paintCavnas;
+	boolean isAplicable;
+	String name;
+	Color color;
 
-	ColoringRule(MainPanel panel){
-		this.n = 0;
-		this.max_n_allowed = 10;
-		this.levels = new Level [100];
+	String tagV = "V";
+	String tagX = "X";
 
-		for (int i = 0; i < this.max_n_allowed; ++i)
-			this.levels[i] = new Level();
-		// this.print();
-	}
-	void updateLevel0(Line newLine){
-		this.levels[0].levelLines.add(newLine);
-	}
-	void updateWithRule(Category ruleCat, ArrayList <Line> ruleInitialLines, ArrayList <Line> ruleFinalLines){
-		if (ruleCat == Category.A){ // left side => n 
-			levels[n].update(ruleInitialLines);
-		}else if (ruleCat == Category.B){ // left side => n | right side => n+1
-			levels[n].update(ruleInitialLines);
-			if (this.n_change){
-				n++;
-				this.n_change = false;
-			}
-			if (n+1 < max_n_allowed)	levels[n+1].update(ruleInitialLines);
-		}else if (ruleCat == Category.C){ // right side - left side => n+1
-			if (n+1 < max_n_allowed)	levels[n+1].update(ruleFinalLines);
-			this.n_change = true;
+	String tagUnion = "∪";
+	String tagInter = "∩";
+	String tagXOR = "⊕";
+	String tagNOT = "~";
+	String tagBra = "(";
+	String tagKet = ")";
+	
+	ColoringRule(String name, String isAplicable, Color color, String [] tagsSet){
+		this.name = name;
+		try{
+			this.isAplicable = this.parseFlag(isAplicable);
+		}catch(WrongTag e){
+			System.out.println(e.getMessage());
 		}
-		// System.out.println("KONTROLA N: n = " + n + ", ilosc leveli: " + levels.length);
-		// print();
-	}
-	void print(){
-		
-		for (int i = 0; i < max_n_allowed; ++i){
-			System.out.println("Level " + i);
-			levels[i].print();
-		}
-	}
-	void paintLevels(Graphics2D g2d){
-		// this.print();
-
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-
-		for (int i = 0; i < max_n_allowed; ++i) {
-			Level level = levels[i];
-			if (level.levelLines.size() <= 2) continue;
-			try{
-				g2d.setPaint(level.getColor());
-				// g2d.translate(25, 5);
-
-				double points[][] = level.getPoints();
-
-				GeneralPath star = new GeneralPath();
-				star.setWindingRule(GeneralPath.WIND_NON_ZERO);
-
-				star.moveTo(points[0][0], points[0][1]);
-				for (int k = 1; k < points.length; k++)
-					star.lineTo(points[k][0], points[k][1]);
-				star.closePath();
-				g2d.fill(star);        
-			}catch (NotClosedShape e) {
-				MainData.COLOR_RULES = false;
-				new MessageFrame(e.getMessage());
-			}
-		}
-		g2d.dispose();
-	}
-}
-class Level {
-	ArrayList <Line> levelLines;
-	private Color color;
-
-	void setColor(Color color){
 		this.color = color;
+		this.paintCavnas = this.parseTagSet(tagsSet);
 	}
-	void randColor(){
-		this.color = new Color((int)(Math.random() * 0x1000000));
+	boolean parseFlag(String isAplicable) throws WrongTag{
+		if (isAplicable.equals(tagV)) return true;
+		if (isAplicable.equals(tagX)) return false;
+		throw new WrongTag("Aplicable tag.");
 	}
-	Color getColor(){
-		return this.color;
-	}
-	double [][] getPoints() throws NotClosedShape{
-		double [][] points = new double [levelLines.size() + 1][2];
-		ArrayList <Line> lines = new ArrayList<>();
-		
-		for (Line line: levelLines)
-			lines.add(line);
-
-		points[0][0] = lines.get(0).pa.x*1.*MainData.grid_size;
-		points[0][1] = lines.get(0).pa.y*1.*MainData.grid_size;
-		Point p = lines.get(0).pb;
-		points[1][0] = p.x*1.*MainData.grid_size;
-		points[1][1] = p.y*1.*MainData.grid_size;
-		int index = 2;
-		// int break_index = -1;
-
-		// int externalSizeControl = 0;
-
-		// while (lines.size() > 1 && externalSizeControl != lines.size()){
-			int sizeControl = 0;
-		// 	externalSizeControl = lines.size();
-
-			while(sizeControl != lines.size()){
-				sizeControl = lines.size();
-				for (int i = 1; i < lines.size(); ++i){
-					if (p.equals(lines.get(i).pa)){
-						p = lines.get(i).pb;
-						points[index][0] = p.x*1.*MainData.grid_size;
-						points[index][1] = p.y*1.*MainData.grid_size;
-						index++;
-						lines.remove(i);
-						break;
-					}else if (p.equals(lines.get(i).pb)){
-						p = lines.get(i).pa;
-						points[index][0] = p.x*1.*MainData.grid_size;
-						points[index][1] = p.y*1.*MainData.grid_size;
-						index++;
-						lines.remove(i);
-						break;
-					}
-				}
+	Area parseTagSet(String [] tagSet){
+		try{
+			Area finalArea = new Area(this.parseLevel(tagSet[0]).getShape());
+			try{
+				Function <Area [], Area> operation = parseOperation(tagSet[1]);
+				Area nextArea = new Area(this.parseLevel(tagSet[2]).getShape());
+				Area [] areas = {finalArea, nextArea};
+				finalArea = operation.apply(areas);
+			}catch (WrongTag e){
+				System.out.println(e.getMessage());
 			}
-		// 	break_index = index;
-		// }
+			return finalArea;
+		}catch(NotClosedShape e){
+			System.out.println(e.getMessage());
+		}catch(WrongTag e1){
+			System.out.println(e1.getMessage());
+		}
+		return null;
+	}
+	Level parseLevel(String tag) throws WrongTag{
+		if (Pattern.matches("L[0-9]+", tag.subSequence(0, tag.length())))
+			throw new WrongTag("Level format");
 
-		if (lines.size() > 1){
-			throw new NotClosedShape();
-		}
-		if (points[points.length-1][0] != points[0][0] && points[points.length-1][1] != points[0][1])
-			throw new NotClosedShape();
-		return points;
+		tag = tag.substring(1);
+		int index = Integer.parseInt(tag);
+		return MainData.coloringRuleLevels.levels[index];
 	}
-	Level(ArrayList <Line> levelLines){
-		this.levelLines = levelLines;
-		this.randColor();
-	}
-	Level(){
-		this.levelLines = new ArrayList <Line>();
-		this.randColor();
-	}
-	void update(ArrayList <Line> newLevelLines){
-		int controlSize = this.levelLines.size();
-		for (Line newline: newLevelLines){
-			boolean shouldBeAdded = true;
-			for (int i = 0; i < controlSize; ++i){
-				if (this.levelLines.get(i).isTheSameLine(newline)){
-					shouldBeAdded = false;
-					break;
-				}
-			}
-			if (shouldBeAdded)	this.levelLines.add(newline);
-		}
-	}
-	void addLine(Line newline){
-		int controlSize = this.levelLines.size();
-		boolean shouldBeAdded = true;
-		for (int i = 0; i < controlSize; ++i){
-			if (this.levelLines.get(i).isTheSameLine(newline)){
-				shouldBeAdded = false;
-				break;
-			}
-		}
-		if (shouldBeAdded)	this.levelLines.add(newline);
-	}
+	Function  <Area [], Area> parseOperation(String tag) throws WrongTag{
+		if (Pattern.matches(tagUnion, tag.subSequence(0, tag.length()))) return ColoringRule::add;
+		if (Pattern.matches(tagInter, tag.subSequence(0, tag.length()))) return ColoringRule::intersect;
+		if (Pattern.matches(tagXOR, tag.subSequence(0, tag.length()))) return ColoringRule::exclusiveOr;
 
-	void print(){
-		System.out.println(this.color.toString());
-		int i = 1;
-		for (Line line: this.levelLines) {
-			System.out.print(i++ + ". ");
-			line.print();
+		throw new WrongTag("The operation is not union / intersection / XOR");
+	}
+	Function <Area, Area> parseSubstract(String tag) throws WrongTag{
+		if (Pattern.matches(tagNOT, tag.subSequence(0, tag.length()))) return ColoringRule::subtract;
+		throw new WrongTag("The operation is not union / intersection / XOR");
+	}
+	boolean parseBra(String tag){
+		if (Pattern.matches(tagBra, tag.subSequence(0, tag.length()))) return true;
+		return false;
+	}
+	boolean parseKet(String tag){
+		if (Pattern.matches(tagKet, tag.subSequence(0, tag.length()))) return true;
+		return false;
+	}
+	static Area subtract(Area area){
+		try{
+			Area newArea = new Area(MainData.coloringRuleLevels.limitingShape.getShape());
+			newArea.subtract(area);
+			return newArea;
+		}catch(NotClosedShape e){
+			System.out.println(e.getMessage());
 		}
+		return null;
+	}
+	static Area add(Area [] areas){
+		areas[0].add(areas[1]);
+		return areas[0];
+	}
+	static Area intersect(Area [] areas){
+		areas[0].intersect(areas[1]);
+		return areas[0];
+	}
+	static Area exclusiveOr(Area [] areas){
+		areas[0].exclusiveOr(areas[1]);
+		return areas[0];
 	}
 }
-class NotClosedShape extends Exception {
-	NotClosedShape(){
-		super("The shape is not closed");
+class WrongTag extends Exception {
+	public WrongTag(String message){
+		super("The tag is wrong" + ". " + message);
+	}
+	public WrongTag(){
+		super("The tag is wrong");
 	}
 }
