@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.StringJoiner;
+import java.lang.Math;
 
 class Shape{
 	Map <Line, Dist> lines_dist;
@@ -60,28 +61,47 @@ class Shape{
 	}
 	ArrayList <Line> findMatch(Shape inputShape){
 		double k = this.marker.length() / inputShape.marker.length();
+
+		Line [][] matchedLines = new Line[this.lines_dist.size()][2];
+
 		ArrayList <Line> mached_lines = new ArrayList<>();
+
 		this.same = 0;
 		for (Map.Entry<Line, Dist> inShape: inputShape.lines_dist.entrySet()) {
 			Line inLine_i = inShape.getKey();
 			Dist inDist_i = inShape.getValue();
-			Referral ref = this.compareLineDistanses(inDist_i, inLine_i, k);
-			if (ref != null){
-				this.same += ref.getNum();
+			int [] result = this.compareLineDistanses(inDist_i, inLine_i, k);
+			if (result != null){
+				this.same += result[1];
 				mached_lines.add(inLine_i);
+				System.out.println("++++++++++++++++++++++Add matched line++++++++++++++++++++++");
+				System.out.println("tablica: " + matchedLines[result[0]]);
+				if (result[1] == 1){
+					matchedLines[result[0]][0] = inLine_i;
+				}else{
+					matchedLines[result[0]][1] = inLine_i;
+				}
 			}
 			// check sublines
 			else{
 				try{
 					Line newLine = findSubLine(inLine_i, inDist_i, k, inputShape.marker);
 					mached_lines.add(inLine_i);
+					System.out.println("----------------------Add matched SUBline----------------------");
 				}
 				catch(PointDoesNotExist p){;
 				}
 			}
 		}
+
+		System.out.println("MATCHING RESULT:");
+		for (int i = 0; i < matchedLines.length; ++i){
+			System.out.println(matchedLines[i][0] + " - " + matchedLines[i][1]);
+		}
+
 		inputShape.needsToBeMirrored = (this.same < mached_lines.size());
 		System.out.println("Przerzucić? " + this.same + " " + mached_lines.size() + "- " + inputShape.needsToBeMirrored);
+
 		return mached_lines;
 	}
 	ArrayList <Line> compareLineAParam(Line inputLine){
@@ -110,13 +130,9 @@ class Shape{
 	}
 	Line findSubLine(Line inputLine, Dist inputDist, double k, Marker inputMarker) throws PointDoesNotExist{
 		Line transLine = inputLine.copy();
-		double alpha = inputMarker.calcRotation(this.marker.dir);
+		double alpha = -inputMarker.calcRotation(this.marker.dir);
 		transLine.rotate(inputMarker.p.x, inputMarker.p.y, alpha);
 
-		// System.out.println("------------------------");
-		// System.out.print("Checked input line: "); inputLine.print();
-		// System.out.print("After translation : "); transLine.print();
-		// inputMarker.print();
 
 		ArrayList <Line> matchedRuleLines = compareLineAParam(transLine);
 
@@ -125,11 +141,17 @@ class Shape{
 			double [] params = transLine.getFunctionParamsOnGrid();
 			for (Line matchedRuleLine: matchedRuleLines){
 				if (matchedRuleLine.length() / k < transLine.length()){
+
+					System.out.println("------------------------");
+					System.out.print("Checked input line: "); inputLine.print();
+					System.out.print("After translation : "); transLine.print();
+					inputMarker.print();
+
 					int [] markerCenter = {inputMarker.p.x, inputMarker.p.y};
 					double distAs = this.lines_dist.get(matchedRuleLine).getMSLA();
 					double distBs = this.lines_dist.get(matchedRuleLine).getMSLB();
 					try{
-						System.out.println("find X");
+						System.out.println("find X [" + markerCenter[0] + ", " + markerCenter[1] + "]");
 						int x_a = findXOnLine(params[0], params[1], distAs, k, markerCenter);
 						int x_b = findXOnLine(params[0], params[1], distBs, k, markerCenter);
 
@@ -150,20 +172,20 @@ class Shape{
 
 						if (checkMirroringSide(k, inputMarker, matchedRuleLine, x_a, x_b, y_a, y_b)){
 							this.same += 1;
-							// System.out.print("Initial line "); matchedRuleLine.print();
-							// System.out.print("\nFound ok line: "); 
-							// newLine.print();
+							System.out.print("Initial line "); matchedRuleLine.print();
+							System.out.print("\nFound ok line: "); 
+							newLine.print();
 							return newLine;
 
 						}else{
-							// System.out.print("Initial line "); matchedRuleLine.print();
-							// System.out.print("\nFound skipped line: ");
+							System.out.print("Initial line "); matchedRuleLine.print();
+							System.out.print("\nFound skipped line: ");
 							line = newLine;
 							line.rotate(inputMarker.p.x, inputMarker.p.y, -alpha);
 							// line.print();
 						}
 					}catch (PointDoesNotExist pointDoesNotExist) {
-						System.out.println(pointDoesNotExist.getMessage());
+						// System.out.println(pointDoesNotExist.getMessage());
 						continue;
 					}
 				}
@@ -172,12 +194,18 @@ class Shape{
 			int x = error.getX();
 			for (Line matchedRuleLine: matchedRuleLines){
 				if (matchedRuleLine.length() / k < transLine.length()){
+
+					System.out.println("------------------------");
+					System.out.print("Checked input line: "); inputLine.print();
+					System.out.print("After translation : "); transLine.print();
+					inputMarker.print();
+
 					int [] markerCenter = {inputMarker.p.x, inputMarker.p.y};
 					double distAs = this.lines_dist.get(matchedRuleLine).getMSLA();
 					double distBs = this.lines_dist.get(matchedRuleLine).getMSLB();
 					try{
 
-						System.out.println("find Y");
+						System.out.println("find Y [" + markerCenter[0] + ", " + markerCenter[1] + "]");
 						int y_a = findYOnLineForNonLinearFunction(x, distAs, k, markerCenter);
 						int y_b = findYOnLineForNonLinearFunction(x, distBs, k, markerCenter);
 
@@ -191,12 +219,20 @@ class Shape{
 						System.out.println("...............");
 
 						if (!(checkY(newLine.pa.y, inputLine) && checkY(newLine.pb.y, inputLine))){
-							System.out.println("nie zgadza sie!");
-							continue;
+							Line lineCopy = newLine.copy();
+							lineCopy.mirrorY(markerCenter[1]);
+							if (!(checkY(lineCopy.pa.y, inputLine) && checkY(lineCopy.pb.y, inputLine))){
+								System.out.println("nie zgadza sie! - Y");
+								continue;
+							}
 						}
 						if (!(checkX(newLine.pa.x, inputLine) && checkX(newLine.pb.x, inputLine))){
-							System.out.println("nie zgadza sie!");
-							continue;
+							Line lineCopy = newLine.copy();
+							lineCopy.mirrorX(markerCenter[0]);
+							if (!(checkX(lineCopy.pa.x, inputLine) && checkX(lineCopy.pb.x, inputLine))){
+								System.out.println("nie zgadza sie! - X");
+								continue;
+							}
 						} 
 						if (checkMirroringSide(k, inputMarker, matchedRuleLine, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y)){
 							this.same += 1;
@@ -211,7 +247,7 @@ class Shape{
 							line.print();
 						}
 					}catch (PointDoesNotExist pointDoesNotExist) {
-						System.out.println(pointDoesNotExist.getMessage());
+						// System.out.println(pointDoesNotExist.getMessage());
 						continue;
 					}
 				}
@@ -224,20 +260,10 @@ class Shape{
 		throw new PointDoesNotExist();
 	}
 	boolean checkY(int y, Line line){
-		System.out.println("---------------------------------");
-		System.out.println("wsp: line.pa.y, y, line.pb.y: " + line.pa.y + " " + y + " " + line.pb.y);
-		System.out.println("wsp: line.pa.y <= y <= line.pb.y " + (line.pa.y <= y) + " " + (y <= line.pb.y) + " " + (line.pa.y <= y && y <= line.pb.y));
-		System.out.println("wsp: line.pa.y <= y <= line.pb.y " + (line.pb.y <= y) + " " + (y <= line.pa.y) + " " + (line.pb.y <= y && y <= line.pa.y));
-		System.out.println("---------------------------------");
 		return	((line.pa.y <= y && y <= line.pb.y) ||
 				 (line.pb.y <= y && y <= line.pa.y));
 	}
 	boolean checkX(int x, Line line){
-		System.out.println("---------------------------------");
-		System.out.println("wsp: line.pa.x, x, line.pb.x: " + line.pa.x + " " + x + " " + line.pb.x);
-		System.out.println("wsp: line.pa.x <= x <= line.pb.x " + (line.pa.x <= x) + " " + (x <= line.pb.x) + " " + (line.pa.x <= x && x <= line.pb.x));
-		System.out.println("wsp: line.pa.x <= x <= line.pb.x " + (line.pb.x <= x) + " " + (x <= line.pa.x) + " " + (line.pb.x <= x && x <= line.pa.x));
-		System.out.println("---------------------------------");
 		return	((line.pa.x <= x && x <= line.pb.x) ||
 				 (line.pb.x <= x && x <= line.pa.x));
 	}
@@ -249,13 +275,6 @@ class Shape{
 		double dist_d = this.lines_dist.get(line).md_la;
 		double md_la = MainData.distans(x_a, y_a, marker.getdx()*1., marker.getdy()*1.);
 		double md_lb = MainData.distans(x_b, y_b, marker.getdx()*1., marker.getdy()*1.);
-
-		System.out.println("not linear subline " + (mb_la*k) + " " + (mb_lb*k) + " " + mb_lb + " " + k + " " + (dist_b));
-		System.out.println("not linear subline " + (md_la*k) + " " + (md_lb*k) + " " + md_lb + " " + k + " " + (dist_d) + "\t");
-		System.out.println("warunki: dist_b-mb_la " + (Math.abs(dist_b-mb_la*k)< 1e-13));
-		System.out.println("warunki: dist_d-md_la " + (Math.abs(dist_d-md_la*k)< 1e-13));
-		System.out.println("warunki: dist_b-mb_lb " + (Math.abs(dist_b-mb_lb*k)< 1e-13));
-		System.out.println("warunki: dist_d-md_lb " + (Math.abs(dist_d-md_lb*k)< 1e-13));
 
 		return (Math.abs(dist_b-mb_la*k) < 1e-13 && Math.abs(dist_d-md_la*k) < 1e-13) || 
 							(Math.abs(dist_b-mb_lb*k) < 1e-13 && Math.abs(dist_d-md_lb*k) < 1e-13);
@@ -349,19 +368,20 @@ class Shape{
 		lines.addAll(this.lines_dist.keySet());
 		return lines;
 	}
-	Referral compareLineDistanses(Dist inputDistans, Line inputLine, double k){
+	int [] compareLineDistanses(Dist inputDistans, Line inputLine, double k){
 		int i = 0;
-		boolean different = false;
+		int different = -1;
 		for (Map.Entry<Line, Dist> dist: this.lines_dist.entrySet()) {
 			Line line_i = dist.getKey();
 			Dist dist_i = dist.getValue();
 			Referral ref = dist_i.compareLine(inputDistans, k);
 			if (ref != null){
-				if (ref == Referral.SAME)	return ref;
-				else different = true;
+				if (ref == Referral.SAME)	return new int[]{i, ref.getNum()};
+				else different = i;
 			}
+			i++;
 		}
-		if (different) return Referral.DIFFERENT;
+		if (different != -1) return new int[]{different, Referral.DIFFERENT.getNum()};
 		return null;
 	}
 	boolean isInt(double value){

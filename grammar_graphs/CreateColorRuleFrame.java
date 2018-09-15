@@ -16,6 +16,7 @@ import javax.swing.border.Border;
 import javax.swing.JColorChooser;
 import javax.swing.Box;
 import javax.swing.JComboBox;
+import javax.swing.BoxLayout;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -24,25 +25,26 @@ import java.util.ArrayList;
 
 class CreateColorRuleFrame extends JFrame {
 
-	double rfXScale = 0.15;
-	double rfYScale = 0.5;
 	double loc = 0.3;
 	double panScale = 0.8;
 
-	int screenHeight;
-	int screenWidth;
-
 	JButton cancelButton;
 	JButton saveButton;
+	JButton addRuleButton;
+	JButton removeRuleButton;
 
 	int n = 0;
 
-	Box ruleBox;
+	private JPanel mainPanel;
+	private ArrayList <JPanel> panelList = new ArrayList<>();
+	private ArrayList <JComboBox> boxList = new ArrayList<>();
+	ArrayList <String> tags;
+	JFrame me = this;
 
-	private JPanel panel;
 
 	CreateColorRuleFrame() {
 		super(ProgramLabels.rulleWinName);
+
 		this.loadFrameData();
 		this.loadPanel();
 
@@ -51,49 +53,47 @@ class CreateColorRuleFrame extends JFrame {
 	}
 	protected void loadFrameData(){
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		Dimension screenSize = tk.getScreenSize();
-		this.screenHeight = (int)(screenSize.height*rfXScale);
-		this.screenWidth = (int)(screenSize.width*rfYScale);
-		System.out.println(screenHeight + " " + screenWidth);
-		this.setSize(screenWidth, screenHeight);
-		this.setLocation((int)(screenWidth*loc), (int)(screenHeight*loc));
+		// this.setLocation((int)(screenWidth*loc), (int)(screenHeight*loc));
 		this.setDefaultCloseOperation(CreateRuleFrame.DISPOSE_ON_CLOSE);
 	}
 	protected void loadPanel(){
-		this.panel = new JPanel();
-		this.panel.setBackground(Color.white);
-		this.panel.setPreferredSize(new Dimension(screenWidth, screenHeight));
+		this.mainPanel = new JPanel();
+		this.mainPanel.setBackground(Color.white);
 
-		Box buttonBox = Box.createVerticalBox();
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+		this.showSaveButton(buttonPanel);
+		this.showAddRuleButton(buttonPanel);
+		this.showCancelButton(buttonPanel);
+		this.mainPanel.add(buttonPanel);
 
-		buttonBox.add(this.ruleBox());
+		this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
 
-		this.panel.add(buttonBox);
-		this.showSaveButton(panel);
-		this.showCancelButton(panel);
-		this.add(panel);
+
+		this.add(mainPanel);
+		this.pack();
 	}
-	protected Box ruleBox(){
-		ruleBox = Box.createHorizontalBox();
-		ruleBox.createRigidArea(new Dimension(100, 100));
-		
+	protected void ruleBox(JPanel panel){
 
-		ruleBox.add(ruleComboIndex());
-		ruleBox.add(ruleName());
-		ruleBox.add(ruleColorButton());
+		panel.add(ruleComboIndex());
+		panel.add(ruleName());
+		panel.add(ruleColorButton());
 
 		JTextArea label = new JTextArea(" => ");
 		label.setEditable(false);
 		label.setFont(label.getFont().deriveFont(32f));
 
-		ruleBox.add(label);
-		
-		ruleBox.add(ruleComboLevels());
-		ruleBox.add(ruleComboOperator());
-		ruleBox.add(ruleComboLevels());
-		this.ruleBox.revalidate();
-		return ruleBox;
+		panel.add(label);
 
+
+		JPanel comboBoxPanel = new JPanel();
+		panel.add(addComboButton(comboBoxPanel));
+		panel.add(removeComboButton(comboBoxPanel));
+		panel.add(comboBoxPanel);
+		comboBoxPanel.add(ruleComboLevels());
+
+		panel.add(addComboButton(comboBoxPanel));
+		panel.add(removeComboButton(comboBoxPanel));
 	}
 	protected JTextArea ruleName(){
 		JTextArea newRuleName = new JTextArea(ProgramLabels.defaultNewRule);
@@ -126,6 +126,8 @@ class CreateColorRuleFrame extends JFrame {
 		// comboLevel.addItem("(");
 		// comboLevel.addItem(")");
 
+		// comboLevel.addActionListener(this);
+
 		return comboLevel;
 	}
 	protected JComboBox ruleComboLevels(){
@@ -140,33 +142,82 @@ class CreateColorRuleFrame extends JFrame {
 		return comboLevel;
 	}
 	protected JButton ruleColorButton(){
-		JButton b = new JButton();
+		JButton b = new JButton("\n\t\t\t\n");
 		b.setBackground(Color.LIGHT_GRAY);
 		b.setFocusPainted(false);
-		b.setPreferredSize(new Dimension(40, 40));
-		b.setMinimumSize(new Dimension(60, 60));
-		b.setSize(new Dimension(60, 60));
 		b.addActionListener(event -> {
 			Color color = JColorChooser.showDialog(this, "Choose Color", Color.white);
 			b.setBackground(color);
 		});
 		return b;
 	}
-	void showSaveButton(JPanel panel){
+	protected JButton addComboButton(JPanel comboBoxPanel){
+		JButton addButton = new JButton(ProgramLabels.addElem);
+		addButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boxList.add(0, ruleComboOperator());
+				comboBoxPanel.add(boxList.get(0));
+				boxList.add(0, ruleComboLevels());
+				comboBoxPanel.add(boxList.get(0));
+				me.pack();
+			}
+		});
+		return addButton;
+	}
+	protected JButton removeComboButton(JPanel comboBoxPanel){
+		JButton remButton = new JButton(ProgramLabels.remElem);
+		remButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (boxList.size() > 1){
+					comboBoxPanel.remove(boxList.get(0));
+					boxList.remove(0);
+					comboBoxPanel.remove(boxList.get(0));
+					boxList.remove(0);
+					me.pack();
+				}
+			}
+		});
+		return remButton;
+	}
+	void showSaveButton(JPanel mainPanel){
 		saveButton = new JButton(ProgramLabels.save);
 		saveButton.addActionListener(event -> {
 
 		});
-		panel.add(saveButton, BorderLayout.LINE_START);
+		mainPanel.add(saveButton, BorderLayout.LINE_START);
 	}
-	void showCancelButton(JPanel panel){
+	void showCancelButton(JPanel mainPanel){
 		cancelButton = new JButton(ProgramLabels.cancel);
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				closeFrame();
 			}
 		});
-		panel.add(cancelButton, BorderLayout.LINE_START);
+		mainPanel.add(cancelButton, BorderLayout.LINE_START);
+	}
+	void showAddRuleButton(JPanel panel){
+		addRuleButton = new JButton(ProgramLabels.addRule);
+		addRuleButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelList.add(0, new JPanel());
+				mainPanel.add(panelList.get(0));
+				showRemoveRuleButton(panelList.get(0));
+				ruleBox(panelList.get(0));
+				me.pack();
+			}
+		});
+		panel.add(addRuleButton, BorderLayout.LINE_START);
+	}
+	void showRemoveRuleButton(JPanel panel){
+		removeRuleButton = new JButton(ProgramLabels.removeRule);
+		removeRuleButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelList.remove(panel);
+				panel.getParent().remove(panel);
+				me.pack();
+			}
+		});
+		panel.add(removeRuleButton, BorderLayout.LINE_START);
 	}
 	void closeFrame(){
 		super.dispose();

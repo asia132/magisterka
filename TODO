@@ -8,7 +8,10 @@ Bugs:
   ☐ zaimplemntować obsługę nawiasów i ~ dla reguł kolorowania
   ☐ przed aplikacją reguł - sprawdzić, czy użyte poziomy są domknięte
   ☐ podczas definiowania reguł kolorowania - sprawdzać, czy nawiasy są domknięte
-  ☐ zamienić boxy na panele w CreateColorRuleFrame - może wtedy będzie dało się dodawać na bierząco pola
+  ☐ reguły kolorowania: + na przedzie dodaje elementy na przodzie, + na tyle - na tyle
+  ☐ obszar ograniczający jest widokiem kamery - koloruje się tylko to, co się w nim mieści
+  ☐ nawiasy i zaprzeczenie powinny się znajdować zarówno w liście poziomów jak i operacji
+  ☐ sprawdzić przesuwanie linii po edycji reguły
 --- ✄ -----------------------
 BRs:
   ☐ symulacja @critical @started
@@ -20,6 +23,7 @@ BRs:
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ zamienić boxy na panele w CreateColorRuleFrame - może wtedy będzie dało się dodawać na bierząco pola @done (18-09-11 15:52) @project(Bugs)
  ✔ do levelu muszą być przypisane wszystkie podkształty, a ich malowanie musi być zależne od ich położenia (SG4) @done (18-09-05 11:03) @project(Bugs)
  ✔  nie da się usunąć lini z prawej strony @done (18-09-04 18:13) @project(Bugs)
  ✔ limiting shape musi się przesuwać razem z obrazem @done (18-09-04 18:12) @project(Bugs)

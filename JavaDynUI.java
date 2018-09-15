@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.JComboBox;
+import java.util.ArrayList;
  
 /**
  *
@@ -64,15 +66,16 @@ public class JavaDynUI extends JFrame {
     private class subPanel extends JPanel {
          
         subPanel me;
+        ArrayList <JComboBox<String>> comboboxes = new ArrayList <>();
  
         public subPanel() {
             super();
             me = this;
             JLabel myLabel = new JLabel("Hello subPanel(): " + countMe++);
             add(myLabel);
+
             JButton myButtonRemoveMe = new JButton("remove me");
             myButtonRemoveMe.addActionListener(new ActionListener(){
- 
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     me.getParent().remove(me);
@@ -80,6 +83,48 @@ public class JavaDynUI extends JFrame {
                 }
             });
             add(myButtonRemoveMe);
+
+            JButton myButtonAddButton = new JButton("Add button");
+            myButtonAddButton.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    comboboxes.add(0, new JComboBox<String>());
+
+                    comboboxes.get(0).addItem("STAY");
+                    comboboxes.get(0).addItem("REMOVE");
+
+                    comboboxes.get(0).addActionListener(new ActionListener(){
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            String s = (String) comboboxes.get(0).getSelectedItem();
+                            switch (s){
+                                case "STAY":    System.out.println("STAY");
+                                                break;
+                                case "REMOVE":  System.out.println("REMOVE");
+                                                break;
+                                default:    System.out.println("ERROR");
+                                            break;
+                            }
+                        }
+                    });
+                    me.add(comboboxes.get(0));
+                    myFrame.pack();
+                }
+            });
+            add(myButtonAddButton);
+
+            JButton myButtonRemoveButton = new JButton("Remove button");
+            myButtonRemoveButton.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    me.remove(comboboxes.get(0));
+                    comboboxes.remove(0);
+                    me.revalidate();
+                    myFrame.pack();
+                }
+            });
+            add(myButtonRemoveButton);
+
         }
     }
 }

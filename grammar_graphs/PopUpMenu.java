@@ -79,6 +79,7 @@ class PopUpMenu extends JPopupMenu {
 			applyRule.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try{
+						System.out.println("----------APPLY RULE: " + changedRule.getName() + "----------");
 						changedRule.apply(panel);
 					}
 					catch(Rule.NoMarkerException exc){
@@ -117,25 +118,25 @@ class PopUpMenu extends JPopupMenu {
 // change view settings
 	void showViewSettings(MainPanel panel){
 		JMenu panelSettings = new JMenu(ProgramLabels.panelSettings);
-		if (panel.programData.default_background_color == Color.WHITE){
-			JMenuItem blackMode = new JMenuItem(ProgramLabels.blackMode);
-			blackMode.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					panel.programData.changeColorModeToBlack();
-					panel.repaint();
-				}
-			});
-			panelSettings.add(blackMode);
-		}else{
-			JMenuItem whiteMode = new JMenuItem(ProgramLabels.whiteMode);
-			whiteMode.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					panel.programData.changeColorModeToWhite();
-					panel.repaint();
-				}
-			});
-			panelSettings.add(whiteMode);
-		}
+		// if (panel.programData.default_background_color == Color.WHITE){
+		// 	JMenuItem blackMode = new JMenuItem(ProgramLabels.blackMode);
+		// 	blackMode.addActionListener(new ActionListener() {
+		// 		public void actionPerformed(ActionEvent e) {
+		// 			panel.programData.changeColorModeToBlack();
+		// 			panel.repaint();
+		// 		}
+		// 	});
+		// 	panelSettings.add(blackMode);
+		// }else{
+		// 	JMenuItem whiteMode = new JMenuItem(ProgramLabels.whiteMode);
+		// 	whiteMode.addActionListener(new ActionListener() {
+		// 		public void actionPerformed(ActionEvent e) {
+		// 			panel.programData.changeColorModeToWhite();
+		// 			panel.repaint();
+		// 		}
+		// 	});
+		// 	panelSettings.add(whiteMode);
+		// }
 		JMenuItem gridButton = new JMenuItem();
 		if (panel.programData.SHOW_GRID)
 			gridButton.setText(ProgramLabels.hideGrid);
@@ -164,14 +165,14 @@ class PopUpMenu extends JPopupMenu {
 	}
 // coloring rules
 	void showColoringRuleLevelss(MainPanel panel){
-		JMenu ruleList = new JMenu(ProgramLabels.rulleAppListOpt);
+		JMenu ruleList = new JMenu(ProgramLabels.colorRuleMenu);
 		if (!MainData.LIMITING_SHAPE){
 			ruleList.add(showColorRuleOption(panel));
 			ruleList.add(addColoringRuleLevels(panel));
-			if (!MainData.COLOR_RULES){
-				ruleList.add(showColorRuleSettings(panel));
-				ruleList.add(showResetLevels(panel));
-			}
+			// if (!MainData.COLOR_RULES){
+				// ruleList.add(showColorRuleSettings(panel));
+			// 	ruleList.add(showResetLevels(panel));
+			// }
 		}
 		if (!MainData.COLOR_RULES)
 			ruleList.add(showColorRuleLimitingShape(panel));

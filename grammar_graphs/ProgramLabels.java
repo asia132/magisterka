@@ -30,6 +30,11 @@ public class ProgramLabels{
 	static String remove = "Remove";
 	static String cancel = "Cancel";
 
+	static String addRule = "Add Rule";
+	static String removeRule = "Remove Rule";
+	static String addElem = "+";
+	static String remElem = "-";
+
 	static String newRuleLabel = "Please, provide the name of rule";
 	static String defaultNewRule = "New_Rule";
 
@@ -44,6 +49,7 @@ public class ProgramLabels{
 	static String hideDist = "Hide length";
 	static String reset = "Reset";
 
+	static String colorRuleMenu = "Painting rules";
 	static String colorRuleOptionOn = "Turn on coloring rules";
 	static String colorRuleOptionOff = "Turn off coloring rules";
 	static String limitShapeOn = "Define limiting shape";

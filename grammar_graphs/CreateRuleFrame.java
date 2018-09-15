@@ -26,6 +26,7 @@ class CreateRuleFrame extends JFrame {
 	JButton saveButton;
 	JButton removeButton;
 	JButton cancelButton;
+	
 	LeftRulePanel panelL;
 	JPanel panelB;
 
