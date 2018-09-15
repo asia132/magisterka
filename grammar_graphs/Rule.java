@@ -50,41 +50,46 @@ final class Rule{
 			throw new NoMarkerException("Please add a marker to left side of rule\n");
 		Shape inputshape = new Shape(panel.programData.getLines(), panel.programData.marker, "Input");
 
-		ArrayList <Line> found_lines = initialshape.findMatch(inputshape);
-		if (finalshape != null){
-			finalshape.needsToBeMirrored = inputshape.needsToBeMirrored;
-		}
+		try{
+			ArrayList <Line> found_lines = initialshape.findMatch(inputshape);
+			
+			if (finalshape != null){
+				finalshape.needsToBeMirrored = inputshape.needsToBeMirrored;
+			}
 
-		if (found_lines.size() >= initialshape.lines_dist.size()){
-			if (finalshape != null && finalshape.marker != null){
-				Marker inputMarker = panel.programData.marker.copy();
+			if (found_lines.size() >= initialshape.lines_dist.size()){
+				if (finalshape != null && finalshape.marker != null){
+					Marker inputMarker = panel.programData.marker.copy();
 
-				try{
-					double k = initialshape.marker.length() / inputshape.marker.length();
-					panel.programData.marker.move((int)((finalshape.marker.getX() - initialshape.marker.getX())/k), (int)((finalshape.marker.getY() - initialshape.marker.getY())/k), inputshape.marker.calcRotation(initialshape.marker.dir));
-					panel.programData.marker.rotateBasedOnDirSub(initialshape.marker.dir, finalshape.marker.dir, finalshape.needsToBeMirrored);
-				
-					panel.programData.marker.scale(this.findMarkerScaleParam());
-					if (finalshape.needsToBeMirrored){
-						if (inputMarker.dir.equals(Direct.N) || inputMarker.dir.equals(Direct.S)){
-							panel.programData.marker.mirrorX(inputMarker.p.x);
+					try{
+						double k = initialshape.marker.length() / inputshape.marker.length();
+						panel.programData.marker.move((int)((finalshape.marker.getX() - initialshape.marker.getX())/k), (int)((finalshape.marker.getY() - initialshape.marker.getY())/k), inputshape.marker.calcRotation(initialshape.marker.dir));
+						panel.programData.marker.rotateBasedOnDirSub(initialshape.marker.dir, finalshape.marker.dir, finalshape.needsToBeMirrored);
+					
+						panel.programData.marker.scale(this.findMarkerScaleParam());
+						if (finalshape.needsToBeMirrored){
+							if (inputMarker.dir.equals(Direct.N) || inputMarker.dir.equals(Direct.S)){
+								panel.programData.marker.mirrorX(inputMarker.p.x);
+							}
+							else{
+								panel.programData.marker.mirrorY(inputMarker.p.y);
+							}
 						}
-						else{
-							panel.programData.marker.mirrorY(inputMarker.p.y);
-						}
+						ArrayList <Line> finalLines = finalshape.setInPlace(inputMarker, initialshape.marker);
+						panel.programData.addLinesByRule(finalLines);
+						MainData.coloringRuleLevels.updateWithRule(this.cat, found_lines, finalLines);
+					}catch (Exception e) {
+						new MessageFrame("Rule could not be applicated. " + e.getMessage());
+						panel.programData.marker = inputMarker;
 					}
-					ArrayList <Line> finalLines = finalshape.setInPlace(inputMarker, initialshape.marker);
-					panel.programData.addLinesByRule(finalLines);
-					MainData.coloringRuleLevels.updateWithRule(this.cat, found_lines, finalLines);
-				}catch (Exception e) {
-					new MessageFrame("Rule could not be applicated. " + e.getMessage());
-					panel.programData.marker = inputMarker;
 				}
+				else{
+					panel.programData.marker = null;
+				}
+				panel.repaint();
 			}
-			else{
-				panel.programData.marker = null;
-			}
-			panel.repaint();
+		}catch(NotAllRuleLinesRecognized error){
+			System.out.println(error.getMessage());;
 		}
 	}
 	@Override

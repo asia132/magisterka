@@ -59,14 +59,14 @@ class Shape{
 		}
 		return resultLines;
 	}
-	ArrayList <Line> findMatch(Shape inputShape){
+	ArrayList <Line> findMatch(Shape inputShape) throws NotAllRuleLinesRecognized{
 		double k = this.marker.length() / inputShape.marker.length();
 
+		ArrayList <Line> ruleLines = new ArrayList<>(this.lines_dist.keySet());
 		Line [][] matchedLines = new Line[this.lines_dist.size()][2];
 
 		ArrayList <Line> mached_lines = new ArrayList<>();
 
-		this.same = 0;
 		for (Map.Entry<Line, Dist> inShape: inputShape.lines_dist.entrySet()) {
 			Line inLine_i = inShape.getKey();
 			Dist inDist_i = inShape.getValue();
@@ -75,7 +75,7 @@ class Shape{
 				this.same += result[1];
 				mached_lines.add(inLine_i);
 				System.out.println("++++++++++++++++++++++Add matched line++++++++++++++++++++++");
-				System.out.println("tablica: " + matchedLines[result[0]]);
+				// System.out.println("tablica: " + matchedLines[result[0]]);
 				if (result[1] == 1){
 					matchedLines[result[0]][0] = inLine_i;
 				}else{
@@ -85,8 +85,14 @@ class Shape{
 			// check sublines
 			else{
 				try{
-					Line newLine = findSubLine(inLine_i, inDist_i, k, inputShape.marker);
-					mached_lines.add(inLine_i);
+					Object[] subLineResult = findSubLine(inLine_i, inDist_i, k, inputShape.marker);
+					mached_lines.add((Line)subLineResult[0]);
+					int index = ruleLines.indexOf((Line)subLineResult[1]);
+					if ((int)subLineResult[2] == 1){;
+						matchedLines[index][0] = (Line)subLineResult[0];
+					}else{;
+						matchedLines[index][1] = (Line)subLineResult[0];
+					}
 					System.out.println("----------------------Add matched SUBline----------------------");
 				}
 				catch(PointDoesNotExist p){;
@@ -94,13 +100,25 @@ class Shape{
 			}
 		}
 
+		this.same = 0;
 		System.out.println("MATCHING RESULT:");
 		for (int i = 0; i < matchedLines.length; ++i){
 			System.out.println(matchedLines[i][0] + " - " + matchedLines[i][1]);
+			if (matchedLines[i][0] != null){
+				this.same++;
+				mached_lines.add(matchedLines[i][0]);
+			} 
+			else{
+				if (matchedLines[i][1] == null){
+					throw new NotAllRuleLinesRecognized("No lines recognized for " + ruleLines.get(i));
+				}else{
+					mached_lines.add(matchedLines[i][1]);
+				}
+			} 
 		}
 
-		inputShape.needsToBeMirrored = (this.same < mached_lines.size());
-		System.out.println("Przerzucić? " + this.same + " " + mached_lines.size() + "- " + inputShape.needsToBeMirrored);
+		inputShape.needsToBeMirrored = (this.same < matchedLines.length);
+		System.out.println("Przerzucić? " + this.same + " " + matchedLines.length + "- " + inputShape.needsToBeMirrored);
 
 		return mached_lines;
 	}
@@ -128,7 +146,7 @@ class Shape{
 		}
 		return ruleLinesWithSameA;
 	}
-	Line findSubLine(Line inputLine, Dist inputDist, double k, Marker inputMarker) throws PointDoesNotExist{
+	Object [] findSubLine(Line inputLine, Dist inputDist, double k, Marker inputMarker) throws PointDoesNotExist{
 		Line transLine = inputLine.copy();
 		double alpha = -inputMarker.calcRotation(this.marker.dir);
 		transLine.rotate(inputMarker.p.x, inputMarker.p.y, alpha);
@@ -137,6 +155,7 @@ class Shape{
 		ArrayList <Line> matchedRuleLines = compareLineAParam(transLine);
 
 		Line line = null;
+		Line mline = null;
 		try{
 			double [] params = transLine.getFunctionParamsOnGrid();
 			for (Line matchedRuleLine: matchedRuleLines){
@@ -175,13 +194,14 @@ class Shape{
 							System.out.print("Initial line "); matchedRuleLine.print();
 							System.out.print("\nFound ok line: "); 
 							newLine.print();
-							return newLine;
+							return new Object[] {newLine, matchedRuleLine, 1};
 
 						}else{
 							System.out.print("Initial line "); matchedRuleLine.print();
 							System.out.print("\nFound skipped line: ");
 							line = newLine;
 							line.rotate(inputMarker.p.x, inputMarker.p.y, -alpha);
+							mline = matchedRuleLine;
 							// line.print();
 						}
 					}catch (PointDoesNotExist pointDoesNotExist) {
@@ -239,11 +259,12 @@ class Shape{
 							System.out.print("Initial line "); matchedRuleLine.print();
 							System.out.print("\nFound ok line: ");
 							newLine.print();
-							return newLine;
+							return new Object[] {newLine, matchedRuleLine, 1};
 						}else{
 							System.out.print("Initial line "); matchedRuleLine.print();
 							System.out.print("\nFound skipped line: ");
 							line = newLine;
+							mline = matchedRuleLine;
 							line.print();
 						}
 					}catch (PointDoesNotExist pointDoesNotExist) {
@@ -254,8 +275,7 @@ class Shape{
 			}
 		}
 		if (line != null){
-			// this.same++;
-			return line;
+			return new Object[]{line, mline, 0};
 		}
 		throw new PointDoesNotExist();
 	}
@@ -531,4 +551,12 @@ class Shape{
 			super("Point was not found");
 		}
 	}
+}
+class NotAllRuleLinesRecognized extends Exception{
+	public NotAllRuleLinesRecognized(String message){
+			super(message);
+		}
+		public NotAllRuleLinesRecognized(){
+			super("Not All Rule Lines Recognized");
+		}
 }
