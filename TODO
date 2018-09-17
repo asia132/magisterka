@@ -12,6 +12,7 @@ Bugs:
   ☐ obszar ograniczający jest widokiem kamery - koloruje się tylko to, co się w nim mieści
   ☐ nawiasy i zaprzeczenie powinny się znajdować zarówno w liście poziomów jak i operacji
   ☐ sprawdzić przesuwanie linii po edycji reguły
+  ☐ dla wyszukiwania na y = b lub x = b: trzeba porównywać 2 odległości od M_S i M_A i brać tą, która się zgadza w obydwu przypadkach -POPRACOWAĆ NA TYM @started
 --- ✄ -----------------------
 BRs:
   ☐ symulacja @critical @started

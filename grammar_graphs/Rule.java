@@ -146,15 +146,17 @@ final class Rule{
 	}
 }
 enum Referral{
-	SAME, DIFFERENT;
+	SAME, DIFFERENT, DUPLICATED;
 	private String value;
 	private int num;
 	static{
 		SAME.value = "Same as original";
 		DIFFERENT.value = "DIFFERENT TO ORIGINAL";
+		DUPLICATED.value = "LINE IS DUPLICATED";
 
 		SAME.num = 1;
 		DIFFERENT.num = 0;
+		DUPLICATED.num = -1;
 	}
 	@Override
 	public String toString(){
