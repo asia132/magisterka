@@ -43,8 +43,8 @@ class ColoringRuleLevels {
 			if (n+1 < max_n_allowed)	levels[n+1].update(ruleFinalLines);
 			this.n_change = true;
 		}
-		System.out.println("KONTROLA N: n = " + n + ", ilosc leveli: " + levels.length);
-		print();
+		// System.out.println("KONTROLA N: n = " + n + ", ilosc leveli: " + levels.length);
+		// print();
 	}
 	void print(){
 		System.out.println("Limiting shape");

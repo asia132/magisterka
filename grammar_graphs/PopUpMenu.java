@@ -118,25 +118,6 @@ class PopUpMenu extends JPopupMenu {
 // change view settings
 	void showViewSettings(MainPanel panel){
 		JMenu panelSettings = new JMenu(ProgramLabels.panelSettings);
-		// if (panel.programData.default_background_color == Color.WHITE){
-		// 	JMenuItem blackMode = new JMenuItem(ProgramLabels.blackMode);
-		// 	blackMode.addActionListener(new ActionListener() {
-		// 		public void actionPerformed(ActionEvent e) {
-		// 			panel.programData.changeColorModeToBlack();
-		// 			panel.repaint();
-		// 		}
-		// 	});
-		// 	panelSettings.add(blackMode);
-		// }else{
-		// 	JMenuItem whiteMode = new JMenuItem(ProgramLabels.whiteMode);
-		// 	whiteMode.addActionListener(new ActionListener() {
-		// 		public void actionPerformed(ActionEvent e) {
-		// 			panel.programData.changeColorModeToWhite();
-		// 			panel.repaint();
-		// 		}
-		// 	});
-		// 	panelSettings.add(whiteMode);
-		// }
 		JMenuItem gridButton = new JMenuItem();
 		if (panel.programData.SHOW_GRID)
 			gridButton.setText(ProgramLabels.hideGrid);
