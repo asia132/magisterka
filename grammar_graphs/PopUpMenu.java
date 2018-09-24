@@ -9,6 +9,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPopupMenu;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JFrame; 
 
 import javax.swing.border.Border;
 
@@ -118,6 +119,12 @@ class PopUpMenu extends JPopupMenu {
 // change view settings
 	void showViewSettings(MainPanel panel){
 		JMenu panelSettings = new JMenu(ProgramLabels.panelSettings);
+		panelSettings.add(showGridOpt(panel));
+		panelSettings.add(showLenOpt(panel));
+		panelSettings.add(showPointOpt(panel));
+		add(panelSettings);
+	}
+	JMenuItem showGridOpt(MainPanel panel){
 		JMenuItem gridButton = new JMenuItem();
 		if (panel.programData.SHOW_GRID)
 			gridButton.setText(ProgramLabels.hideGrid);
@@ -129,7 +136,9 @@ class PopUpMenu extends JPopupMenu {
 				panel.repaint();
 			}
 		});
-		panelSettings.add(gridButton);
+		return gridButton;
+	}
+	JMenuItem showLenOpt(MainPanel panel){
 		JMenuItem markerSimulate = new JMenuItem();
 		if (panel.programData.showDist)
 			markerSimulate.setText(ProgramLabels.hideDist);
@@ -141,8 +150,21 @@ class PopUpMenu extends JPopupMenu {
 				panel.repaint();
 			}
 		});
-		panelSettings.add(markerSimulate);
-		add(panelSettings);
+		return markerSimulate;
+	}
+	JMenuItem showPointOpt(MainPanel panel){
+		JMenuItem markerSimulate = new JMenuItem();
+		if (panel.programData.showPoints)
+			markerSimulate.setText(ProgramLabels.hidePoints);
+		else
+			markerSimulate.setText(ProgramLabels.showPoints);
+		markerSimulate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				panel.programData.showPoints = !panel.programData.showPoints;
+				panel.repaint();
+			}
+		});
+		return markerSimulate;
 	}
 // coloring rules
 	void showColoringRuleLevelss(MainPanel panel){
@@ -231,38 +253,65 @@ class PopUpMenu extends JPopupMenu {
 	void showElemEdit(MainPanel panel){
 		JMenu elemEdit = new JMenu(ProgramLabels.elemEdit);
 		if (!panel.programData.isEmptyModified()){
-			JMenuItem removeButton = new JMenuItem();
-			removeButton.setText(ProgramLabels.elemRemove);
-			removeButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent ev) {
-					System.out.println("-----------------REMOVE-LINES------------------");
-					panel.removeSelectedLines();
-				}
-			});
-			elemEdit.add(removeButton);
-			JMenuItem copyButton = new JMenuItem();
-			copyButton.setText(ProgramLabels.elemCopy);
-			copyButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent ev) {
-					System.out.println("-----------------COPY-LINES--------------------");
-					panel.copyLines();
-				}
-			});
-			elemEdit.add(copyButton);
+			elemEdit.add(showElemEditRem(panel));
+			elemEdit.add(showElemEditCopy(panel));
 		}
 		if (!panel.programData.copiedLines.isEmpty()){
-			JMenuItem pasteButton = new JMenuItem();
-			pasteButton.setText(ProgramLabels.elemPaste);
-			pasteButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent ev) {
-					System.out.println("-----------------PASTE-LINES-------------------");
-					panel.pasteLines(panel.x1, panel.y1);
-				}
-			});
-			elemEdit.add(pasteButton);
+			elemEdit.add(showElemEditPaste(panel));
 		}
-		if (!panel.programData.copiedLines.isEmpty() || !panel.programData.isEmptyModified())
+		if (panel.programData.getLines() != null)
+			elemEdit.add(showElemEditGroup(panel));			
 			add(elemEdit);
+	}
+	JMenuItem showElemEditRem(MainPanel panel){
+		JMenuItem removeButton = new JMenuItem();
+		removeButton.setText(ProgramLabels.elemRemove);
+		removeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				System.out.println("-----------------REMOVE-LINES------------------");
+				panel.removeSelectedLines();
+			}
+		});
+		return removeButton;
+	}
+	JMenuItem showElemEditCopy(MainPanel panel){
+		JMenuItem copyButton = new JMenuItem();
+		copyButton.setText(ProgramLabels.elemCopy);
+		copyButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				System.out.println("-----------------COPY-LINES--------------------");
+				panel.copyLines();
+			}
+		});
+		return copyButton;
+	}
+	JMenuItem showElemEditPaste(MainPanel panel){
+		JMenuItem pasteButton = new JMenuItem();
+		pasteButton.setText(ProgramLabels.elemPaste);
+		pasteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				System.out.println("-----------------PASTE-LINES-------------------");
+				panel.pasteLines(panel.x1, panel.y1);
+			}
+		});
+		return pasteButton;
+	}
+	JMenuItem showElemEditGroup(MainPanel panel){
+		JMenuItem pasteButton = new JMenuItem();
+		pasteButton.setText(ProgramLabels.elemGroup);
+		pasteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				System.out.println("-----------------GROUP-LINES-------------------");
+				
+				int before = panel.programData.getLinesSize();
+				do{
+					before = panel.programData.getLinesSize();
+					panel.programData.setLines(Shape.groupLines(panel.programData.getLines()));
+				}while (before != panel.programData.getLinesSize());
+				panel.repaint();
+			}
+		});
+		return pasteButton;
 	}
 // marker
 	void showMarker(MainPanel panel){
@@ -317,7 +366,9 @@ class PopUpMenu extends JPopupMenu {
 		grammar.add(showOpenFile(panel));
 		grammar.add(showSaveFile(panel));
 		grammar.add(showSimulate(panel));
-		grammar.add(showResetOption(panel));
+		grammar.add(showResetAllOption(panel));
+		if (MainData.file != null)
+			grammar.add(showResetOption(panel));
 
 		add(grammar);
 	}
@@ -334,15 +385,30 @@ class PopUpMenu extends JPopupMenu {
 		return markerSimulate;
 	}
 	// remove all rules and lines
-	JMenuItem showResetOption(MainPanel panel){
+	JMenuItem showResetAllOption(MainPanel panel){
 		JMenuItem resetButton = new JMenuItem();
-		resetButton.setText(ProgramLabels.reset);
+		resetButton.setText(ProgramLabels.resetAll);
 		resetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				panel.programData.clear();
 				MainData.coloringRuleLevels = new ColoringRuleLevels(panel);
 				panel.repaint();
-				System.out.println("-------------------RESET-------------------");
+				MainData.file = null;
+				System.out.println("-----------------RESET-ALL-----------------");
+			}
+		});
+		return resetButton;
+	}
+	// remove all rules and lines
+	JMenuItem showResetOption(MainPanel panel){
+		JMenuItem resetButton = new JMenuItem();
+		resetButton.setText(ProgramLabels.reset + " " + MainData.file.getName());
+		resetButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				FileSaver fileSaver = new FileSaver(MainData.file);
+				fileSaver.openDataFile(panel);
+				panel.repaint();
+				System.out.println("-------------------RESET-" + fileSaver.getName() + "------------------");
 			}
 		});
 		return resetButton;
@@ -360,6 +426,7 @@ class PopUpMenu extends JPopupMenu {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					FileSaver fileSaver = new FileSaver(fc.getSelectedFile());
 					fileSaver.saveDataFile(panel);
+					MainData.file = fc.getSelectedFile();
 				}
 				panel.repaint();
 			}
@@ -380,6 +447,7 @@ class PopUpMenu extends JPopupMenu {
 					FileSaver fileSaver = new FileSaver(fc.getSelectedFile());
 					fileSaver.openDataFile(panel);
 					System.out.println("-------------------OPEN " + fc.getSelectedFile().getName() + "-------------------");
+					MainData.file = fc.getSelectedFile();
 				}
 				panel.repaint();
 			}

@@ -12,26 +12,33 @@ import javax.swing.SwingUtilities;
 
 import java.lang.Math;
 
+import java.io.File;
+
 
 class MainData {
 	MainData() {}
 	boolean RIGHT = false;
 	boolean MIDDLE = false;
 	static boolean showDist = false;
+	static boolean showPoints = false;
 	Rectangle checkingRect = null;
 	Marker marker = null;
 	Marker modified_marker = null;
 
+
 	private ArrayList <Line> lines = new ArrayList<Line>();
 	static ColoringRuleLevels coloringRuleLevels = null;
-
 
 	ArrayList <Line> modyfiedLines = new ArrayList<Line>();
 	ArrayList <Line> initialLines = new ArrayList<Line>();
 	private ArrayList <Line> temp_shape = new ArrayList<Line>();
 	static ArrayList <Line> copiedLines = new ArrayList<Line>();
 
+	static File file = null;
+
+	int [] point0 = {0, 0};
 	static int grid_size = 20;
+	static int grid_section = 12;
 	
 	static ArrayList <ColoringRule> rulePainting = new ArrayList<>();
 	static ArrayList <Rule> ruleList = new ArrayList<>(); 
@@ -48,11 +55,24 @@ class MainData {
 	static Color default_check_marker_color = Color.MAGENTA;
 	static Color default_marker_color = Color.CYAN;
 	static Color default_grid_color = Color.LIGHT_GRAY;
+	static Color default_point_color = Color.DARK_GRAY;
 
 	void fillColoringRuleLevelsWithInput(){
 		for (Line line: lines) {
 			coloringRuleLevels.updateLevel0(line);
 		}
+	}
+
+// lines
+	void setLines(ArrayList <Line> newLines){
+		this.lines = newLines;
+		coloringRuleLevels.updateLevel0(newLines);
+	}
+	ArrayList <Line> copy(){
+		ArrayList <Line> copy = new ArrayList<Line>();
+		for (Line line: this.lines)
+			copy.add(line.copy());
+		return copy;
 	}
 	void addLinesByRule(ArrayList <Line> newlines){
 		this.lines.addAll(newlines);
@@ -66,17 +86,6 @@ class MainData {
 
 		if (mainPanel && ! LIMITING_SHAPE){
 			coloringRuleLevels.updateLevel0(line);
-		}
-	}
-	void endDefininingLimitShape(){
-		for (Line line: coloringRuleLevels.limitingShape.levelLines){
-			this.lines.remove(line);
-		}
-	}
-	void startDefininingLimitShape(){
-		for (Line line: coloringRuleLevels.limitingShape.levelLines){
-			line.changeColor(default_check_marker_color);
-			this.lines.add(line);
 		}
 	}
 	void removeLine(Line line){
@@ -105,7 +114,25 @@ class MainData {
 	int getLinesSize(){
 		return this.lines.size();
 	}
-
+	void printAllLines(){
+		for (Line line : lines){
+			line.print();
+		}
+		System.out.println("------------------------------");
+	}
+// limit shape
+	void endDefininingLimitShape(){
+		for (Line line: coloringRuleLevels.limitingShape.levelLines){
+			this.lines.remove(line);
+		}
+	}
+	void startDefininingLimitShape(){
+		for (Line line: coloringRuleLevels.limitingShape.levelLines){
+			line.changeColor(default_check_marker_color);
+			this.lines.add(line);
+		}
+	}
+// random things
 	String ruleAppListToString(){
 		StringJoiner info = new StringJoiner("");
 		for (Rule rule : ruleAppList){
@@ -133,6 +160,26 @@ class MainData {
 				return rule;
 		return null;
 	}
+	void clear(){
+		this.marker = null;
+		this.modified_marker = null;
+
+		this.ruleList.clear();
+		this.ruleAppList.clear();
+		
+		this.modyfiedLines.clear();
+		this.lines.clear();
+		this.tempShapeClear();
+		this.copiedLines.clear();
+	}
+	boolean inRuleList(String name){
+		for (Rule rule : ruleList) {
+			if (name.equals(rule.getName()))
+				return true;
+		}
+		return false;
+	}
+// temp shape
 	int tempShapeSize(){
 		return temp_shape.size();
 	}
@@ -157,31 +204,7 @@ class MainData {
 		temp_shape.get(i).setXY_a(initialLines.get(i).getX_a() + x2 - x1, initialLines.get(i).getY_a() + y2 - y1);
 		temp_shape.get(i).setXY_b(initialLines.get(i).getX_b() + x2 - x1, initialLines.get(i).getY_b() + y2 - y1);
 	}
-	void clear(){
-		this.marker = null;
-		this.modified_marker = null;
-
-		this.ruleList.clear();
-		this.ruleAppList.clear();
-		
-		this.modyfiedLines.clear();
-		this.lines.clear();
-		this.tempShapeClear();
-		this.copiedLines.clear();
-	}
-	boolean inRuleList(String name){
-		for (Rule rule : ruleList) {
-			if (name.equals(rule.getName()))
-				return true;
-		}
-		return false;
-	}
-	void printAllLines(){
-		for (Line line : lines){
-			line.print();
-		}
-		System.out.println("------------------------------");
-	}
+// to string
 	String markerToString(){
 		StringJoiner info = new StringJoiner("\t");
 		if (marker != null)
@@ -202,12 +225,7 @@ class MainData {
 		}
 		return info.toString();
 	}
-	ArrayList <Line> copy(){
-		ArrayList <Line> copy = new ArrayList<Line>();
-		for (Line line: this.lines)
-			copy.add(line.copy());
-		return copy;
-	}
+// grid
 	static int toGrid(int x){
 		int modX = x%grid_size;
 		if (modX <= (grid_size/2)*1.){
@@ -221,12 +239,31 @@ class MainData {
 	static boolean isOnGrid(double value){
 		return value % grid_size == 0.0;
 	}
+	static void setGrig(){
+		SHOW_GRID = !SHOW_GRID;
+	}
+	void setGridSize(int i, int screenWidth, int screenHeight){
+		int max_grid = screenWidth < screenHeight ? screenWidth : screenHeight;
+		if (i + grid_size > 1 && grid_size + i < max_grid){
+			grid_size += i;
+		}
+	}
+	int getGridSize(){
+		return grid_size;
+	}
+	void allLinesScale(int i, int screenWidth, int screenHeight){
+		if (i == 1 || grid_size > 5){
+			setGridSize(i, screenWidth, screenHeight);
+		}
+	}
+// modified markers
 	void addMarkerToModified(){
-		modified_marker = marker;
+		modified_marker = marker.copy();
 	}
 	void clearModifiedMarker(){
 		modified_marker = null;
 	}
+// modified lines
 	void clearModified(){
 		if (LIMITING_SHAPE)	changeModifiedColor(default_check_marker_color);
 		else	changeModifiedColor(default_figure_color);
@@ -238,19 +275,30 @@ class MainData {
 	ArrayList <Line> getModified(){
 		return modyfiedLines;
 	}
-	void changeColorModeToBlack(){
-		default_background_color = Color.BLACK;
-		default_figure_color = Color.WHITE;
-		changeFiguresColor();
+	void changeFiguresColor(){
+		for (Line line : lines){
+			if (modyfiedLines.indexOf(line) == -1){
+				line.changeColor(default_figure_color);
+			}
+		}
 	}
-	void changeColorModeToWhite(){
-		default_background_color = Color.WHITE;
-		default_figure_color = Color.BLACK;
-		changeFiguresColor();
+	void changeModifiedColor(Color color){
+		for (Line line: modyfiedLines) {
+			line.changeColor(color);
+		}
 	}
-	static void setGrig(){
-		SHOW_GRID = !SHOW_GRID;
+	void addToModified(Line line){
+		if (modyfiedLines.indexOf(line) == -1){
+			modyfiedLines.add(line);
+			line.changeColor(default_check_color);
+		}
+		else{
+			if (LIMITING_SHAPE)	changeModifiedColor(default_check_marker_color);
+			else	line.changeColor(default_figure_color);
+			modyfiedLines.remove(line);
+		}
 	}
+// distanses
 	static double distans(double x1, double y1, double x2, double y2){
 		double x = (x1 - x2) * (x1 - x2);
 		double y = (y1 - y2) * (y1 - y2);
@@ -266,6 +314,7 @@ class MainData {
 		double y = (p1[1] - p2[1]) * (p1[1] - p2[1]);
 		return Math.sqrt(x + y);
 	}
+// copied lines
 	static int [] findCenter(ArrayList <Line> linesList){
 		if (linesList.size() > 0){
 			int min_x = linesList.get(0).getX_a();
@@ -291,41 +340,7 @@ class MainData {
 		}
 		int [] point = {0,0};
 		return point;
-	} 
-// grid size
-	void setGridSize(int i, int screenWidth, int screenHeight){
-		int max_grid = screenWidth < screenHeight ? screenWidth : screenHeight;
-		if (i + grid_size > 1 && grid_size + i < max_grid){
-			grid_size += i;
-		}
-	}
-	int getGridSize(){
-		return grid_size;
-	}
-// lines and modified lines method
-	void changeFiguresColor(){
-		for (Line line : lines){
-			if (modyfiedLines.indexOf(line) == -1){
-				line.changeColor(default_figure_color);
-			}
-		}
-	}
-	void changeModifiedColor(Color color){
-		for (Line line: modyfiedLines) {
-			line.changeColor(color);
-		}
-	}
-	void addToModified(Line line){
-		if (modyfiedLines.indexOf(line) == -1){
-			modyfiedLines.add(line);
-			line.changeColor(default_check_color);
-		}
-		else{
-			if (LIMITING_SHAPE)	changeModifiedColor(default_check_marker_color);
-			else	line.changeColor(default_figure_color);
-			modyfiedLines.remove(line);
-		}
-	}
+	} 	
 	void pasteCopied(int x, int y){
 		if (!copiedLines.isEmpty()){
 			if (LIMITING_SHAPE)	changeModifiedColor(default_check_marker_color);
@@ -350,12 +365,7 @@ class MainData {
 		else	changeModifiedColor(default_figure_color);
 		modyfiedLines.clear();
 	}
-	void allLinesScale(int i, int screenWidth, int screenHeight){
-		if (i == 1 || grid_size > 5){
-			setGridSize(i, screenWidth, screenHeight);
-		}
-	}
-//
+// where it was clicked
 	Line onLine(int x, int y){
 		for (Line s : lines){
 			if (s.onLine(x, y, grid_size)) return s;
@@ -379,11 +389,6 @@ class MainData {
 			return true;
 		return false;
 	}
-	void drawLines(Graphics2D g2d) {
-		for (Line s : lines) {
-			s.drawLine(g2d);
-		}
-	}
 	void findLinesInRect(){
 		for (Line line: lines){
 			if (checkingRect.insideRect(line)){
@@ -394,19 +399,25 @@ class MainData {
 			addMarkerToModified();
 		}
 	}
+// drawing
+	void drawLines(Graphics2D g2d) {
+		for (Line s : lines) {
+			s.drawLine(g2d, point0);
+		}
+	}
 	void drawTempLine(Graphics2D g2d) {
 		for (Line line: temp_shape)
-			line.drawLine(g2d);
+			line.drawLine(g2d, point0);
 	}
 	void paintGrid(Graphics2D g2d, int screenWidth, int screenHeight){
 		g2d.setColor(default_grid_color);
-		for (int i = 0, j = 0; i < screenWidth; i += grid_size, j++){
-			if (j%12 == 0) g2d.setStroke(new BasicStroke(2));
+		for (int i = point0[0]*grid_size, j = 0; i < screenWidth; i += grid_size, j++){
+			if (j%grid_section == 0) g2d.setStroke(new BasicStroke(2));
 			else g2d.setStroke(new BasicStroke(1));
 			g2d.drawLine(i, 0, i, screenHeight);
 		}
-		for (int i = 0, j = 0; i < screenHeight; i += grid_size, j++){
-			if (j%12 == 0) g2d.setStroke(new BasicStroke(2));
+		for (int i = point0[1]*grid_size, j = 0; i < screenHeight; i += grid_size, j++){
+			if (j%grid_section == 0) g2d.setStroke(new BasicStroke(2));
 			else g2d.setStroke(new BasicStroke(1));
 			g2d.drawLine(0, i, screenWidth, i);
 		}

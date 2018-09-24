@@ -56,7 +56,7 @@ class CreateRuleFrame extends JFrame {
 		this.setVisible(true);
 	}
 	CreateRuleFrame(Rule rule) {
-		super(ProgramLabels.rulleWinName);
+		super(ProgramLabels.rulleWinName + ": " + rule.name);
 		loadFrameData();
 		this.ruleName = rule.name;
 		

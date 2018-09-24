@@ -75,7 +75,7 @@ class Marker{
 		}
 		return false;
 	}
-	void drawLine(Graphics2D g2d){
+	void drawMarker(Graphics2D g2d, int [] point0){
 		g2d.setColor(color);
 		g2d.setStroke(new BasicStroke(3));
 		g2d.drawOval(getX(), getY(), 1, 1);
@@ -119,6 +119,14 @@ class Marker{
 			g2d.drawString("B", this.getBx(), this.getBy());
 			g2d.drawString("C", this.getCx(), this.getCy());
 			g2d.drawString("D", this.getDx(), this.getDy());
+		}
+		if (MainData.showPoints == true){
+			g2d.setColor(MainData.default_point_color);
+			g2d.drawString("[" + (p.x - point0[0]) + ", " + (p.y - point0[1]) + "]", getX() - 4, getY() + (int)(MainData.grid_size*0.5)); // S
+			g2d.drawString("[" + (getax() - point0[0]) + ", " + (getay() - point0[1]) + "]", getAx() - 4, getAy() + (int)(MainData.grid_size*0.5)); // A
+			g2d.drawString("[" + (getbx() - point0[0]) + ", " + (getby() - point0[1]) + "]", getBx() - 4, getBy() + (int)(MainData.grid_size*0.5)); // B
+			g2d.drawString("[" + (getcx() - point0[0]) + ", " + (getcy() - point0[1]) + "]", getCx() - 4, getCy() + (int)(MainData.grid_size*0.5)); // C
+			g2d.drawString("[" + (getdx() - point0[0]) + ", " + (getdy() - point0[1]) + "]", getDx() - 4, getDy() + (int)(MainData.grid_size*0.5)); // D
 		}
 	}
 	void setXY(int x, int y){

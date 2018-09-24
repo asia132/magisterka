@@ -2,7 +2,7 @@ package grammar_graphs;
 
 public class ProgramLabels{
 	public static String programName = "Grammar Graphs";
-	static String rulleWinName = "Rules";
+	static String rulleWinName = "Rule";
 
 	static String rulleList = "Rules...";
 	static String rulleAdding = "Add new rule";
@@ -25,6 +25,7 @@ public class ProgramLabels{
 	static String elemRemove = "Remove elements";
 	static String elemCopy = "Copy elements";
 	static String elemPaste = "Paste elements";
+	static String elemGroup = "Group elements";
 
 	static String save = "Save";
 	static String remove = "Remove";
@@ -47,7 +48,10 @@ public class ProgramLabels{
 	static String runSimulation = "Run Simulation";
 	static String showDist = "Show length";
 	static String hideDist = "Hide length";
+	static String resetAll = "Reset All";
 	static String reset = "Reset";
+	static String showPoints = "Show co-ordinates";
+	static String hidePoints = "Hide co-ordinates";
 
 	static String colorRuleMenu = "Painting rules";
 	static String colorRuleOptionOn = "Turn on coloring rules";
@@ -62,5 +66,5 @@ public class ProgramLabels{
 	static String extensionGrammar = "grammar";
 	static String extensionGrammarInfo = "Grammar file";
 	
-	static String grammar = "Grammar Options";
+	static String grammar = "Grammar Shape File";
 }

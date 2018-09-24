@@ -29,6 +29,9 @@ class ColoringRuleLevels {
 	void updateLevel0(Line newLine){
 		this.levels[0].levelLines.add(newLine);
 	}
+	void updateLevel0(ArrayList <Line> newLines){
+		this.levels[0].levelLines = newLines;
+	}
 	void updateWithRule(Category ruleCat, ArrayList <Line> ruleInitialLines, ArrayList <Line> ruleFinalLines){
 		if (ruleCat == Category.A){ // left side => n
 			if (n != 0)	levels[n].update(ruleInitialLines);

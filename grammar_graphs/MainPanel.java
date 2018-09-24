@@ -78,6 +78,8 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		programData.drawLines(g2d);
 	}
 	public void moveLines(int x1, int y1, int x2, int y2){
+		// programData.point0[0] += MainData.toGrid(x2 - x1);
+		// programData.point0[1] += MainData.toGrid(y2 - y1);
 		programData.moveLines(x1, y1, x2, y2, (!(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)));
 		if (programData.marker != null)
 			this.programData.marker.move(x2 - x1, y2 - y1);
@@ -110,6 +112,9 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		}
 	}
 	public void moveLinesOfTempShape(int x1, int y1, int x2, int y2){
+		if (programData.modified_marker != null && programData.marker != null){
+			programData.marker.setXY(programData.modified_marker.getX() + x2 - x1, programData.modified_marker.getY() + y2 - y1);
+		}
 		for (int i = 0; i < programData.getModified().size(); i++){	
 			programData.tempShapeMove(i, x1, y1, x2, y2);
 		}
@@ -143,7 +148,7 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 				programData.checkingRect.drawRectanle(g2d);
 			}
 			if (programData.marker != null){
-				programData.marker.drawLine(g2d);
+				programData.marker.drawMarker(g2d, programData.point0);
 			}
 		}
 	}

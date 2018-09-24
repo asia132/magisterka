@@ -22,7 +22,10 @@ public class Main extends JFrame {
 
 		this.setSize(screenWidth, screenHeight);
 		this.setLocation(0, 0);
-		this.add(new MainPanel(screenWidth, screenHeight));
+
+		MainPanel panel = new MainPanel(screenWidth, screenHeight);
+
+		this.add(panel);
 
 		this.setDefaultCloseOperation(Main.EXIT_ON_CLOSE);
 		this.setLayout(new FlowLayout());

@@ -78,6 +78,9 @@ class Line{
 	double length(){
 		return MainData.distans(this.getX_a(), this.getY_a(), this.getX_b(), this.getY_b());
 	}
+	double small_length(){
+		return MainData.distans(this.pa.x, this.pa.y, this.pb.x, this.pb.y);
+	}
 	double [] getDoubleCoordinates(){
 		double [] norm = new double [4];
 		norm[0] = this.pa.x * 1.;
@@ -86,7 +89,7 @@ class Line{
 		norm[3] = this.pb.y * 1.;
 		return norm;
 	}
-	void drawLine(Graphics2D g2d){
+	void drawLine(Graphics2D g2d, int [] point0){
 		g2d.setColor(color);
 		g2d.setStroke(new BasicStroke(3));
 
@@ -98,6 +101,14 @@ class Line{
 			String text = Integer.toString((int)Math.floor(disx()))  + ", " + Integer.toString((int)Math.floor(disy()));
 			g2d.setColor(MainData.default_rect_color);
 			g2d.drawString(text, x + 1, y + 1);
+		}
+		if (MainData.showPoints == true){
+			g2d.setColor(MainData.default_point_color);
+			String text = "[" + (pa.x - point0[0]) + ", " + (pa.y - point0[1]) + "]";
+			g2d.drawString(text, getX_a() + 1, getY_a() - (int)(MainData.grid_size*0.5));
+			
+			text = "[" + (pb.x - point0[0]) + ", " + (pb.y - point0[1]) + "]";
+			g2d.drawString(text, getX_b() + 1, getY_b() - (int)(MainData.grid_size*0.5));
 		}
 	}
 	void changeColor(Color new_color){
