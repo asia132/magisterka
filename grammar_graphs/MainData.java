@@ -235,7 +235,7 @@ class MainData {
 		StringJoiner info = new StringJoiner("");
 		int i = 0;
 		for (Level level: coloringRuleLevels.levels){
-			if (i > coloringRuleLevels.n + 1) break;
+			if (i > coloringRuleLevels.getN() + 1) break;
 			for (Line line: level.levelLines){
 				info.add(FileSaver.level).add("\t").add("L"+i).add("\t").add(line.toString()).add("\n");
 			}

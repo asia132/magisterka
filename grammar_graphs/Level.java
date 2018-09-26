@@ -74,11 +74,14 @@ class Level {
 				}
 			}
 
-		if (lines.size() > 1){
-			throw new NotClosedShape("Some lines are left.");
+		if (points[points.length-1][0] != points[0][0] && points[points.length-1][1] != points[0][1]){
+			// throw new NotClosedShape("The points are not connected.");
+			System.out.println("The points are not connected.");
 		}
-		if (points[points.length-1][0] != points[0][0] && points[points.length-1][1] != points[0][1])
-			throw new NotClosedShape("The points are not connected.");
+		if (lines.size() > 1){
+			System.out.println("Some lines are left.");
+			// throw new NotClosedShape("Some lines are left.");
+		}
 		return points;
 	}
 	Level(ArrayList <Line> levelLines){

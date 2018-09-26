@@ -80,7 +80,7 @@ class FileSaver{
 					break;
 				}
 				if (n.equals(lineContent[0])){
-					MainData.coloringRuleLevels.n = Integer.parseInt(lineContent[1]);
+					MainData.coloringRuleLevels.setN(Integer.parseInt(lineContent[1]));
 				} else if (level.equals(lineContent[0])){
 					panel.programData.addLine(this.parseLine(lineContent), Integer.parseInt(lineContent[1].substring(1)));
 				} else if (limitShapeTag.equals(lineContent[0]))

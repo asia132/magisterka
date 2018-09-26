@@ -17,7 +17,12 @@ import java.util.StringJoiner;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.JButton;
+
 import java.lang.Math;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainPanel extends JPanel implements MouseListener, MouseWheelListener, MouseMotionListener {
 	static final long serialVersionUID = 42L;
@@ -89,7 +94,7 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 			for (Line line: programData.coloringRuleLevels.limitingShape.levelLines){
 				line.move(x2 - x1, y2 - y1);
 			}
-			for (int i = 0; i <= programData.coloringRuleLevels.n + 1; ++i){
+			for (int i = 0; i <= programData.coloringRuleLevels.getN() + 1; ++i){
 				for (Line line: programData.coloringRuleLevels.levels[i].levelLines){
 					line.move(x2 - x1, y2 - y1);
 				}
@@ -129,7 +134,7 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 	@Override
 	public String toString(){
 		StringJoiner info = new StringJoiner("");
-		return info.add(FileSaver.n).add("\t").add(programData.coloringRuleLevels.n + "\n").add(programData.levelsToString()).add(programData.limitShapeToString()).add(programData.markerToString()).add(programData.linesToString()).add(programData.rulesToString()).add(programData.ruleAppListToString()).toString();
+		return info.add(FileSaver.n).add("\t").add(programData.coloringRuleLevels.getN() + "\n").add(programData.levelsToString()).add(programData.limitShapeToString()).add(programData.markerToString()).add(programData.linesToString()).add(programData.rulesToString()).add(programData.ruleAppListToString()).toString();
 	}
 	@Override
     public Dimension getPreferredSize() {
@@ -147,10 +152,14 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		}else{
 			if (programData.SHOW_GRID)
 				programData.paintGrid(g2d, screenWidth, screenHeight);
+			if (!programData.tempShapeIsEmpty() && programData.LIMITING_SHAPE){
+				programData.drawTempLine(g2d);
+			}
 			if (programData.DRAW_LEVELS && !(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)){
 				int i = 0;
 				for (Level level: MainData.coloringRuleLevels.levels){
-					if (i > MainData.coloringRuleLevels.n + 1) break;
+					if (i > MainData.coloringRuleLevels.getN() + 1) break;
+					if (i == 1)
 					for (Line line: level.levelLines){
 						line.changeColor(level.getColor());
 						line.drawLine(g2d, programData.point0);
@@ -165,13 +174,11 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 
 					g2d.setColor(level.getColor());
 					g2d.drawString("L" + i, x, y);
+
 					i++;
 				}
 			}else{
 				paintLines(g2d);
-			}
-			if (!programData.tempShapeIsEmpty()){
-				programData.drawTempLine(g2d);
 			}
 			if (programData.checkingRect != null){
 				programData.checkingRect.drawRectanle(g2d);

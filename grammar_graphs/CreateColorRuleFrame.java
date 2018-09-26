@@ -132,8 +132,8 @@ class CreateColorRuleFrame extends JFrame {
 	}
 	protected JComboBox ruleComboLevels(){
 
-		String [] levels = new String [MainData.coloringRuleLevels.n + 1];
-		for (int i = 0; i <= MainData.coloringRuleLevels.n; ++i) {
+		String [] levels = new String [MainData.coloringRuleLevels.getN() + 1];
+		for (int i = 0; i <= MainData.coloringRuleLevels.getN(); ++i) {
 			levels[i] = "L" + i;
 		}
 

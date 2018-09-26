@@ -66,7 +66,7 @@ class Simulation{
 				Line newline = new Line(a, b);
 				panel.programData.addLine(newline, false);
 				MainData.coloringRuleLevels.levels[1].addLine(newline);
-				MainData.coloringRuleLevels.n = 1;
+				MainData.coloringRuleLevels.setN(1);
 			}
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);
@@ -84,7 +84,7 @@ class Simulation{
 				Line newline = new Line(a, b);
 				panel.programData.addLine(newline, false);
 				MainData.coloringRuleLevels.levels[2].addLine(newline);
-				MainData.coloringRuleLevels.n = 2;
+				MainData.coloringRuleLevels.setN(2);
 			}
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);

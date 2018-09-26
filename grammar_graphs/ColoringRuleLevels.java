@@ -13,7 +13,7 @@ import java.lang.Math;
 class ColoringRuleLevels {
 	static Level levels[];
 	Level limitingShape = new Level();
-	int n = 0;
+	private int n = 0;
 	int max_n_allowed;
 	private boolean n_change = false;
 
@@ -27,6 +27,15 @@ class ColoringRuleLevels {
 			this.levels[i] = new Level();
 		// this.print();
 	}
+	int getN(){
+		return n;
+	}
+	void setN(int n){
+		this.n = n;
+	}
+	void increaseN(){
+		this.n++;
+	}
 	void updateLevel0(Line newLine){
 		this.levels[0].levelLines.add(newLine);
 	}
@@ -37,13 +46,22 @@ class ColoringRuleLevels {
 		if (ruleCat == Category.A){ // left side => n
 			if (n != 0)	levels[n].update(ruleInitialLines);
 		}else if (ruleCat == Category.B){ // left side => n | right side => n+1
-			System.out.println("CONTROL: " + n);
-			if (n != 0)	levels[n].update(ruleInitialLines);
+			System.out.println("Cat B:");
+			if (n != 0){
+				System.out.println("update n");
+				levels[n].update(ruleInitialLines);
+			}
 			if (this.n_change){
-				if (n+1 < max_n_allowed)	n++;
+				if (n+1 < max_n_allowed){
+					this.increaseN();
+					System.out.println("increase n");
+				}
 				this.n_change = false;
 			}
-			if (n+1 < max_n_allowed)	levels[n+1].update(ruleInitialLines);
+			if (n+1 < max_n_allowed){
+				levels[n+1].update(ruleInitialLines);
+				System.out.println("update n+1");
+			}	
 		}else if (ruleCat == Category.C){ // right side - left side => n+1
 			if (n+1 < max_n_allowed)	levels[n+1].update(ruleFinalLines);
 			this.n_change = true;
