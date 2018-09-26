@@ -75,6 +75,18 @@ class PopUpMenu extends JPopupMenu {
 
 		for (Rule changedRule: panel.programData.ruleList){
 			rulesList[i] = new JMenu(panel.programData.ruleList.get(i).getName());
+			rulesList[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try{
+						System.out.println("----------APPLY RULE: " + changedRule.getName() + "----------");
+						changedRule.apply(panel);
+					}
+					catch(Rule.NoMarkerException exc){
+						MessageFrame error = new MessageFrame(exc.getMessage());
+						System.out.println("PopUp line 86" + exc.getLocalizedMessage());
+					}
+				}
+			});
 
 			JMenuItem applyRule = new JMenuItem("Apply");
 			applyRule.addActionListener(new ActionListener() {
@@ -85,6 +97,7 @@ class PopUpMenu extends JPopupMenu {
 					}
 					catch(Rule.NoMarkerException exc){
 						MessageFrame error = new MessageFrame(exc.getMessage());
+						System.out.println("PopUp line 86" + exc.getLocalizedMessage());
 					}
 				}
 			});
@@ -140,13 +153,13 @@ class PopUpMenu extends JPopupMenu {
 	}
 	JMenuItem showLenOpt(MainPanel panel){
 		JMenuItem markerSimulate = new JMenuItem();
-		if (panel.programData.showDist)
+		if (panel.programData.SHOW_DIST)
 			markerSimulate.setText(ProgramLabels.hideDist);
 		else
 			markerSimulate.setText(ProgramLabels.showDist);
 		markerSimulate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				panel.programData.showDist = !panel.programData.showDist;
+				panel.programData.SHOW_DIST = !panel.programData.SHOW_DIST;
 				panel.repaint();
 			}
 		});
@@ -154,13 +167,13 @@ class PopUpMenu extends JPopupMenu {
 	}
 	JMenuItem showPointOpt(MainPanel panel){
 		JMenuItem markerSimulate = new JMenuItem();
-		if (panel.programData.showPoints)
+		if (panel.programData.SHOW_POINTS)
 			markerSimulate.setText(ProgramLabels.hidePoints);
 		else
 			markerSimulate.setText(ProgramLabels.showPoints);
 		markerSimulate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				panel.programData.showPoints = !panel.programData.showPoints;
+				panel.programData.SHOW_POINTS = !panel.programData.SHOW_POINTS;
 				panel.repaint();
 			}
 		});
@@ -172,14 +185,26 @@ class PopUpMenu extends JPopupMenu {
 		if (!MainData.LIMITING_SHAPE){
 			ruleList.add(showColorRuleOption(panel));
 			ruleList.add(addColoringRuleLevels(panel));
-			// if (!MainData.COLOR_RULES){
-				// ruleList.add(showColorRuleSettings(panel));
-			// 	ruleList.add(showResetLevels(panel));
-			// }
 		}
 		if (!MainData.COLOR_RULES)
 			ruleList.add(showColorRuleLimitingShape(panel));
+		ruleList.add(drawLevels(panel));
 		add(ruleList);
+	}
+	JMenuItem drawLevels(MainPanel panel){
+		JMenuItem button = new JMenuItem();
+		if (panel.programData.DRAW_LEVELS)
+			button.setText(ProgramLabels.stopDrawLevels);
+		else
+			button.setText(ProgramLabels.drawLevels);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel.programData.DRAW_LEVELS = !panel.programData.DRAW_LEVELS;
+				panel.programData.changeFiguresColor();
+				panel.repaint();
+			}
+		});
+		return button;
 	}
 	JMenuItem addColoringRuleLevels(MainPanel panel){
 		JMenuItem addRules = new JMenuItem(ProgramLabels.rulleAdding);
@@ -316,48 +341,84 @@ class PopUpMenu extends JPopupMenu {
 // marker
 	void showMarker(MainPanel panel){
 		if (panel.programData.marker == null){
-			JMenuItem markerButton = new JMenuItem();
-			markerButton.setText(ProgramLabels.addMarker);
-			markerButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent ev) {
-					panel.addMarker(panel.x1, panel.y1);
+			if (!(panel instanceof RigthRulePanel))
+				add(showAddMarker(panel));
+			else{
+				if (((RigthRulePanel)panel).parent.programData.marker != null){
+					JMenu marker = new JMenu(ProgramLabels.marker);
+					marker.add(showAddMarker(panel));
+					marker.add(showCopyFromLeftSideMarker(panel));
+					add(marker);
+				}else{
+					add(showAddMarker(panel));
 				}
-			});
-			add(markerButton);
+			}
 		}
 		else{
 			JMenu marker = new JMenu(ProgramLabels.marker);
-			JMenuItem markerButton = new JMenuItem();
-			markerButton.setText(ProgramLabels.moveMarker);
-			markerButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent ev) {
-					panel.addMarker(panel.x1, panel.y1);
-				}
-			});
-			marker.add(markerButton);
-			JMenuItem removeMarkerButton = new JMenuItem();
-			removeMarkerButton.setText(ProgramLabels.removeMarker);
-			removeMarkerButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent ev) {
-					panel.removeMarker();
-				}
-			});
-			marker.add(removeMarkerButton);
-
+			marker.add(showMoveMarker(panel));
+			marker.add(showRemoveMarker(panel));
 			if((panel instanceof LeftRulePanel)){
-				JMenuItem copyMarkerButton = new JMenuItem();
-				copyMarkerButton.setText(ProgramLabels.copyMarker);
-				copyMarkerButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent ev) {
-						((LeftRulePanel)panel).copyMarker();
-						((LeftRulePanel)panel).rigthRulePanel.repaint();
-					}
-				});
-				marker.add(copyMarkerButton);
+				marker.add(showCopyToRigthSideMarker(panel));
 			}
-
+			if((panel instanceof RigthRulePanel)){
+				if (((RigthRulePanel)panel).parent.programData.marker != null)
+				marker.add(showCopyFromLeftSideMarker(panel));
+			}
 			add(marker);
 		}
+	}
+	JMenuItem showAddMarker(MainPanel panel){
+		JMenuItem markerButton = new JMenuItem();
+		markerButton.setText(ProgramLabels.addMarker);
+		markerButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				panel.addMarker(panel.x1, panel.y1);
+			}
+		});
+		return markerButton;
+	}
+	JMenuItem showMoveMarker(MainPanel panel){
+		JMenuItem markerButton = new JMenuItem();
+		markerButton.setText(ProgramLabels.moveMarker);
+		markerButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				panel.addMarker(panel.x1, panel.y1);
+			}
+		});
+		return markerButton;
+	}
+	JMenuItem showRemoveMarker(MainPanel panel){
+		JMenuItem removeMarkerButton = new JMenuItem();
+		removeMarkerButton.setText(ProgramLabels.removeMarker);
+		removeMarkerButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				panel.removeMarker();
+			}
+		});
+		return removeMarkerButton;
+	}
+	JMenuItem showCopyToRigthSideMarker(MainPanel panel){
+		JMenuItem copyMarkerButton = new JMenuItem();
+		copyMarkerButton.setText(ProgramLabels.copyMarkerToRigthSide);
+		copyMarkerButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				((LeftRulePanel)panel).copyMarker();
+				((LeftRulePanel)panel).rigthRulePanel.repaint();
+			}
+		});
+		return copyMarkerButton;
+	}
+	JMenuItem showCopyFromLeftSideMarker(MainPanel panel){
+		JMenuItem copyMarkerButton = new JMenuItem();
+		copyMarkerButton.setText(ProgramLabels.copyMarkerFromLeftSide);
+		copyMarkerButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				((RigthRulePanel)panel).parent.copyMarker();
+				((RigthRulePanel)panel).repaint();
+			}
+		});
+		return copyMarkerButton;
 	}
 // grammar options
 	void showGrammarOptions(MainPanel panel){
@@ -484,6 +545,7 @@ class PopUpMenu extends JPopupMenu {
 				}
 				catch(Rule.NoMarkerException exc){
 					MessageFrame error = new MessageFrame(exc.getMessage());
+					System.out.println(exc.getLocalizedMessage());
 				}
 			}
 		});

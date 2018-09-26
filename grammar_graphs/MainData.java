@@ -19,8 +19,14 @@ class MainData {
 	MainData() {}
 	boolean RIGHT = false;
 	boolean MIDDLE = false;
-	static boolean showDist = false;
-	static boolean showPoints = false;
+	
+	static boolean SHOW_DIST = false;
+	static boolean SHOW_POINTS = false;
+	static boolean SHOW_GRID = true;
+	static boolean COLOR_RULES = false;
+	static boolean LIMITING_SHAPE = false;
+	static boolean DRAW_LEVELS = false;
+
 	Rectangle checkingRect = null;
 	Marker marker = null;
 	Marker modified_marker = null;
@@ -44,9 +50,6 @@ class MainData {
 	static ArrayList <Rule> ruleList = new ArrayList<>(); 
 	static ArrayList <Rule> ruleAppList = new ArrayList<>();
 
-	static boolean SHOW_GRID = true;
-	static boolean COLOR_RULES = false;
-	static boolean LIMITING_SHAPE = false;
 	// BLACK BLUE CYAN DARK_GRAY GRAY GREEN LIGHT_GRAY MAGENTA ORANGE PINK RED WHITE YELLOW
 	static Color default_figure_color = Color.BLACK;
 	static Color default_background_color = Color.WHITE;
@@ -87,6 +90,13 @@ class MainData {
 		if (mainPanel && ! LIMITING_SHAPE){
 			coloringRuleLevels.updateLevel0(line);
 		}
+	}
+	void addLine(Line line, int level_i){
+		// if (level_i > coloringRuleLevels.n){
+		// 	coloringRuleLevels.n = level_i;
+		// 	System.out.println("NEW N: " + coloringRuleLevels.n);
+		// }
+		coloringRuleLevels.levels[level_i].levelLines.add(line);
 	}
 	void removeLine(Line line){
 		this.lines.remove(line);
@@ -133,13 +143,6 @@ class MainData {
 		}
 	}
 // random things
-	String ruleAppListToString(){
-		StringJoiner info = new StringJoiner("");
-		for (Rule rule : ruleAppList){
-			info.add(FileSaver.ruleList).add("\t").add(rule.getName()).add("\n");
-		}
-		return info.toString();		
-	}
 	static ArrayList <Line> RelativeComplement(ArrayList <Line> setA, ArrayList <Line> setB){
 		ArrayList <Line> resultSet = new ArrayList<>();
 		for (Line lineA: setA){
@@ -205,16 +208,38 @@ class MainData {
 		temp_shape.get(i).setXY_b(initialLines.get(i).getX_b() + x2 - x1, initialLines.get(i).getY_b() + y2 - y1);
 	}
 // to string
+	String ruleAppListToString(){
+		StringJoiner info = new StringJoiner("");
+		for (Rule rule : ruleAppList){
+			info.add(FileSaver.ruleList).add("\t").add(rule.getName()).add("\n");
+		}
+		return info.toString();		
+	}
 	String markerToString(){
 		StringJoiner info = new StringJoiner("\t");
 		if (marker != null)
 			return info.add(FileSaver.inputTag).add(FileSaver.iSideTag).add(marker.toString()).toString();
 		return info.add(FileSaver.inputTag).add(FileSaver.iSideTag).toString();
 	}
+	String limitShapeToString(){
+		return coloringRuleLevels.limitingShapeToString();
+	}
 	String linesToString(){
 		StringJoiner info = new StringJoiner("");
 		for (Line line : lines){
-			info.add(FileSaver.inputTag).add("\t").add(FileSaver.iSideTag).add("\t").add(line.toString());
+			info.add(FileSaver.inputTag).add("\t").add(FileSaver.iSideTag).add("\t").add(line.toString()).add("\n");
+		}
+		return info.toString();
+	}
+	String levelsToString(){
+		StringJoiner info = new StringJoiner("");
+		int i = 0;
+		for (Level level: coloringRuleLevels.levels){
+			if (i > coloringRuleLevels.n + 1) break;
+			for (Line line: level.levelLines){
+				info.add(FileSaver.level).add("\t").add("L"+i).add("\t").add(line.toString()).add("\n");
+			}
+			i++;
 		}
 		return info.toString();
 	}

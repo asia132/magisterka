@@ -1,8 +1,0 @@
-#INPUT	#I	#M	N	2	46	10
-#INPUT	#I	#L	48	8	50	8
-#INPUT	#I	#L	48	12	50	12
-#New_Rule	#A	#M	N	2	10	8
-#New_Rule	#A	#L	12	10	14	10
-#New_Rule	#A	#L	12	6	14	6
-#New_Rule	#B	#M	N	2	14	8
-#New_Rule	#B	#L	12	6	12	10

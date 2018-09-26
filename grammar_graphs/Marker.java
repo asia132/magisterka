@@ -113,14 +113,14 @@ class Marker{
 		}
 		
 		g2d.setColor(MainData.default_rect_color);
-		if (MainData.showDist == true){
+		if (MainData.SHOW_DIST == true){
 			g2d.drawString(getD(), getX()+ 2, getY() - 2);
 			g2d.drawString("A", this.getAx(), this.getAy());
 			g2d.drawString("B", this.getBx(), this.getBy());
 			g2d.drawString("C", this.getCx(), this.getCy());
 			g2d.drawString("D", this.getDx(), this.getDy());
 		}
-		if (MainData.showPoints == true){
+		if (MainData.SHOW_POINTS == true){
 			g2d.setColor(MainData.default_point_color);
 			g2d.drawString("[" + (p.x - point0[0]) + ", " + (p.y - point0[1]) + "]", getX() - 4, getY() + (int)(MainData.grid_size*0.5)); // S
 			g2d.drawString("[" + (getax() - point0[0]) + ", " + (getay() - point0[1]) + "]", getAx() - 4, getAy() + (int)(MainData.grid_size*0.5)); // A
@@ -152,24 +152,16 @@ class Marker{
 	void scale(int i){
 		r += i;
 	}
-	void scale(double k) throws Exception{
+	void scale(double k) throws ToSmallRException{
 		double newR = r * k;
 		if (newR >= 1)
 			r = (int)newR;
 		else
-			throw new Exception("The marker radius cannot be smaller than 1.");
+			throw new ToSmallRException("The marker radius cannot be smaller than 1.");
 	}
 	void move(int xt, int yt, double angle){
-
-		// int x = (int)Math.round(Math.cos(angle) * this.p.x*1. - (Math.sin(angle) * this.p.y*1.) + (xt*1. * (1. - Math.cos(angle))) + (yt*1. * Math.sin(angle)));
-		// int y = (int)Math.round(Math.sin(angle) * this.p.x*1. + (Math.cos(angle) * this.p.y*1.) + (yt*1. * (1. - Math.cos(angle))) - (xt*1. * Math.sin(angle)));
-
 		int x = (int)Math.round(Math.cos(angle) * xt*1. - (Math.sin(angle) * yt*1.));
 		int y = (int)Math.round(Math.sin(angle) * xt*1. + (Math.cos(angle) * yt*1.));
-		
-		// System.out.println(xt + " -> " + x);
-		// System.out.println(yt + " -> " + y);
-
 		this.p.x += toGrid(x);
 		this.p.y += toGrid(y);
 	}
@@ -499,6 +491,14 @@ class Marker{
 			return Math.PI * 3 / 2;
 		}
 		return 0;
+	}
+}
+class ToSmallRException extends Exception{
+	ToSmallRException(){
+		super("The marker radius cannot be smaller than 1.");
+	}
+	ToSmallRException(String mess){
+		super(mess + ".\tThe marker radius cannot be smaller than 1.");
 	}
 }
 enum Direct{

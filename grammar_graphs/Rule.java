@@ -78,9 +78,10 @@ final class Rule{
 						ArrayList <Line> finalLines = finalshape.setInPlace(inputMarker, initialshape.marker);
 						panel.programData.addLinesByRule(finalLines);
 						MainData.coloringRuleLevels.updateWithRule(this.cat, found_lines, finalLines);
-					}catch (Exception e) {
+					}catch (ToSmallRException e) {
 						new MessageFrame("Rule could not be applicated. " + e.getMessage());
 						panel.programData.marker = inputMarker;
+						System.out.println("Rule apply: " + e.getLocalizedMessage());
 					}
 				}
 				else{

@@ -21,10 +21,13 @@ clean:
 	$(RM) $(MAIN).class
 
 build:
-	@$(JC) $(MAIN).java
+	@$(JC) -g $(MAIN).java
 
 run:
 	@java $(MAIN)
+
+debug:
+	jdb $(MAIN)
 
 #only runs ready program
 r: 

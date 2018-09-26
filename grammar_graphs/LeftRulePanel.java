@@ -55,6 +55,12 @@ class LeftRulePanel extends MainPanel {
 		this.repaint();
 		this.rigthRulePanel.moveAllLines(x1, y1, x2, y2);
 	}
+	public void moveAllLines(int x1, int y1, int x2, int y2){
+		programData.moveLines(x1, y1, x2, y2, false);
+		if (programData.marker != null)
+			this.programData.marker.move(x2 - x1, y2 - y1);
+		this.repaint();
+	}
 	@Override
 	public void modifyLines(int x1, int y1, int x2, int y2){
 		Line line = programData.tempShapeFirstLine();

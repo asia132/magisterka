@@ -380,7 +380,7 @@ class Shape{
 	String linesDistToString(String ruleName, String siteTag){
 		StringJoiner info = new StringJoiner("");
 		for (Line line_i: this.lines_dist.keySet()) {
-			info.add("#").add(ruleName).add("\t").add(siteTag).add("\t").add(line_i.toString()).toString();
+			info.add("#").add(ruleName).add("\t").add(siteTag).add("\t").add(line_i.toString()).add("\n").toString();
 		}
 		return info.toString();
 	}

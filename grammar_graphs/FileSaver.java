@@ -20,6 +20,9 @@ class FileSaver{
 	static String aSideTag = "#A";
 	static String bSideTag = "#B";
 	static String ruleList = "#RULELIST";
+	static String limitShapeTag = "#LIMITSHAPE";
+	static String level = "#LEVEL";
+	static String n = "#N";
 
 	FileSaver(File file){
 		this.file = file;
@@ -76,7 +79,13 @@ class FileSaver{
 					}
 					break;
 				}
-				if (inputTag.equals(lineContent[0])){
+				if (n.equals(lineContent[0])){
+					MainData.coloringRuleLevels.n = Integer.parseInt(lineContent[1]);
+				} else if (level.equals(lineContent[0])){
+					panel.programData.addLine(this.parseLine(lineContent), Integer.parseInt(lineContent[1].substring(1)));
+				} else if (limitShapeTag.equals(lineContent[0]))
+					MainData.coloringRuleLevels.limitingShape.levelLines.add(this.parseLine(lineContent));
+				else if (inputTag.equals(lineContent[0])){
 					if (markerTag.equals(lineContent[2])){
 						try{
 							panel.programData.marker = this.parseMarker(lineContent);
@@ -84,7 +93,7 @@ class FileSaver{
 							System.out.println("WARNING: Marker was not added to input picture. " + e.getMessage());
 						}
 					}else{
-						panel.programData.addLine(this.parseLine(lineContent), true);
+						panel.programData.addLine(this.parseLine(lineContent), false);
 					}
 				}else{
 					String ruleName = lineContent[0].substring(1);
@@ -96,7 +105,7 @@ class FileSaver{
 								else panel.programData.ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), null));
 							}catch (Exception e) {
 								System.out.println("WARNING: Rule " + newRuleName + " was not added. " + e.getMessage());
-								System.out.println((markerBSide.copy() == null) + " " + (markerASide.copy() == null));
+								// System.out.println((markerBSide.copy() == null) + " " + (markerASide.copy() == null));
 							}
 						}
 						newRuleName = ruleName;

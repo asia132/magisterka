@@ -3,6 +3,8 @@ package grammar_graphs;
 import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.Font;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
@@ -87,6 +89,11 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 			for (Line line: programData.coloringRuleLevels.limitingShape.levelLines){
 				line.move(x2 - x1, y2 - y1);
 			}
+			for (int i = 0; i <= programData.coloringRuleLevels.n + 1; ++i){
+				for (Line line: programData.coloringRuleLevels.levels[i].levelLines){
+					line.move(x2 - x1, y2 - y1);
+				}
+			}
 		}		
 		this.repaint();
 	}
@@ -122,7 +129,7 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 	@Override
 	public String toString(){
 		StringJoiner info = new StringJoiner("");
-		return info.add(programData.markerToString()).add(programData.linesToString()).add(programData.rulesToString()).add(programData.ruleAppListToString()).toString();
+		return info.add(FileSaver.n).add("\t").add(programData.coloringRuleLevels.n + "\n").add(programData.levelsToString()).add(programData.limitShapeToString()).add(programData.markerToString()).add(programData.linesToString()).add(programData.rulesToString()).add(programData.ruleAppListToString()).toString();
 	}
 	@Override
     public Dimension getPreferredSize() {
@@ -140,7 +147,29 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		}else{
 			if (programData.SHOW_GRID)
 				programData.paintGrid(g2d, screenWidth, screenHeight);
-			paintLines(g2d);
+			if (programData.DRAW_LEVELS && !(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)){
+				int i = 0;
+				for (Level level: MainData.coloringRuleLevels.levels){
+					if (i > MainData.coloringRuleLevels.n + 1) break;
+					for (Line line: level.levelLines){
+						line.changeColor(level.getColor());
+						line.drawLine(g2d, programData.point0);
+					}
+
+					g2d.setColor(programData.default_background_color);
+					g2d.setFont(new Font("Dialog", Font.BOLD, 20)); 
+					Rectangle2D rect = g2d.getFontMetrics().getStringBounds("L1000", g2d);
+					int x = this.getWidth() - (int)(this.getWidth()*0.25);
+					int y = (i + 1)*((int)rect.getHeight());
+					g2d.fillRect(x, y - g2d.getFontMetrics().getAscent(), (int) rect.getWidth(), (int) rect.getHeight());
+
+					g2d.setColor(level.getColor());
+					g2d.drawString("L" + i, x, y);
+					i++;
+				}
+			}else{
+				paintLines(g2d);
+			}
 			if (!programData.tempShapeIsEmpty()){
 				programData.drawTempLine(g2d);
 			}
@@ -149,6 +178,12 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 			}
 			if (programData.marker != null){
 				programData.marker.drawMarker(g2d, programData.point0);
+			}
+			if (!(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)){
+				for (Line line: MainData.coloringRuleLevels.limitingShape.levelLines){
+					line.changeColor(MainData.default_check_marker_color);
+					line.drawLine(g2d, programData.point0);
+				}
 			}
 		}
 	}

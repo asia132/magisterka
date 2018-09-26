@@ -5,19 +5,23 @@ import java.util.ArrayList;
 
 class RigthRulePanel extends MainPanel{
 	ArrayList <Line> leftLines = new ArrayList<Line>();
-	RigthRulePanel(int screenWidth, int screenHeight){
+	LeftRulePanel parent;
+	RigthRulePanel(int screenWidth, int screenHeight, LeftRulePanel parent){
 		super(screenWidth, screenHeight);
+		this.parent = parent;
 	}
-	RigthRulePanel(){
+	RigthRulePanel(LeftRulePanel parent){
 		super();
+		this.parent = parent;
 	}
 	@Override
 	public void moveLines(int x1, int y1, int x2, int y2){
 		for (Line line: programData.getLines()){
-			if (!this.leftLines.contains(line))		line.move(x2 - x1, y2 - y1);
+			line.move(x2 - x1, y2 - y1);
 		}
 		if (programData.marker != null)
 			this.programData.marker.move(x2 - x1, y2 - y1);
+		this.parent.moveAllLines(x1, y1, x2, y2);
 		this.repaint();
 	}
 	public void moveAllLines(int x1, int y1, int x2, int y2){

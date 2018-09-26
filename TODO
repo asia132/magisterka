@@ -3,28 +3,28 @@ Bugs:
   ☐ poprawić precyzję skalowania @low
 
   ☐ możliwość zdefiniowania max level qty
-  ☐ wprowadzić przycinanie linii na potrzeby kolorowania (SG1)
+  ☐ wprowadzić przycinanie linii na potrzeby kolorowania (SG1) w momencie przejścia do następnego levelu @started
   ☐ zaimplemntować obsługę nawiasów i ~ dla reguł kolorowania
   ☐ przed aplikacją reguł - sprawdzić, czy użyte poziomy są domknięte
   ☐ podczas definiowania reguł kolorowania - sprawdzać, czy nawiasy są domknięte
   ☐ reguły kolorowania: + na przedzie dodaje elementy na przodzie, + na tyle - na tyle
   ☐ obszar ograniczający jest widokiem kamery - koloruje się tylko to, co się w nim mieści
   ☐ nawiasy i zaprzeczenie powinny się znajdować zarówno w liście poziomów jak i operacji
-
-  ☐ sprawdzić przesuwanie linii po edycji reguły
-
-  ☐ zapisuj levele i reguły kolorowania do pliku
+  ☐ zapisuj do pliku reguły kolorowania (przed regułami zwykłymi)
 --- ✄ -----------------------
 BRs:
   ☐ symulacja @critical @started
-  Gramatyka:
-  dod. funkcjonalności:
   GUI:
     ☐ okno rules musi być skalowalne @high
     ☐ podpowiedzi przy przyciskach @high
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ levele - trzeba to przerobić @done (18-09-26 10:26) @project(Bugs)
+ ✔ LIMIT SHAPE (przed inputem) @done (18-09-25 18:43) @project(Bugs)
+ ✔ dod. funkcjonalności: @done (18-09-25 11:58) @project(BRs)
+ ✔ Gramatyka: @done (18-09-25 11:58) @project(BRs)
+ ✔ sprawdzić przesuwanie linii po edycji reguły @done (18-09-25 11:57) @project(Bugs)
  ✘ okno, w którym będzie można przypisać levelom kolory (ewentualnie tekstury i gradienty) @critical @cancelled (18-09-24 20:59) @project(Bugs)
  ✔ dla wyszukiwania na y = b lub x = b: trzeba porównywać 2 odległości od M_S i M_A i brać tą, która się zgadza -POPRACOWAĆ NA TYM @started @done (18-09-24 20:59) @project(Bugs)
  ✔ sublines się zepsuły - funkcja compareLineAParam nie uwzgędnia przekształceń inputu @done (18-09-24 20:58) @project(Bugs)

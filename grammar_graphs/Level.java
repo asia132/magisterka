@@ -19,7 +19,7 @@ class Level {
 		this.color = color;
 	}
 	void randColor(){
-		this.color = new Color((int)(Math.random() * 0x1000000));
+		this.color = new Color((int)(Math.random() * 0x1000000)).darker();
 	}
 	Color getColor(){
 		return this.color;

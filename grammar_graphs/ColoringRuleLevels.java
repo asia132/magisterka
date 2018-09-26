@@ -13,11 +13,12 @@ import java.lang.Math;
 class ColoringRuleLevels {
 	static Level levels[];
 	Level limitingShape = new Level();
-	int n;
+	int n = 0;
 	int max_n_allowed;
 	private boolean n_change = false;
 
 	ColoringRuleLevels(MainPanel panel){
+		System.out.println("RUN COLORING LEVELS CONSTRUCTOR");
 		this.n = 0;
 		this.max_n_allowed = 10;
 		this.levels = new Level [100];
@@ -36,6 +37,7 @@ class ColoringRuleLevels {
 		if (ruleCat == Category.A){ // left side => n
 			if (n != 0)	levels[n].update(ruleInitialLines);
 		}else if (ruleCat == Category.B){ // left side => n | right side => n+1
+			System.out.println("CONTROL: " + n);
 			if (n != 0)	levels[n].update(ruleInitialLines);
 			if (this.n_change){
 				if (n+1 < max_n_allowed)	n++;
@@ -48,6 +50,13 @@ class ColoringRuleLevels {
 		}
 		// System.out.println("KONTROLA N: n = " + n + ", ilosc leveli: " + levels.length);
 		// print();
+	}
+	String limitingShapeToString(){
+		StringJoiner info = new StringJoiner("");
+		for (Line line: limitingShape.levelLines){
+			info.add(FileSaver.limitShapeTag).add("\t").add(FileSaver.iSideTag).add("\t").add(line.toString()).add("\n");
+		}
+		return info.toString();
 	}
 	void print(){
 		System.out.println("Limiting shape");
@@ -70,6 +79,7 @@ class ColoringRuleLevels {
 			}catch (NotClosedShape e) {;
 				MainData.COLOR_RULES = false;
 				new MessageFrame(e.getMessage() + ". Limiting shape.");
+					System.out.println(e.getLocalizedMessage());
 			}
 		}
 
@@ -84,6 +94,7 @@ class ColoringRuleLevels {
 			}catch (NotClosedShape e) {;
 				MainData.COLOR_RULES = false;
 				new MessageFrame(e.getMessage() + ". Level index: " + i);
+				System.out.println(e.getLocalizedMessage());
 			}
 		}
 		g2d.dispose();

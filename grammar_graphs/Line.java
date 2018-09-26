@@ -14,7 +14,6 @@ class Line{
 	Point pb;
 
 	Color color = MainData.default_figure_color;
-	boolean wasAdded = false;
 
 	Line(int x_a, int y_a, int x_b, int y_b){	
 		this.pa = new Point(toGrid(x_a), toGrid(y_a));
@@ -95,14 +94,14 @@ class Line{
 
 		g2d.drawLine(this.getX_a(), this.getY_a(), this.getX_b(), this.getY_b());
 		
-		if (MainData.showDist == true){
+		if (MainData.SHOW_DIST == true){
 			int x = (int)((getX_a() + getX_b()) * 0.5);
 			int y = (int)((getY_a() + getY_b()) * 0.5) - (int)(MainData.grid_size*0.5);
 			String text = Integer.toString((int)Math.floor(disx()))  + ", " + Integer.toString((int)Math.floor(disy()));
 			g2d.setColor(MainData.default_rect_color);
 			g2d.drawString(text, x + 1, y + 1);
 		}
-		if (MainData.showPoints == true){
+		if (MainData.SHOW_POINTS == true){
 			g2d.setColor(MainData.default_point_color);
 			String text = "[" + (pa.x - point0[0]) + ", " + (pa.y - point0[1]) + "]";
 			g2d.drawString(text, getX_a() + 1, getY_a() - (int)(MainData.grid_size*0.5));
@@ -268,7 +267,7 @@ class Line{
 	@Override
 	public String toString(){
 		StringJoiner info = new StringJoiner("\t");
-		return info.add(FileSaver.lineTag).add("" + pa.x).add("" + pa.y).add("" + pb.x).add(pb.y + "\n").toString();
+		return info.add(FileSaver.lineTag).add("" + pa.x).add("" + pa.y).add("" + pb.x).add(pb.y + "").toString();
 	}
 	boolean isTheSameLine(Line other){
 		if (this.pa.x != other.pa.x) return false;

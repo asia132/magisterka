@@ -132,18 +132,16 @@ class CreateRuleFrame extends JFrame {
 
 		for (Line line : lines){
 			Line newLine = line.copy();
-			newLine.move(-tran[2] + panelL.programData.grid_size, -tran[3] + panelL.programData.grid_size);
 			panelL.programData.addLine(newLine, false);
 		}
 		if (initialmarker != null){
 			panelL.programData.marker = initialmarker.copy();
-			panelL.programData.marker.move(-tran[2] + panelL.programData.grid_size, -tran[3] + panelL.programData.grid_size);
 		}
 	}
 	void loadRightPanel(ArrayList <Line> initialLines, ArrayList <Line> finalLines, Marker finalmarker) {
 		int width = (int)(screenWidth*rfScale*0.5);
 		int height = (int)(screenHeight*rfScale*panScale);
-		panelL.rigthRulePanel = new RigthRulePanel(width, height);
+		panelL.rigthRulePanel = new RigthRulePanel(width, height, panelL);
 
 		ArrayList <Line> lines = new ArrayList<>();
 		lines.addAll(initialLines);
@@ -155,21 +153,19 @@ class CreateRuleFrame extends JFrame {
 
 		for (Line line : initialLines){
 			Line newLine = line.copy();
-			newLine.move(-tran[2] + panelL.rigthRulePanel.programData.grid_size, -tran[3] + panelL.rigthRulePanel.programData.grid_size);
 			panelL.rigthRulePanel.programData.addLine(newLine, false);
 			panelL.rigthRulePanel.leftLines.add(newLine);
 		}
 		if (finalLines != null && !finalLines.isEmpty()){
 			for (Line line : finalLines){
 				Line newLine = line.copy();
-				newLine.move(-tran[2] + panelL.rigthRulePanel.programData.grid_size, -tran[3] + panelL.rigthRulePanel.programData.grid_size);
 				panelL.rigthRulePanel.programData.addLine(newLine, false);
 			}
 		}
 		if (finalmarker != null){
 			panelL.rigthRulePanel.programData.marker = finalmarker.copy();
-			panelL.rigthRulePanel.programData.marker.move(-tran[2] + panelL.rigthRulePanel.programData.grid_size, -tran[3] + panelL.rigthRulePanel.programData.grid_size);
 		}
+		panelL.moveLines(0, 0, -tran[2] + MainData.grid_size, -tran[3] + MainData.grid_size);
 	}
 	void loadBottomPanel() {
 		panelB = new JPanel();
@@ -214,6 +210,7 @@ class CreateRuleFrame extends JFrame {
 				}
 				catch(Exception exc){
 					MessageFrame error = new MessageFrame(exc.getMessage());
+					System.out.println(exc.getLocalizedMessage());
 				}
 			}else{
 				for (Rule rule: panelL.programData.ruleList){
@@ -230,6 +227,7 @@ class CreateRuleFrame extends JFrame {
 				}
 				catch(Exception exc){
 					MessageFrame error = new MessageFrame(exc.getMessage());
+					System.out.println(exc.getLocalizedMessage());
 				}				
 			}
 		});
