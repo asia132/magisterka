@@ -21,7 +21,7 @@ clean:
 	$(RM) $(MAIN).class
 
 build:
-	@$(JC) -g $(MAIN).java
+	@$(JC) $(MAIN).java
 
 run:
 	@java $(MAIN)

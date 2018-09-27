@@ -113,6 +113,7 @@ class Line{
 	void changeColor(Color new_color){
 		this.color = new_color;
 	}
+// gets
 	int [] getA(){
 		int [] a = {this.getX_a(), this.getY_a()};
 		return a;
@@ -148,6 +149,7 @@ class Line{
 		}
 		return ab;
 	}
+//
 	boolean isPartOfLinearFun(){
 		return this.pa.x != this.pb.x;
 	}
@@ -200,7 +202,7 @@ class Line{
 		return this.onLine(otherLine.getX_a(), otherLine.getY_a(), MainData.grid_size) || this.onLine(otherLine.getX_b(), otherLine.getY_b(), MainData.grid_size);
 	}
 	// check if the point of x and y coordinates are in the line
-	boolean onLine(int x, int y, int grid_size){
+	boolean onLine(int x, int y, int threshold){
 		try{
 			int x_1, x_2;
 			if (this.getX_a() < this.getX_b()){
@@ -214,7 +216,7 @@ class Line{
 			double [] ab = getFunctionParams();
 			int ceil = (int)Math.ceil(ab[0] * x + ab[1]);
 			int floor = (int)Math.floor(ab[0] * x + ab[1]);
-			if (floor - grid_size <= y && ceil + grid_size >= y && x_1 <= x && x_2 >= x){
+			if (floor - threshold <= y && ceil + threshold >= y && x_1 <= x && x_2 >= x){
 				return true;
 			}
 		}
@@ -228,7 +230,38 @@ class Line{
 				y_1 = this.getY_b();
 				y_2 = this.getY_a();
 			}
-			if (y_1 <= y && y_2 >= y && toGrid(x)*grid_size == this.getX_a())
+			if (y_1 <= y && y_2 >= y && toGrid(x)*threshold == this.getX_a())
+				return true;
+		}
+		return false;
+	}
+	// check if the point of x and y coordinates are in the line
+	boolean onLine(int x, int y){
+		try{
+			int x_1, x_2;
+			if (this.pa.x < this.pb.x){
+				x_1 = this.pa.x;
+				x_2 = this.pb.x;
+			}
+			else{
+				x_1 = this.pb.x;
+				x_2 = this.pa.x;
+			}
+			double [] ab = getFunctionParams();
+			if (y == (int)Math.round(ab[0] * y + ab[1]) && x_1 <= x && x <= x_2)
+				return true;			
+		}
+		catch(NotALinearFunction error){
+			int y_1, y_2;
+			if (this.pa.y < this.pb.y){
+				y_1 = this.pa.y;
+				y_2 = this.pb.y;
+			}
+			else{
+				y_1 = this.pb.y;
+				y_2 = this.pa.y;
+			}
+			if (x == this.pa.x && y_1 <= y && y <= y_2)
 				return true;
 		}
 		return false;

@@ -75,24 +75,11 @@ class PopUpMenu extends JPopupMenu {
 
 		for (Rule changedRule: panel.programData.ruleList){
 			rulesList[i] = new JMenu(panel.programData.ruleList.get(i).getName());
-			rulesList[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					try{
-						System.out.println("----------APPLY RULE: " + changedRule.getName() + "----------");
-						changedRule.apply(panel);
-					}
-					catch(Rule.NoMarkerException exc){
-						MessageFrame error = new MessageFrame(exc.getMessage());
-						System.out.println("PopUp line 86" + exc.getLocalizedMessage());
-					}
-				}
-			});
 
 			JMenuItem applyRule = new JMenuItem("Apply");
 			applyRule.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try{
-						System.out.println("----------APPLY RULE: " + changedRule.getName() + "----------");
 						changedRule.apply(panel);
 					}
 					catch(Rule.NoMarkerException exc){

@@ -44,6 +44,7 @@ final class Rule{
 		return this.cat;
 	}
 	void apply(MainPanel panel) throws NoMarkerException{
+		System.out.println("----------APPLY RULE: " + this.getName() + " of Category: " + cat.getChar() + "----------");
 		if (panel.programData.marker == null)
 			throw new NoMarkerException("Please add a marker to main panel\n");
 		if (initialshape.marker == null)
@@ -56,7 +57,6 @@ final class Rule{
 			if (finalshape != null){
 				finalshape.needsToBeMirrored = inputshape.needsToBeMirrored;
 			}
-
 			if (found_lines.size() >= initialshape.lines_dist.size()){
 				if (finalshape != null && finalshape.marker != null){
 					Marker inputMarker = panel.programData.marker.copy();
@@ -86,6 +86,7 @@ final class Rule{
 				}
 				else{
 					panel.programData.marker = null;
+					MainData.coloringRuleLevels.updateWithRule(this.cat, found_lines, null);
 				}
 				panel.repaint();
 			}

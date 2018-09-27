@@ -14,6 +14,7 @@ class Level {
 	ArrayList <Line> levelLines;
 	GeneralPath levelShape = null;
 	private Color color;
+	double [][] points;
 
 	void setColor(Color color){
 		this.color = color;
@@ -24,9 +25,22 @@ class Level {
 	Color getColor(){
 		return this.color;
 	}
+	void closeLevel(){
+		int before = levelLines.size();
+		System.out.print("Size before: " + before);
+		do{
+			before = levelLines.size();
+			levelLines = Shape.groupLines(levelLines);
+		}while (before != levelLines.size());
+		System.out.println("\nSize after: " + before);
+		try{
+			this.points = generatePoints();
+		}catch(NotClosedShape e){
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+	}
 	GeneralPath getShape() throws NotClosedShape{
-		double points[][] = this.getPoints();
-
 		levelShape = new GeneralPath();
 		levelShape.setWindingRule(GeneralPath.WIND_NON_ZERO);
 
@@ -37,7 +51,7 @@ class Level {
 
 		return levelShape;
 	}
-	double [][] getPoints() throws NotClosedShape{
+	double [][] generatePoints() throws NotClosedShape{
 		double [][] points = new double [levelLines.size() + 1][2];
 		ArrayList <Line> lines = new ArrayList<>();
 		
@@ -51,36 +65,47 @@ class Level {
 		points[1][1] = p.y*1.*MainData.grid_size;
 		int index = 2;
 
+		Line firstLine = lines.get(0);
+		Line lastLine = lines.get(0);
+
 		int sizeControl = 0;
 
-			while(sizeControl != lines.size()){
-				sizeControl = lines.size();
-				for (int i = 1; i < lines.size(); ++i){
-					if (p.equals(lines.get(i).pa)){
-						p = lines.get(i).pb;
-						points[index][0] = p.x*1.*MainData.grid_size;
-						points[index][1] = p.y*1.*MainData.grid_size;
-						index++;
-						lines.remove(i);
-						break;
-					}else if (p.equals(lines.get(i).pb)){
-						p = lines.get(i).pa;
-						points[index][0] = p.x*1.*MainData.grid_size;
-						points[index][1] = p.y*1.*MainData.grid_size;
-						index++;
-						lines.remove(i);
-						break;
-					}
+		while(sizeControl != lines.size()){
+			sizeControl = lines.size();
+			for (int i = 1; i < lines.size(); ++i){
+				if (p.equals(lines.get(i).pa)){
+					p = lines.get(i).pb;
+					points[index][0] = p.x*1.*MainData.grid_size;
+					points[index][1] = p.y*1.*MainData.grid_size;
+					index++;
+					lastLine = lines.get(i);
+					lines.remove(i);
+					break;
+				}else if (p.equals(lines.get(i).pb)){
+					p = lines.get(i).pa;
+					points[index][0] = p.x*1.*MainData.grid_size;
+					points[index][1] = p.y*1.*MainData.grid_size;
+					index++;
+					lastLine = lines.get(i);
+					lines.remove(i);
+					break;
 				}
 			}
+		}
 
 		if (points[points.length-1][0] != points[0][0] && points[points.length-1][1] != points[0][1]){
-			// throw new NotClosedShape("The points are not connected.");
 			System.out.println("The points are not connected.");
+			System.out.println("Check it there is a chanse to close the shape");
+			if (lines.size() == 0){
+				System.out.println("No, there isn't");
+				throw new NotClosedShape("The points are not connected.");
+			}
+			System.out.println("Yes, we will check it futher");
+			onLine(int x, int y);
 		}
 		if (lines.size() > 1){
-			System.out.println("Some lines are left.");
-			// throw new NotClosedShape("Some lines are left.");
+			System.out.println("REMOVE " + lines.size() + " LINES FROM LEVEL");
+			levelLines.remove(lines);
 		}
 		return points;
 	}

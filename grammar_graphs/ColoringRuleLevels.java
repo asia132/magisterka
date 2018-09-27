@@ -34,6 +34,7 @@ class ColoringRuleLevels {
 		this.n = n;
 	}
 	void increaseN(){
+		levels[n].closeLevel();
 		this.n++;
 	}
 	void updateLevel0(Line newLine){
@@ -45,22 +46,24 @@ class ColoringRuleLevels {
 	void updateWithRule(Category ruleCat, ArrayList <Line> ruleInitialLines, ArrayList <Line> ruleFinalLines){
 		if (ruleCat == Category.A){ // left side => n
 			if (n != 0)	levels[n].update(ruleInitialLines);
+			levels[n].closeLevel();
+			System.out.println("CATEGORY A");
 		}else if (ruleCat == Category.B){ // left side => n | right side => n+1
-			System.out.println("Cat B:");
-			if (n != 0){
-				System.out.println("update n");
-				levels[n].update(ruleInitialLines);
-			}
+			System.out.println("Cat B: (n = " + n + ")");
 			if (this.n_change){
 				if (n+1 < max_n_allowed){
 					this.increaseN();
-					System.out.println("increase n");
+					System.out.println("increase n (n = " + n + ")");
 				}
 				this.n_change = false;
 			}
+			if (n != 0){
+				System.out.println("update n (n = " + n + ")");
+				levels[n].update(ruleInitialLines);
+			}
 			if (n+1 < max_n_allowed){
 				levels[n+1].update(ruleInitialLines);
-				System.out.println("update n+1");
+				System.out.println("update n+1 (n+1 = " + (n+1) + ")");
 			}	
 		}else if (ruleCat == Category.C){ // right side - left side => n+1
 			if (n+1 < max_n_allowed)	levels[n+1].update(ruleFinalLines);

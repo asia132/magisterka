@@ -5,7 +5,6 @@ Bugs:
   ☐ możliwość zdefiniowania max level qty
   ☐ wprowadzić przycinanie linii na potrzeby kolorowania (SG1) w momencie przejścia do następnego levelu @started
   ☐ zaimplemntować obsługę nawiasów i ~ dla reguł kolorowania
-  ☐ przed aplikacją reguł - sprawdzić, czy użyte poziomy są domknięte
   ☐ podczas definiowania reguł kolorowania - sprawdzać, czy nawiasy są domknięte
   ☐ reguły kolorowania: + na przedzie dodaje elementy na przodzie, + na tyle - na tyle
   ☐ obszar ograniczający jest widokiem kamery - koloruje się tylko to, co się w nim mieści
@@ -20,6 +19,7 @@ BRs:
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✘ przed aplikacją reguł - sprawdzić, czy użyte poziomy są domknięte @cancelled (18-09-26 18:20) @project(Bugs)
  ✔ levele - trzeba to przerobić @done (18-09-26 10:26) @project(Bugs)
  ✔ LIMIT SHAPE (przed inputem) @done (18-09-25 18:43) @project(Bugs)
  ✔ dod. funkcjonalności: @done (18-09-25 11:58) @project(BRs)
