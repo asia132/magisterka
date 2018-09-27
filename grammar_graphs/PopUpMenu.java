@@ -194,7 +194,7 @@ class PopUpMenu extends JPopupMenu {
 		return button;
 	}
 	JMenuItem addColoringRuleLevels(MainPanel panel){
-		JMenuItem addRules = new JMenuItem(ProgramLabels.rulleAdding);
+		JMenuItem addRules = new JMenuItem(ProgramLabels.colorRuleDefine);
 		addRules.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new CreateColorRuleFrame();

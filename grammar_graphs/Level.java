@@ -101,7 +101,7 @@ class Level {
 				throw new NotClosedShape("The points are not connected.");
 			}
 			System.out.println("Yes, we will check it futher");
-			onLine(int x, int y);
+			// onLine(int x, int y);
 		}
 		if (lines.size() > 1){
 			System.out.println("REMOVE " + lines.size() + " LINES FROM LEVEL");

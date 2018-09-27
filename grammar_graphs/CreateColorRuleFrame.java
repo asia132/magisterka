@@ -23,6 +23,8 @@ import java.awt.event.ActionEvent;
 
 import java.util.ArrayList;
 
+import java.lang.NumberFormatException;
+
 class CreateColorRuleFrame extends JFrame {
 
 	double loc = 0.3;
@@ -37,13 +39,18 @@ class CreateColorRuleFrame extends JFrame {
 
 	private JPanel mainPanel;
 	private ArrayList <JPanel> panelList = new ArrayList<>();
-	private ArrayList <JComboBox> boxList = new ArrayList<>();
-	ArrayList <String> tags;
-	JFrame me = this;
 
+	JFrame me = this;
+	JTextArea nvalue;
+	ArrayList <JTextArea> rulesBodies = new ArrayList<>();
+
+	// TAGS
+	String ruleSeparator = " => ";
+	String ruleApplied = "APPLY";
+	String ruleSkipped = "SKIP";
 
 	CreateColorRuleFrame() {
-		super(ProgramLabels.rulleWinName);
+		super(ProgramLabels.defineColorRulesFrame);
 
 		this.loadFrameData();
 		this.loadPanel();
@@ -53,7 +60,6 @@ class CreateColorRuleFrame extends JFrame {
 	}
 	protected void loadFrameData(){
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		// this.setLocation((int)(screenWidth*loc), (int)(screenHeight*loc));
 		this.setDefaultCloseOperation(CreateRuleFrame.DISPOSE_ON_CLOSE);
 	}
 	protected void loadPanel(){
@@ -62,6 +68,7 @@ class CreateColorRuleFrame extends JFrame {
 
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+		this.showNEditSection(buttonPanel);
 		this.showSaveButton(buttonPanel);
 		this.showAddRuleButton(buttonPanel);
 		this.showCancelButton(buttonPanel);
@@ -76,68 +83,31 @@ class CreateColorRuleFrame extends JFrame {
 	protected void ruleBox(JPanel panel){
 
 		panel.add(ruleComboIndex());
-		panel.add(ruleName());
 		panel.add(ruleColorButton());
 
-		JTextArea label = new JTextArea(" => ");
+		JTextArea label = new JTextArea(ruleSeparator);
 		label.setEditable(false);
 		label.setFont(label.getFont().deriveFont(32f));
-
 		panel.add(label);
+
+		rulesBodies.add(0, new JTextArea("\t"));
+		rulesBodies.get(0).setEditable(false);
+		rulesBodies.get(0).setFont(label.getFont().deriveFont(32f));
+		rulesBodies.get(0).setBackground(Color.LIGHT_GRAY);
+		rulesBodies.get(0).setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+		panel.add(rulesBodies.get(0));
 
 
 		JPanel comboBoxPanel = new JPanel();
-		panel.add(addComboButton(comboBoxPanel));
-		panel.add(removeComboButton(comboBoxPanel));
 		panel.add(comboBoxPanel);
-		comboBoxPanel.add(ruleComboLevels());
 
-		panel.add(addComboButton(comboBoxPanel));
-		panel.add(removeComboButton(comboBoxPanel));
-	}
-	protected JTextArea ruleName(){
-		JTextArea newRuleName = new JTextArea(ProgramLabels.defaultNewRule);
-		newRuleName.setEditable(true);
-		newRuleName.setBackground(Color.WHITE);
-		newRuleName.setForeground(Color.BLACK);
-
-		Border border = BorderFactory.createLineBorder(Color.BLACK);
-		newRuleName.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-
-		return newRuleName;
+		panel.add(addComboButton(comboBoxPanel, rulesBodies.get(0)));
 	}
 	protected JComboBox ruleComboIndex(){
 		JComboBox<String> comboLevel = new JComboBox<String>();
 
-		// add items to the combo box
-		comboLevel.addItem("V");
-		comboLevel.addItem("X");
-
-		return comboLevel;
-	}
-	protected JComboBox ruleComboOperator(){
-		JComboBox<String> comboLevel = new JComboBox<String>();
-
-		// add items to the combo box
-		comboLevel.addItem("∪");
-		comboLevel.addItem("∩");
-		// comboLevel.addItem("~");
-		comboLevel.addItem("⊕");
-		// comboLevel.addItem("(");
-		// comboLevel.addItem(")");
-
-		// comboLevel.addActionListener(this);
-
-		return comboLevel;
-	}
-	protected JComboBox ruleComboLevels(){
-
-		String [] levels = new String [MainData.coloringRuleLevels.getN() + 1];
-		for (int i = 0; i <= MainData.coloringRuleLevels.getN(); ++i) {
-			levels[i] = "L" + i;
-		}
-
-		JComboBox<String> comboLevel = new JComboBox<String>(levels);
+		comboLevel.addItem(ruleApplied);
+		comboLevel.addItem(ruleSkipped);
 
 		return comboLevel;
 	}
@@ -146,43 +116,29 @@ class CreateColorRuleFrame extends JFrame {
 		b.setBackground(Color.LIGHT_GRAY);
 		b.setFocusPainted(false);
 		b.addActionListener(event -> {
-			Color color = JColorChooser.showDialog(this, "Choose Color", Color.white);
+			Color color = JColorChooser.showDialog(this, ProgramLabels.chooseColor, Color.white);
 			b.setBackground(color);
 		});
 		return b;
 	}
-	protected JButton addComboButton(JPanel comboBoxPanel){
-		JButton addButton = new JButton(ProgramLabels.addElem);
+	protected JButton addComboButton(JPanel comboBoxPanel, JTextArea textArea){
+		JButton addButton = new JButton(ProgramLabels.editRule);
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boxList.add(0, ruleComboOperator());
-				comboBoxPanel.add(boxList.get(0));
-				boxList.add(0, ruleComboLevels());
-				comboBoxPanel.add(boxList.get(0));
-				me.pack();
+				new EditColorRuleFrame(textArea);
 			}
 		});
 		return addButton;
 	}
-	protected JButton removeComboButton(JPanel comboBoxPanel){
-		JButton remButton = new JButton(ProgramLabels.remElem);
-		remButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (boxList.size() > 1){
-					comboBoxPanel.remove(boxList.get(0));
-					boxList.remove(0);
-					comboBoxPanel.remove(boxList.get(0));
-					boxList.remove(0);
-					me.pack();
-				}
-			}
-		});
-		return remButton;
-	}
 	void showSaveButton(JPanel mainPanel){
 		saveButton = new JButton(ProgramLabels.save);
 		saveButton.addActionListener(event -> {
-
+			try{
+				MainData.coloringRuleLevels.setMaxNAllowed(Integer.parseInt(nvalue.getText()));
+				closeFrame();
+			}catch(NumberFormatException e){
+				new MessageFrame(nvalue.getText() + " - the provided N must be integer");
+			}
 		});
 		mainPanel.add(saveButton, BorderLayout.LINE_START);
 	}
@@ -218,6 +174,19 @@ class CreateColorRuleFrame extends JFrame {
 			}
 		});
 		panel.add(removeRuleButton, BorderLayout.LINE_START);
+	}
+	void showNEditSection(JPanel panel){
+
+		JTextArea nlabel = new JTextArea("N = ");
+		nlabel.setEditable(false);
+		panel.add(nlabel, BorderLayout.LINE_START);
+
+		this.nvalue = new JTextArea(MainData.coloringRuleLevels.max_n_allowed + "");
+		this.nvalue.setEditable(true);
+		this.nvalue.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+		nvalue.setBackground(new Color(224, 224, 224));
+		panel.add(this.nvalue, BorderLayout.LINE_START);
+
 	}
 	void closeFrame(){
 		super.dispose();

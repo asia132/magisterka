@@ -27,6 +27,13 @@ class ColoringRuleLevels {
 			this.levels[i] = new Level();
 		// this.print();
 	}
+	void setMaxNAllowed(int max_n){
+		for (int i = this.max_n_allowed; i < max_n; ++i){
+			if (this.levels[i] == null)
+				this.levels[i] = new Level();
+		}
+		this.max_n_allowed = max_n;
+	}
 	int getN(){
 		return n;
 	}

@@ -3,6 +3,8 @@ package grammar_graphs;
 public class ProgramLabels{
 	public static String programName = "Grammar Graphs";
 	static String rulleWinName = "Rule";
+	static String defineColorRulesFrame = "Define Color Rules";
+	static String editColorRuleFrame = "Edit Rule";
 
 	static String rulleList = "Rules...";
 	static String rulleAdding = "Add new rule";
@@ -30,11 +32,12 @@ public class ProgramLabels{
 	static String save = "Save";
 	static String remove = "Remove";
 	static String cancel = "Cancel";
+	static String delete = "Del";
 
 	static String addRule = "Add Rule";
 	static String removeRule = "Remove Rule";
-	static String addElem = "+";
-	static String remElem = "-";
+	static String editRule = "Edit";
+	static String chooseColor = "Choose Color";
 
 	static String newRuleLabel = "Please, provide the name of rule";
 	static String defaultNewRule = "New_Rule";
@@ -55,6 +58,7 @@ public class ProgramLabels{
 	static String hidePoints = "Hide co-ordinates";
 
 	static String colorRuleMenu = "Painting rules";
+	static String colorRuleDefine = "Define Painting rules";
 	static String colorRuleOptionOn = "Render";
 	static String colorRuleOptionOff = "Exit Render View";
 	static String limitShapeOn = "Define limiting shape";
