@@ -2,107 +2,135 @@ package grammar_graphs;
 
 import java.awt.geom.Area;
 import java.awt.Color;
-import java.util.regex.Pattern;
+
 import java.util.function.*;
 
-class ColoringRule {
+import java.util.Stack;
+import java.util.LinkedList;
+
+public class ColoringRule {
 	Area paintCavnas;
 	boolean isAplicable;
 	String name;
 	Color color;
 
-	String tagV = "V";
-	String tagX = "X";
+	static String ruleApplied = "APPLY";
+	static String ruleSkipped = "SKIP";
 
-	String tagUnion = "∪";
-	String tagInter = "∩";
-	String tagXOR = "⊕";
-	String tagNOT = "~";
-	String tagBra = "(";
-	String tagKet = ")";
+		// TAGS
+	static String levelAdd = "∪";
+	static String levelIntersect = "∩";
+	static String levelNot = "~";
+	static String levelXOR = "⊕";
+
+	static String levelBra = "(";
+	static String levelKet = ")";
 	
-	ColoringRule(String name, String isAplicable, Color color, String [] tagsSet){
-		this.name = name;
+	ColoringRule(String isAplicable, Color color, String [] tagsSet){
 		try{
 			this.isAplicable = this.parseFlag(isAplicable);
+			this.paintCavnas = this.parseTagSet(tagsSet);
 		}catch(WrongTag e){
 			System.out.println(e.getMessage());
 		}
 		this.color = color;
-		this.paintCavnas = this.parseTagSet(tagsSet);
 	}
 	boolean parseFlag(String isAplicable) throws WrongTag{
-		if (isAplicable.equals(tagV)) return true;
-		if (isAplicable.equals(tagX)) return false;
+		if (isAplicable.equals(ruleApplied)) return true;
+		if (isAplicable.equals(ruleSkipped)) return false;
 		throw new WrongTag("Aplicable tag.");
 	}
-	Area parseTagSet(String [] tagSet){
-		try{
-			Area finalArea = new Area(this.parseLevel(tagSet[0]).getShape());
-			try{
-				Function <Area [], Area> operation = parseOperation(tagSet[1]);
-				Area nextArea = new Area(this.parseLevel(tagSet[2]).getShape());
-				Area [] areas = {finalArea, nextArea};
-				finalArea = operation.apply(areas);
-			}catch (WrongTag e){
-				System.out.println(e.getMessage());
+	static void arrayPrint(String [] text){
+		for (String t: text) {
+			System.out.print(t);
+		}
+	}
+	static String [] shuntingYardAlgorithm(String [] text) throws WrongTag{
+		LinkedList <String> output = new LinkedList<>();
+		Stack <String> stack = new Stack<>();
+
+		for (String token: text){
+			if (token.equals(levelBra)){ // token = "("
+				stack.add(token);
+			}else if (token.equals(levelKet)){ // token = ")"
+				
+				int j = 0;
+				while (!stack.peek().equals(levelBra)){
+					j++;
+					output.add(stack.pop());
+				}
+				if (j == 0){
+					throw new WrongTag("Brackets are not closed");
+				}
+				stack.pop();
+			}else if (token.equals(levelAdd) || token.equals(levelIntersect) || token.equals(levelXOR) || token.equals(levelNot)){ // token is an operator
+				while (!stack.empty() && !stack.peek().equals(levelBra)){
+					output.add(stack.pop());
+				}
+				stack.add(token);
+
+			}else{ // token is a number
+				output.add(token);
 			}
-			return finalArea;
-		}catch(NotClosedShape e){
-			System.out.println(e.getMessage());
-		}catch(WrongTag e1){
-			System.out.println(e1.getMessage());
 		}
-		return null;
-	}
-	Level parseLevel(String tag) throws WrongTag{
-		if (Pattern.matches("L[0-9]+", tag.subSequence(0, tag.length())))
-			throw new WrongTag("Level format");
 
-		tag = tag.substring(1);
-		int index = Integer.parseInt(tag);
-		return MainData.coloringRuleLevels.levels[index];
+		while (!stack.empty()){
+			if (stack.peek().equals(levelBra) || stack.peek().equals(levelKet)){
+				throw new WrongTag("Brackets are not closed on the end");
+			}
+			output.add(stack.pop());
+		}
+		return output.toArray(new String[output.size()]);
 	}
-	Function  <Area [], Area> parseOperation(String tag) throws WrongTag{
-		if (Pattern.matches(tagUnion, tag.subSequence(0, tag.length()))) return ColoringRule::add;
-		if (Pattern.matches(tagInter, tag.subSequence(0, tag.length()))) return ColoringRule::intersect;
-		if (Pattern.matches(tagXOR, tag.subSequence(0, tag.length()))) return ColoringRule::exclusiveOr;
+	static Area parseTagSet(String [] text) throws WrongTag{
+		// arrayPrint(text);
+		String [] rpnText = shuntingYardAlgorithm(text);
+		// arrayPrint(text);
 
-		throw new WrongTag("The operation is not union / intersection / XOR");
+		Stack <String> stack = new Stack<>();
+		String result = "";
+
+		for (String token: rpnText){
+			if (token.equals(levelAdd) || token.equals(levelIntersect) || token.equals(levelXOR) || token.equals(levelNot)){
+				String level_b = stack.pop();
+				String level_a = stack.pop();
+				result = "(" + level_a + token + level_b + ")";
+				stack.add(result);
+			}else{
+				stack.add(token);
+			}
+		}
+		result = stack.pop();
+
+		System.out.println("\n\nResult is: " + result);
+		
+		return new Area();
 	}
-	Function <Area, Area> parseSubstract(String tag) throws WrongTag{
-		if (Pattern.matches(tagNOT, tag.subSequence(0, tag.length()))) return ColoringRule::subtract;
-		throw new WrongTag("The operation is not union / intersection / XOR");
-	}
-	boolean parseBra(String tag){
-		if (Pattern.matches(tagBra, tag.subSequence(0, tag.length()))) return true;
-		return false;
-	}
-	boolean parseKet(String tag){
-		if (Pattern.matches(tagKet, tag.subSequence(0, tag.length()))) return true;
-		return false;
-	}
-	static Area subtract(Area area){
+	public static void main(String[] args) {
+		String [] rule1 = {"L0", "∩", "L1", "∩", "L2"};
+		String [] rule2 = {"(", "L0", "∩", "L1", "∩", "LS", "~", "L2", ")", "∪", "(", "L0", "∩", "LS", "~", "L1", "∩", "L2", ")", "∪", "(", "LS", "~", "L0", "∩", "L1", "∩", "L2", ")"};
+		String [] rule3 = {"(", "L0", "∩", "LS", "~", "L1", "∩", "LS", "~", "L2", ")", "∪", "(", "LS", "~", "L0", "∩", "L1", "∩", "LS", "~", "L2", ")", "∪", "(", "LS", "~", "L0", "∩", "LS", "~", "L1", "∩", "L2", ")"};
+		String [] rule4 = {"LS", "~", "(", "L0", "∩", "L1", "∩", "L2", ")"};
 		try{
-			Area newArea = new Area(MainData.coloringRuleLevels.limitingShape.getShape());
-			newArea.subtract(area);
-			return newArea;
-		}catch(NotClosedShape e){
+			parseTagSet(rule1);
+		}catch(WrongTag e){
 			System.out.println(e.getMessage());
 		}
-		return null;
-	}
-	static Area add(Area [] areas){
-		areas[0].add(areas[1]);
-		return areas[0];
-	}
-	static Area intersect(Area [] areas){
-		areas[0].intersect(areas[1]);
-		return areas[0];
-	}
-	static Area exclusiveOr(Area [] areas){
-		areas[0].exclusiveOr(areas[1]);
-		return areas[0];
+		try{
+			parseTagSet(rule2);
+		}catch(WrongTag e){
+			System.out.println(e.getMessage());
+		}
+		try{
+			parseTagSet(rule3);
+		}catch(WrongTag e){
+			System.out.println(e.getMessage());
+		}
+		try{
+			parseTagSet(rule4);
+		}catch(WrongTag e){
+			System.out.println(e.getMessage());
+		}
 	}
 }
 class WrongTag extends Exception {

@@ -38,14 +38,6 @@ class EditColorRuleFrame extends JFrame {
 
 	JTextArea parentText;
 
-	// TAGS
-	String levelAdd = "∪";
-	String levelIntersect = "∩";
-	String levelNot = "~";
-	String levelXOR = "⊕";
-	String levelBra = "(";
-	String levelKet = ")";
-
 	JTextArea ruleBody;
 	int pos = 0;
 
@@ -101,12 +93,12 @@ class EditColorRuleFrame extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.white);
 
-		panel.add(addSign(levelAdd));
-		panel.add(addSign(levelIntersect));
-		panel.add(addSign(levelNot));
-		panel.add(addSign(levelXOR));
-		panel.add(addSign(levelBra));
-		panel.add(addSign(levelKet));
+		panel.add(addSign(ColoringRule.levelAdd));
+		panel.add(addSign(ColoringRule.levelIntersect));
+		panel.add(addNegationSign(ColoringRule.levelNot));
+		panel.add(addSign(ColoringRule.levelXOR));
+		panel.add(addSign(ColoringRule.levelBra));
+		panel.add(addSign(ColoringRule.levelKet));
 
 		this.mainPanel.add(panel);
 	}
@@ -186,6 +178,18 @@ class EditColorRuleFrame extends JFrame {
 		button.addActionListener(event -> {
 			ruleBody.insert(operator, pos);
 			pos += operator.length();
+			this.ruleBody.setCaretPosition(pos);
+			ruleBody.getCaret().setVisible(true);
+		});
+		button.setFont(button.getFont().deriveFont(32f));
+		return button;
+	}
+	JButton addNegationSign(String operator){
+		JButton button = new JButton(operator);
+		button.addActionListener(event -> {
+			String updatedOperator = "LS" + operator;
+			ruleBody.insert(updatedOperator, pos);
+			pos += updatedOperator.length();
 			this.ruleBody.setCaretPosition(pos);
 			ruleBody.getCaret().setVisible(true);
 		});

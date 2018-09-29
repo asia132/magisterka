@@ -43,11 +43,11 @@ class CreateColorRuleFrame extends JFrame {
 	JFrame me = this;
 	JTextArea nvalue;
 	ArrayList <JTextArea> rulesBodies = new ArrayList<>();
+	String [] tagsSet;
 
 	// TAGS
 	String ruleSeparator = " => ";
-	String ruleApplied = "APPLY";
-	String ruleSkipped = "SKIP";
+
 
 	CreateColorRuleFrame() {
 		super(ProgramLabels.defineColorRulesFrame);
@@ -106,8 +106,8 @@ class CreateColorRuleFrame extends JFrame {
 	protected JComboBox ruleComboIndex(){
 		JComboBox<String> comboLevel = new JComboBox<String>();
 
-		comboLevel.addItem(ruleApplied);
-		comboLevel.addItem(ruleSkipped);
+		comboLevel.addItem(ColoringRule.ruleApplied);
+		comboLevel.addItem(ColoringRule.ruleSkipped);
 
 		return comboLevel;
 	}
@@ -125,7 +125,7 @@ class CreateColorRuleFrame extends JFrame {
 		JButton addButton = new JButton(ProgramLabels.editRule);
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new EditColorRuleFrame(textArea);
+				new EditColorRuleFrame(textArea, tagsSet);
 			}
 		});
 		return addButton;
@@ -138,6 +138,14 @@ class CreateColorRuleFrame extends JFrame {
 				closeFrame();
 			}catch(NumberFormatException e){
 				new MessageFrame(nvalue.getText() + " - the provided N must be integer");
+			}
+			// TODO: tutaj trzeba uzupełnić zapis reguł
+			try{
+				for (JTextArea ruleBody: rulesBodies){
+					// String tagsSet
+				}
+			}catch(WrongTag e){
+				new MessageFrame(e.getMessage());
 			}
 		});
 		mainPanel.add(saveButton, BorderLayout.LINE_START);
