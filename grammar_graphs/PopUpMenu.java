@@ -223,8 +223,9 @@ class PopUpMenu extends JPopupMenu {
 			colorRuleOption.setText(ProgramLabels.colorRuleOptionOn);
 		colorRuleOption.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
+				MainData.coloringRuleLevels.limitingShape.closeLevel();
+				MainData.coloringRuleLevels.levels[0].closeLevel();
 				MainData.COLOR_RULES = !MainData.COLOR_RULES;
-				
 			}
 		});
 		return colorRuleOption;

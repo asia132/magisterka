@@ -85,8 +85,8 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		programData.drawLines(g2d);
 	}
 	public void moveLines(int x1, int y1, int x2, int y2){
-		// programData.point0[0] += MainData.toGrid(x2 - x1);
-		// programData.point0[1] += MainData.toGrid(y2 - y1);
+		programData.point0[0] += MainData.toGrid(x2 - x1);
+		programData.point0[1] += MainData.toGrid(y2 - y1);
 		programData.moveLines(x1, y1, x2, y2, (!(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)));
 		if (programData.marker != null)
 			this.programData.marker.move(x2 - x1, y2 - y1);
@@ -134,7 +134,18 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 	@Override
 	public String toString(){
 		StringJoiner info = new StringJoiner("");
-		return info.add(FileSaver.n).add("\t").add(programData.coloringRuleLevels.getN() + "\n").add(programData.levelsToString()).add(programData.limitShapeToString()).add(programData.markerToString()).add(programData.linesToString()).add(programData.rulesToString()).add(programData.ruleAppListToString()).toString();
+
+		info.add(FileSaver.n).add("\t");
+		info.add(programData.coloringRuleLevels.getN() + "\n");
+		info.add(programData.rulePaintingToString());
+		info.add(programData.levelsToString());
+		info.add(programData.limitShapeToString());
+		info.add(programData.markerToString());
+		info.add(programData.linesToString());
+		info.add(programData.rulesToString());
+		info.add(programData.ruleAppListToString());
+		
+		return info.toString();
 	}
 	@Override
     public Dimension getPreferredSize() {
@@ -152,7 +163,10 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		}else{
 			if (programData.SHOW_GRID)
 				programData.paintGrid(g2d, screenWidth, screenHeight);
-			if (!programData.tempShapeIsEmpty() && programData.LIMITING_SHAPE){
+			if (programData.LIMITING_SHAPE){
+				programData.drawLinesStack(g2d);
+			}
+			if (!programData.tempShapeIsEmpty()){
 				programData.drawTempLine(g2d);
 			}
 			if (programData.DRAW_LEVELS && !(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)){
@@ -188,7 +202,7 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 			}
 			if (!(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)){
 				for (Line line: MainData.coloringRuleLevels.limitingShape.levelLines){
-					line.changeColor(MainData.default_check_marker_color);
+					// line.changeColor(MainData.default_check_marker_color);
 					line.drawLine(g2d, programData.point0);
 				}
 			}

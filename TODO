@@ -2,14 +2,8 @@ Bugs:
   ☐ skopiowane linie w input pic nie mogą być dzielone z oknem dodawania reguł @low
   ☐ poprawić precyzję skalowania @low
 
-  ☐ możliwość zdefiniowania max level qty
   ☐ wprowadzić przycinanie linii na potrzeby kolorowania (SG1) w momencie przejścia do następnego levelu @started
-  ☐ zaimplemntować obsługę nawiasów i ~ dla reguł kolorowania
-  ☐ podczas definiowania reguł kolorowania - sprawdzać, czy nawiasy są domknięte
-  ☐ reguły kolorowania: + na przedzie dodaje elementy na przodzie, + na tyle - na tyle
-  ☐ obszar ograniczający jest widokiem kamery - koloruje się tylko to, co się w nim mieści
-  ☐ nawiasy i zaprzeczenie powinny się znajdować zarówno w liście poziomów jak i operacji
-  ☐ zapisuj do pliku reguły kolorowania (przed regułami zwykłymi)
+  ☐ po wyjściu z Render mode kolor limit shape zmienia się na czarny
 --- ✄ -----------------------
 BRs:
   ☐ symulacja @critical @started
@@ -19,6 +13,14 @@ BRs:
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ poprawić proces wprowadzania limit shape @done (18-10-03 13:31) @project(Bugs)
+ ✔ obszar ograniczający jest widokiem kamery - koloruje się tylko to, co się w nim mieści @done (18-10-03 12:20) @project(Bugs)
+ ✔ zaimplemntować obsługę nawiasów i ~ dla reguł kolorowania @done (18-10-02 07:58) @project(Bugs)
+ ✔ podczas definiowania reguł kolorowania - sprawdzać, czy nawiasy są domknięte @done (18-10-02 07:58) @project(Bugs)
+ ✔ możliwość zdefiniowania max level qty @done (18-10-02 07:58) @project(Bugs)
+ ✘ reguły kolorowania: + na przedzie dodaje elementy na przodzie, + na tyle - na tyle @cancelled (18-10-02 07:57) @project(Bugs)
+ ✔ zapisuj do pliku reguły kolorowania (przed regułami zwykłymi) @done (18-10-02 07:57) @project(Bugs)
+ ✔ nawiasy i zaprzeczenie powinny się znajdować zarówno w liście poziomów jak i operacji @done (18-10-02 07:57) @project(Bugs)
  ✘ przed aplikacją reguł - sprawdzić, czy użyte poziomy są domknięte @cancelled (18-09-26 18:20) @project(Bugs)
  ✔ levele - trzeba to przerobić @done (18-09-26 10:26) @project(Bugs)
  ✔ LIMIT SHAPE (przed inputem) @done (18-09-25 18:43) @project(Bugs)

@@ -33,12 +33,14 @@ class MainData {
 
 
 	private ArrayList <Line> lines = new ArrayList<Line>();
+	private ArrayList <Line> linesStack = null;
 	static ColoringRuleLevels coloringRuleLevels = null;
 
 	ArrayList <Line> modyfiedLines = new ArrayList<Line>();
 	ArrayList <Line> initialLines = new ArrayList<Line>();
 	private ArrayList <Line> temp_shape = new ArrayList<Line>();
 	static ArrayList <Line> copiedLines = new ArrayList<Line>();
+
 
 	static File file = null;
 
@@ -131,14 +133,27 @@ class MainData {
 		System.out.println("------------------------------");
 	}
 // limit shape
+	void drawLinesStack(Graphics2D g2d) {
+		for (Line s : linesStack) {
+			s.drawLine(g2d, point0);
+		}
+	}
 	void endDefininingLimitShape(){
-		for (Line line: coloringRuleLevels.limitingShape.levelLines){
-			this.lines.remove(line);
+		this.lines.clear();
+		for (Line line: this.linesStack){
+			this.lines.add(line);
+		}
+		this.linesStack.clear();
+		default_figure_color = Color.BLACK;
+		for (Line line: this.temp_shape){
+			line.changeColor(default_check_marker_color);
 		}
 	}
 	void startDefininingLimitShape(){
+		this.linesStack = this.copy();
+		this.lines.clear();
+		default_figure_color = Color.MAGENTA;
 		for (Line line: coloringRuleLevels.limitingShape.levelLines){
-			line.changeColor(default_check_marker_color);
 			this.lines.add(line);
 		}
 	}
@@ -208,6 +223,17 @@ class MainData {
 		temp_shape.get(i).setXY_b(initialLines.get(i).getX_b() + x2 - x1, initialLines.get(i).getY_b() + y2 - y1);
 	}
 // to string
+	String rulePaintingToString(){
+		if (!rulePainting.isEmpty()){
+			StringJoiner info = new StringJoiner("\n");
+			for (ColoringRule rule : rulePainting){
+				info.add(rule.toString());
+			}
+			return info.add("\n").toString();	
+		}else{
+			return "";
+		}
+	}
 	String ruleAppListToString(){
 		StringJoiner info = new StringJoiner("");
 		for (Rule rule : ruleAppList){
@@ -217,9 +243,10 @@ class MainData {
 	}
 	String markerToString(){
 		StringJoiner info = new StringJoiner("\t");
-		if (marker != null)
+		if (marker != null){
 			return info.add(FileSaver.inputTag).add(FileSaver.iSideTag).add(marker.toString()).toString();
-		return info.add(FileSaver.inputTag).add(FileSaver.iSideTag).toString();
+		}
+		return "";
 	}
 	String limitShapeToString(){
 		return coloringRuleLevels.limitingShapeToString();
@@ -431,8 +458,12 @@ class MainData {
 		}
 	}
 	void drawTempLine(Graphics2D g2d) {
-		for (Line line: temp_shape)
+		for (Line line: temp_shape){
+			if (LIMITING_SHAPE){
+				line.changeColor(MainData.default_figure_color);
+			}
 			line.drawLine(g2d, point0);
+		}
 	}
 	void paintGrid(Graphics2D g2d, int screenWidth, int screenHeight){
 		g2d.setColor(default_grid_color);

@@ -29,13 +29,21 @@ class Simulation{
 	static void runSimulation(MainPanel panel){
 		SIMULATE = true;
 		panel.programData.clear();
+
 		load0Level(panel);
+		MainData.coloringRuleLevels.increaseN();
+		System.out.println("N = " + MainData.coloringRuleLevels.getN());
 		load1Level(panel);
+		MainData.coloringRuleLevels.increaseN();
+		System.out.println("N = " + MainData.coloringRuleLevels.getN());
 		load2Level(panel);
+		MainData.coloringRuleLevels.increaseN();
+		System.out.println("N = " + MainData.coloringRuleLevels.getN());
 
 		panel.programData.marker = new Marker(new Point(114, 3));
 		panel.programData.marker.scale(4);
 		panel.programData.grid_size = 15;
+		
 		panel.repaint();
 
 	}
@@ -66,7 +74,7 @@ class Simulation{
 				Line newline = new Line(a, b);
 				panel.programData.addLine(newline, false);
 				MainData.coloringRuleLevels.levels[1].addLine(newline);
-				MainData.coloringRuleLevels.setN(1);
+				// MainData.coloringRuleLevels.setN(1);
 			}
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);
@@ -84,7 +92,7 @@ class Simulation{
 				Line newline = new Line(a, b);
 				panel.programData.addLine(newline, false);
 				MainData.coloringRuleLevels.levels[2].addLine(newline);
-				MainData.coloringRuleLevels.setN(2);
+				// MainData.coloringRuleLevels.setN(2);
 			}
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);

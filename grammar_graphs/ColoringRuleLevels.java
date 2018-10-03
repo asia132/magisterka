@@ -18,7 +18,6 @@ class ColoringRuleLevels {
 	private boolean n_change = false;
 
 	ColoringRuleLevels(MainPanel panel){
-		System.out.println("RUN COLORING LEVELS CONSTRUCTOR");
 		this.n = 0;
 		this.max_n_allowed = 10;
 		this.levels = new Level [100];
@@ -38,6 +37,9 @@ class ColoringRuleLevels {
 		return n;
 	}
 	void setN(int n){
+		for (int i = this.n; i <n; ++i){
+			levels[i].closeLevel();
+		}
 		this.n = n;
 	}
 	void increaseN(){
@@ -111,12 +113,22 @@ class ColoringRuleLevels {
 			}
 		}
 
-		for (int i = 0; i <= n; ++i) {
+		try{
+			Level level = levels[0];
+			g2d.setPaint(level.getColor());			
+			g2d.fill(level.getShape());
+		}catch (NotClosedShape e) {;
+			MainData.COLOR_RULES = false;
+			new MessageFrame(e.getMessage() + ". Level index: 0");
+			System.out.println(e.getLocalizedMessage());
+		}
+
+		for (int i = 1; i < n; ++i) {
 			try{
 				Level level = levels[i];
 				if (level.levelLines.size() <= 2) continue;
 
-				g2d.setPaint(level.getColor());				
+				g2d.setPaint(level.getColor());		
 				g2d.fill(level.getShape());
 
 			}catch (NotClosedShape e) {;

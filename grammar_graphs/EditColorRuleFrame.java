@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import java.util.ArrayList;
+import java.util.StringJoiner;
 
 class EditColorRuleFrame extends JFrame {
 
@@ -36,16 +37,22 @@ class EditColorRuleFrame extends JFrame {
 	private JPanel mainPanel;
 	JFrame me = this;
 
-	JTextArea parentText;
+	ArrayList <String> tagList;
+	RuleComponents parentRuleData;
 
 	JTextArea ruleBody;
 	int pos = 0;
+	int tagPos = 0;
 
 
-	EditColorRuleFrame(JTextArea parentText) {
+	EditColorRuleFrame(RuleComponents ruleData) {
 		super(ProgramLabels.editColorRuleFrame);
 
-		this.parentText = parentText;
+		this.parentRuleData = ruleData;
+		this.tagList = ruleData.tagsSetCopy();
+		System.out.println(tagList.size() + " found");
+
+		this.tagPos = ruleData.tagsSet.size();
 
 		this.loadFrameData();
 		this.loadPanel();
@@ -56,6 +63,13 @@ class EditColorRuleFrame extends JFrame {
 	protected void loadFrameData(){
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		this.setDefaultCloseOperation(CreateRuleFrame.DISPOSE_ON_CLOSE);
+	}
+	static String arrayListToString(ArrayList <String> stringList){
+		StringJoiner result = new StringJoiner("");
+		for (String tag: stringList) {
+			result.add(tag);
+		}
+		return result.toString();
 	}
 	protected void loadPanel(){
 		this.mainPanel = new JPanel();
@@ -72,11 +86,13 @@ class EditColorRuleFrame extends JFrame {
 	}
 	void loadTextArea(){
 
-		this.ruleBody = new JTextArea(this.parentText.getText());
+		this.ruleBody = new JTextArea(arrayListToString(this.tagList));
 		this.ruleBody.setEditable(false);
 		this.ruleBody.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-		ruleBody.setBackground(new Color(224, 224, 224));
-		ruleBody.getCaret().setVisible(true);
+		this.ruleBody.setBackground(new Color(224, 224, 224));
+		this.pos = ruleBody.getText().length();
+		this.ruleBody.setCaretPosition(pos);
+		this.ruleBody.getCaret().setVisible(true);
 		this.mainPanel.add(this.ruleBody, BorderLayout.LINE_START);
 	}
 	void loadLevelPanel(){
@@ -97,6 +113,7 @@ class EditColorRuleFrame extends JFrame {
 		panel.add(addSign(ColoringRule.levelIntersect));
 		panel.add(addNegationSign(ColoringRule.levelNot));
 		panel.add(addSign(ColoringRule.levelXOR));
+		panel.add(addSign(ColoringRule.levelSubstract));
 		panel.add(addSign(ColoringRule.levelBra));
 		panel.add(addSign(ColoringRule.levelKet));
 
@@ -119,7 +136,9 @@ class EditColorRuleFrame extends JFrame {
 		JButton button = new JButton("AC");
 		button.addActionListener(event -> {
 			this.ruleBody.replaceRange(null, 0, ruleBody.getText().length());
+			this.tagList.clear();
 			this.pos = 0;
+			this.tagPos = 0;
 			this.ruleBody.setCaretPosition(pos);
 			ruleBody.getCaret().setVisible(true);
 		});
@@ -128,8 +147,10 @@ class EditColorRuleFrame extends JFrame {
 	JButton leftButton(){
 		JButton button = new JButton("<");
 		button.addActionListener(event -> {
-			if (pos > 0)
-				this.pos--;
+			if (tagPos > 0){
+				this.tagPos--;
+				this.pos -= tagList.get(tagPos).length();
+			}
 			this.ruleBody.setCaretPosition(pos);
 			ruleBody.getCaret().setVisible(true);
 		});
@@ -138,8 +159,10 @@ class EditColorRuleFrame extends JFrame {
 	JButton rigthButton(){
 		JButton button = new JButton(">");
 		button.addActionListener(event -> {
-			if (pos < ruleBody.getText().length())
-				this.pos++;
+			if (tagPos < tagList.size()){
+				this.pos += tagList.get(tagPos).length();
+				this.tagPos++;
+			}
 			this.ruleBody.setCaretPosition(pos);
 			ruleBody.getCaret().setVisible(true);
 		});
@@ -148,18 +171,24 @@ class EditColorRuleFrame extends JFrame {
 	JButton delButton(){
 		JButton button = new JButton(ProgramLabels.delete);
 		button.addActionListener(event -> {
-			this.ruleBody.replaceRange(null, this.pos - 1, this.pos);
-			this.pos--;
-			this.ruleBody.setCaretPosition(pos);
-			ruleBody.getCaret().setVisible(true);
+			if (this.tagList.size() > 0){
+				--tagPos;
+				this.ruleBody.replaceRange(null, this.pos - tagList.get(tagPos).length(), this.pos);
+				this.pos -= tagList.get(tagPos).length();
+				this.tagList.remove(tagPos);
+				this.ruleBody.setCaretPosition(pos);
+				ruleBody.getCaret().setVisible(true);
+			}
 		});
 		return button;
 	}
 	JButton saveButton(){
 		JButton button = new JButton(ProgramLabels.save);
 		button.addActionListener(event -> {
-			this.parentText.replaceRange(null, 0, this.parentText.getText().length());
-			this.parentText.insert(this.ruleBody.getText(), 0);
+
+			parentRuleData.rulesBodies.replaceRange(null, 0, parentRuleData.rulesBodies.getText().length());
+			parentRuleData.rulesBodies.insert(arrayListToString(tagList), 0);
+			parentRuleData.tagsSet = tagList;
 			closeFrame();
 		});
 		return button;
@@ -176,7 +205,9 @@ class EditColorRuleFrame extends JFrame {
 	JButton addSign(String operator){
 		JButton button = new JButton(operator);
 		button.addActionListener(event -> {
+
 			ruleBody.insert(operator, pos);
+			tagList.add(tagPos++, operator);
 			pos += operator.length();
 			this.ruleBody.setCaretPosition(pos);
 			ruleBody.getCaret().setVisible(true);
@@ -187,8 +218,10 @@ class EditColorRuleFrame extends JFrame {
 	JButton addNegationSign(String operator){
 		JButton button = new JButton(operator);
 		button.addActionListener(event -> {
-			String updatedOperator = "LS" + operator;
+
+			String updatedOperator = "LS" + ColoringRule.levelSubstract;
 			ruleBody.insert(updatedOperator, pos);
+			tagList.add(tagPos++, updatedOperator);
 			pos += updatedOperator.length();
 			this.ruleBody.setCaretPosition(pos);
 			ruleBody.getCaret().setVisible(true);

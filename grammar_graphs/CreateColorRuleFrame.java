@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import java.util.ArrayList;
+import java.util.StringJoiner;
 
 import java.lang.NumberFormatException;
 
@@ -38,19 +39,19 @@ class CreateColorRuleFrame extends JFrame {
 	int n = 0;
 
 	private JPanel mainPanel;
-	private ArrayList <JPanel> panelList = new ArrayList<>();
 
 	JFrame me = this;
 	JTextArea nvalue;
-	ArrayList <JTextArea> rulesBodies = new ArrayList<>();
-	String [] tagsSet;
-
+	ArrayList <RuleComponents> rules;
+	
 	// TAGS
 	String ruleSeparator = " => ";
 
 
 	CreateColorRuleFrame() {
 		super(ProgramLabels.defineColorRulesFrame);
+
+		this.rules = new ArrayList<>();
 
 		this.loadFrameData();
 		this.loadPanel();
@@ -74,6 +75,19 @@ class CreateColorRuleFrame extends JFrame {
 		this.showCancelButton(buttonPanel);
 		this.mainPanel.add(buttonPanel);
 
+		for (ColoringRule oldRule: MainData.rulePainting){
+			rules.add(0, new RuleComponents());
+			rules.get(0).panel = new JPanel();
+			mainPanel.add(rules.get(0).panel);
+			showRemoveRuleButton(rules.get(0));
+			ruleBox(rules.get(0).panel);
+			rules.get(0).tagsSet = oldRule.getTagSet();
+			rules.get(0).colorButton.setBackground(oldRule.getColor());
+			rules.get(0).comboLevel.setSelectedItem(oldRule.getAplicableInfo());
+			rules.get(0).rulesBodies.insert(EditColorRuleFrame.arrayListToString(oldRule.getTagSet()), 0);
+			me.pack();
+		}
+
 		this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
 
 
@@ -82,50 +96,51 @@ class CreateColorRuleFrame extends JFrame {
 	}
 	protected void ruleBox(JPanel panel){
 
-		panel.add(ruleComboIndex());
-		panel.add(ruleColorButton());
+		panel.add(ruleComboIndex(rules.get(0)));
+		panel.add(ruleColorButton(rules.get(0)));
 
 		JTextArea label = new JTextArea(ruleSeparator);
 		label.setEditable(false);
 		label.setFont(label.getFont().deriveFont(32f));
 		panel.add(label);
 
-		rulesBodies.add(0, new JTextArea("\t"));
-		rulesBodies.get(0).setEditable(false);
-		rulesBodies.get(0).setFont(label.getFont().deriveFont(32f));
-		rulesBodies.get(0).setBackground(Color.LIGHT_GRAY);
-		rulesBodies.get(0).setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-		panel.add(rulesBodies.get(0));
+		// tagsSet.add(0, new ArrayList <String>());
+		rules.get(0).rulesBodies = new JTextArea("");
+		rules.get(0).rulesBodies.setEditable(false);
+		rules.get(0).rulesBodies.setFont(label.getFont().deriveFont(32f));
+		rules.get(0).rulesBodies.setBackground(Color.LIGHT_GRAY);
+		rules.get(0).rulesBodies.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+		panel.add(rules.get(0).rulesBodies);
 
 
 		JPanel comboBoxPanel = new JPanel();
 		panel.add(comboBoxPanel);
 
-		panel.add(addComboButton(comboBoxPanel, rulesBodies.get(0)));
+		panel.add(addEditButton(rules.get(0)));
 	}
-	protected JComboBox ruleComboIndex(){
-		JComboBox<String> comboLevel = new JComboBox<String>();
+	protected JComboBox ruleComboIndex(RuleComponents rule){
+		rule.comboLevel = new JComboBox<String>();
 
-		comboLevel.addItem(ColoringRule.ruleApplied);
-		comboLevel.addItem(ColoringRule.ruleSkipped);
+		rule.comboLevel.addItem(ColoringRule.ruleApplied);
+		rule.comboLevel.addItem(ColoringRule.ruleSkipped);
 
-		return comboLevel;
+		return rule.comboLevel;
 	}
-	protected JButton ruleColorButton(){
-		JButton b = new JButton("\n\t\t\t\n");
-		b.setBackground(Color.LIGHT_GRAY);
-		b.setFocusPainted(false);
-		b.addActionListener(event -> {
+	protected JButton ruleColorButton(RuleComponents rule){
+		rule.colorButton = new JButton("\n\t\t\t\n");
+		rule.colorButton.setBackground(Color.LIGHT_GRAY);
+		rule.colorButton.setFocusPainted(false);
+		rule.colorButton.addActionListener(event -> {
 			Color color = JColorChooser.showDialog(this, ProgramLabels.chooseColor, Color.white);
-			b.setBackground(color);
+			rule.colorButton.setBackground(color);
 		});
-		return b;
+		return rule.colorButton;
 	}
-	protected JButton addComboButton(JPanel comboBoxPanel, JTextArea textArea){
+	protected JButton addEditButton(RuleComponents rule){
 		JButton addButton = new JButton(ProgramLabels.editRule);
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new EditColorRuleFrame(textArea, tagsSet);
+				EditColorRuleFrame editFrame = new EditColorRuleFrame(rule);
 			}
 		});
 		return addButton;
@@ -141,8 +156,8 @@ class CreateColorRuleFrame extends JFrame {
 			}
 			// TODO: tutaj trzeba uzupełnić zapis reguł
 			try{
-				for (JTextArea ruleBody: rulesBodies){
-					// String tagsSet
+				for (RuleComponents ruleData: rules){
+					MainData.rulePainting.add(new ColoringRule(ruleData.getApplicableTag(), ruleData.getColor(), ruleData.tagsSet));
 				}
 			}catch(WrongTag e){
 				new MessageFrame(e.getMessage());
@@ -163,25 +178,26 @@ class CreateColorRuleFrame extends JFrame {
 		addRuleButton = new JButton(ProgramLabels.addRule);
 		addRuleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panelList.add(0, new JPanel());
-				mainPanel.add(panelList.get(0));
-				showRemoveRuleButton(panelList.get(0));
-				ruleBox(panelList.get(0));
+				rules.add(0, new RuleComponents());
+				rules.get(0).panel = new JPanel();
+				mainPanel.add(rules.get(0).panel);
+				showRemoveRuleButton(rules.get(0));
+				ruleBox(rules.get(0).panel);
 				me.pack();
 			}
 		});
 		panel.add(addRuleButton, BorderLayout.LINE_START);
 	}
-	void showRemoveRuleButton(JPanel panel){
+	void showRemoveRuleButton(RuleComponents rule){
 		removeRuleButton = new JButton(ProgramLabels.removeRule);
 		removeRuleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panelList.remove(panel);
-				panel.getParent().remove(panel);
+				rule.panel.getParent().remove(rule.panel);
+				rules.remove(rule);
 				me.pack();
 			}
 		});
-		panel.add(removeRuleButton, BorderLayout.LINE_START);
+		rule.panel.add(removeRuleButton, BorderLayout.LINE_START);
 	}
 	void showNEditSection(JPanel panel){
 
@@ -198,5 +214,29 @@ class CreateColorRuleFrame extends JFrame {
 	}
 	void closeFrame(){
 		super.dispose();
+	}
+}
+class RuleComponents{
+	JTextArea rulesBodies;
+	ArrayList <String> tagsSet;
+	JComboBox<String> comboLevel;
+	JButton colorButton;
+	JPanel panel;
+
+	RuleComponents(){
+		tagsSet = new ArrayList<>();
+	}
+	ArrayList <String> tagsSetCopy(){
+		System.out.println(tagsSet.size() + " should be copied");
+		ArrayList <String> copy = new ArrayList<>(tagsSet.size());
+		for (String tag: tagsSet)
+			copy.add(tag);
+		return copy;
+	}
+	Color getColor(){
+		return colorButton.getBackground();
+	}
+	String getApplicableTag(){
+		return (String)(comboLevel.getSelectedItem());
 	}
 }

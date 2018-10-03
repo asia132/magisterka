@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.awt.Point;
 
 import java.util.ArrayList;
+import java.awt.Color;
 
 class FileSaver{
 	File file;
@@ -23,6 +24,7 @@ class FileSaver{
 	static String limitShapeTag = "#LIMITSHAPE";
 	static String level = "#LEVEL";
 	static String n = "#N";
+	static String paintingRule = "#PAINTRULE";
 
 	FileSaver(File file){
 		this.file = file;
@@ -81,11 +83,21 @@ class FileSaver{
 				}
 				if (n.equals(lineContent[0])){
 					MainData.coloringRuleLevels.setN(Integer.parseInt(lineContent[1]));
+				} else if (paintingRule.equals(lineContent[0])){
+					Color color = new Color(Integer.parseInt(lineContent[1]));
+					boolean isApp = Boolean.parseBoolean(lineContent[2]);
+					String [] tagsSet = lineContent[3].split(",");
+					panel.programData.rulePainting.add(new ColoringRule(isApp, color, tagsSet));
+
 				} else if (level.equals(lineContent[0])){
+
 					panel.programData.addLine(this.parseLine(lineContent), Integer.parseInt(lineContent[1].substring(1)));
-				} else if (limitShapeTag.equals(lineContent[0]))
-					MainData.coloringRuleLevels.limitingShape.levelLines.add(this.parseLine(lineContent));
-				else if (inputTag.equals(lineContent[0])){
+
+				} else if (limitShapeTag.equals(lineContent[0])){
+					Line shapeLine = this.parseLine(lineContent);
+					shapeLine.changeColor(MainData.default_check_marker_color);
+					MainData.coloringRuleLevels.limitingShape.levelLines.add(shapeLine);
+				}else if (inputTag.equals(lineContent[0])){
 					if (markerTag.equals(lineContent[2])){
 						try{
 							panel.programData.marker = this.parseMarker(lineContent);

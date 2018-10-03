@@ -13,7 +13,7 @@ class Line{
 	Point pa;
 	Point pb;
 
-	Color color = MainData.default_figure_color;
+	private Color color = MainData.default_figure_color;
 
 	Line(int x_a, int y_a, int x_b, int y_b){	
 		this.pa = new Point(toGrid(x_a), toGrid(y_a));
@@ -237,6 +237,8 @@ class Line{
 	}
 	// check if the point of x and y coordinates are in the line
 	boolean onLine(int x, int y){
+		System.out.print("::: Analyze line\t"); this.print();
+		System.out.println("::: Point [" + x + ", " + y + "]");
 		try{
 			int x_1, x_2;
 			if (this.pa.x < this.pb.x){
@@ -247,8 +249,11 @@ class Line{
 				x_1 = this.pb.x;
 				x_2 = this.pa.x;
 			}
-			double [] ab = getFunctionParams();
-			if (y == (int)Math.round(ab[0] * y + ab[1]) && x_1 <= x && x <= x_2)
+			double [] ab = getFunctionParamsOnGrid();
+			System.out.println("::: " + y + " == " + (int)Math.round(ab[0] * x + ab[1]) + ": " + (y == (int)Math.round(ab[0] * y + ab[1])));
+			System.out.println("::: " + x_1 + " <= " + x + ": " + (x_1 <= x));
+			System.out.println("::: " + x + " <= " + x_2 + ": " + (x <= x_2));
+			if (y == (int)Math.round(ab[0] * x + ab[1]) && x_1 <= x && x <= x_2)
 				return true;			
 		}
 		catch(NotALinearFunction error){
@@ -261,7 +266,7 @@ class Line{
 				y_1 = this.pb.y;
 				y_2 = this.pa.y;
 			}
-			if (x == this.pa.x && y_1 <= y && y <= y_2)
+			if (x == this.getX_a() && y_1 <= y && y <= y_2)
 				return true;
 		}
 		return false;
