@@ -138,6 +138,11 @@ class MainData {
 			s.drawLine(g2d, point0);
 		}
 	}
+	void updateLimitShapeColor(){
+		for (Line line: this.temp_shape){
+			line.changeColor(default_check_marker_color);
+		}
+	}
 	void endDefininingLimitShape(){
 		this.lines.clear();
 		for (Line line: this.linesStack){
@@ -145,9 +150,7 @@ class MainData {
 		}
 		this.linesStack.clear();
 		default_figure_color = Color.BLACK;
-		for (Line line: this.temp_shape){
-			line.changeColor(default_check_marker_color);
-		}
+		updateLimitShapeColor();
 	}
 	void startDefininingLimitShape(){
 		this.linesStack = this.copy();

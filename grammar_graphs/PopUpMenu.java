@@ -226,6 +226,7 @@ class PopUpMenu extends JPopupMenu {
 				MainData.coloringRuleLevels.limitingShape.closeLevel();
 				MainData.coloringRuleLevels.levels[0].closeLevel();
 				MainData.COLOR_RULES = !MainData.COLOR_RULES;
+				panel.programData.updateLimitShapeColor();
 			}
 		});
 		return colorRuleOption;
