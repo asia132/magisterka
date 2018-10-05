@@ -12,7 +12,7 @@ import java.lang.Math;
 
 class ColoringRuleLevels {
 	static Level levels[];
-	Level limitingShape = new Level();
+	Level limitingShape = new Level("Limit Shape");
 	private int n = 0;
 	int max_n_allowed;
 	private boolean n_change = false;
@@ -23,13 +23,13 @@ class ColoringRuleLevels {
 		this.levels = new Level [100];
 
 		for (int i = 0; i < this.max_n_allowed; ++i)
-			this.levels[i] = new Level();
+			this.levels[i] = new Level(i + "");
 		// this.print();
 	}
 	void setMaxNAllowed(int max_n){
 		for (int i = this.max_n_allowed; i < max_n; ++i){
 			if (this.levels[i] == null)
-				this.levels[i] = new Level();
+				this.levels[i] = new Level(i + "");
 		}
 		this.max_n_allowed = max_n;
 	}
@@ -75,11 +75,8 @@ class ColoringRuleLevels {
 			if (n+1 < max_n_allowed){
 				levels[n+1].levelLines.addAll(ruleFinalLines);
 			}
-			// System.out.println("Compare lines id: " + levels[n+1].levelLines.get(levels[n+1].levelLines.size()-1) + " " + programData.lines.get(programData.lines.size() - 1));
 			this.n_change = true;
 		}
-		// System.out.println("KONTROLA N: n = " + n + ", ilosc leveli: " + levels.length);
-		// print();
 	}
 	String limitingShapeToString(){
 		StringJoiner info = new StringJoiner("");
@@ -109,7 +106,7 @@ class ColoringRuleLevels {
 			}catch (NotClosedShape e) {;
 				MainData.setColorRules();
 				new MessageFrame(e.getMessage() + ". Limiting shape.");
-					System.out.println(e.getLocalizedMessage());
+				System.out.println(e.getMessage());
 			}
 		}
 
@@ -120,7 +117,7 @@ class ColoringRuleLevels {
 		}catch (NotClosedShape e) {;
 			MainData.setColorRules();
 			new MessageFrame(e.getMessage() + ". Level index: 0");
-			System.out.println(e.getLocalizedMessage());
+			System.out.println(e.getMessage());
 		}
 
 		for (int i = 1; i <= n; ++i) {
@@ -134,7 +131,7 @@ class ColoringRuleLevels {
 			}catch (NotClosedShape e) {;
 				MainData.setColorRules();
 				new MessageFrame(e.getMessage() + ". Level index: " + i);
-				System.out.println(e.getLocalizedMessage());
+				System.out.println(e.getMessage() + ". Level index: " + i);
 			}
 		}
 		g2d.dispose();

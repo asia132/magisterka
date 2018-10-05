@@ -17,6 +17,7 @@ class Level {
 	double [][] points;
 	Area area;
 	double precision = 1e-12;
+	String name;
 
 	void setColor(Color color){
 		this.color = color;
@@ -28,7 +29,7 @@ class Level {
 		return this.color;
 	}
 	void closeLevel(){
-		System.out.println("---------------CLOSE-LEVEL---------------");
+		System.out.println("---------------CLOSE-LEVEL-" + this.name + "--------------");
 		int before = levelLines.size();
 		do{
 			before = levelLines.size();
@@ -38,9 +39,8 @@ class Level {
 			try{
 				this.points = generatePoints();
 			}catch(NotClosedShape e){
-				System.out.println(e.getMessage());
 				MainData.setColorRules();
-				// e.printStackTrace();
+				System.out.println(e.getMessage());
 			}
 		}
 	}
@@ -49,7 +49,7 @@ class Level {
 		levelShape.setWindingRule(GeneralPath.WIND_NON_ZERO);
 
 		if (points == null || points.length < 0){
-			throw new NotClosedShape("Points are null. The shapes are not closed.");
+			throw new NotClosedShape("Get shape: Points are null. The shapes are not closed.");
 		}
 		levelShape.moveTo(points[0][0], points[0][1]);
 		for (int k = 1; k < points.length; k++)
@@ -135,13 +135,15 @@ class Level {
 		}
 		return output;
 	}
-	Level(ArrayList <Line> levelLines){
+	Level(ArrayList <Line> levelLines, String name){
 		this.levelLines = levelLines;
 		this.randColor();
+		this.name = name;
 	}
-	Level(){
+	Level(String name){
 		this.levelLines = new ArrayList <Line>();
 		this.randColor();
+		this.name = name;
 	}
 	void update(ArrayList <Line> newLevelLines){
 		for (Line newline: newLevelLines){

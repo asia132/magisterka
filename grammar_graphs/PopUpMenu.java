@@ -225,7 +225,9 @@ class PopUpMenu extends JPopupMenu {
 			public void actionPerformed(ActionEvent ev) {
 				System.out.println("----------------TURN RENDERING ON----------------");
 				MainData.coloringRuleLevels.limitingShape.closeLevel();
-				MainData.coloringRuleLevels.levels[0].closeLevel();
+				for (int i = 0; i <= MainData.coloringRuleLevels.getN(); ++i){
+					MainData.coloringRuleLevels.levels[i].closeLevel();
+				}
 				MainData.setColorRules();
 			}
 		});

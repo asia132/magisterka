@@ -85,10 +85,9 @@ class FileSaver{
 					MainData.coloringRuleLevels.setN(Integer.parseInt(lineContent[1]));
 				} else if (paintingRule.equals(lineContent[0])){
 					MainData.coloringRuleLevels.limitingShape.closeLevel();
-					System.out.println("LEVEL QTY: " + MainData.coloringRuleLevels.levels.length);
-					// for (int i = 0; i <= MainData.coloringRuleLevels.getN(); ++i){
-						MainData.coloringRuleLevels.levels[0].closeLevel();
-					// }
+					for (int i = 0; i <= MainData.coloringRuleLevels.getN(); ++i){
+						MainData.coloringRuleLevels.levels[i].closeLevel();
+					}
 					Color color = new Color(Integer.parseInt(lineContent[1]));
 					boolean isApp = Boolean.parseBoolean(lineContent[2]);
 					String [] tagsSet = lineContent[3].split(",");
@@ -175,6 +174,12 @@ class FileSaver{
 				}
 			}
 			reader.close();
+
+			System.out.println("N = " + MainData.coloringRuleLevels.getN());
+			MainData.coloringRuleLevels.limitingShape.closeLevel();
+			for (int i = 0; i <= MainData.coloringRuleLevels.getN(); ++i){
+				MainData.coloringRuleLevels.levels[i].closeLevel();
+			}
 			
 			panel.repaint();
 		}catch (IOException e) {

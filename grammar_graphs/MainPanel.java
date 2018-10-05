@@ -93,15 +93,9 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 			for (Line line: programData.coloringRuleLevels.limitingShape.levelLines){
 				line.move(x2 - x1, y2 - y1);
 			}
-			// for (int i = 0; i <= programData.coloringRuleLevels.getN() + 1; ++i){
-			// 	for (Line line: programData.coloringRuleLevels.levels[i].levelLines){
-					// line.move(x2 - x1, y2 - y1);
-			// 	}
-			// }
 		}
-		// else{
-			programData.moveLines(x1, y1, x2, y2, (!(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)));
-		// }	
+		programData.moveLines(x1, y1, x2, y2, (!(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)));
+
 		this.repaint();
 	}
 	public void resizeMarker(int x1, int y1, int x2, int y2){
@@ -142,7 +136,6 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		info.add(programData.levelsToString());
 		info.add(programData.limitShapeToString());
 		info.add(programData.markerToString());
-		info.add(programData.linesToString());
 		info.add(programData.rulesToString());
 		info.add(programData.ruleAppListToString());
 		info.add(programData.rulePaintingToString());

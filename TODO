@@ -2,10 +2,7 @@ Bugs:
   ☐ skopiowane linie w input pic nie mogą być dzielone z oknem dodawania reguł @low
   ☐ poprawić precyzję skalowania @low
 
-  ☐ wprowadzić przycinanie linii na potrzeby kolorowania (SG1) w momencie przejścia do następnego levelu @started
-  ☐ przesuwanie poziomów: podlinie znalezione na inpucie powinny być childem odpowiadających ich linii i przesuwać się razem z rodzicem.
   ☐ poprawić rule application list
-  ☐ zmienić sposób zapisu do plików linii
   ☐ problem z usuwaniem ostatniej reguły kolorowania
 --- ✄ -----------------------
 BRs:
@@ -16,6 +13,9 @@ BRs:
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ zmienić sposób zapisu do plików linii @done (18-10-05 16:08) @project(Bugs)
+ ✔ wprowadzić przycinanie linii na potrzeby kolorowania (SG1) w momencie przejścia do następnego levelu @started @done (18-10-05 15:15) @project(Bugs)
+ ✔ przesuwanie poziomów: podlinie znalezione na inpucie powinny być childem odpowiadających ich linii i przesuwać się razem z rodzicem. @done (18-10-05 15:15) @project(Bugs)
  ✔ przesuwanie poziomów nie działa (dodawaj do poziomów dla A i B odnalezione linie inputa, a nie przerobione linie rule left side) @done (18-10-05 12:52) @project(Bugs)
  ✔ po wyjściu z Render mode kolor limit shape zmienia się na czarny @done (18-10-03 15:16) @project(Bugs)
  ✔ poprawić proces wprowadzania limit shape @done (18-10-03 13:31) @project(Bugs)

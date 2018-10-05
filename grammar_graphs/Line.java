@@ -186,23 +186,19 @@ class Line{
 	}
 // sets
 	void setXY_a(int x_a, int y_a){
-		System.out.println("SET XY A");
 		this.pa.x = toGrid(x_a);
 		this.pa.y = toGrid(y_a);
 		if (!childs.isEmpty()){
 			for (Line child: childs){
-				System.out.println("\tSET XY A CHILD");
 				child.setXY_a(x_a, y_a);
 			}
 		}
 	}
 	void setXY_b(int x_b, int y_b){
-		System.out.println("SET XY B");
 		this.pb.x = toGrid(x_b);
 		this.pb.y = toGrid(y_b);
 		if (!childs.isEmpty()){
 			for (Line child: childs){
-				System.out.println("\tSET XY B CHILD");
 				child.setXY_b(x_b, y_b);
 			}
 		}
@@ -213,31 +209,26 @@ class Line{
 		this.pa.y = points[1];
 		if (!childs.isEmpty()){
 			for (Line child: childs){
-				System.out.println("\tSET V CHILD");
 				child.setA(points);
 			}
 		}
 	}
 	void setB(int [] points){
-		System.out.println("SET B");
 		this.pb.x = points[0];
 		this.pb.y = points[1];
 		if (!childs.isEmpty()){
 			for (Line child: childs){
-				System.out.println("\tSET B CHILD");
 				child.setB(points);
 			}
 		}
 	}
 	void move(int x, int y){
-		System.out.println("MOVE " + childs);
 		this.pa.x += toGrid(x); 
 		this.pa.y += toGrid(y);
 		this.pb.x += toGrid(x);
 		this.pb.y += toGrid(y);
 		if (!childs.isEmpty()){
 			for (Line child: childs){
-				System.out.println("\tMOVE CHILD");
 				child.move(x, y);
 			}
 		}
@@ -342,11 +333,11 @@ class Line{
 	void print(){
 		System.out.println("Line: A("+pa.x+", "+pa.y+") - B("+pb.x+", "+pb.y+")");
 	}
-	// @Override
-	// public String toString(){
-	// 	StringJoiner info = new StringJoiner("\t");
-	// 	return info.add(FileSaver.lineTag).add("" + pa.x).add("" + pa.y).add("" + pb.x).add(pb.y + "").toString();
-	// }
+	@Override
+	public String toString(){
+		StringJoiner info = new StringJoiner("\t");
+		return info.add(FileSaver.lineTag).add("" + pa.x).add("" + pa.y).add("" + pb.x).add(pb.y + "").toString();
+	}
 	boolean isTheSameLine(Line other){
 		if (this.pa.x != other.pa.x) return false;
 		if (this.pa.y != other.pa.y) return false;

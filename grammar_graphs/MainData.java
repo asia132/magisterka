@@ -102,10 +102,7 @@ class MainData {
 		}
 	}
 	void addLine(Line line, int level_i){
-		// if (level_i > coloringRuleLevels.n){
-		// 	coloringRuleLevels.n = level_i;
-		// 	System.out.println("NEW N: " + coloringRuleLevels.n);
-		// }
+		this.lines.add(line);
 		coloringRuleLevels.levels[level_i].levelLines.add(line);
 	}
 	void removeLine(Line line){
@@ -271,7 +268,7 @@ class MainData {
 	}
 	String levelsToString(){
 		StringJoiner info = new StringJoiner("");
-		for (int n = 1; n < coloringRuleLevels.getN() + 1; ++n){
+		for (int n = 0; n < coloringRuleLevels.getN() + 1; ++n){
 			for (Line line: coloringRuleLevels.levels[n].levelLines){
 				info.add(FileSaver.level).add("\t").add("L"+n).add("\t").add(line.toString()).add("\n");
 			}
