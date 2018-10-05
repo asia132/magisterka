@@ -52,30 +52,30 @@ class ColoringRuleLevels {
 	void updateLevel0(ArrayList <Line> newLines){
 		this.levels[0].levelLines = newLines;
 	}
-	void updateWithRule(Category ruleCat, ArrayList <Line> ruleInitialLines, ArrayList <Line> ruleFinalLines){
+	void updateWithRule(Category ruleCat, ArrayList <Line> ruleInitialLines, ArrayList <Line> ruleFinalLines, MainData programData){
 		if (ruleCat == Category.A){ // left side => n
-			if (n != 0)	levels[n].update(ruleInitialLines);
+			this.increaseN();
+			levels[n].update(ruleInitialLines);
 			levels[n].closeLevel();
-			System.out.println("CATEGORY A");
 		}else if (ruleCat == Category.B){ // left side => n | right side => n+1
-			System.out.println("Cat B: (n = " + n + ")");
 			if (this.n_change){
 				if (n+1 < max_n_allowed){
 					this.increaseN();
-					System.out.println("increase n (n = " + n + ")");
 				}
 				this.n_change = false;
 			}
 			if (n != 0){
-				System.out.println("update n (n = " + n + ")");
 				levels[n].update(ruleInitialLines);
 			}
 			if (n+1 < max_n_allowed){
 				levels[n+1].update(ruleInitialLines);
-				System.out.println("update n+1 (n+1 = " + (n+1) + ")");
 			}	
 		}else if (ruleCat == Category.C){ // right side - left side => n+1
-			if (n+1 < max_n_allowed)	levels[n+1].update(ruleFinalLines);
+			programData.lines.addAll(ruleFinalLines);
+			if (n+1 < max_n_allowed){
+				levels[n+1].levelLines.addAll(ruleFinalLines);
+			}
+			// System.out.println("Compare lines id: " + levels[n+1].levelLines.get(levels[n+1].levelLines.size()-1) + " " + programData.lines.get(programData.lines.size() - 1));
 			this.n_change = true;
 		}
 		// System.out.println("KONTROLA N: n = " + n + ", ilosc leveli: " + levels.length);
@@ -107,7 +107,7 @@ class ColoringRuleLevels {
 				g2d.setPaint(limitingShape.getColor());				
 				g2d.fill(limitingShape.getShape()); 
 			}catch (NotClosedShape e) {;
-				MainData.COLOR_RULES = false;
+				MainData.setColorRules();
 				new MessageFrame(e.getMessage() + ". Limiting shape.");
 					System.out.println(e.getLocalizedMessage());
 			}
@@ -118,12 +118,12 @@ class ColoringRuleLevels {
 			g2d.setPaint(level.getColor());			
 			g2d.fill(level.getShape());
 		}catch (NotClosedShape e) {;
-			MainData.COLOR_RULES = false;
+			MainData.setColorRules();
 			new MessageFrame(e.getMessage() + ". Level index: 0");
 			System.out.println(e.getLocalizedMessage());
 		}
 
-		for (int i = 1; i < n; ++i) {
+		for (int i = 1; i <= n; ++i) {
 			try{
 				Level level = levels[i];
 				if (level.levelLines.size() <= 2) continue;
@@ -132,7 +132,7 @@ class ColoringRuleLevels {
 				g2d.fill(level.getShape());
 
 			}catch (NotClosedShape e) {;
-				MainData.COLOR_RULES = false;
+				MainData.setColorRules();
 				new MessageFrame(e.getMessage() + ". Level index: " + i);
 				System.out.println(e.getLocalizedMessage());
 			}

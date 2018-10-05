@@ -8,6 +8,7 @@ import java.util.function.*;
 import java.util.Stack;
 import java.util.LinkedList;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.StringJoiner;
 
 public class ColoringRule {
@@ -136,6 +137,10 @@ public class ColoringRule {
 		if (tag.charAt(1) == 'S') return MainData.coloringRuleLevels.limitingShape;
 		try{
 			int i = Integer.parseInt(tag.substring(1));
+			System.out.println(":::FIND LEVEL" + i);
+			System.out.println(":::FIND LEVEL " + MainData.coloringRuleLevels.levels[i]);
+			System.out.println(":::FIND LEVEL " + MainData.coloringRuleLevels.levels[i].area);
+			// MainData.coloringRuleLevels.levels[i].closeLevel();
 			return MainData.coloringRuleLevels.levels[i];
 		}catch(NumberFormatException e){
 			throw new WrongTag("Cannot parse level tag: " + tag);
@@ -150,6 +155,8 @@ public class ColoringRule {
 		Stack <Area> stack = new Stack<>();
 		Area result = new Area();
 
+		System.out.println(":::LEVEL ADDING");
+
 		for (String token: rpnText){
 			if (token.equals(levelAdd) || token.equals(levelIntersect) || token.equals(levelXOR) || token.equals(levelNot) || token.equals(levelSubstract)){
 				String level_b = sStack.pop();
@@ -160,12 +167,16 @@ public class ColoringRule {
 				Function  <Area [], Area> operation = parseOperation(token);
 				Area area_b = stack.pop();
 				Area area_a = stack.pop();
+				System.out.println("a: " + area_a + ", b: " + area_b + ", operation: " + operation);
 				result = operation.apply(new Area[]{area_a, area_b});
 				stack.add(result);
 			}else{
 				sStack.add(token);
 				stack.add(parseLevel(token).area);
 			}
+			System.out.println("::TOKEN: " + token);
+			System.out.println("::QUEUE: " + Arrays.toString(rpnText));
+			System.out.println("::STACK: " + stack);
 		}
 		sResult = sStack.pop();
 
@@ -174,20 +185,24 @@ public class ColoringRule {
 		return result;
 	}
 	static Area add(Area [] areas){
-		areas[0].add(areas[1]);
-		return areas[0];
+		Area result = (Area)areas[0].clone();
+		result.add(areas[1]);
+		return result;
 	}
 	static Area intersect(Area [] areas){
-		areas[0].intersect(areas[1]);
-		return areas[0];
+		Area result = (Area)areas[0].clone();
+		result.intersect(areas[1]);
+		return result;
 	}
 	static Area exclusiveOr(Area [] areas){
-		areas[0].exclusiveOr(areas[1]);
-		return areas[0];
+		Area result = (Area)areas[0].clone();
+		result.exclusiveOr(areas[1]);
+		return result;
 	}
 	static Area subtract(Area [] areas){
-		areas[0].subtract(areas[1]);
-		return areas[0];
+		Area result = (Area)areas[0].clone();
+		result.subtract(areas[1]);
+		return result;
 	}
 }
 class WrongTag extends Exception {

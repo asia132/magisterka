@@ -28,6 +28,7 @@ class Level {
 		return this.color;
 	}
 	void closeLevel(){
+		System.out.println("---------------CLOSE-LEVEL---------------");
 		int before = levelLines.size();
 		do{
 			before = levelLines.size();
@@ -38,7 +39,7 @@ class Level {
 				this.points = generatePoints();
 			}catch(NotClosedShape e){
 				System.out.println(e.getMessage());
-				MainData.COLOR_RULES = false;
+				MainData.setColorRules();
 				// e.printStackTrace();
 			}
 		}
@@ -48,7 +49,7 @@ class Level {
 		levelShape.setWindingRule(GeneralPath.WIND_NON_ZERO);
 
 		if (points == null || points.length < 0){
-			throw new NotClosedShape("The shapes are not closed.");
+			throw new NotClosedShape("Points are null. The shapes are not closed.");
 		}
 		levelShape.moveTo(points[0][0], points[0][1]);
 		for (int k = 1; k < points.length; k++)
@@ -59,8 +60,18 @@ class Level {
 		area.intersect(MainData.coloringRuleLevels.limitingShape.area);
 		return area;
 	}
+	int moveToBackCounter = 0;
+	void moveToBack(Line line) throws NotClosedShape{
+		moveToBackCounter++;
+		if (moveToBackCounter == levelLines.size() - 1){
+			System.out.println("The points are not connected. Regression count = " + moveToBackCounter);
+			throw new NotClosedShape("The points are not connected. Regression count = " + moveToBackCounter);
+		}
+		levelLines.remove(line);
+		levelLines.add(line);
+	}
 	double [][] generatePoints() throws NotClosedShape{
-		System.out.println("-----------------------------------");
+
 
 		ArrayList <Double []> points = new ArrayList<>();
 
@@ -100,25 +111,19 @@ class Level {
 				}
 			}
 		}
-
-		System.out.println(points.get(points.size()-1)[0] + " != " + points.get(0)[0] + ": " + (Math.abs(points.get(points.size()-1)[0] - points.get(0)[0]) > precision) + ".\t"  + points.get(points.size()-1)[1] + " != " + points.get(0)[1] + ": " +(Math.abs(points.get(points.size()-1)[1] - points.get(0)[1]) > precision));
-
-		if (Math.abs(points.get(points.size()-1)[0] - points.get(0)[0]) > precision && Math.abs(points.get(points.size()-1)[1] - points.get(0)[1]) > precision){
-			System.out.println("The points are not connected.");
-			System.out.println("Check it there.get(is a chanse to close the shape");
+		if (Math.abs(points.get(points.size()-1)[0] - points.get(0)[0]) > precision || Math.abs(points.get(points.size()-1)[1] - points.get(0)[1]) > precision){
 			if (linesToCheck.size() == 0){
-				System.out.println("No, there isn't");
-				throw new NotClosedShape("The points [" + points.get(0)[0].intValue() + ", " + points.get(0)[1].intValue() + "] and [" + points.get(points.size()-1)[0].intValue() + ", " + points.get(points.size()-1)[1].intValue() + "] are not connected.");
+				this.moveToBack(levelLines.get(0));
+				return generatePoints();
 			}
-			System.out.println("Yes, we will check it futher");
 			for (Line line: linesToCheck) {
 				if (line.onLine(points.get(0)[0].intValue(), points.get(0)[1].intValue()) && line.onLine(points.get(points.size()-1)[0].intValue(), points.get(points.size()-1)[1].intValue())){
 					return arrayConverter(points.toArray(new Double[points.size()][2]));
 				}
 			}
-			throw new NotClosedShape("The points are not connected. There is no lines, that would pass both [" + points.get(0)[0].intValue() + ", " + points.get(0)[1].intValue() + "] and [" + points.get(points.size()-1)[0].intValue() + ", " + points.get(points.size()-1)[1].intValue() + "]");
-		}
-		System.out.println("Point are connected, so the shape is closed");
+			this.moveToBack(levelLines.get(0));
+			return generatePoints();
+			}
 		return arrayConverter(points.toArray(new Double[points.size()][2]));
 	}
 	static double [][] arrayConverter(Double [][] input){
@@ -139,16 +144,8 @@ class Level {
 		this.randColor();
 	}
 	void update(ArrayList <Line> newLevelLines){
-		int controlSize = this.levelLines.size();
 		for (Line newline: newLevelLines){
-			boolean shouldBeAdded = true;
-			for (int i = 0; i < controlSize; ++i){
-				if (this.levelLines.get(i).isTheSameLine(newline)){
-					shouldBeAdded = false;
-					break;
-				}
-			}
-			if (shouldBeAdded)	this.levelLines.add(newline);
+			this.levelLines.add(newline);
 		}
 	}
 	void addLine(Line newline){

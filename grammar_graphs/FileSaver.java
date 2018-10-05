@@ -84,6 +84,11 @@ class FileSaver{
 				if (n.equals(lineContent[0])){
 					MainData.coloringRuleLevels.setN(Integer.parseInt(lineContent[1]));
 				} else if (paintingRule.equals(lineContent[0])){
+					MainData.coloringRuleLevels.limitingShape.closeLevel();
+					System.out.println("LEVEL QTY: " + MainData.coloringRuleLevels.levels.length);
+					// for (int i = 0; i <= MainData.coloringRuleLevels.getN(); ++i){
+						MainData.coloringRuleLevels.levels[0].closeLevel();
+					// }
 					Color color = new Color(Integer.parseInt(lineContent[1]));
 					boolean isApp = Boolean.parseBoolean(lineContent[2]);
 					String [] tagsSet = lineContent[3].split(",");
@@ -105,7 +110,7 @@ class FileSaver{
 							System.out.println("WARNING: Marker was not added to input picture. " + e.getMessage());
 						}
 					}else{
-						panel.programData.addLine(this.parseLine(lineContent), false);
+						panel.programData.addLine(this.parseLine(lineContent), true);
 					}
 				}else{
 					String ruleName = lineContent[0].substring(1);

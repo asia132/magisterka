@@ -52,8 +52,11 @@ final class Rule{
 		Shape inputshape = new Shape(panel.programData.getLines(), panel.programData.marker, "Input");
 
 		try{
+
+			System.out.println("-------------INPUT----------");
+			System.out.println(panel.programData.lines);
 			ArrayList <Line> found_lines = initialshape.findMatch(inputshape);
-			
+			System.out.println("-------------end finding match----------");
 			if (finalshape != null){
 				finalshape.needsToBeMirrored = inputshape.needsToBeMirrored;
 			}
@@ -76,8 +79,7 @@ final class Rule{
 							}
 						}
 						ArrayList <Line> finalLines = finalshape.setInPlace(inputMarker, initialshape.marker);
-						panel.programData.addLinesByRule(finalLines);
-						MainData.coloringRuleLevels.updateWithRule(this.cat, found_lines, finalLines);
+						MainData.coloringRuleLevels.updateWithRule(this.cat, found_lines, finalLines, panel.programData);
 					}catch (ToSmallRException e) {
 						new MessageFrame("Rule could not be applicated. " + e.getMessage());
 						panel.programData.marker = inputMarker;
@@ -86,7 +88,7 @@ final class Rule{
 				}
 				else{
 					panel.programData.marker = null;
-					MainData.coloringRuleLevels.updateWithRule(this.cat, found_lines, null);
+					MainData.coloringRuleLevels.updateWithRule(this.cat, found_lines, null, panel.programData);
 				}
 				panel.repaint();
 			}

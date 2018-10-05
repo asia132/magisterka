@@ -17,9 +17,9 @@ class Shape{
 	double precision = 1e-12;
 
 	Shape(ArrayList <Line> lines, Marker marker){
+		this.name = "Rule B site";
 		this.marker = marker;
 		this.lines_dist = new HashMap<Line, Dist>();
-		this.name = "Rule B site";
 		for (Line line: lines){
 			this.lines_dist.put(line.copy(), new Dist(line, marker));
 		}
@@ -35,7 +35,7 @@ class Shape{
 			lines = groupLines(lines);
 		}while (before != lines.size());
 		for (Line line: lines){
-			this.lines_dist.put(line.copy(), new Dist(line, marker));
+			this.lines_dist.put(line, new Dist(line, marker));
 		}
 	}
 	Shape(String name){
@@ -66,6 +66,7 @@ class Shape{
 		return 2*xc - x;
 	}
 	ArrayList <Line> findMatch(Shape inputShape) throws NotAllRuleLinesRecognized{
+		System.out.println("-------------find match----------");
 		double k = this.marker.length() / inputShape.marker.length();
 
 		ArrayList <Line> ruleLines = new ArrayList<>(this.lines_dist.keySet());
@@ -164,19 +165,23 @@ class Shape{
 							if (xrange[0] <= x1s_a && x1s_a <= xrange[1] && (x1s_a == x1a_a || x1s_a == x1a_b || x1s_a == x2a_a || x1s_a == x2a_b)){
 								if (xrange[0] <= x1s_b && x1s_b <= xrange[1] && (x1s_b == x1a_a || x1s_b == x1a_b || x1s_b == x2a_a || x1s_b == x2a_b) && line_r.small_length() == (MainData.distans(x1s_a, y1_a, x1s_b, y1_b) * k)){
 									newLine = new Line(x1s_a*MainData.grid_size, y1_a*MainData.grid_size, x1s_b*MainData.grid_size, y1_b*MainData.grid_size);
+									inLine_i.addChild(newLine);
 									var_x1a = true;
 								}else if (xrange[0] <= x2s_b && x2s_b <= xrange[1] && (x2s_b == x1a_a || x2s_b == x1a_b || x2s_b == x2a_a || x2s_b == x2a_b) && line_r.small_length() == (MainData.distans(x1s_a, y1_a, x2s_b, y2_b) * k)){
 									newLine = new Line(x1s_a*MainData.grid_size, y1_a*MainData.grid_size, x2s_b*MainData.grid_size, y2_b*MainData.grid_size);
+									inLine_i.addChild(newLine);
 									var_x1a = true;
 								}
 							}
 							if (var_x1a == false && xrange[0] <= x2s_a && x2s_a <= xrange[1] && (x2s_a == x1a_a || x2s_a == x1a_b || x2s_a == x2a_a || x2s_a == x2a_b)){
 								if (xrange[0] <= x1s_b && x1s_b <= xrange[1] && (x1s_b == x1a_a || x1s_b == x1a_b || x1s_b == x2a_a || x1s_b == x2a_b) && line_r.small_length() == (MainData.distans(x2s_a, y2_a, x1s_b, y1_b) * k)){
 									newLine = new Line(x2s_a*MainData.grid_size, y2_a*MainData.grid_size, x1s_b*MainData.grid_size, y1_b*MainData.grid_size);
+									inLine_i.addChild(newLine);
 									var_x1a = true;
 								}else{
 									if (xrange[0] <= x2s_b && x2s_b <= xrange[1] && (x2s_b == x1a_a || x2s_b == x1a_b || x2s_b == x2a_a || x2s_b == x2a_b) && line_r.small_length() == (MainData.distans(x2s_a, y2_a, x2s_b, y2_b) * k)){
 										newLine = new Line(x2s_a*MainData.grid_size, y2_a*MainData.grid_size, x2s_b*MainData.grid_size, y2_b*MainData.grid_size);
+										inLine_i.addChild(newLine);
 										var_x1a = true;
 									}else{
 										continue;
@@ -265,19 +270,23 @@ class Shape{
 							if (yrange[0] <= y1_a && y1_a <= yrange[1] && (y1_a == y1Aa_a || y1_a == y1Aa_b || y1_a == y2Aa_a || y1_a == y2Aa_b)){
 								if (yrange[0] <= y1_b && y1_b <= yrange[1] && (y1_b == y1Aa_a || y1_b == y1Aa_b || y1_b == y2Aa_a || y1_b == y2Aa_b) && line_r.small_length() == (MainData.distans(x, y1_a, x, y1_b) * k)){
 									newLine = new Line(x*MainData.grid_size, y1_a*MainData.grid_size, x*MainData.grid_size, y1_b*MainData.grid_size);
+									inLine_i.addChild(newLine);
 									var_x1a = true;
 								}else if (yrange[0] <= y2_b && y2_b <= yrange[1] && (y2_b == y1Aa_a || y2_b == y1Aa_b || y2_b == y2Aa_a || y2_b == y2Aa_b) && line_r.small_length() == (MainData.distans(x, y1_a, x, y2_b) * k)){
 									newLine = new Line(x*MainData.grid_size, y1_a*MainData.grid_size, x*MainData.grid_size, y2_b*MainData.grid_size);
+									line_r.addChild(newLine);
 									var_x1a = true;
 								}
 							}
 							if (var_x1a == false && yrange[0] <= y2_a && y2_a <= yrange[1] && (y2_a == y1Aa_a || y2_a == y1Aa_b || y2_a == y2Aa_a || y2_a == y2Aa_b)){
 								if (yrange[0] <= y1_b && y1_b <= yrange[1] && (y1_b == y1Aa_a || y1_b == y1Aa_b || y1_b == y2Aa_a || y1_b == y2Aa_b) && line_r.small_length() == (MainData.distans(x, y2_a, x, y1_b) * k)){
 									newLine = new Line(x*MainData.grid_size, y2_a*MainData.grid_size, x*MainData.grid_size, y1_b*MainData.grid_size);
+									inLine_i.addChild(newLine);
 									var_x1a = true;
 								}else{
 									if (yrange[0] <= y2_b && y2_b <= yrange[1] && (y2_b == y1Aa_a || y2_b == y1Aa_b || y2_b == y2Aa_a || y2_b == y2Aa_b) && line_r.small_length() == (MainData.distans(x, y2_a, x, y2_b) * k)){
 										newLine = new Line(x*MainData.grid_size, y2_a*MainData.grid_size, x*MainData.grid_size, y2_b*MainData.grid_size);
+										inLine_i.addChild(newLine);
 										var_x1a = true;
 									}else{
 										continue;
@@ -405,7 +414,7 @@ class Shape{
 	static ArrayList <Line> groupLines(ArrayList <Line> shape_lines){
 		ArrayList <Line> lines = new ArrayList<>();
 		for (Line line: shape_lines)
-			lines.add(line.copy());
+			lines.add(line);
 		for (int i = 0; i < lines.size(); ++i){
 			try{
 				double [] funparam_i = lines.get(i).getFunctionParams();

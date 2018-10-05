@@ -39,16 +39,18 @@ class EditColorRuleFrame extends JFrame {
 
 	ArrayList <String> tagList;
 	RuleComponents parentRuleData;
+	JFrame parent;
 
 	JTextArea ruleBody;
 	int pos = 0;
 	int tagPos = 0;
 
 
-	EditColorRuleFrame(RuleComponents ruleData) {
+	EditColorRuleFrame(RuleComponents ruleData, JFrame parent) {
 		super(ProgramLabels.editColorRuleFrame);
 
 		this.parentRuleData = ruleData;
+		this.parent = parent;
 		this.tagList = ruleData.tagsSetCopy();
 		System.out.println(tagList.size() + " found");
 
@@ -99,7 +101,7 @@ class EditColorRuleFrame extends JFrame {
 		JPanel levelPanel = new JPanel();
 		levelPanel.setBackground(Color.white);
 
-		for (int i = 0; i < MainData.coloringRuleLevels.getN(); i++){
+		for (int i = 0; i <= MainData.coloringRuleLevels.getN(); i++){
 			levelPanel.add(addSign("L" + i));
 		}
 
@@ -189,6 +191,7 @@ class EditColorRuleFrame extends JFrame {
 			parentRuleData.rulesBodies.replaceRange(null, 0, parentRuleData.rulesBodies.getText().length());
 			parentRuleData.rulesBodies.insert(arrayListToString(tagList), 0);
 			parentRuleData.tagsSet = tagList;
+			this.parent.pack();
 			closeFrame();
 		});
 		return button;
@@ -220,9 +223,12 @@ class EditColorRuleFrame extends JFrame {
 		button.addActionListener(event -> {
 
 			String updatedOperator = "LS" + ColoringRule.levelSubstract;
+			
 			ruleBody.insert(updatedOperator, pos);
-			tagList.add(tagPos++, updatedOperator);
+			tagList.add(tagPos++, "LS");
+			tagList.add(tagPos++, ColoringRule.levelSubstract);
 			pos += updatedOperator.length();
+
 			this.ruleBody.setCaretPosition(pos);
 			ruleBody.getCaret().setVisible(true);
 		});

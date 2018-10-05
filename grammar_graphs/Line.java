@@ -8,18 +8,23 @@ import java.awt.Graphics2D;
 import java.lang.Math;
 
 import java.util.StringJoiner;
+import java.util.ArrayList;
 
 class Line{
 	Point pa;
 	Point pb;
 
+	private ArrayList <Line> childs = new ArrayList<>();
+
 	private Color color = MainData.default_figure_color;
 
 	Line(int x_a, int y_a, int x_b, int y_b){	
+		// System.out.println("CREATE LINE + " + this);
 		this.pa = new Point(toGrid(x_a), toGrid(y_a));
 		this.pb = new Point(toGrid(x_b), toGrid(y_b));
 	}
-	Line(Point a, Point b){	
+	Line(Point a, Point b){
+		// System.out.println("CREATE LINE + " + this);
 		this.pa = a;
 		this.pb = b;
 	}
@@ -41,6 +46,10 @@ class Line{
 			if (v < xx)	return (int)Math.floor(v);
 			else		return (int)Math.ceil(v);
 		}
+	}
+	void addChild(Line line){
+		this.childs.add(line);
+		System.out.println(this + " add child: " + line);
 	}
 	void scale(int x, int y, double s){
 		// pa.x = round((pa.x - x) * s + x, x, s);
@@ -175,27 +184,63 @@ class Line{
 			return result;
 		}
 	}
+// sets
 	void setXY_a(int x_a, int y_a){
+		System.out.println("SET XY A");
 		this.pa.x = toGrid(x_a);
 		this.pa.y = toGrid(y_a);
+		if (!childs.isEmpty()){
+			for (Line child: childs){
+				System.out.println("\tSET XY A CHILD");
+				child.setXY_a(x_a, y_a);
+			}
+		}
 	}
 	void setXY_b(int x_b, int y_b){
+		System.out.println("SET XY B");
 		this.pb.x = toGrid(x_b);
 		this.pb.y = toGrid(y_b);
+		if (!childs.isEmpty()){
+			for (Line child: childs){
+				System.out.println("\tSET XY B CHILD");
+				child.setXY_b(x_b, y_b);
+			}
+		}
 	}
 	void setA(int [] points){
+		System.out.println("SET A");
 		this.pa.x = points[0];
 		this.pa.y = points[1];
+		if (!childs.isEmpty()){
+			for (Line child: childs){
+				System.out.println("\tSET V CHILD");
+				child.setA(points);
+			}
+		}
 	}
 	void setB(int [] points){
+		System.out.println("SET B");
 		this.pb.x = points[0];
 		this.pb.y = points[1];
+		if (!childs.isEmpty()){
+			for (Line child: childs){
+				System.out.println("\tSET B CHILD");
+				child.setB(points);
+			}
+		}
 	}
 	void move(int x, int y){
+		System.out.println("MOVE " + childs);
 		this.pa.x += toGrid(x); 
 		this.pa.y += toGrid(y);
 		this.pb.x += toGrid(x);
 		this.pb.y += toGrid(y);
+		if (!childs.isEmpty()){
+			for (Line child: childs){
+				System.out.println("\tMOVE CHILD");
+				child.move(x, y);
+			}
+		}
 	}
 	// check if the other line has the same a nad b params as the line
 	boolean compareABParams(Line otherLine){
@@ -237,8 +282,6 @@ class Line{
 	}
 	// check if the point of x and y coordinates are in the line
 	boolean onLine(int x, int y){
-		System.out.print("::: Analyze line\t"); this.print();
-		System.out.println("::: Point [" + x + ", " + y + "]");
 		try{
 			int x_1, x_2;
 			if (this.pa.x < this.pb.x){
@@ -250,9 +293,6 @@ class Line{
 				x_2 = this.pa.x;
 			}
 			double [] ab = getFunctionParamsOnGrid();
-			System.out.println("::: " + y + " == " + (int)Math.round(ab[0] * x + ab[1]) + ": " + (y == (int)Math.round(ab[0] * y + ab[1])));
-			System.out.println("::: " + x_1 + " <= " + x + ": " + (x_1 <= x));
-			System.out.println("::: " + x + " <= " + x_2 + ": " + (x <= x_2));
 			if (y == (int)Math.round(ab[0] * x + ab[1]) && x_1 <= x && x <= x_2)
 				return true;			
 		}
@@ -302,11 +342,11 @@ class Line{
 	void print(){
 		System.out.println("Line: A("+pa.x+", "+pa.y+") - B("+pb.x+", "+pb.y+")");
 	}
-	@Override
-	public String toString(){
-		StringJoiner info = new StringJoiner("\t");
-		return info.add(FileSaver.lineTag).add("" + pa.x).add("" + pa.y).add("" + pb.x).add(pb.y + "").toString();
-	}
+	// @Override
+	// public String toString(){
+	// 	StringJoiner info = new StringJoiner("\t");
+	// 	return info.add(FileSaver.lineTag).add("" + pa.x).add("" + pa.y).add("" + pb.x).add(pb.y + "").toString();
+	// }
 	boolean isTheSameLine(Line other){
 		if (this.pa.x != other.pa.x) return false;
 		if (this.pa.y != other.pa.y) return false;

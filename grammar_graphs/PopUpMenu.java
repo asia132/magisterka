@@ -25,14 +25,14 @@ import java.io.File;
 class PopUpMenu extends JPopupMenu {
 	PopUpMenu(MainPanel panel){
 		if(!(panel instanceof LeftRulePanel) && !(panel instanceof RigthRulePanel)){
-			if (!MainData.COLOR_RULES && !MainData.LIMITING_SHAPE){
+			if (!MainData.getColorRules() && !MainData.LIMITING_SHAPE){
 				showRulesChanging(panel);
 				showRuleListOptions(panel);
 				showGrammarOptions(panel);
 			}
 			showColoringRuleLevelss(panel);
 		}
-		if (!MainData.COLOR_RULES){
+		if (!MainData.getColorRules()){
 			showViewSettings(panel);
 			showElemEdit(panel);
 			if (!MainData.LIMITING_SHAPE)
@@ -173,7 +173,7 @@ class PopUpMenu extends JPopupMenu {
 			buttonMenu.add(showColorRuleOption(panel));
 			buttonMenu.add(addColoringRuleLevels(panel));
 		}
-		if (!MainData.COLOR_RULES)
+		if (!MainData.getColorRules())
 			buttonMenu.add(showColorRuleLimitingShape(panel));
 		buttonMenu.add(drawLevels(panel));
 		add(buttonMenu);
@@ -217,16 +217,16 @@ class PopUpMenu extends JPopupMenu {
 	}
 	JMenuItem showColorRuleOption(MainPanel panel){
 		JMenuItem colorRuleOption = new JMenuItem();
-		if (MainData.COLOR_RULES)
+		if (MainData.getColorRules())
 			colorRuleOption.setText(ProgramLabels.colorRuleOptionOff);
 		else
 			colorRuleOption.setText(ProgramLabels.colorRuleOptionOn);
 		colorRuleOption.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
+				System.out.println("----------------TURN RENDERING ON----------------");
 				MainData.coloringRuleLevels.limitingShape.closeLevel();
 				MainData.coloringRuleLevels.levels[0].closeLevel();
-				MainData.COLOR_RULES = !MainData.COLOR_RULES;
-				panel.programData.updateLimitShapeColor();
+				MainData.setColorRules();
 			}
 		});
 		return colorRuleOption;
@@ -415,10 +415,12 @@ class PopUpMenu extends JPopupMenu {
 
 		grammar.add(showOpenFile(panel));
 		grammar.add(showSaveFile(panel));
-		grammar.add(showSimulate(panel));
-		grammar.add(showResetAllOption(panel));
-		if (MainData.file != null)
+		if (MainData.file != null){
+			grammar.add(showSaveTheFile(panel));
 			grammar.add(showResetOption(panel));
+		}
+		grammar.add(showResetAllOption(panel));
+		grammar.add(showSimulate(panel));
 
 		add(grammar);
 	}
@@ -463,7 +465,20 @@ class PopUpMenu extends JPopupMenu {
 		});
 		return resetButton;
 	}
-	// save document
+	// save the document
+	JMenuItem showSaveTheFile(MainPanel panel){
+		JMenuItem resetButton = new JMenuItem();
+		resetButton.setText(ProgramLabels.saveGrammar + " " + MainData.file.getName());
+		resetButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ev) {
+				FileSaver fileSaver = new FileSaver(MainData.file);
+				fileSaver.saveDataFile(panel);
+				panel.repaint();
+			}
+		});
+		return resetButton;
+	}
+	// save as document
 	JMenuItem showSaveFile(MainPanel panel){
 		JFileChooser fc = new JFileChooser("./temp/");
 		fc.setFileFilter(new FileNameExtensionFilter(ProgramLabels.extensionGrammarInfo, ProgramLabels.extensionGrammar));

@@ -3,7 +3,10 @@ Bugs:
   ☐ poprawić precyzję skalowania @low
 
   ☐ wprowadzić przycinanie linii na potrzeby kolorowania (SG1) w momencie przejścia do następnego levelu @started
-  ☐ po wyjściu z Render mode kolor limit shape zmienia się na czarny
+  ☐ przesuwanie poziomów: podlinie znalezione na inpucie powinny być childem odpowiadających ich linii i przesuwać się razem z rodzicem.
+  ☐ poprawić rule application list
+  ☐ zmienić sposób zapisu do plików linii
+  ☐ problem z usuwaniem ostatniej reguły kolorowania
 --- ✄ -----------------------
 BRs:
   ☐ symulacja @critical @started
@@ -13,6 +16,8 @@ BRs:
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✔ przesuwanie poziomów nie działa (dodawaj do poziomów dla A i B odnalezione linie inputa, a nie przerobione linie rule left side) @done (18-10-05 12:52) @project(Bugs)
+ ✔ po wyjściu z Render mode kolor limit shape zmienia się na czarny @done (18-10-03 15:16) @project(Bugs)
  ✔ poprawić proces wprowadzania limit shape @done (18-10-03 13:31) @project(Bugs)
  ✔ obszar ograniczający jest widokiem kamery - koloruje się tylko to, co się w nim mieści @done (18-10-03 12:20) @project(Bugs)
  ✔ zaimplemntować obsługę nawiasów i ~ dla reguł kolorowania @done (18-10-02 07:58) @project(Bugs)

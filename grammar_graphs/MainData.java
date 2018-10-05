@@ -3,6 +3,7 @@ package grammar_graphs;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 import java.util.ArrayList;
 import java.util.StringJoiner;
@@ -23,7 +24,7 @@ class MainData {
 	static boolean SHOW_DIST = false;
 	static boolean SHOW_POINTS = false;
 	static boolean SHOW_GRID = true;
-	static boolean COLOR_RULES = false;
+	private static boolean COLOR_RULES = false;
 	static boolean LIMITING_SHAPE = false;
 	static boolean DRAW_LEVELS = false;
 
@@ -32,7 +33,7 @@ class MainData {
 	Marker modified_marker = null;
 
 
-	private ArrayList <Line> lines = new ArrayList<Line>();
+	ArrayList <Line> lines = new ArrayList<Line>();
 	private ArrayList <Line> linesStack = null;
 	static ColoringRuleLevels coloringRuleLevels = null;
 
@@ -52,7 +53,7 @@ class MainData {
 	static ArrayList <Rule> ruleList = new ArrayList<>(); 
 	static ArrayList <Rule> ruleAppList = new ArrayList<>();
 
-	// BLACK BLUE CYAN DARK_GRAY GRAY GREEN LIGHT_GRAY MAGENTA ORANGE PINK RED WHITE YELLOW
+// BLACK BLUE CYAN DARK_GRAY GRAY GREEN LIGHT_GRAY MAGENTA ORANGE PINK RED WHITE YELLOW
 	static Color default_figure_color = Color.BLACK;
 	static Color default_background_color = Color.WHITE;
 	static Color default_check_color = Color.RED;
@@ -67,7 +68,14 @@ class MainData {
 			coloringRuleLevels.updateLevel0(line);
 		}
 	}
-
+// Color rules
+	static boolean getColorRules(){
+		return COLOR_RULES;
+	}
+	static void setColorRules(){
+		COLOR_RULES = !COLOR_RULES;
+		updateLimitShapeColor();
+	}
 // lines
 	void setLines(ArrayList <Line> newLines){
 		this.lines = newLines;
@@ -138,8 +146,8 @@ class MainData {
 			s.drawLine(g2d, point0);
 		}
 	}
-	void updateLimitShapeColor(){
-		for (Line line: this.temp_shape){
+	static void updateLimitShapeColor(){
+		for (Line line: coloringRuleLevels.limitingShape.levelLines){
 			line.changeColor(default_check_marker_color);
 		}
 	}
@@ -263,13 +271,10 @@ class MainData {
 	}
 	String levelsToString(){
 		StringJoiner info = new StringJoiner("");
-		int i = 0;
-		for (Level level: coloringRuleLevels.levels){
-			if (i > coloringRuleLevels.getN() + 1) break;
-			for (Line line: level.levelLines){
-				info.add(FileSaver.level).add("\t").add("L"+i).add("\t").add(line.toString()).add("\n");
+		for (int n = 1; n < coloringRuleLevels.getN() + 1; ++n){
+			for (Line line: coloringRuleLevels.levels[n].levelLines){
+				info.add(FileSaver.level).add("\t").add("L"+n).add("\t").add(line.toString()).add("\n");
 			}
-			i++;
 		}
 		return info.toString();
 	}
@@ -455,6 +460,18 @@ class MainData {
 		}
 	}
 // drawing
+	void render(Graphics2D g2d){
+		// this.print();
+
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+		for (ColoringRule rule: rulePainting) {
+			g2d.setPaint(rule.getColor());		
+			g2d.fill(rule.paintCavnas);
+		}
+		g2d.dispose();
+	}
 	void drawLines(Graphics2D g2d) {
 		for (Line s : lines) {
 			s.drawLine(g2d, point0);
@@ -462,14 +479,21 @@ class MainData {
 	}
 	void drawTempLine(Graphics2D g2d) {
 		for (Line line: temp_shape){
-			if (LIMITING_SHAPE){
-				line.changeColor(MainData.default_figure_color);
-			}
 			line.drawLine(g2d, point0);
 		}
 	}
 	void paintGrid(Graphics2D g2d, int screenWidth, int screenHeight){
 		g2d.setColor(default_grid_color);
+		for (int i = point0[0]*grid_size, j = 0; i < 0; i -= grid_size, --j){
+			if (j%grid_section == 0) g2d.setStroke(new BasicStroke(2));
+			else g2d.setStroke(new BasicStroke(1));
+			g2d.drawLine(i, 0, i, screenHeight);
+		}
+		for (int i = point0[1]*grid_size, j = 0; i < 0; i -= grid_size, j--){
+			if (j%grid_section == 0) g2d.setStroke(new BasicStroke(2));
+			else g2d.setStroke(new BasicStroke(1));
+			g2d.drawLine(0, i, screenWidth, i);
+		}
 		for (int i = point0[0]*grid_size, j = 0; i < screenWidth; i += grid_size, j++){
 			if (j%grid_section == 0) g2d.setStroke(new BasicStroke(2));
 			else g2d.setStroke(new BasicStroke(1));

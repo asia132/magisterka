@@ -140,7 +140,7 @@ class CreateColorRuleFrame extends JFrame {
 		JButton addButton = new JButton(ProgramLabels.editRule);
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditColorRuleFrame editFrame = new EditColorRuleFrame(rule);
+				EditColorRuleFrame editFrame = new EditColorRuleFrame(rule, me);
 			}
 		});
 		return addButton;
@@ -156,6 +156,7 @@ class CreateColorRuleFrame extends JFrame {
 			}
 			// TODO: tutaj trzeba uzupełnić zapis reguł
 			try{
+				MainData.rulePainting.clear();
 				for (RuleComponents ruleData: rules){
 					MainData.rulePainting.add(new ColoringRule(ruleData.getApplicableTag(), ruleData.getColor(), ruleData.tagsSet));
 				}

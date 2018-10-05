@@ -1,0 +1,6283 @@
+-------------------OPEN SGXX.grammar-------------------
+----------APPLY RULE: B_Rule_1 of Category: B----------
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed]
+-------------find match----------
+grammar_graphs.Line@4bd550ae add child: grammar_graphs.Line@196e5768
+grammar_graphs.Line@4bd550ae add child: grammar_graphs.Line@7044d084
+-------------end finding match----------
+----------APPLY RULE: C_Rule_2 of Category: C----------
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed]
+-------------find match----------
+grammar_graphs.Line@785f38ed add child: grammar_graphs.Line@61dcc4ef
+grammar_graphs.Line@4bd550ae add child: grammar_graphs.Line@60451069
+grammar_graphs.Line@1d481b84 add child: grammar_graphs.Line@b7bce1e
+-------------end finding match----------
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+----------APPLY RULE: C_Rule_2 of Category: C----------
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed, grammar_graphs.Line@5d6dff05, grammar_graphs.Line@5a91a3fb, grammar_graphs.Line@129f2698, grammar_graphs.Line@474111eb, grammar_graphs.Line@75664bd1, grammar_graphs.Line@22bfb0fd, grammar_graphs.Line@49fff9d4, grammar_graphs.Line@6fe6749, grammar_graphs.Line@41819c84, grammar_graphs.Line@1e66f411, grammar_graphs.Line@28618f50, grammar_graphs.Line@5d50713a, grammar_graphs.Line@1078a3a8, grammar_graphs.Line@39171bca, grammar_graphs.Line@1da818b7, grammar_graphs.Line@43af6399]
+-------------find match----------
+grammar_graphs.Line@1d481b84 add child: grammar_graphs.Line@161ffda7
+grammar_graphs.Line@785f38ed add child: grammar_graphs.Line@17d77de5
+grammar_graphs.Line@45d4def2 add child: grammar_graphs.Line@4ae7b208
+-------------end finding match----------
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+----------APPLY RULE: B_Rule_1 of Category: B----------
+SET A
+SET B
+SET A
+SET B
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed, grammar_graphs.Line@5d6dff05, grammar_graphs.Line@5a91a3fb, grammar_graphs.Line@129f2698, grammar_graphs.Line@474111eb, grammar_graphs.Line@75664bd1, grammar_graphs.Line@22bfb0fd, grammar_graphs.Line@49fff9d4, grammar_graphs.Line@6fe6749, grammar_graphs.Line@41819c84, grammar_graphs.Line@1e66f411, grammar_graphs.Line@28618f50, grammar_graphs.Line@5d50713a, grammar_graphs.Line@1078a3a8, grammar_graphs.Line@39171bca, grammar_graphs.Line@1da818b7, grammar_graphs.Line@43af6399, grammar_graphs.Line@72eca366, grammar_graphs.Line@1bf78a59, grammar_graphs.Line@3763e497, grammar_graphs.Line@40637781, grammar_graphs.Line@57030b78, grammar_graphs.Line@7001e683, grammar_graphs.Line@58eee348, grammar_graphs.Line@3ea48ab, grammar_graphs.Line@1ab4d7c2, grammar_graphs.Line@4cfdcb65, grammar_graphs.Line@33371987, grammar_graphs.Line@1cec480a, grammar_graphs.Line@4d92f42c, grammar_graphs.Line@6f16a818, grammar_graphs.Line@64666f5c, grammar_graphs.Line@40dd732c]
+-------------find match----------
+grammar_graphs.Line@8de213b add child: grammar_graphs.Line@1ad14547
+grammar_graphs.Line@1cec480a add child: grammar_graphs.Line@4d9ad5ce
+grammar_graphs.Line@1cec480a add child: grammar_graphs.Line@712c1178
+-------------end finding match----------
+---------------CLOSE-LEVEL---------------
+----------APPLY RULE: C_Rule_2 of Category: C----------
+SET A
+SET B
+SET A
+SET B
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed, grammar_graphs.Line@5d6dff05, grammar_graphs.Line@5a91a3fb, grammar_graphs.Line@129f2698, grammar_graphs.Line@474111eb, grammar_graphs.Line@75664bd1, grammar_graphs.Line@22bfb0fd, grammar_graphs.Line@49fff9d4, grammar_graphs.Line@6fe6749, grammar_graphs.Line@41819c84, grammar_graphs.Line@1e66f411, grammar_graphs.Line@28618f50, grammar_graphs.Line@5d50713a, grammar_graphs.Line@1078a3a8, grammar_graphs.Line@39171bca, grammar_graphs.Line@1da818b7, grammar_graphs.Line@43af6399, grammar_graphs.Line@72eca366, grammar_graphs.Line@1bf78a59, grammar_graphs.Line@3763e497, grammar_graphs.Line@40637781, grammar_graphs.Line@57030b78, grammar_graphs.Line@7001e683, grammar_graphs.Line@58eee348, grammar_graphs.Line@3ea48ab, grammar_graphs.Line@1ab4d7c2, grammar_graphs.Line@4cfdcb65, grammar_graphs.Line@33371987, grammar_graphs.Line@1cec480a, grammar_graphs.Line@4d92f42c, grammar_graphs.Line@6f16a818, grammar_graphs.Line@64666f5c, grammar_graphs.Line@40dd732c]
+-------------find match----------
+grammar_graphs.Line@1cec480a add child: grammar_graphs.Line@5ac35862
+grammar_graphs.Line@33371987 add child: grammar_graphs.Line@4aa8d500
+grammar_graphs.Line@3763e497 add child: grammar_graphs.Line@51075d3e
+-------------end finding match----------
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+----------APPLY RULE: C_Rule_2 of Category: C----------
+SET A
+SET B
+SET A
+SET B
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed, grammar_graphs.Line@5d6dff05, grammar_graphs.Line@5a91a3fb, grammar_graphs.Line@129f2698, grammar_graphs.Line@474111eb, grammar_graphs.Line@75664bd1, grammar_graphs.Line@22bfb0fd, grammar_graphs.Line@49fff9d4, grammar_graphs.Line@6fe6749, grammar_graphs.Line@41819c84, grammar_graphs.Line@1e66f411, grammar_graphs.Line@28618f50, grammar_graphs.Line@5d50713a, grammar_graphs.Line@1078a3a8, grammar_graphs.Line@39171bca, grammar_graphs.Line@1da818b7, grammar_graphs.Line@43af6399, grammar_graphs.Line@72eca366, grammar_graphs.Line@1bf78a59, grammar_graphs.Line@3763e497, grammar_graphs.Line@40637781, grammar_graphs.Line@57030b78, grammar_graphs.Line@7001e683, grammar_graphs.Line@58eee348, grammar_graphs.Line@3ea48ab, grammar_graphs.Line@1ab4d7c2, grammar_graphs.Line@4cfdcb65, grammar_graphs.Line@33371987, grammar_graphs.Line@1cec480a, grammar_graphs.Line@4d92f42c, grammar_graphs.Line@6f16a818, grammar_graphs.Line@64666f5c, grammar_graphs.Line@40dd732c, grammar_graphs.Line@403121b7, grammar_graphs.Line@71719b, grammar_graphs.Line@cfdb440, grammar_graphs.Line@6778f64c, grammar_graphs.Line@2e0d5f8d, grammar_graphs.Line@25fb0e7e, grammar_graphs.Line@4445e135, grammar_graphs.Line@642fa567, grammar_graphs.Line@209a6f58, grammar_graphs.Line@5def1dcb, grammar_graphs.Line@3648030a, grammar_graphs.Line@2f559c39, grammar_graphs.Line@5c46d624, grammar_graphs.Line@79e28922, grammar_graphs.Line@fc48547, grammar_graphs.Line@cf364d2]
+-------------find match----------
+grammar_graphs.Line@7001e683 add child: grammar_graphs.Line@66ee749e
+grammar_graphs.Line@4cfdcb65 add child: grammar_graphs.Line@b284af8
+grammar_graphs.Line@33371987 add child: grammar_graphs.Line@20ed1867
+grammar_graphs.Line@3763e497 add child: grammar_graphs.Line@372f3d5c
+grammar_graphs.Line@45d4def2 add child: grammar_graphs.Line@2270f5a3
+-------------end finding match----------
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+----------APPLY RULE: C_Rule_2 of Category: C----------
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed, grammar_graphs.Line@5d6dff05, grammar_graphs.Line@5a91a3fb, grammar_graphs.Line@129f2698, grammar_graphs.Line@474111eb, grammar_graphs.Line@75664bd1, grammar_graphs.Line@22bfb0fd, grammar_graphs.Line@49fff9d4, grammar_graphs.Line@6fe6749, grammar_graphs.Line@41819c84, grammar_graphs.Line@1e66f411, grammar_graphs.Line@28618f50, grammar_graphs.Line@5d50713a, grammar_graphs.Line@1078a3a8, grammar_graphs.Line@39171bca, grammar_graphs.Line@1da818b7, grammar_graphs.Line@43af6399, grammar_graphs.Line@72eca366, grammar_graphs.Line@1bf78a59, grammar_graphs.Line@3763e497, grammar_graphs.Line@40637781, grammar_graphs.Line@57030b78, grammar_graphs.Line@7001e683, grammar_graphs.Line@58eee348, grammar_graphs.Line@3ea48ab, grammar_graphs.Line@1ab4d7c2, grammar_graphs.Line@4cfdcb65, grammar_graphs.Line@33371987, grammar_graphs.Line@1cec480a, grammar_graphs.Line@4d92f42c, grammar_graphs.Line@6f16a818, grammar_graphs.Line@64666f5c, grammar_graphs.Line@40dd732c, grammar_graphs.Line@403121b7, grammar_graphs.Line@71719b, grammar_graphs.Line@cfdb440, grammar_graphs.Line@6778f64c, grammar_graphs.Line@2e0d5f8d, grammar_graphs.Line@25fb0e7e, grammar_graphs.Line@4445e135, grammar_graphs.Line@642fa567, grammar_graphs.Line@209a6f58, grammar_graphs.Line@5def1dcb, grammar_graphs.Line@3648030a, grammar_graphs.Line@2f559c39, grammar_graphs.Line@5c46d624, grammar_graphs.Line@79e28922, grammar_graphs.Line@fc48547, grammar_graphs.Line@cf364d2, grammar_graphs.Line@6b46049f, grammar_graphs.Line@232007b0, grammar_graphs.Line@6dab1b55, grammar_graphs.Line@48d326ae, grammar_graphs.Line@13eaa1d7, grammar_graphs.Line@30d4299d, grammar_graphs.Line@590fd61, grammar_graphs.Line@54275d2b, grammar_graphs.Line@1efc797e, grammar_graphs.Line@1205ba61, grammar_graphs.Line@38ce17d, grammar_graphs.Line@1f56f98, grammar_graphs.Line@6fd5a488, grammar_graphs.Line@503cdda1, grammar_graphs.Line@34df49d2, grammar_graphs.Line@5c4f6fcd]
+-------------find match----------
+grammar_graphs.Line@7001e683 add child: grammar_graphs.Line@6aa86030
+grammar_graphs.Line@45d4def2 add child: grammar_graphs.Line@2477256e
+grammar_graphs.Line@72eca366 add child: grammar_graphs.Line@59bd9f17
+grammar_graphs.Line@4cfdcb65 add child: grammar_graphs.Line@7eabb2ea
+grammar_graphs.Line@4d92f42c add child: grammar_graphs.Line@572be4ef
+-------------end finding match----------
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+----------APPLY RULE: C_Rule_2 of Category: C----------
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed, grammar_graphs.Line@5d6dff05, grammar_graphs.Line@5a91a3fb, grammar_graphs.Line@129f2698, grammar_graphs.Line@474111eb, grammar_graphs.Line@75664bd1, grammar_graphs.Line@22bfb0fd, grammar_graphs.Line@49fff9d4, grammar_graphs.Line@6fe6749, grammar_graphs.Line@41819c84, grammar_graphs.Line@1e66f411, grammar_graphs.Line@28618f50, grammar_graphs.Line@5d50713a, grammar_graphs.Line@1078a3a8, grammar_graphs.Line@39171bca, grammar_graphs.Line@1da818b7, grammar_graphs.Line@43af6399, grammar_graphs.Line@72eca366, grammar_graphs.Line@1bf78a59, grammar_graphs.Line@3763e497, grammar_graphs.Line@40637781, grammar_graphs.Line@57030b78, grammar_graphs.Line@7001e683, grammar_graphs.Line@58eee348, grammar_graphs.Line@3ea48ab, grammar_graphs.Line@1ab4d7c2, grammar_graphs.Line@4cfdcb65, grammar_graphs.Line@33371987, grammar_graphs.Line@1cec480a, grammar_graphs.Line@4d92f42c, grammar_graphs.Line@6f16a818, grammar_graphs.Line@64666f5c, grammar_graphs.Line@40dd732c, grammar_graphs.Line@403121b7, grammar_graphs.Line@71719b, grammar_graphs.Line@cfdb440, grammar_graphs.Line@6778f64c, grammar_graphs.Line@2e0d5f8d, grammar_graphs.Line@25fb0e7e, grammar_graphs.Line@4445e135, grammar_graphs.Line@642fa567, grammar_graphs.Line@209a6f58, grammar_graphs.Line@5def1dcb, grammar_graphs.Line@3648030a, grammar_graphs.Line@2f559c39, grammar_graphs.Line@5c46d624, grammar_graphs.Line@79e28922, grammar_graphs.Line@fc48547, grammar_graphs.Line@cf364d2, grammar_graphs.Line@6b46049f, grammar_graphs.Line@232007b0, grammar_graphs.Line@6dab1b55, grammar_graphs.Line@48d326ae, grammar_graphs.Line@13eaa1d7, grammar_graphs.Line@30d4299d, grammar_graphs.Line@590fd61, grammar_graphs.Line@54275d2b, grammar_graphs.Line@1efc797e, grammar_graphs.Line@1205ba61, grammar_graphs.Line@38ce17d, grammar_graphs.Line@1f56f98, grammar_graphs.Line@6fd5a488, grammar_graphs.Line@503cdda1, grammar_graphs.Line@34df49d2, grammar_graphs.Line@5c4f6fcd, grammar_graphs.Line@4aeaf731, grammar_graphs.Line@7f9a9c5c, grammar_graphs.Line@5c054da7, grammar_graphs.Line@5481c654, grammar_graphs.Line@49cfe08a, grammar_graphs.Line@621ced93, grammar_graphs.Line@1482ec02, grammar_graphs.Line@4e6b3ba0, grammar_graphs.Line@28d59698, grammar_graphs.Line@78964957, grammar_graphs.Line@7de343a3, grammar_graphs.Line@7e0252e1, grammar_graphs.Line@69a3d0ba, grammar_graphs.Line@23b5f028, grammar_graphs.Line@442c41a6, grammar_graphs.Line@5f84a538]
+-------------find match----------
+grammar_graphs.Line@72eca366 add child: grammar_graphs.Line@53bc3a50
+grammar_graphs.Line@64666f5c add child: grammar_graphs.Line@753b70f0
+grammar_graphs.Line@4d92f42c add child: grammar_graphs.Line@715e4999
+grammar_graphs.Line@45d4def2 add child: grammar_graphs.Line@b098fef
+grammar_graphs.Line@57030b78 add child: grammar_graphs.Line@39554a64
+-------------end finding match----------
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+----------APPLY RULE: C_Rule_2 of Category: C----------
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed, grammar_graphs.Line@5d6dff05, grammar_graphs.Line@5a91a3fb, grammar_graphs.Line@129f2698, grammar_graphs.Line@474111eb, grammar_graphs.Line@75664bd1, grammar_graphs.Line@22bfb0fd, grammar_graphs.Line@49fff9d4, grammar_graphs.Line@6fe6749, grammar_graphs.Line@41819c84, grammar_graphs.Line@1e66f411, grammar_graphs.Line@28618f50, grammar_graphs.Line@5d50713a, grammar_graphs.Line@1078a3a8, grammar_graphs.Line@39171bca, grammar_graphs.Line@1da818b7, grammar_graphs.Line@43af6399, grammar_graphs.Line@72eca366, grammar_graphs.Line@1bf78a59, grammar_graphs.Line@3763e497, grammar_graphs.Line@40637781, grammar_graphs.Line@57030b78, grammar_graphs.Line@7001e683, grammar_graphs.Line@58eee348, grammar_graphs.Line@3ea48ab, grammar_graphs.Line@1ab4d7c2, grammar_graphs.Line@4cfdcb65, grammar_graphs.Line@33371987, grammar_graphs.Line@1cec480a, grammar_graphs.Line@4d92f42c, grammar_graphs.Line@6f16a818, grammar_graphs.Line@64666f5c, grammar_graphs.Line@40dd732c, grammar_graphs.Line@403121b7, grammar_graphs.Line@71719b, grammar_graphs.Line@cfdb440, grammar_graphs.Line@6778f64c, grammar_graphs.Line@2e0d5f8d, grammar_graphs.Line@25fb0e7e, grammar_graphs.Line@4445e135, grammar_graphs.Line@642fa567, grammar_graphs.Line@209a6f58, grammar_graphs.Line@5def1dcb, grammar_graphs.Line@3648030a, grammar_graphs.Line@2f559c39, grammar_graphs.Line@5c46d624, grammar_graphs.Line@79e28922, grammar_graphs.Line@fc48547, grammar_graphs.Line@cf364d2, grammar_graphs.Line@6b46049f, grammar_graphs.Line@232007b0, grammar_graphs.Line@6dab1b55, grammar_graphs.Line@48d326ae, grammar_graphs.Line@13eaa1d7, grammar_graphs.Line@30d4299d, grammar_graphs.Line@590fd61, grammar_graphs.Line@54275d2b, grammar_graphs.Line@1efc797e, grammar_graphs.Line@1205ba61, grammar_graphs.Line@38ce17d, grammar_graphs.Line@1f56f98, grammar_graphs.Line@6fd5a488, grammar_graphs.Line@503cdda1, grammar_graphs.Line@34df49d2, grammar_graphs.Line@5c4f6fcd, grammar_graphs.Line@4aeaf731, grammar_graphs.Line@7f9a9c5c, grammar_graphs.Line@5c054da7, grammar_graphs.Line@5481c654, grammar_graphs.Line@49cfe08a, grammar_graphs.Line@621ced93, grammar_graphs.Line@1482ec02, grammar_graphs.Line@4e6b3ba0, grammar_graphs.Line@28d59698, grammar_graphs.Line@78964957, grammar_graphs.Line@7de343a3, grammar_graphs.Line@7e0252e1, grammar_graphs.Line@69a3d0ba, grammar_graphs.Line@23b5f028, grammar_graphs.Line@442c41a6, grammar_graphs.Line@5f84a538, grammar_graphs.Line@1747114e, grammar_graphs.Line@14d680be, grammar_graphs.Line@5367133c, grammar_graphs.Line@4072755e, grammar_graphs.Line@6f90d17f, grammar_graphs.Line@4f637f43, grammar_graphs.Line@24f67b60, grammar_graphs.Line@77fd2225, grammar_graphs.Line@6092509d, grammar_graphs.Line@1e0f0e8c, grammar_graphs.Line@4ac2f369, grammar_graphs.Line@5d78ac2a, grammar_graphs.Line@438a51aa, grammar_graphs.Line@25975c39, grammar_graphs.Line@7893aa59, grammar_graphs.Line@71044a24]
+-------------find match----------
+grammar_graphs.Line@1bf78a59 add child: grammar_graphs.Line@6e6da6a9
+grammar_graphs.Line@64666f5c add child: grammar_graphs.Line@bc9085f
+grammar_graphs.Line@45d4def2 add child: grammar_graphs.Line@79ada703
+grammar_graphs.Line@40637781 add child: grammar_graphs.Line@2aab9778
+grammar_graphs.Line@57030b78 add child: grammar_graphs.Line@29f0246a
+-------------end finding match----------
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+----------APPLY RULE: C_Rule_2 of Category: C----------
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed, grammar_graphs.Line@5d6dff05, grammar_graphs.Line@5a91a3fb, grammar_graphs.Line@129f2698, grammar_graphs.Line@474111eb, grammar_graphs.Line@75664bd1, grammar_graphs.Line@22bfb0fd, grammar_graphs.Line@49fff9d4, grammar_graphs.Line@6fe6749, grammar_graphs.Line@41819c84, grammar_graphs.Line@1e66f411, grammar_graphs.Line@28618f50, grammar_graphs.Line@5d50713a, grammar_graphs.Line@1078a3a8, grammar_graphs.Line@39171bca, grammar_graphs.Line@1da818b7, grammar_graphs.Line@43af6399, grammar_graphs.Line@72eca366, grammar_graphs.Line@1bf78a59, grammar_graphs.Line@3763e497, grammar_graphs.Line@40637781, grammar_graphs.Line@57030b78, grammar_graphs.Line@7001e683, grammar_graphs.Line@58eee348, grammar_graphs.Line@3ea48ab, grammar_graphs.Line@1ab4d7c2, grammar_graphs.Line@4cfdcb65, grammar_graphs.Line@33371987, grammar_graphs.Line@1cec480a, grammar_graphs.Line@4d92f42c, grammar_graphs.Line@6f16a818, grammar_graphs.Line@64666f5c, grammar_graphs.Line@40dd732c, grammar_graphs.Line@403121b7, grammar_graphs.Line@71719b, grammar_graphs.Line@cfdb440, grammar_graphs.Line@6778f64c, grammar_graphs.Line@2e0d5f8d, grammar_graphs.Line@25fb0e7e, grammar_graphs.Line@4445e135, grammar_graphs.Line@642fa567, grammar_graphs.Line@209a6f58, grammar_graphs.Line@5def1dcb, grammar_graphs.Line@3648030a, grammar_graphs.Line@2f559c39, grammar_graphs.Line@5c46d624, grammar_graphs.Line@79e28922, grammar_graphs.Line@fc48547, grammar_graphs.Line@cf364d2, grammar_graphs.Line@6b46049f, grammar_graphs.Line@232007b0, grammar_graphs.Line@6dab1b55, grammar_graphs.Line@48d326ae, grammar_graphs.Line@13eaa1d7, grammar_graphs.Line@30d4299d, grammar_graphs.Line@590fd61, grammar_graphs.Line@54275d2b, grammar_graphs.Line@1efc797e, grammar_graphs.Line@1205ba61, grammar_graphs.Line@38ce17d, grammar_graphs.Line@1f56f98, grammar_graphs.Line@6fd5a488, grammar_graphs.Line@503cdda1, grammar_graphs.Line@34df49d2, grammar_graphs.Line@5c4f6fcd, grammar_graphs.Line@4aeaf731, grammar_graphs.Line@7f9a9c5c, grammar_graphs.Line@5c054da7, grammar_graphs.Line@5481c654, grammar_graphs.Line@49cfe08a, grammar_graphs.Line@621ced93, grammar_graphs.Line@1482ec02, grammar_graphs.Line@4e6b3ba0, grammar_graphs.Line@28d59698, grammar_graphs.Line@78964957, grammar_graphs.Line@7de343a3, grammar_graphs.Line@7e0252e1, grammar_graphs.Line@69a3d0ba, grammar_graphs.Line@23b5f028, grammar_graphs.Line@442c41a6, grammar_graphs.Line@5f84a538, grammar_graphs.Line@1747114e, grammar_graphs.Line@14d680be, grammar_graphs.Line@5367133c, grammar_graphs.Line@4072755e, grammar_graphs.Line@6f90d17f, grammar_graphs.Line@4f637f43, grammar_graphs.Line@24f67b60, grammar_graphs.Line@77fd2225, grammar_graphs.Line@6092509d, grammar_graphs.Line@1e0f0e8c, grammar_graphs.Line@4ac2f369, grammar_graphs.Line@5d78ac2a, grammar_graphs.Line@438a51aa, grammar_graphs.Line@25975c39, grammar_graphs.Line@7893aa59, grammar_graphs.Line@71044a24, grammar_graphs.Line@6a385afb, grammar_graphs.Line@7eb97d00, grammar_graphs.Line@8df35f8, grammar_graphs.Line@20a493fd, grammar_graphs.Line@8e3ea90, grammar_graphs.Line@3d07c7f1, grammar_graphs.Line@4c86555c, grammar_graphs.Line@48391c4a, grammar_graphs.Line@59cdbff3, grammar_graphs.Line@5f99d8b7, grammar_graphs.Line@5c22b4fa, grammar_graphs.Line@22702697, grammar_graphs.Line@22abb5df, grammar_graphs.Line@33e68d5d, grammar_graphs.Line@7a2a6abf, grammar_graphs.Line@26b7ec58]
+-------------find match----------
+grammar_graphs.Line@6f16a818 add child: grammar_graphs.Line@213c11b6
+grammar_graphs.Line@58eee348 add child: grammar_graphs.Line@86ae8bc
+grammar_graphs.Line@1bf78a59 add child: grammar_graphs.Line@3cecec65
+grammar_graphs.Line@40637781 add child: grammar_graphs.Line@2520128c
+grammar_graphs.Line@45d4def2 add child: grammar_graphs.Line@64d0063f
+-------------end finding match----------
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+----------APPLY RULE: C_Rule_2 of Category: C----------
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed, grammar_graphs.Line@5d6dff05, grammar_graphs.Line@5a91a3fb, grammar_graphs.Line@129f2698, grammar_graphs.Line@474111eb, grammar_graphs.Line@75664bd1, grammar_graphs.Line@22bfb0fd, grammar_graphs.Line@49fff9d4, grammar_graphs.Line@6fe6749, grammar_graphs.Line@41819c84, grammar_graphs.Line@1e66f411, grammar_graphs.Line@28618f50, grammar_graphs.Line@5d50713a, grammar_graphs.Line@1078a3a8, grammar_graphs.Line@39171bca, grammar_graphs.Line@1da818b7, grammar_graphs.Line@43af6399, grammar_graphs.Line@72eca366, grammar_graphs.Line@1bf78a59, grammar_graphs.Line@3763e497, grammar_graphs.Line@40637781, grammar_graphs.Line@57030b78, grammar_graphs.Line@7001e683, grammar_graphs.Line@58eee348, grammar_graphs.Line@3ea48ab, grammar_graphs.Line@1ab4d7c2, grammar_graphs.Line@4cfdcb65, grammar_graphs.Line@33371987, grammar_graphs.Line@1cec480a, grammar_graphs.Line@4d92f42c, grammar_graphs.Line@6f16a818, grammar_graphs.Line@64666f5c, grammar_graphs.Line@40dd732c, grammar_graphs.Line@403121b7, grammar_graphs.Line@71719b, grammar_graphs.Line@cfdb440, grammar_graphs.Line@6778f64c, grammar_graphs.Line@2e0d5f8d, grammar_graphs.Line@25fb0e7e, grammar_graphs.Line@4445e135, grammar_graphs.Line@642fa567, grammar_graphs.Line@209a6f58, grammar_graphs.Line@5def1dcb, grammar_graphs.Line@3648030a, grammar_graphs.Line@2f559c39, grammar_graphs.Line@5c46d624, grammar_graphs.Line@79e28922, grammar_graphs.Line@fc48547, grammar_graphs.Line@cf364d2, grammar_graphs.Line@6b46049f, grammar_graphs.Line@232007b0, grammar_graphs.Line@6dab1b55, grammar_graphs.Line@48d326ae, grammar_graphs.Line@13eaa1d7, grammar_graphs.Line@30d4299d, grammar_graphs.Line@590fd61, grammar_graphs.Line@54275d2b, grammar_graphs.Line@1efc797e, grammar_graphs.Line@1205ba61, grammar_graphs.Line@38ce17d, grammar_graphs.Line@1f56f98, grammar_graphs.Line@6fd5a488, grammar_graphs.Line@503cdda1, grammar_graphs.Line@34df49d2, grammar_graphs.Line@5c4f6fcd, grammar_graphs.Line@4aeaf731, grammar_graphs.Line@7f9a9c5c, grammar_graphs.Line@5c054da7, grammar_graphs.Line@5481c654, grammar_graphs.Line@49cfe08a, grammar_graphs.Line@621ced93, grammar_graphs.Line@1482ec02, grammar_graphs.Line@4e6b3ba0, grammar_graphs.Line@28d59698, grammar_graphs.Line@78964957, grammar_graphs.Line@7de343a3, grammar_graphs.Line@7e0252e1, grammar_graphs.Line@69a3d0ba, grammar_graphs.Line@23b5f028, grammar_graphs.Line@442c41a6, grammar_graphs.Line@5f84a538, grammar_graphs.Line@1747114e, grammar_graphs.Line@14d680be, grammar_graphs.Line@5367133c, grammar_graphs.Line@4072755e, grammar_graphs.Line@6f90d17f, grammar_graphs.Line@4f637f43, grammar_graphs.Line@24f67b60, grammar_graphs.Line@77fd2225, grammar_graphs.Line@6092509d, grammar_graphs.Line@1e0f0e8c, grammar_graphs.Line@4ac2f369, grammar_graphs.Line@5d78ac2a, grammar_graphs.Line@438a51aa, grammar_graphs.Line@25975c39, grammar_graphs.Line@7893aa59, grammar_graphs.Line@71044a24, grammar_graphs.Line@6a385afb, grammar_graphs.Line@7eb97d00, grammar_graphs.Line@8df35f8, grammar_graphs.Line@20a493fd, grammar_graphs.Line@8e3ea90, grammar_graphs.Line@3d07c7f1, grammar_graphs.Line@4c86555c, grammar_graphs.Line@48391c4a, grammar_graphs.Line@59cdbff3, grammar_graphs.Line@5f99d8b7, grammar_graphs.Line@5c22b4fa, grammar_graphs.Line@22702697, grammar_graphs.Line@22abb5df, grammar_graphs.Line@33e68d5d, grammar_graphs.Line@7a2a6abf, grammar_graphs.Line@26b7ec58, grammar_graphs.Line@3b202d11, grammar_graphs.Line@60f471d4, grammar_graphs.Line@4565ab34, grammar_graphs.Line@2160ac59, grammar_graphs.Line@1b9245c1, grammar_graphs.Line@58abfdb6, grammar_graphs.Line@307fd19c, grammar_graphs.Line@1459b1ae, grammar_graphs.Line@52095b82, grammar_graphs.Line@1dec42a9, grammar_graphs.Line@1a2d4aef, grammar_graphs.Line@54109b07, grammar_graphs.Line@d1d84ea, grammar_graphs.Line@729b66ea, grammar_graphs.Line@2113064, grammar_graphs.Line@3352affd]
+-------------find match----------
+grammar_graphs.Line@6f16a818 add child: grammar_graphs.Line@1ad7234b
+grammar_graphs.Line@5d50713a add child: grammar_graphs.Line@11ceb265
+grammar_graphs.Line@58eee348 add child: grammar_graphs.Line@9832e95
+grammar_graphs.Line@45d4def2 add child: grammar_graphs.Line@2f88551f
+grammar_graphs.Line@6fe6749 add child: grammar_graphs.Line@c66f6de
+-------------end finding match----------
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+----------APPLY RULE: C_Rule_2 of Category: C----------
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed, grammar_graphs.Line@5d6dff05, grammar_graphs.Line@5a91a3fb, grammar_graphs.Line@129f2698, grammar_graphs.Line@474111eb, grammar_graphs.Line@75664bd1, grammar_graphs.Line@22bfb0fd, grammar_graphs.Line@49fff9d4, grammar_graphs.Line@6fe6749, grammar_graphs.Line@41819c84, grammar_graphs.Line@1e66f411, grammar_graphs.Line@28618f50, grammar_graphs.Line@5d50713a, grammar_graphs.Line@1078a3a8, grammar_graphs.Line@39171bca, grammar_graphs.Line@1da818b7, grammar_graphs.Line@43af6399, grammar_graphs.Line@72eca366, grammar_graphs.Line@1bf78a59, grammar_graphs.Line@3763e497, grammar_graphs.Line@40637781, grammar_graphs.Line@57030b78, grammar_graphs.Line@7001e683, grammar_graphs.Line@58eee348, grammar_graphs.Line@3ea48ab, grammar_graphs.Line@1ab4d7c2, grammar_graphs.Line@4cfdcb65, grammar_graphs.Line@33371987, grammar_graphs.Line@1cec480a, grammar_graphs.Line@4d92f42c, grammar_graphs.Line@6f16a818, grammar_graphs.Line@64666f5c, grammar_graphs.Line@40dd732c, grammar_graphs.Line@403121b7, grammar_graphs.Line@71719b, grammar_graphs.Line@cfdb440, grammar_graphs.Line@6778f64c, grammar_graphs.Line@2e0d5f8d, grammar_graphs.Line@25fb0e7e, grammar_graphs.Line@4445e135, grammar_graphs.Line@642fa567, grammar_graphs.Line@209a6f58, grammar_graphs.Line@5def1dcb, grammar_graphs.Line@3648030a, grammar_graphs.Line@2f559c39, grammar_graphs.Line@5c46d624, grammar_graphs.Line@79e28922, grammar_graphs.Line@fc48547, grammar_graphs.Line@cf364d2, grammar_graphs.Line@6b46049f, grammar_graphs.Line@232007b0, grammar_graphs.Line@6dab1b55, grammar_graphs.Line@48d326ae, grammar_graphs.Line@13eaa1d7, grammar_graphs.Line@30d4299d, grammar_graphs.Line@590fd61, grammar_graphs.Line@54275d2b, grammar_graphs.Line@1efc797e, grammar_graphs.Line@1205ba61, grammar_graphs.Line@38ce17d, grammar_graphs.Line@1f56f98, grammar_graphs.Line@6fd5a488, grammar_graphs.Line@503cdda1, grammar_graphs.Line@34df49d2, grammar_graphs.Line@5c4f6fcd, grammar_graphs.Line@4aeaf731, grammar_graphs.Line@7f9a9c5c, grammar_graphs.Line@5c054da7, grammar_graphs.Line@5481c654, grammar_graphs.Line@49cfe08a, grammar_graphs.Line@621ced93, grammar_graphs.Line@1482ec02, grammar_graphs.Line@4e6b3ba0, grammar_graphs.Line@28d59698, grammar_graphs.Line@78964957, grammar_graphs.Line@7de343a3, grammar_graphs.Line@7e0252e1, grammar_graphs.Line@69a3d0ba, grammar_graphs.Line@23b5f028, grammar_graphs.Line@442c41a6, grammar_graphs.Line@5f84a538, grammar_graphs.Line@1747114e, grammar_graphs.Line@14d680be, grammar_graphs.Line@5367133c, grammar_graphs.Line@4072755e, grammar_graphs.Line@6f90d17f, grammar_graphs.Line@4f637f43, grammar_graphs.Line@24f67b60, grammar_graphs.Line@77fd2225, grammar_graphs.Line@6092509d, grammar_graphs.Line@1e0f0e8c, grammar_graphs.Line@4ac2f369, grammar_graphs.Line@5d78ac2a, grammar_graphs.Line@438a51aa, grammar_graphs.Line@25975c39, grammar_graphs.Line@7893aa59, grammar_graphs.Line@71044a24, grammar_graphs.Line@6a385afb, grammar_graphs.Line@7eb97d00, grammar_graphs.Line@8df35f8, grammar_graphs.Line@20a493fd, grammar_graphs.Line@8e3ea90, grammar_graphs.Line@3d07c7f1, grammar_graphs.Line@4c86555c, grammar_graphs.Line@48391c4a, grammar_graphs.Line@59cdbff3, grammar_graphs.Line@5f99d8b7, grammar_graphs.Line@5c22b4fa, grammar_graphs.Line@22702697, grammar_graphs.Line@22abb5df, grammar_graphs.Line@33e68d5d, grammar_graphs.Line@7a2a6abf, grammar_graphs.Line@26b7ec58, grammar_graphs.Line@3b202d11, grammar_graphs.Line@60f471d4, grammar_graphs.Line@4565ab34, grammar_graphs.Line@2160ac59, grammar_graphs.Line@1b9245c1, grammar_graphs.Line@58abfdb6, grammar_graphs.Line@307fd19c, grammar_graphs.Line@1459b1ae, grammar_graphs.Line@52095b82, grammar_graphs.Line@1dec42a9, grammar_graphs.Line@1a2d4aef, grammar_graphs.Line@54109b07, grammar_graphs.Line@d1d84ea, grammar_graphs.Line@729b66ea, grammar_graphs.Line@2113064, grammar_graphs.Line@3352affd, grammar_graphs.Line@685f20ad, grammar_graphs.Line@78384cb5, grammar_graphs.Line@15f5ce00, grammar_graphs.Line@2e9e0a66, grammar_graphs.Line@3fd51d50, grammar_graphs.Line@532a3fb, grammar_graphs.Line@3e8cf893, grammar_graphs.Line@609f181e, grammar_graphs.Line@3cf6da93, grammar_graphs.Line@7737b6c0, grammar_graphs.Line@670afea6, grammar_graphs.Line@3e9bcab4, grammar_graphs.Line@265c7a91, grammar_graphs.Line@6c97592c, grammar_graphs.Line@5cd875d6, grammar_graphs.Line@793bb76e]
+-------------find match----------
+grammar_graphs.Line@129f2698 add child: grammar_graphs.Line@2f33cf5c
+grammar_graphs.Line@28618f50 add child: grammar_graphs.Line@30da69a9
+grammar_graphs.Line@5d50713a add child: grammar_graphs.Line@3af20f63
+grammar_graphs.Line@45d4def2 add child: grammar_graphs.Line@1e564f94
+grammar_graphs.Line@6fe6749 add child: grammar_graphs.Line@2f2e2a2d
+-------------end finding match----------
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+----------APPLY RULE: C_Rule_2 of Category: C----------
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed, grammar_graphs.Line@5d6dff05, grammar_graphs.Line@5a91a3fb, grammar_graphs.Line@129f2698, grammar_graphs.Line@474111eb, grammar_graphs.Line@75664bd1, grammar_graphs.Line@22bfb0fd, grammar_graphs.Line@49fff9d4, grammar_graphs.Line@6fe6749, grammar_graphs.Line@41819c84, grammar_graphs.Line@1e66f411, grammar_graphs.Line@28618f50, grammar_graphs.Line@5d50713a, grammar_graphs.Line@1078a3a8, grammar_graphs.Line@39171bca, grammar_graphs.Line@1da818b7, grammar_graphs.Line@43af6399, grammar_graphs.Line@72eca366, grammar_graphs.Line@1bf78a59, grammar_graphs.Line@3763e497, grammar_graphs.Line@40637781, grammar_graphs.Line@57030b78, grammar_graphs.Line@7001e683, grammar_graphs.Line@58eee348, grammar_graphs.Line@3ea48ab, grammar_graphs.Line@1ab4d7c2, grammar_graphs.Line@4cfdcb65, grammar_graphs.Line@33371987, grammar_graphs.Line@1cec480a, grammar_graphs.Line@4d92f42c, grammar_graphs.Line@6f16a818, grammar_graphs.Line@64666f5c, grammar_graphs.Line@40dd732c, grammar_graphs.Line@403121b7, grammar_graphs.Line@71719b, grammar_graphs.Line@cfdb440, grammar_graphs.Line@6778f64c, grammar_graphs.Line@2e0d5f8d, grammar_graphs.Line@25fb0e7e, grammar_graphs.Line@4445e135, grammar_graphs.Line@642fa567, grammar_graphs.Line@209a6f58, grammar_graphs.Line@5def1dcb, grammar_graphs.Line@3648030a, grammar_graphs.Line@2f559c39, grammar_graphs.Line@5c46d624, grammar_graphs.Line@79e28922, grammar_graphs.Line@fc48547, grammar_graphs.Line@cf364d2, grammar_graphs.Line@6b46049f, grammar_graphs.Line@232007b0, grammar_graphs.Line@6dab1b55, grammar_graphs.Line@48d326ae, grammar_graphs.Line@13eaa1d7, grammar_graphs.Line@30d4299d, grammar_graphs.Line@590fd61, grammar_graphs.Line@54275d2b, grammar_graphs.Line@1efc797e, grammar_graphs.Line@1205ba61, grammar_graphs.Line@38ce17d, grammar_graphs.Line@1f56f98, grammar_graphs.Line@6fd5a488, grammar_graphs.Line@503cdda1, grammar_graphs.Line@34df49d2, grammar_graphs.Line@5c4f6fcd, grammar_graphs.Line@4aeaf731, grammar_graphs.Line@7f9a9c5c, grammar_graphs.Line@5c054da7, grammar_graphs.Line@5481c654, grammar_graphs.Line@49cfe08a, grammar_graphs.Line@621ced93, grammar_graphs.Line@1482ec02, grammar_graphs.Line@4e6b3ba0, grammar_graphs.Line@28d59698, grammar_graphs.Line@78964957, grammar_graphs.Line@7de343a3, grammar_graphs.Line@7e0252e1, grammar_graphs.Line@69a3d0ba, grammar_graphs.Line@23b5f028, grammar_graphs.Line@442c41a6, grammar_graphs.Line@5f84a538, grammar_graphs.Line@1747114e, grammar_graphs.Line@14d680be, grammar_graphs.Line@5367133c, grammar_graphs.Line@4072755e, grammar_graphs.Line@6f90d17f, grammar_graphs.Line@4f637f43, grammar_graphs.Line@24f67b60, grammar_graphs.Line@77fd2225, grammar_graphs.Line@6092509d, grammar_graphs.Line@1e0f0e8c, grammar_graphs.Line@4ac2f369, grammar_graphs.Line@5d78ac2a, grammar_graphs.Line@438a51aa, grammar_graphs.Line@25975c39, grammar_graphs.Line@7893aa59, grammar_graphs.Line@71044a24, grammar_graphs.Line@6a385afb, grammar_graphs.Line@7eb97d00, grammar_graphs.Line@8df35f8, grammar_graphs.Line@20a493fd, grammar_graphs.Line@8e3ea90, grammar_graphs.Line@3d07c7f1, grammar_graphs.Line@4c86555c, grammar_graphs.Line@48391c4a, grammar_graphs.Line@59cdbff3, grammar_graphs.Line@5f99d8b7, grammar_graphs.Line@5c22b4fa, grammar_graphs.Line@22702697, grammar_graphs.Line@22abb5df, grammar_graphs.Line@33e68d5d, grammar_graphs.Line@7a2a6abf, grammar_graphs.Line@26b7ec58, grammar_graphs.Line@3b202d11, grammar_graphs.Line@60f471d4, grammar_graphs.Line@4565ab34, grammar_graphs.Line@2160ac59, grammar_graphs.Line@1b9245c1, grammar_graphs.Line@58abfdb6, grammar_graphs.Line@307fd19c, grammar_graphs.Line@1459b1ae, grammar_graphs.Line@52095b82, grammar_graphs.Line@1dec42a9, grammar_graphs.Line@1a2d4aef, grammar_graphs.Line@54109b07, grammar_graphs.Line@d1d84ea, grammar_graphs.Line@729b66ea, grammar_graphs.Line@2113064, grammar_graphs.Line@3352affd, grammar_graphs.Line@685f20ad, grammar_graphs.Line@78384cb5, grammar_graphs.Line@15f5ce00, grammar_graphs.Line@2e9e0a66, grammar_graphs.Line@3fd51d50, grammar_graphs.Line@532a3fb, grammar_graphs.Line@3e8cf893, grammar_graphs.Line@609f181e, grammar_graphs.Line@3cf6da93, grammar_graphs.Line@7737b6c0, grammar_graphs.Line@670afea6, grammar_graphs.Line@3e9bcab4, grammar_graphs.Line@265c7a91, grammar_graphs.Line@6c97592c, grammar_graphs.Line@5cd875d6, grammar_graphs.Line@793bb76e, grammar_graphs.Line@4c5a9940, grammar_graphs.Line@66791ebf, grammar_graphs.Line@4affd70b, grammar_graphs.Line@14def33b, grammar_graphs.Line@c56e879, grammar_graphs.Line@227493aa, grammar_graphs.Line@16075f60, grammar_graphs.Line@752331b0, grammar_graphs.Line@7a1844f, grammar_graphs.Line@4e0d0a4d, grammar_graphs.Line@486229e5, grammar_graphs.Line@64b293d6, grammar_graphs.Line@8709041, grammar_graphs.Line@2e09bc60, grammar_graphs.Line@77fd8545, grammar_graphs.Line@b5fee62]
+-------------find match----------
+grammar_graphs.Line@129f2698 add child: grammar_graphs.Line@6856b9d5
+grammar_graphs.Line@45d4def2 add child: grammar_graphs.Line@731ade37
+grammar_graphs.Line@28618f50 add child: grammar_graphs.Line@7892afe7
+grammar_graphs.Line@22bfb0fd add child: grammar_graphs.Line@c4a7269
+grammar_graphs.Line@1e66f411 add child: grammar_graphs.Line@518fea24
+-------------end finding match----------
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+----------APPLY RULE: C_Rule_2 of Category: C----------
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed, grammar_graphs.Line@5d6dff05, grammar_graphs.Line@5a91a3fb, grammar_graphs.Line@129f2698, grammar_graphs.Line@474111eb, grammar_graphs.Line@75664bd1, grammar_graphs.Line@22bfb0fd, grammar_graphs.Line@49fff9d4, grammar_graphs.Line@6fe6749, grammar_graphs.Line@41819c84, grammar_graphs.Line@1e66f411, grammar_graphs.Line@28618f50, grammar_graphs.Line@5d50713a, grammar_graphs.Line@1078a3a8, grammar_graphs.Line@39171bca, grammar_graphs.Line@1da818b7, grammar_graphs.Line@43af6399, grammar_graphs.Line@72eca366, grammar_graphs.Line@1bf78a59, grammar_graphs.Line@3763e497, grammar_graphs.Line@40637781, grammar_graphs.Line@57030b78, grammar_graphs.Line@7001e683, grammar_graphs.Line@58eee348, grammar_graphs.Line@3ea48ab, grammar_graphs.Line@1ab4d7c2, grammar_graphs.Line@4cfdcb65, grammar_graphs.Line@33371987, grammar_graphs.Line@1cec480a, grammar_graphs.Line@4d92f42c, grammar_graphs.Line@6f16a818, grammar_graphs.Line@64666f5c, grammar_graphs.Line@40dd732c, grammar_graphs.Line@403121b7, grammar_graphs.Line@71719b, grammar_graphs.Line@cfdb440, grammar_graphs.Line@6778f64c, grammar_graphs.Line@2e0d5f8d, grammar_graphs.Line@25fb0e7e, grammar_graphs.Line@4445e135, grammar_graphs.Line@642fa567, grammar_graphs.Line@209a6f58, grammar_graphs.Line@5def1dcb, grammar_graphs.Line@3648030a, grammar_graphs.Line@2f559c39, grammar_graphs.Line@5c46d624, grammar_graphs.Line@79e28922, grammar_graphs.Line@fc48547, grammar_graphs.Line@cf364d2, grammar_graphs.Line@6b46049f, grammar_graphs.Line@232007b0, grammar_graphs.Line@6dab1b55, grammar_graphs.Line@48d326ae, grammar_graphs.Line@13eaa1d7, grammar_graphs.Line@30d4299d, grammar_graphs.Line@590fd61, grammar_graphs.Line@54275d2b, grammar_graphs.Line@1efc797e, grammar_graphs.Line@1205ba61, grammar_graphs.Line@38ce17d, grammar_graphs.Line@1f56f98, grammar_graphs.Line@6fd5a488, grammar_graphs.Line@503cdda1, grammar_graphs.Line@34df49d2, grammar_graphs.Line@5c4f6fcd, grammar_graphs.Line@4aeaf731, grammar_graphs.Line@7f9a9c5c, grammar_graphs.Line@5c054da7, grammar_graphs.Line@5481c654, grammar_graphs.Line@49cfe08a, grammar_graphs.Line@621ced93, grammar_graphs.Line@1482ec02, grammar_graphs.Line@4e6b3ba0, grammar_graphs.Line@28d59698, grammar_graphs.Line@78964957, grammar_graphs.Line@7de343a3, grammar_graphs.Line@7e0252e1, grammar_graphs.Line@69a3d0ba, grammar_graphs.Line@23b5f028, grammar_graphs.Line@442c41a6, grammar_graphs.Line@5f84a538, grammar_graphs.Line@1747114e, grammar_graphs.Line@14d680be, grammar_graphs.Line@5367133c, grammar_graphs.Line@4072755e, grammar_graphs.Line@6f90d17f, grammar_graphs.Line@4f637f43, grammar_graphs.Line@24f67b60, grammar_graphs.Line@77fd2225, grammar_graphs.Line@6092509d, grammar_graphs.Line@1e0f0e8c, grammar_graphs.Line@4ac2f369, grammar_graphs.Line@5d78ac2a, grammar_graphs.Line@438a51aa, grammar_graphs.Line@25975c39, grammar_graphs.Line@7893aa59, grammar_graphs.Line@71044a24, grammar_graphs.Line@6a385afb, grammar_graphs.Line@7eb97d00, grammar_graphs.Line@8df35f8, grammar_graphs.Line@20a493fd, grammar_graphs.Line@8e3ea90, grammar_graphs.Line@3d07c7f1, grammar_graphs.Line@4c86555c, grammar_graphs.Line@48391c4a, grammar_graphs.Line@59cdbff3, grammar_graphs.Line@5f99d8b7, grammar_graphs.Line@5c22b4fa, grammar_graphs.Line@22702697, grammar_graphs.Line@22abb5df, grammar_graphs.Line@33e68d5d, grammar_graphs.Line@7a2a6abf, grammar_graphs.Line@26b7ec58, grammar_graphs.Line@3b202d11, grammar_graphs.Line@60f471d4, grammar_graphs.Line@4565ab34, grammar_graphs.Line@2160ac59, grammar_graphs.Line@1b9245c1, grammar_graphs.Line@58abfdb6, grammar_graphs.Line@307fd19c, grammar_graphs.Line@1459b1ae, grammar_graphs.Line@52095b82, grammar_graphs.Line@1dec42a9, grammar_graphs.Line@1a2d4aef, grammar_graphs.Line@54109b07, grammar_graphs.Line@d1d84ea, grammar_graphs.Line@729b66ea, grammar_graphs.Line@2113064, grammar_graphs.Line@3352affd, grammar_graphs.Line@685f20ad, grammar_graphs.Line@78384cb5, grammar_graphs.Line@15f5ce00, grammar_graphs.Line@2e9e0a66, grammar_graphs.Line@3fd51d50, grammar_graphs.Line@532a3fb, grammar_graphs.Line@3e8cf893, grammar_graphs.Line@609f181e, grammar_graphs.Line@3cf6da93, grammar_graphs.Line@7737b6c0, grammar_graphs.Line@670afea6, grammar_graphs.Line@3e9bcab4, grammar_graphs.Line@265c7a91, grammar_graphs.Line@6c97592c, grammar_graphs.Line@5cd875d6, grammar_graphs.Line@793bb76e, grammar_graphs.Line@4c5a9940, grammar_graphs.Line@66791ebf, grammar_graphs.Line@4affd70b, grammar_graphs.Line@14def33b, grammar_graphs.Line@c56e879, grammar_graphs.Line@227493aa, grammar_graphs.Line@16075f60, grammar_graphs.Line@752331b0, grammar_graphs.Line@7a1844f, grammar_graphs.Line@4e0d0a4d, grammar_graphs.Line@486229e5, grammar_graphs.Line@64b293d6, grammar_graphs.Line@8709041, grammar_graphs.Line@2e09bc60, grammar_graphs.Line@77fd8545, grammar_graphs.Line@b5fee62, grammar_graphs.Line@74c17d44, grammar_graphs.Line@19c109ac, grammar_graphs.Line@46c7f9c7, grammar_graphs.Line@68b7e5f1, grammar_graphs.Line@17e38efe, grammar_graphs.Line@6fe79c7, grammar_graphs.Line@7f8eb11e, grammar_graphs.Line@28414b73, grammar_graphs.Line@40881858, grammar_graphs.Line@235ea4fb, grammar_graphs.Line@569bc116, grammar_graphs.Line@5c978c9a, grammar_graphs.Line@7eaf4ea8, grammar_graphs.Line@288044fa, grammar_graphs.Line@209ba38d, grammar_graphs.Line@4456c4ef]
+-------------find match----------
+grammar_graphs.Line@22bfb0fd add child: grammar_graphs.Line@6edbff0b
+grammar_graphs.Line@45d4def2 add child: grammar_graphs.Line@1321be96
+grammar_graphs.Line@5d6dff05 add child: grammar_graphs.Line@136b2e72
+grammar_graphs.Line@1e66f411 add child: grammar_graphs.Line@61e8e14c
+grammar_graphs.Line@1078a3a8 add child: grammar_graphs.Line@507a79dd
+-------------end finding match----------
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+----------APPLY RULE: C_Rule_2 of Category: C----------
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed, grammar_graphs.Line@5d6dff05, grammar_graphs.Line@5a91a3fb, grammar_graphs.Line@129f2698, grammar_graphs.Line@474111eb, grammar_graphs.Line@75664bd1, grammar_graphs.Line@22bfb0fd, grammar_graphs.Line@49fff9d4, grammar_graphs.Line@6fe6749, grammar_graphs.Line@41819c84, grammar_graphs.Line@1e66f411, grammar_graphs.Line@28618f50, grammar_graphs.Line@5d50713a, grammar_graphs.Line@1078a3a8, grammar_graphs.Line@39171bca, grammar_graphs.Line@1da818b7, grammar_graphs.Line@43af6399, grammar_graphs.Line@72eca366, grammar_graphs.Line@1bf78a59, grammar_graphs.Line@3763e497, grammar_graphs.Line@40637781, grammar_graphs.Line@57030b78, grammar_graphs.Line@7001e683, grammar_graphs.Line@58eee348, grammar_graphs.Line@3ea48ab, grammar_graphs.Line@1ab4d7c2, grammar_graphs.Line@4cfdcb65, grammar_graphs.Line@33371987, grammar_graphs.Line@1cec480a, grammar_graphs.Line@4d92f42c, grammar_graphs.Line@6f16a818, grammar_graphs.Line@64666f5c, grammar_graphs.Line@40dd732c, grammar_graphs.Line@403121b7, grammar_graphs.Line@71719b, grammar_graphs.Line@cfdb440, grammar_graphs.Line@6778f64c, grammar_graphs.Line@2e0d5f8d, grammar_graphs.Line@25fb0e7e, grammar_graphs.Line@4445e135, grammar_graphs.Line@642fa567, grammar_graphs.Line@209a6f58, grammar_graphs.Line@5def1dcb, grammar_graphs.Line@3648030a, grammar_graphs.Line@2f559c39, grammar_graphs.Line@5c46d624, grammar_graphs.Line@79e28922, grammar_graphs.Line@fc48547, grammar_graphs.Line@cf364d2, grammar_graphs.Line@6b46049f, grammar_graphs.Line@232007b0, grammar_graphs.Line@6dab1b55, grammar_graphs.Line@48d326ae, grammar_graphs.Line@13eaa1d7, grammar_graphs.Line@30d4299d, grammar_graphs.Line@590fd61, grammar_graphs.Line@54275d2b, grammar_graphs.Line@1efc797e, grammar_graphs.Line@1205ba61, grammar_graphs.Line@38ce17d, grammar_graphs.Line@1f56f98, grammar_graphs.Line@6fd5a488, grammar_graphs.Line@503cdda1, grammar_graphs.Line@34df49d2, grammar_graphs.Line@5c4f6fcd, grammar_graphs.Line@4aeaf731, grammar_graphs.Line@7f9a9c5c, grammar_graphs.Line@5c054da7, grammar_graphs.Line@5481c654, grammar_graphs.Line@49cfe08a, grammar_graphs.Line@621ced93, grammar_graphs.Line@1482ec02, grammar_graphs.Line@4e6b3ba0, grammar_graphs.Line@28d59698, grammar_graphs.Line@78964957, grammar_graphs.Line@7de343a3, grammar_graphs.Line@7e0252e1, grammar_graphs.Line@69a3d0ba, grammar_graphs.Line@23b5f028, grammar_graphs.Line@442c41a6, grammar_graphs.Line@5f84a538, grammar_graphs.Line@1747114e, grammar_graphs.Line@14d680be, grammar_graphs.Line@5367133c, grammar_graphs.Line@4072755e, grammar_graphs.Line@6f90d17f, grammar_graphs.Line@4f637f43, grammar_graphs.Line@24f67b60, grammar_graphs.Line@77fd2225, grammar_graphs.Line@6092509d, grammar_graphs.Line@1e0f0e8c, grammar_graphs.Line@4ac2f369, grammar_graphs.Line@5d78ac2a, grammar_graphs.Line@438a51aa, grammar_graphs.Line@25975c39, grammar_graphs.Line@7893aa59, grammar_graphs.Line@71044a24, grammar_graphs.Line@6a385afb, grammar_graphs.Line@7eb97d00, grammar_graphs.Line@8df35f8, grammar_graphs.Line@20a493fd, grammar_graphs.Line@8e3ea90, grammar_graphs.Line@3d07c7f1, grammar_graphs.Line@4c86555c, grammar_graphs.Line@48391c4a, grammar_graphs.Line@59cdbff3, grammar_graphs.Line@5f99d8b7, grammar_graphs.Line@5c22b4fa, grammar_graphs.Line@22702697, grammar_graphs.Line@22abb5df, grammar_graphs.Line@33e68d5d, grammar_graphs.Line@7a2a6abf, grammar_graphs.Line@26b7ec58, grammar_graphs.Line@3b202d11, grammar_graphs.Line@60f471d4, grammar_graphs.Line@4565ab34, grammar_graphs.Line@2160ac59, grammar_graphs.Line@1b9245c1, grammar_graphs.Line@58abfdb6, grammar_graphs.Line@307fd19c, grammar_graphs.Line@1459b1ae, grammar_graphs.Line@52095b82, grammar_graphs.Line@1dec42a9, grammar_graphs.Line@1a2d4aef, grammar_graphs.Line@54109b07, grammar_graphs.Line@d1d84ea, grammar_graphs.Line@729b66ea, grammar_graphs.Line@2113064, grammar_graphs.Line@3352affd, grammar_graphs.Line@685f20ad, grammar_graphs.Line@78384cb5, grammar_graphs.Line@15f5ce00, grammar_graphs.Line@2e9e0a66, grammar_graphs.Line@3fd51d50, grammar_graphs.Line@532a3fb, grammar_graphs.Line@3e8cf893, grammar_graphs.Line@609f181e, grammar_graphs.Line@3cf6da93, grammar_graphs.Line@7737b6c0, grammar_graphs.Line@670afea6, grammar_graphs.Line@3e9bcab4, grammar_graphs.Line@265c7a91, grammar_graphs.Line@6c97592c, grammar_graphs.Line@5cd875d6, grammar_graphs.Line@793bb76e, grammar_graphs.Line@4c5a9940, grammar_graphs.Line@66791ebf, grammar_graphs.Line@4affd70b, grammar_graphs.Line@14def33b, grammar_graphs.Line@c56e879, grammar_graphs.Line@227493aa, grammar_graphs.Line@16075f60, grammar_graphs.Line@752331b0, grammar_graphs.Line@7a1844f, grammar_graphs.Line@4e0d0a4d, grammar_graphs.Line@486229e5, grammar_graphs.Line@64b293d6, grammar_graphs.Line@8709041, grammar_graphs.Line@2e09bc60, grammar_graphs.Line@77fd8545, grammar_graphs.Line@b5fee62, grammar_graphs.Line@74c17d44, grammar_graphs.Line@19c109ac, grammar_graphs.Line@46c7f9c7, grammar_graphs.Line@68b7e5f1, grammar_graphs.Line@17e38efe, grammar_graphs.Line@6fe79c7, grammar_graphs.Line@7f8eb11e, grammar_graphs.Line@28414b73, grammar_graphs.Line@40881858, grammar_graphs.Line@235ea4fb, grammar_graphs.Line@569bc116, grammar_graphs.Line@5c978c9a, grammar_graphs.Line@7eaf4ea8, grammar_graphs.Line@288044fa, grammar_graphs.Line@209ba38d, grammar_graphs.Line@4456c4ef, grammar_graphs.Line@4eb1a84a, grammar_graphs.Line@4e30750, grammar_graphs.Line@22a76401, grammar_graphs.Line@21905519, grammar_graphs.Line@62a05a99, grammar_graphs.Line@7e65181a, grammar_graphs.Line@677becbb, grammar_graphs.Line@44e045d0, grammar_graphs.Line@40f8dcc, grammar_graphs.Line@2474bb47, grammar_graphs.Line@7207d21b, grammar_graphs.Line@4aa1e6d4, grammar_graphs.Line@ca9e495, grammar_graphs.Line@d86d8c4, grammar_graphs.Line@41dd4465, grammar_graphs.Line@47415c94]
+-------------find match----------
+grammar_graphs.Line@1da818b7 add child: grammar_graphs.Line@7c3aec40
+grammar_graphs.Line@5d6dff05 add child: grammar_graphs.Line@57ef71ce
+grammar_graphs.Line@75664bd1 add child: grammar_graphs.Line@2f76f712
+grammar_graphs.Line@1078a3a8 add child: grammar_graphs.Line@629ebb94
+grammar_graphs.Line@45d4def2 add child: grammar_graphs.Line@496d136b
+-------------end finding match----------
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+----------APPLY RULE: C_Rule_2 of Category: C----------
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed, grammar_graphs.Line@5d6dff05, grammar_graphs.Line@5a91a3fb, grammar_graphs.Line@129f2698, grammar_graphs.Line@474111eb, grammar_graphs.Line@75664bd1, grammar_graphs.Line@22bfb0fd, grammar_graphs.Line@49fff9d4, grammar_graphs.Line@6fe6749, grammar_graphs.Line@41819c84, grammar_graphs.Line@1e66f411, grammar_graphs.Line@28618f50, grammar_graphs.Line@5d50713a, grammar_graphs.Line@1078a3a8, grammar_graphs.Line@39171bca, grammar_graphs.Line@1da818b7, grammar_graphs.Line@43af6399, grammar_graphs.Line@72eca366, grammar_graphs.Line@1bf78a59, grammar_graphs.Line@3763e497, grammar_graphs.Line@40637781, grammar_graphs.Line@57030b78, grammar_graphs.Line@7001e683, grammar_graphs.Line@58eee348, grammar_graphs.Line@3ea48ab, grammar_graphs.Line@1ab4d7c2, grammar_graphs.Line@4cfdcb65, grammar_graphs.Line@33371987, grammar_graphs.Line@1cec480a, grammar_graphs.Line@4d92f42c, grammar_graphs.Line@6f16a818, grammar_graphs.Line@64666f5c, grammar_graphs.Line@40dd732c, grammar_graphs.Line@403121b7, grammar_graphs.Line@71719b, grammar_graphs.Line@cfdb440, grammar_graphs.Line@6778f64c, grammar_graphs.Line@2e0d5f8d, grammar_graphs.Line@25fb0e7e, grammar_graphs.Line@4445e135, grammar_graphs.Line@642fa567, grammar_graphs.Line@209a6f58, grammar_graphs.Line@5def1dcb, grammar_graphs.Line@3648030a, grammar_graphs.Line@2f559c39, grammar_graphs.Line@5c46d624, grammar_graphs.Line@79e28922, grammar_graphs.Line@fc48547, grammar_graphs.Line@cf364d2, grammar_graphs.Line@6b46049f, grammar_graphs.Line@232007b0, grammar_graphs.Line@6dab1b55, grammar_graphs.Line@48d326ae, grammar_graphs.Line@13eaa1d7, grammar_graphs.Line@30d4299d, grammar_graphs.Line@590fd61, grammar_graphs.Line@54275d2b, grammar_graphs.Line@1efc797e, grammar_graphs.Line@1205ba61, grammar_graphs.Line@38ce17d, grammar_graphs.Line@1f56f98, grammar_graphs.Line@6fd5a488, grammar_graphs.Line@503cdda1, grammar_graphs.Line@34df49d2, grammar_graphs.Line@5c4f6fcd, grammar_graphs.Line@4aeaf731, grammar_graphs.Line@7f9a9c5c, grammar_graphs.Line@5c054da7, grammar_graphs.Line@5481c654, grammar_graphs.Line@49cfe08a, grammar_graphs.Line@621ced93, grammar_graphs.Line@1482ec02, grammar_graphs.Line@4e6b3ba0, grammar_graphs.Line@28d59698, grammar_graphs.Line@78964957, grammar_graphs.Line@7de343a3, grammar_graphs.Line@7e0252e1, grammar_graphs.Line@69a3d0ba, grammar_graphs.Line@23b5f028, grammar_graphs.Line@442c41a6, grammar_graphs.Line@5f84a538, grammar_graphs.Line@1747114e, grammar_graphs.Line@14d680be, grammar_graphs.Line@5367133c, grammar_graphs.Line@4072755e, grammar_graphs.Line@6f90d17f, grammar_graphs.Line@4f637f43, grammar_graphs.Line@24f67b60, grammar_graphs.Line@77fd2225, grammar_graphs.Line@6092509d, grammar_graphs.Line@1e0f0e8c, grammar_graphs.Line@4ac2f369, grammar_graphs.Line@5d78ac2a, grammar_graphs.Line@438a51aa, grammar_graphs.Line@25975c39, grammar_graphs.Line@7893aa59, grammar_graphs.Line@71044a24, grammar_graphs.Line@6a385afb, grammar_graphs.Line@7eb97d00, grammar_graphs.Line@8df35f8, grammar_graphs.Line@20a493fd, grammar_graphs.Line@8e3ea90, grammar_graphs.Line@3d07c7f1, grammar_graphs.Line@4c86555c, grammar_graphs.Line@48391c4a, grammar_graphs.Line@59cdbff3, grammar_graphs.Line@5f99d8b7, grammar_graphs.Line@5c22b4fa, grammar_graphs.Line@22702697, grammar_graphs.Line@22abb5df, grammar_graphs.Line@33e68d5d, grammar_graphs.Line@7a2a6abf, grammar_graphs.Line@26b7ec58, grammar_graphs.Line@3b202d11, grammar_graphs.Line@60f471d4, grammar_graphs.Line@4565ab34, grammar_graphs.Line@2160ac59, grammar_graphs.Line@1b9245c1, grammar_graphs.Line@58abfdb6, grammar_graphs.Line@307fd19c, grammar_graphs.Line@1459b1ae, grammar_graphs.Line@52095b82, grammar_graphs.Line@1dec42a9, grammar_graphs.Line@1a2d4aef, grammar_graphs.Line@54109b07, grammar_graphs.Line@d1d84ea, grammar_graphs.Line@729b66ea, grammar_graphs.Line@2113064, grammar_graphs.Line@3352affd, grammar_graphs.Line@685f20ad, grammar_graphs.Line@78384cb5, grammar_graphs.Line@15f5ce00, grammar_graphs.Line@2e9e0a66, grammar_graphs.Line@3fd51d50, grammar_graphs.Line@532a3fb, grammar_graphs.Line@3e8cf893, grammar_graphs.Line@609f181e, grammar_graphs.Line@3cf6da93, grammar_graphs.Line@7737b6c0, grammar_graphs.Line@670afea6, grammar_graphs.Line@3e9bcab4, grammar_graphs.Line@265c7a91, grammar_graphs.Line@6c97592c, grammar_graphs.Line@5cd875d6, grammar_graphs.Line@793bb76e, grammar_graphs.Line@4c5a9940, grammar_graphs.Line@66791ebf, grammar_graphs.Line@4affd70b, grammar_graphs.Line@14def33b, grammar_graphs.Line@c56e879, grammar_graphs.Line@227493aa, grammar_graphs.Line@16075f60, grammar_graphs.Line@752331b0, grammar_graphs.Line@7a1844f, grammar_graphs.Line@4e0d0a4d, grammar_graphs.Line@486229e5, grammar_graphs.Line@64b293d6, grammar_graphs.Line@8709041, grammar_graphs.Line@2e09bc60, grammar_graphs.Line@77fd8545, grammar_graphs.Line@b5fee62, grammar_graphs.Line@74c17d44, grammar_graphs.Line@19c109ac, grammar_graphs.Line@46c7f9c7, grammar_graphs.Line@68b7e5f1, grammar_graphs.Line@17e38efe, grammar_graphs.Line@6fe79c7, grammar_graphs.Line@7f8eb11e, grammar_graphs.Line@28414b73, grammar_graphs.Line@40881858, grammar_graphs.Line@235ea4fb, grammar_graphs.Line@569bc116, grammar_graphs.Line@5c978c9a, grammar_graphs.Line@7eaf4ea8, grammar_graphs.Line@288044fa, grammar_graphs.Line@209ba38d, grammar_graphs.Line@4456c4ef, grammar_graphs.Line@4eb1a84a, grammar_graphs.Line@4e30750, grammar_graphs.Line@22a76401, grammar_graphs.Line@21905519, grammar_graphs.Line@62a05a99, grammar_graphs.Line@7e65181a, grammar_graphs.Line@677becbb, grammar_graphs.Line@44e045d0, grammar_graphs.Line@40f8dcc, grammar_graphs.Line@2474bb47, grammar_graphs.Line@7207d21b, grammar_graphs.Line@4aa1e6d4, grammar_graphs.Line@ca9e495, grammar_graphs.Line@d86d8c4, grammar_graphs.Line@41dd4465, grammar_graphs.Line@47415c94, grammar_graphs.Line@65207a89, grammar_graphs.Line@7df6df58, grammar_graphs.Line@6aa38969, grammar_graphs.Line@4b74391d, grammar_graphs.Line@2de6f6c8, grammar_graphs.Line@6621e033, grammar_graphs.Line@10bfd55f, grammar_graphs.Line@7ae9aa84, grammar_graphs.Line@1dd9312b, grammar_graphs.Line@60a343a7, grammar_graphs.Line@96a17f8, grammar_graphs.Line@67113ea7, grammar_graphs.Line@509b154b, grammar_graphs.Line@2a5fca84, grammar_graphs.Line@7353dde0, grammar_graphs.Line@15e04e96]
+-------------find match----------
+grammar_graphs.Line@474111eb add child: grammar_graphs.Line@41bfad44
+grammar_graphs.Line@75664bd1 add child: grammar_graphs.Line@2ceec44e
+grammar_graphs.Line@1da818b7 add child: grammar_graphs.Line@786ae891
+grammar_graphs.Line@45d4def2 add child: grammar_graphs.Line@6fe98df4
+grammar_graphs.Line@5a91a3fb add child: grammar_graphs.Line@5380d8c0
+-------------end finding match----------
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+----------APPLY RULE: C_Rule_2 of Category: C----------
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed, grammar_graphs.Line@5d6dff05, grammar_graphs.Line@5a91a3fb, grammar_graphs.Line@129f2698, grammar_graphs.Line@474111eb, grammar_graphs.Line@75664bd1, grammar_graphs.Line@22bfb0fd, grammar_graphs.Line@49fff9d4, grammar_graphs.Line@6fe6749, grammar_graphs.Line@41819c84, grammar_graphs.Line@1e66f411, grammar_graphs.Line@28618f50, grammar_graphs.Line@5d50713a, grammar_graphs.Line@1078a3a8, grammar_graphs.Line@39171bca, grammar_graphs.Line@1da818b7, grammar_graphs.Line@43af6399, grammar_graphs.Line@72eca366, grammar_graphs.Line@1bf78a59, grammar_graphs.Line@3763e497, grammar_graphs.Line@40637781, grammar_graphs.Line@57030b78, grammar_graphs.Line@7001e683, grammar_graphs.Line@58eee348, grammar_graphs.Line@3ea48ab, grammar_graphs.Line@1ab4d7c2, grammar_graphs.Line@4cfdcb65, grammar_graphs.Line@33371987, grammar_graphs.Line@1cec480a, grammar_graphs.Line@4d92f42c, grammar_graphs.Line@6f16a818, grammar_graphs.Line@64666f5c, grammar_graphs.Line@40dd732c, grammar_graphs.Line@403121b7, grammar_graphs.Line@71719b, grammar_graphs.Line@cfdb440, grammar_graphs.Line@6778f64c, grammar_graphs.Line@2e0d5f8d, grammar_graphs.Line@25fb0e7e, grammar_graphs.Line@4445e135, grammar_graphs.Line@642fa567, grammar_graphs.Line@209a6f58, grammar_graphs.Line@5def1dcb, grammar_graphs.Line@3648030a, grammar_graphs.Line@2f559c39, grammar_graphs.Line@5c46d624, grammar_graphs.Line@79e28922, grammar_graphs.Line@fc48547, grammar_graphs.Line@cf364d2, grammar_graphs.Line@6b46049f, grammar_graphs.Line@232007b0, grammar_graphs.Line@6dab1b55, grammar_graphs.Line@48d326ae, grammar_graphs.Line@13eaa1d7, grammar_graphs.Line@30d4299d, grammar_graphs.Line@590fd61, grammar_graphs.Line@54275d2b, grammar_graphs.Line@1efc797e, grammar_graphs.Line@1205ba61, grammar_graphs.Line@38ce17d, grammar_graphs.Line@1f56f98, grammar_graphs.Line@6fd5a488, grammar_graphs.Line@503cdda1, grammar_graphs.Line@34df49d2, grammar_graphs.Line@5c4f6fcd, grammar_graphs.Line@4aeaf731, grammar_graphs.Line@7f9a9c5c, grammar_graphs.Line@5c054da7, grammar_graphs.Line@5481c654, grammar_graphs.Line@49cfe08a, grammar_graphs.Line@621ced93, grammar_graphs.Line@1482ec02, grammar_graphs.Line@4e6b3ba0, grammar_graphs.Line@28d59698, grammar_graphs.Line@78964957, grammar_graphs.Line@7de343a3, grammar_graphs.Line@7e0252e1, grammar_graphs.Line@69a3d0ba, grammar_graphs.Line@23b5f028, grammar_graphs.Line@442c41a6, grammar_graphs.Line@5f84a538, grammar_graphs.Line@1747114e, grammar_graphs.Line@14d680be, grammar_graphs.Line@5367133c, grammar_graphs.Line@4072755e, grammar_graphs.Line@6f90d17f, grammar_graphs.Line@4f637f43, grammar_graphs.Line@24f67b60, grammar_graphs.Line@77fd2225, grammar_graphs.Line@6092509d, grammar_graphs.Line@1e0f0e8c, grammar_graphs.Line@4ac2f369, grammar_graphs.Line@5d78ac2a, grammar_graphs.Line@438a51aa, grammar_graphs.Line@25975c39, grammar_graphs.Line@7893aa59, grammar_graphs.Line@71044a24, grammar_graphs.Line@6a385afb, grammar_graphs.Line@7eb97d00, grammar_graphs.Line@8df35f8, grammar_graphs.Line@20a493fd, grammar_graphs.Line@8e3ea90, grammar_graphs.Line@3d07c7f1, grammar_graphs.Line@4c86555c, grammar_graphs.Line@48391c4a, grammar_graphs.Line@59cdbff3, grammar_graphs.Line@5f99d8b7, grammar_graphs.Line@5c22b4fa, grammar_graphs.Line@22702697, grammar_graphs.Line@22abb5df, grammar_graphs.Line@33e68d5d, grammar_graphs.Line@7a2a6abf, grammar_graphs.Line@26b7ec58, grammar_graphs.Line@3b202d11, grammar_graphs.Line@60f471d4, grammar_graphs.Line@4565ab34, grammar_graphs.Line@2160ac59, grammar_graphs.Line@1b9245c1, grammar_graphs.Line@58abfdb6, grammar_graphs.Line@307fd19c, grammar_graphs.Line@1459b1ae, grammar_graphs.Line@52095b82, grammar_graphs.Line@1dec42a9, grammar_graphs.Line@1a2d4aef, grammar_graphs.Line@54109b07, grammar_graphs.Line@d1d84ea, grammar_graphs.Line@729b66ea, grammar_graphs.Line@2113064, grammar_graphs.Line@3352affd, grammar_graphs.Line@685f20ad, grammar_graphs.Line@78384cb5, grammar_graphs.Line@15f5ce00, grammar_graphs.Line@2e9e0a66, grammar_graphs.Line@3fd51d50, grammar_graphs.Line@532a3fb, grammar_graphs.Line@3e8cf893, grammar_graphs.Line@609f181e, grammar_graphs.Line@3cf6da93, grammar_graphs.Line@7737b6c0, grammar_graphs.Line@670afea6, grammar_graphs.Line@3e9bcab4, grammar_graphs.Line@265c7a91, grammar_graphs.Line@6c97592c, grammar_graphs.Line@5cd875d6, grammar_graphs.Line@793bb76e, grammar_graphs.Line@4c5a9940, grammar_graphs.Line@66791ebf, grammar_graphs.Line@4affd70b, grammar_graphs.Line@14def33b, grammar_graphs.Line@c56e879, grammar_graphs.Line@227493aa, grammar_graphs.Line@16075f60, grammar_graphs.Line@752331b0, grammar_graphs.Line@7a1844f, grammar_graphs.Line@4e0d0a4d, grammar_graphs.Line@486229e5, grammar_graphs.Line@64b293d6, grammar_graphs.Line@8709041, grammar_graphs.Line@2e09bc60, grammar_graphs.Line@77fd8545, grammar_graphs.Line@b5fee62, grammar_graphs.Line@74c17d44, grammar_graphs.Line@19c109ac, grammar_graphs.Line@46c7f9c7, grammar_graphs.Line@68b7e5f1, grammar_graphs.Line@17e38efe, grammar_graphs.Line@6fe79c7, grammar_graphs.Line@7f8eb11e, grammar_graphs.Line@28414b73, grammar_graphs.Line@40881858, grammar_graphs.Line@235ea4fb, grammar_graphs.Line@569bc116, grammar_graphs.Line@5c978c9a, grammar_graphs.Line@7eaf4ea8, grammar_graphs.Line@288044fa, grammar_graphs.Line@209ba38d, grammar_graphs.Line@4456c4ef, grammar_graphs.Line@4eb1a84a, grammar_graphs.Line@4e30750, grammar_graphs.Line@22a76401, grammar_graphs.Line@21905519, grammar_graphs.Line@62a05a99, grammar_graphs.Line@7e65181a, grammar_graphs.Line@677becbb, grammar_graphs.Line@44e045d0, grammar_graphs.Line@40f8dcc, grammar_graphs.Line@2474bb47, grammar_graphs.Line@7207d21b, grammar_graphs.Line@4aa1e6d4, grammar_graphs.Line@ca9e495, grammar_graphs.Line@d86d8c4, grammar_graphs.Line@41dd4465, grammar_graphs.Line@47415c94, grammar_graphs.Line@65207a89, grammar_graphs.Line@7df6df58, grammar_graphs.Line@6aa38969, grammar_graphs.Line@4b74391d, grammar_graphs.Line@2de6f6c8, grammar_graphs.Line@6621e033, grammar_graphs.Line@10bfd55f, grammar_graphs.Line@7ae9aa84, grammar_graphs.Line@1dd9312b, grammar_graphs.Line@60a343a7, grammar_graphs.Line@96a17f8, grammar_graphs.Line@67113ea7, grammar_graphs.Line@509b154b, grammar_graphs.Line@2a5fca84, grammar_graphs.Line@7353dde0, grammar_graphs.Line@15e04e96, grammar_graphs.Line@996ba4a, grammar_graphs.Line@2697f589, grammar_graphs.Line@5325a82, grammar_graphs.Line@50a1c43c, grammar_graphs.Line@6c597088, grammar_graphs.Line@75fbfb37, grammar_graphs.Line@628a4940, grammar_graphs.Line@3cd4e109, grammar_graphs.Line@45b05ab0, grammar_graphs.Line@1bae1b2b, grammar_graphs.Line@31a6792a, grammar_graphs.Line@156f617, grammar_graphs.Line@1a91839d, grammar_graphs.Line@718db4a7, grammar_graphs.Line@73e0fc95, grammar_graphs.Line@53aba4f0]
+-------------find match----------
+grammar_graphs.Line@49fff9d4 add child: grammar_graphs.Line@4f9f0aae
+grammar_graphs.Line@474111eb add child: grammar_graphs.Line@3bef539c
+grammar_graphs.Line@45d4def2 add child: grammar_graphs.Line@7ccdeb8b
+grammar_graphs.Line@39171bca add child: grammar_graphs.Line@724f4cc6
+grammar_graphs.Line@5a91a3fb add child: grammar_graphs.Line@4532f25b
+-------------end finding match----------
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+----------APPLY RULE: C_Rule_2 of Category: C----------
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed, grammar_graphs.Line@5d6dff05, grammar_graphs.Line@5a91a3fb, grammar_graphs.Line@129f2698, grammar_graphs.Line@474111eb, grammar_graphs.Line@75664bd1, grammar_graphs.Line@22bfb0fd, grammar_graphs.Line@49fff9d4, grammar_graphs.Line@6fe6749, grammar_graphs.Line@41819c84, grammar_graphs.Line@1e66f411, grammar_graphs.Line@28618f50, grammar_graphs.Line@5d50713a, grammar_graphs.Line@1078a3a8, grammar_graphs.Line@39171bca, grammar_graphs.Line@1da818b7, grammar_graphs.Line@43af6399, grammar_graphs.Line@72eca366, grammar_graphs.Line@1bf78a59, grammar_graphs.Line@3763e497, grammar_graphs.Line@40637781, grammar_graphs.Line@57030b78, grammar_graphs.Line@7001e683, grammar_graphs.Line@58eee348, grammar_graphs.Line@3ea48ab, grammar_graphs.Line@1ab4d7c2, grammar_graphs.Line@4cfdcb65, grammar_graphs.Line@33371987, grammar_graphs.Line@1cec480a, grammar_graphs.Line@4d92f42c, grammar_graphs.Line@6f16a818, grammar_graphs.Line@64666f5c, grammar_graphs.Line@40dd732c, grammar_graphs.Line@403121b7, grammar_graphs.Line@71719b, grammar_graphs.Line@cfdb440, grammar_graphs.Line@6778f64c, grammar_graphs.Line@2e0d5f8d, grammar_graphs.Line@25fb0e7e, grammar_graphs.Line@4445e135, grammar_graphs.Line@642fa567, grammar_graphs.Line@209a6f58, grammar_graphs.Line@5def1dcb, grammar_graphs.Line@3648030a, grammar_graphs.Line@2f559c39, grammar_graphs.Line@5c46d624, grammar_graphs.Line@79e28922, grammar_graphs.Line@fc48547, grammar_graphs.Line@cf364d2, grammar_graphs.Line@6b46049f, grammar_graphs.Line@232007b0, grammar_graphs.Line@6dab1b55, grammar_graphs.Line@48d326ae, grammar_graphs.Line@13eaa1d7, grammar_graphs.Line@30d4299d, grammar_graphs.Line@590fd61, grammar_graphs.Line@54275d2b, grammar_graphs.Line@1efc797e, grammar_graphs.Line@1205ba61, grammar_graphs.Line@38ce17d, grammar_graphs.Line@1f56f98, grammar_graphs.Line@6fd5a488, grammar_graphs.Line@503cdda1, grammar_graphs.Line@34df49d2, grammar_graphs.Line@5c4f6fcd, grammar_graphs.Line@4aeaf731, grammar_graphs.Line@7f9a9c5c, grammar_graphs.Line@5c054da7, grammar_graphs.Line@5481c654, grammar_graphs.Line@49cfe08a, grammar_graphs.Line@621ced93, grammar_graphs.Line@1482ec02, grammar_graphs.Line@4e6b3ba0, grammar_graphs.Line@28d59698, grammar_graphs.Line@78964957, grammar_graphs.Line@7de343a3, grammar_graphs.Line@7e0252e1, grammar_graphs.Line@69a3d0ba, grammar_graphs.Line@23b5f028, grammar_graphs.Line@442c41a6, grammar_graphs.Line@5f84a538, grammar_graphs.Line@1747114e, grammar_graphs.Line@14d680be, grammar_graphs.Line@5367133c, grammar_graphs.Line@4072755e, grammar_graphs.Line@6f90d17f, grammar_graphs.Line@4f637f43, grammar_graphs.Line@24f67b60, grammar_graphs.Line@77fd2225, grammar_graphs.Line@6092509d, grammar_graphs.Line@1e0f0e8c, grammar_graphs.Line@4ac2f369, grammar_graphs.Line@5d78ac2a, grammar_graphs.Line@438a51aa, grammar_graphs.Line@25975c39, grammar_graphs.Line@7893aa59, grammar_graphs.Line@71044a24, grammar_graphs.Line@6a385afb, grammar_graphs.Line@7eb97d00, grammar_graphs.Line@8df35f8, grammar_graphs.Line@20a493fd, grammar_graphs.Line@8e3ea90, grammar_graphs.Line@3d07c7f1, grammar_graphs.Line@4c86555c, grammar_graphs.Line@48391c4a, grammar_graphs.Line@59cdbff3, grammar_graphs.Line@5f99d8b7, grammar_graphs.Line@5c22b4fa, grammar_graphs.Line@22702697, grammar_graphs.Line@22abb5df, grammar_graphs.Line@33e68d5d, grammar_graphs.Line@7a2a6abf, grammar_graphs.Line@26b7ec58, grammar_graphs.Line@3b202d11, grammar_graphs.Line@60f471d4, grammar_graphs.Line@4565ab34, grammar_graphs.Line@2160ac59, grammar_graphs.Line@1b9245c1, grammar_graphs.Line@58abfdb6, grammar_graphs.Line@307fd19c, grammar_graphs.Line@1459b1ae, grammar_graphs.Line@52095b82, grammar_graphs.Line@1dec42a9, grammar_graphs.Line@1a2d4aef, grammar_graphs.Line@54109b07, grammar_graphs.Line@d1d84ea, grammar_graphs.Line@729b66ea, grammar_graphs.Line@2113064, grammar_graphs.Line@3352affd, grammar_graphs.Line@685f20ad, grammar_graphs.Line@78384cb5, grammar_graphs.Line@15f5ce00, grammar_graphs.Line@2e9e0a66, grammar_graphs.Line@3fd51d50, grammar_graphs.Line@532a3fb, grammar_graphs.Line@3e8cf893, grammar_graphs.Line@609f181e, grammar_graphs.Line@3cf6da93, grammar_graphs.Line@7737b6c0, grammar_graphs.Line@670afea6, grammar_graphs.Line@3e9bcab4, grammar_graphs.Line@265c7a91, grammar_graphs.Line@6c97592c, grammar_graphs.Line@5cd875d6, grammar_graphs.Line@793bb76e, grammar_graphs.Line@4c5a9940, grammar_graphs.Line@66791ebf, grammar_graphs.Line@4affd70b, grammar_graphs.Line@14def33b, grammar_graphs.Line@c56e879, grammar_graphs.Line@227493aa, grammar_graphs.Line@16075f60, grammar_graphs.Line@752331b0, grammar_graphs.Line@7a1844f, grammar_graphs.Line@4e0d0a4d, grammar_graphs.Line@486229e5, grammar_graphs.Line@64b293d6, grammar_graphs.Line@8709041, grammar_graphs.Line@2e09bc60, grammar_graphs.Line@77fd8545, grammar_graphs.Line@b5fee62, grammar_graphs.Line@74c17d44, grammar_graphs.Line@19c109ac, grammar_graphs.Line@46c7f9c7, grammar_graphs.Line@68b7e5f1, grammar_graphs.Line@17e38efe, grammar_graphs.Line@6fe79c7, grammar_graphs.Line@7f8eb11e, grammar_graphs.Line@28414b73, grammar_graphs.Line@40881858, grammar_graphs.Line@235ea4fb, grammar_graphs.Line@569bc116, grammar_graphs.Line@5c978c9a, grammar_graphs.Line@7eaf4ea8, grammar_graphs.Line@288044fa, grammar_graphs.Line@209ba38d, grammar_graphs.Line@4456c4ef, grammar_graphs.Line@4eb1a84a, grammar_graphs.Line@4e30750, grammar_graphs.Line@22a76401, grammar_graphs.Line@21905519, grammar_graphs.Line@62a05a99, grammar_graphs.Line@7e65181a, grammar_graphs.Line@677becbb, grammar_graphs.Line@44e045d0, grammar_graphs.Line@40f8dcc, grammar_graphs.Line@2474bb47, grammar_graphs.Line@7207d21b, grammar_graphs.Line@4aa1e6d4, grammar_graphs.Line@ca9e495, grammar_graphs.Line@d86d8c4, grammar_graphs.Line@41dd4465, grammar_graphs.Line@47415c94, grammar_graphs.Line@65207a89, grammar_graphs.Line@7df6df58, grammar_graphs.Line@6aa38969, grammar_graphs.Line@4b74391d, grammar_graphs.Line@2de6f6c8, grammar_graphs.Line@6621e033, grammar_graphs.Line@10bfd55f, grammar_graphs.Line@7ae9aa84, grammar_graphs.Line@1dd9312b, grammar_graphs.Line@60a343a7, grammar_graphs.Line@96a17f8, grammar_graphs.Line@67113ea7, grammar_graphs.Line@509b154b, grammar_graphs.Line@2a5fca84, grammar_graphs.Line@7353dde0, grammar_graphs.Line@15e04e96, grammar_graphs.Line@996ba4a, grammar_graphs.Line@2697f589, grammar_graphs.Line@5325a82, grammar_graphs.Line@50a1c43c, grammar_graphs.Line@6c597088, grammar_graphs.Line@75fbfb37, grammar_graphs.Line@628a4940, grammar_graphs.Line@3cd4e109, grammar_graphs.Line@45b05ab0, grammar_graphs.Line@1bae1b2b, grammar_graphs.Line@31a6792a, grammar_graphs.Line@156f617, grammar_graphs.Line@1a91839d, grammar_graphs.Line@718db4a7, grammar_graphs.Line@73e0fc95, grammar_graphs.Line@53aba4f0, grammar_graphs.Line@4002ad2, grammar_graphs.Line@1782186a, grammar_graphs.Line@1fa35f20, grammar_graphs.Line@4d51c6a5, grammar_graphs.Line@48823367, grammar_graphs.Line@4f443355, grammar_graphs.Line@4a9b2fc2, grammar_graphs.Line@9bcacda, grammar_graphs.Line@5103d899, grammar_graphs.Line@50fcbf81, grammar_graphs.Line@3eccf050, grammar_graphs.Line@2dba3d74, grammar_graphs.Line@418c9e65, grammar_graphs.Line@74393162, grammar_graphs.Line@2dae01c5, grammar_graphs.Line@74d91b6a]
+-------------find match----------
+grammar_graphs.Line@49fff9d4 add child: grammar_graphs.Line@49d696b2
+grammar_graphs.Line@45d4def2 add child: grammar_graphs.Line@14ab1664
+grammar_graphs.Line@39171bca add child: grammar_graphs.Line@5b23d378
+-------------end finding match----------
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+----------APPLY RULE: A_Rule_3 of Category: A----------
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+-------------INPUT----------
+[grammar_graphs.Line@6e570380, grammar_graphs.Line@8de213b, grammar_graphs.Line@6bff80b1, grammar_graphs.Line@1d481b84, grammar_graphs.Line@4bd550ae, grammar_graphs.Line@327b6716, grammar_graphs.Line@259683e0, grammar_graphs.Line@785f38ed, grammar_graphs.Line@5d6dff05, grammar_graphs.Line@5a91a3fb, grammar_graphs.Line@129f2698, grammar_graphs.Line@474111eb, grammar_graphs.Line@75664bd1, grammar_graphs.Line@22bfb0fd, grammar_graphs.Line@49fff9d4, grammar_graphs.Line@6fe6749, grammar_graphs.Line@41819c84, grammar_graphs.Line@1e66f411, grammar_graphs.Line@28618f50, grammar_graphs.Line@5d50713a, grammar_graphs.Line@1078a3a8, grammar_graphs.Line@39171bca, grammar_graphs.Line@1da818b7, grammar_graphs.Line@43af6399, grammar_graphs.Line@72eca366, grammar_graphs.Line@1bf78a59, grammar_graphs.Line@3763e497, grammar_graphs.Line@40637781, grammar_graphs.Line@57030b78, grammar_graphs.Line@7001e683, grammar_graphs.Line@58eee348, grammar_graphs.Line@3ea48ab, grammar_graphs.Line@1ab4d7c2, grammar_graphs.Line@4cfdcb65, grammar_graphs.Line@33371987, grammar_graphs.Line@1cec480a, grammar_graphs.Line@4d92f42c, grammar_graphs.Line@6f16a818, grammar_graphs.Line@64666f5c, grammar_graphs.Line@40dd732c, grammar_graphs.Line@403121b7, grammar_graphs.Line@71719b, grammar_graphs.Line@cfdb440, grammar_graphs.Line@6778f64c, grammar_graphs.Line@2e0d5f8d, grammar_graphs.Line@25fb0e7e, grammar_graphs.Line@4445e135, grammar_graphs.Line@642fa567, grammar_graphs.Line@209a6f58, grammar_graphs.Line@5def1dcb, grammar_graphs.Line@3648030a, grammar_graphs.Line@2f559c39, grammar_graphs.Line@5c46d624, grammar_graphs.Line@79e28922, grammar_graphs.Line@fc48547, grammar_graphs.Line@cf364d2, grammar_graphs.Line@6b46049f, grammar_graphs.Line@232007b0, grammar_graphs.Line@6dab1b55, grammar_graphs.Line@48d326ae, grammar_graphs.Line@13eaa1d7, grammar_graphs.Line@30d4299d, grammar_graphs.Line@590fd61, grammar_graphs.Line@54275d2b, grammar_graphs.Line@1efc797e, grammar_graphs.Line@1205ba61, grammar_graphs.Line@38ce17d, grammar_graphs.Line@1f56f98, grammar_graphs.Line@6fd5a488, grammar_graphs.Line@503cdda1, grammar_graphs.Line@34df49d2, grammar_graphs.Line@5c4f6fcd, grammar_graphs.Line@4aeaf731, grammar_graphs.Line@7f9a9c5c, grammar_graphs.Line@5c054da7, grammar_graphs.Line@5481c654, grammar_graphs.Line@49cfe08a, grammar_graphs.Line@621ced93, grammar_graphs.Line@1482ec02, grammar_graphs.Line@4e6b3ba0, grammar_graphs.Line@28d59698, grammar_graphs.Line@78964957, grammar_graphs.Line@7de343a3, grammar_graphs.Line@7e0252e1, grammar_graphs.Line@69a3d0ba, grammar_graphs.Line@23b5f028, grammar_graphs.Line@442c41a6, grammar_graphs.Line@5f84a538, grammar_graphs.Line@1747114e, grammar_graphs.Line@14d680be, grammar_graphs.Line@5367133c, grammar_graphs.Line@4072755e, grammar_graphs.Line@6f90d17f, grammar_graphs.Line@4f637f43, grammar_graphs.Line@24f67b60, grammar_graphs.Line@77fd2225, grammar_graphs.Line@6092509d, grammar_graphs.Line@1e0f0e8c, grammar_graphs.Line@4ac2f369, grammar_graphs.Line@5d78ac2a, grammar_graphs.Line@438a51aa, grammar_graphs.Line@25975c39, grammar_graphs.Line@7893aa59, grammar_graphs.Line@71044a24, grammar_graphs.Line@6a385afb, grammar_graphs.Line@7eb97d00, grammar_graphs.Line@8df35f8, grammar_graphs.Line@20a493fd, grammar_graphs.Line@8e3ea90, grammar_graphs.Line@3d07c7f1, grammar_graphs.Line@4c86555c, grammar_graphs.Line@48391c4a, grammar_graphs.Line@59cdbff3, grammar_graphs.Line@5f99d8b7, grammar_graphs.Line@5c22b4fa, grammar_graphs.Line@22702697, grammar_graphs.Line@22abb5df, grammar_graphs.Line@33e68d5d, grammar_graphs.Line@7a2a6abf, grammar_graphs.Line@26b7ec58, grammar_graphs.Line@3b202d11, grammar_graphs.Line@60f471d4, grammar_graphs.Line@4565ab34, grammar_graphs.Line@2160ac59, grammar_graphs.Line@1b9245c1, grammar_graphs.Line@58abfdb6, grammar_graphs.Line@307fd19c, grammar_graphs.Line@1459b1ae, grammar_graphs.Line@52095b82, grammar_graphs.Line@1dec42a9, grammar_graphs.Line@1a2d4aef, grammar_graphs.Line@54109b07, grammar_graphs.Line@d1d84ea, grammar_graphs.Line@729b66ea, grammar_graphs.Line@2113064, grammar_graphs.Line@3352affd, grammar_graphs.Line@685f20ad, grammar_graphs.Line@78384cb5, grammar_graphs.Line@15f5ce00, grammar_graphs.Line@2e9e0a66, grammar_graphs.Line@3fd51d50, grammar_graphs.Line@532a3fb, grammar_graphs.Line@3e8cf893, grammar_graphs.Line@609f181e, grammar_graphs.Line@3cf6da93, grammar_graphs.Line@7737b6c0, grammar_graphs.Line@670afea6, grammar_graphs.Line@3e9bcab4, grammar_graphs.Line@265c7a91, grammar_graphs.Line@6c97592c, grammar_graphs.Line@5cd875d6, grammar_graphs.Line@793bb76e, grammar_graphs.Line@4c5a9940, grammar_graphs.Line@66791ebf, grammar_graphs.Line@4affd70b, grammar_graphs.Line@14def33b, grammar_graphs.Line@c56e879, grammar_graphs.Line@227493aa, grammar_graphs.Line@16075f60, grammar_graphs.Line@752331b0, grammar_graphs.Line@7a1844f, grammar_graphs.Line@4e0d0a4d, grammar_graphs.Line@486229e5, grammar_graphs.Line@64b293d6, grammar_graphs.Line@8709041, grammar_graphs.Line@2e09bc60, grammar_graphs.Line@77fd8545, grammar_graphs.Line@b5fee62, grammar_graphs.Line@74c17d44, grammar_graphs.Line@19c109ac, grammar_graphs.Line@46c7f9c7, grammar_graphs.Line@68b7e5f1, grammar_graphs.Line@17e38efe, grammar_graphs.Line@6fe79c7, grammar_graphs.Line@7f8eb11e, grammar_graphs.Line@28414b73, grammar_graphs.Line@40881858, grammar_graphs.Line@235ea4fb, grammar_graphs.Line@569bc116, grammar_graphs.Line@5c978c9a, grammar_graphs.Line@7eaf4ea8, grammar_graphs.Line@288044fa, grammar_graphs.Line@209ba38d, grammar_graphs.Line@4456c4ef, grammar_graphs.Line@4eb1a84a, grammar_graphs.Line@4e30750, grammar_graphs.Line@22a76401, grammar_graphs.Line@21905519, grammar_graphs.Line@62a05a99, grammar_graphs.Line@7e65181a, grammar_graphs.Line@677becbb, grammar_graphs.Line@44e045d0, grammar_graphs.Line@40f8dcc, grammar_graphs.Line@2474bb47, grammar_graphs.Line@7207d21b, grammar_graphs.Line@4aa1e6d4, grammar_graphs.Line@ca9e495, grammar_graphs.Line@d86d8c4, grammar_graphs.Line@41dd4465, grammar_graphs.Line@47415c94, grammar_graphs.Line@65207a89, grammar_graphs.Line@7df6df58, grammar_graphs.Line@6aa38969, grammar_graphs.Line@4b74391d, grammar_graphs.Line@2de6f6c8, grammar_graphs.Line@6621e033, grammar_graphs.Line@10bfd55f, grammar_graphs.Line@7ae9aa84, grammar_graphs.Line@1dd9312b, grammar_graphs.Line@60a343a7, grammar_graphs.Line@96a17f8, grammar_graphs.Line@67113ea7, grammar_graphs.Line@509b154b, grammar_graphs.Line@2a5fca84, grammar_graphs.Line@7353dde0, grammar_graphs.Line@15e04e96, grammar_graphs.Line@996ba4a, grammar_graphs.Line@2697f589, grammar_graphs.Line@5325a82, grammar_graphs.Line@50a1c43c, grammar_graphs.Line@6c597088, grammar_graphs.Line@75fbfb37, grammar_graphs.Line@628a4940, grammar_graphs.Line@3cd4e109, grammar_graphs.Line@45b05ab0, grammar_graphs.Line@1bae1b2b, grammar_graphs.Line@31a6792a, grammar_graphs.Line@156f617, grammar_graphs.Line@1a91839d, grammar_graphs.Line@718db4a7, grammar_graphs.Line@73e0fc95, grammar_graphs.Line@53aba4f0, grammar_graphs.Line@4002ad2, grammar_graphs.Line@1782186a, grammar_graphs.Line@1fa35f20, grammar_graphs.Line@4d51c6a5, grammar_graphs.Line@48823367, grammar_graphs.Line@4f443355, grammar_graphs.Line@4a9b2fc2, grammar_graphs.Line@9bcacda, grammar_graphs.Line@5103d899, grammar_graphs.Line@50fcbf81, grammar_graphs.Line@3eccf050, grammar_graphs.Line@2dba3d74, grammar_graphs.Line@418c9e65, grammar_graphs.Line@74393162, grammar_graphs.Line@2dae01c5, grammar_graphs.Line@74d91b6a, grammar_graphs.Line@671d813d, grammar_graphs.Line@1a83f86a, grammar_graphs.Line@5657d568, grammar_graphs.Line@132a64c9, grammar_graphs.Line@18351bf8, grammar_graphs.Line@1d70f03c, grammar_graphs.Line@75e49a6f, grammar_graphs.Line@35a8b436, grammar_graphs.Line@48ca2291, grammar_graphs.Line@5f283a0, grammar_graphs.Line@1f997232, grammar_graphs.Line@4effa44c, grammar_graphs.Line@3e86a0a1, grammar_graphs.Line@2f78cb52, grammar_graphs.Line@7ba4246d, grammar_graphs.Line@43420081]
+-------------find match----------
+grammar_graphs.Line@4effa44c add child: grammar_graphs.Line@2a8971e0
+grammar_graphs.Line@4effa44c add child: grammar_graphs.Line@70d4af90
+grammar_graphs.Line@327b6716 add child: grammar_graphs.Line@6913d5b1
+-------------end finding match----------
+---------------CLOSE-LEVEL---------------
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+SET A
+SET B
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+---------------CLOSE-LEVEL---------------
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+SET B
+SET A
+	SET V CHILD
+SET A
+	SET V CHILD
+SET A
+SET B
+	SET B CHILD
+SET B
+	SET B CHILD
+SET B
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@1ad14547]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b7bce1e, grammar_graphs.Line@161ffda7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@196e5768, grammar_graphs.Line@7044d084, grammar_graphs.Line@60451069]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6913d5b1]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@61dcc4ef, grammar_graphs.Line@17d77de5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@136b2e72, grammar_graphs.Line@57ef71ce]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@5380d8c0, grammar_graphs.Line@4532f25b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f33cf5c, grammar_graphs.Line@6856b9d5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@41bfad44, grammar_graphs.Line@3bef539c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f76f712, grammar_graphs.Line@2ceec44e]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c4a7269, grammar_graphs.Line@6edbff0b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4f9f0aae, grammar_graphs.Line@49d696b2]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c66f6de, grammar_graphs.Line@2f2e2a2d]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@518fea24, grammar_graphs.Line@61e8e14c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@30da69a9, grammar_graphs.Line@7892afe7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@11ceb265, grammar_graphs.Line@3af20f63]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@507a79dd, grammar_graphs.Line@629ebb94]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@724f4cc6, grammar_graphs.Line@5b23d378]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@7c3aec40, grammar_graphs.Line@786ae891]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@59bd9f17, grammar_graphs.Line@53bc3a50]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6e6da6a9, grammar_graphs.Line@3cecec65]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@51075d3e, grammar_graphs.Line@372f3d5c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2aab9778, grammar_graphs.Line@2520128c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@39554a64, grammar_graphs.Line@29f0246a]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@66ee749e, grammar_graphs.Line@6aa86030]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@86ae8bc, grammar_graphs.Line@9832e95]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b284af8, grammar_graphs.Line@7eabb2ea]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4aa8d500, grammar_graphs.Line@20ed1867]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4d9ad5ce, grammar_graphs.Line@712c1178, grammar_graphs.Line@5ac35862]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@572be4ef, grammar_graphs.Line@715e4999]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@213c11b6, grammar_graphs.Line@1ad7234b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@753b70f0, grammar_graphs.Line@bc9085f]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@2a8971e0, grammar_graphs.Line@70d4af90]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@1ad14547]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b7bce1e, grammar_graphs.Line@161ffda7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@196e5768, grammar_graphs.Line@7044d084, grammar_graphs.Line@60451069]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6913d5b1]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@61dcc4ef, grammar_graphs.Line@17d77de5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@136b2e72, grammar_graphs.Line@57ef71ce]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@5380d8c0, grammar_graphs.Line@4532f25b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f33cf5c, grammar_graphs.Line@6856b9d5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@41bfad44, grammar_graphs.Line@3bef539c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f76f712, grammar_graphs.Line@2ceec44e]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c4a7269, grammar_graphs.Line@6edbff0b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4f9f0aae, grammar_graphs.Line@49d696b2]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c66f6de, grammar_graphs.Line@2f2e2a2d]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@518fea24, grammar_graphs.Line@61e8e14c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@30da69a9, grammar_graphs.Line@7892afe7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@11ceb265, grammar_graphs.Line@3af20f63]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@507a79dd, grammar_graphs.Line@629ebb94]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@724f4cc6, grammar_graphs.Line@5b23d378]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@7c3aec40, grammar_graphs.Line@786ae891]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@59bd9f17, grammar_graphs.Line@53bc3a50]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6e6da6a9, grammar_graphs.Line@3cecec65]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@51075d3e, grammar_graphs.Line@372f3d5c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2aab9778, grammar_graphs.Line@2520128c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@39554a64, grammar_graphs.Line@29f0246a]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@66ee749e, grammar_graphs.Line@6aa86030]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@86ae8bc, grammar_graphs.Line@9832e95]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b284af8, grammar_graphs.Line@7eabb2ea]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4aa8d500, grammar_graphs.Line@20ed1867]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4d9ad5ce, grammar_graphs.Line@712c1178, grammar_graphs.Line@5ac35862]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@572be4ef, grammar_graphs.Line@715e4999]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@213c11b6, grammar_graphs.Line@1ad7234b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@753b70f0, grammar_graphs.Line@bc9085f]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@2a8971e0, grammar_graphs.Line@70d4af90]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@1ad14547]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b7bce1e, grammar_graphs.Line@161ffda7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@196e5768, grammar_graphs.Line@7044d084, grammar_graphs.Line@60451069]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6913d5b1]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@61dcc4ef, grammar_graphs.Line@17d77de5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@136b2e72, grammar_graphs.Line@57ef71ce]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@5380d8c0, grammar_graphs.Line@4532f25b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f33cf5c, grammar_graphs.Line@6856b9d5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@41bfad44, grammar_graphs.Line@3bef539c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f76f712, grammar_graphs.Line@2ceec44e]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c4a7269, grammar_graphs.Line@6edbff0b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4f9f0aae, grammar_graphs.Line@49d696b2]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c66f6de, grammar_graphs.Line@2f2e2a2d]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@518fea24, grammar_graphs.Line@61e8e14c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@30da69a9, grammar_graphs.Line@7892afe7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@11ceb265, grammar_graphs.Line@3af20f63]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@507a79dd, grammar_graphs.Line@629ebb94]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@724f4cc6, grammar_graphs.Line@5b23d378]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@7c3aec40, grammar_graphs.Line@786ae891]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@59bd9f17, grammar_graphs.Line@53bc3a50]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6e6da6a9, grammar_graphs.Line@3cecec65]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@51075d3e, grammar_graphs.Line@372f3d5c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2aab9778, grammar_graphs.Line@2520128c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@39554a64, grammar_graphs.Line@29f0246a]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@66ee749e, grammar_graphs.Line@6aa86030]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@86ae8bc, grammar_graphs.Line@9832e95]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b284af8, grammar_graphs.Line@7eabb2ea]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4aa8d500, grammar_graphs.Line@20ed1867]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4d9ad5ce, grammar_graphs.Line@712c1178, grammar_graphs.Line@5ac35862]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@572be4ef, grammar_graphs.Line@715e4999]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@213c11b6, grammar_graphs.Line@1ad7234b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@753b70f0, grammar_graphs.Line@bc9085f]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@2a8971e0, grammar_graphs.Line@70d4af90]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@1ad14547]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b7bce1e, grammar_graphs.Line@161ffda7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@196e5768, grammar_graphs.Line@7044d084, grammar_graphs.Line@60451069]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6913d5b1]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@61dcc4ef, grammar_graphs.Line@17d77de5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@136b2e72, grammar_graphs.Line@57ef71ce]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@5380d8c0, grammar_graphs.Line@4532f25b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f33cf5c, grammar_graphs.Line@6856b9d5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@41bfad44, grammar_graphs.Line@3bef539c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f76f712, grammar_graphs.Line@2ceec44e]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c4a7269, grammar_graphs.Line@6edbff0b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4f9f0aae, grammar_graphs.Line@49d696b2]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c66f6de, grammar_graphs.Line@2f2e2a2d]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@518fea24, grammar_graphs.Line@61e8e14c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@30da69a9, grammar_graphs.Line@7892afe7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@11ceb265, grammar_graphs.Line@3af20f63]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@507a79dd, grammar_graphs.Line@629ebb94]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@724f4cc6, grammar_graphs.Line@5b23d378]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@7c3aec40, grammar_graphs.Line@786ae891]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@59bd9f17, grammar_graphs.Line@53bc3a50]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6e6da6a9, grammar_graphs.Line@3cecec65]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@51075d3e, grammar_graphs.Line@372f3d5c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2aab9778, grammar_graphs.Line@2520128c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@39554a64, grammar_graphs.Line@29f0246a]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@66ee749e, grammar_graphs.Line@6aa86030]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@86ae8bc, grammar_graphs.Line@9832e95]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b284af8, grammar_graphs.Line@7eabb2ea]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4aa8d500, grammar_graphs.Line@20ed1867]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4d9ad5ce, grammar_graphs.Line@712c1178, grammar_graphs.Line@5ac35862]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@572be4ef, grammar_graphs.Line@715e4999]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@213c11b6, grammar_graphs.Line@1ad7234b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@753b70f0, grammar_graphs.Line@bc9085f]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@2a8971e0, grammar_graphs.Line@70d4af90]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@1ad14547]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b7bce1e, grammar_graphs.Line@161ffda7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@196e5768, grammar_graphs.Line@7044d084, grammar_graphs.Line@60451069]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6913d5b1]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@61dcc4ef, grammar_graphs.Line@17d77de5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@136b2e72, grammar_graphs.Line@57ef71ce]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@5380d8c0, grammar_graphs.Line@4532f25b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f33cf5c, grammar_graphs.Line@6856b9d5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@41bfad44, grammar_graphs.Line@3bef539c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f76f712, grammar_graphs.Line@2ceec44e]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c4a7269, grammar_graphs.Line@6edbff0b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4f9f0aae, grammar_graphs.Line@49d696b2]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c66f6de, grammar_graphs.Line@2f2e2a2d]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@518fea24, grammar_graphs.Line@61e8e14c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@30da69a9, grammar_graphs.Line@7892afe7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@11ceb265, grammar_graphs.Line@3af20f63]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@507a79dd, grammar_graphs.Line@629ebb94]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@724f4cc6, grammar_graphs.Line@5b23d378]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@7c3aec40, grammar_graphs.Line@786ae891]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@59bd9f17, grammar_graphs.Line@53bc3a50]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6e6da6a9, grammar_graphs.Line@3cecec65]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@51075d3e, grammar_graphs.Line@372f3d5c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2aab9778, grammar_graphs.Line@2520128c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@39554a64, grammar_graphs.Line@29f0246a]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@66ee749e, grammar_graphs.Line@6aa86030]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@86ae8bc, grammar_graphs.Line@9832e95]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b284af8, grammar_graphs.Line@7eabb2ea]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4aa8d500, grammar_graphs.Line@20ed1867]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4d9ad5ce, grammar_graphs.Line@712c1178, grammar_graphs.Line@5ac35862]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@572be4ef, grammar_graphs.Line@715e4999]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@213c11b6, grammar_graphs.Line@1ad7234b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@753b70f0, grammar_graphs.Line@bc9085f]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@2a8971e0, grammar_graphs.Line@70d4af90]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@1ad14547]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b7bce1e, grammar_graphs.Line@161ffda7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@196e5768, grammar_graphs.Line@7044d084, grammar_graphs.Line@60451069]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6913d5b1]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@61dcc4ef, grammar_graphs.Line@17d77de5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@136b2e72, grammar_graphs.Line@57ef71ce]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@5380d8c0, grammar_graphs.Line@4532f25b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f33cf5c, grammar_graphs.Line@6856b9d5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@41bfad44, grammar_graphs.Line@3bef539c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f76f712, grammar_graphs.Line@2ceec44e]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c4a7269, grammar_graphs.Line@6edbff0b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4f9f0aae, grammar_graphs.Line@49d696b2]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c66f6de, grammar_graphs.Line@2f2e2a2d]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@518fea24, grammar_graphs.Line@61e8e14c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@30da69a9, grammar_graphs.Line@7892afe7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@11ceb265, grammar_graphs.Line@3af20f63]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@507a79dd, grammar_graphs.Line@629ebb94]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@724f4cc6, grammar_graphs.Line@5b23d378]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@7c3aec40, grammar_graphs.Line@786ae891]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@59bd9f17, grammar_graphs.Line@53bc3a50]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6e6da6a9, grammar_graphs.Line@3cecec65]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@51075d3e, grammar_graphs.Line@372f3d5c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2aab9778, grammar_graphs.Line@2520128c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@39554a64, grammar_graphs.Line@29f0246a]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@66ee749e, grammar_graphs.Line@6aa86030]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@86ae8bc, grammar_graphs.Line@9832e95]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b284af8, grammar_graphs.Line@7eabb2ea]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4aa8d500, grammar_graphs.Line@20ed1867]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4d9ad5ce, grammar_graphs.Line@712c1178, grammar_graphs.Line@5ac35862]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@572be4ef, grammar_graphs.Line@715e4999]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@213c11b6, grammar_graphs.Line@1ad7234b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@753b70f0, grammar_graphs.Line@bc9085f]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@2a8971e0, grammar_graphs.Line@70d4af90]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@1ad14547]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b7bce1e, grammar_graphs.Line@161ffda7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@196e5768, grammar_graphs.Line@7044d084, grammar_graphs.Line@60451069]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6913d5b1]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@61dcc4ef, grammar_graphs.Line@17d77de5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@136b2e72, grammar_graphs.Line@57ef71ce]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@5380d8c0, grammar_graphs.Line@4532f25b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f33cf5c, grammar_graphs.Line@6856b9d5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@41bfad44, grammar_graphs.Line@3bef539c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f76f712, grammar_graphs.Line@2ceec44e]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c4a7269, grammar_graphs.Line@6edbff0b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4f9f0aae, grammar_graphs.Line@49d696b2]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c66f6de, grammar_graphs.Line@2f2e2a2d]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@518fea24, grammar_graphs.Line@61e8e14c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@30da69a9, grammar_graphs.Line@7892afe7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@11ceb265, grammar_graphs.Line@3af20f63]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@507a79dd, grammar_graphs.Line@629ebb94]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@724f4cc6, grammar_graphs.Line@5b23d378]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@7c3aec40, grammar_graphs.Line@786ae891]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@59bd9f17, grammar_graphs.Line@53bc3a50]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6e6da6a9, grammar_graphs.Line@3cecec65]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@51075d3e, grammar_graphs.Line@372f3d5c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2aab9778, grammar_graphs.Line@2520128c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@39554a64, grammar_graphs.Line@29f0246a]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@66ee749e, grammar_graphs.Line@6aa86030]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@86ae8bc, grammar_graphs.Line@9832e95]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b284af8, grammar_graphs.Line@7eabb2ea]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4aa8d500, grammar_graphs.Line@20ed1867]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4d9ad5ce, grammar_graphs.Line@712c1178, grammar_graphs.Line@5ac35862]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@572be4ef, grammar_graphs.Line@715e4999]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@213c11b6, grammar_graphs.Line@1ad7234b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@753b70f0, grammar_graphs.Line@bc9085f]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@2a8971e0, grammar_graphs.Line@70d4af90]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@1ad14547]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b7bce1e, grammar_graphs.Line@161ffda7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@196e5768, grammar_graphs.Line@7044d084, grammar_graphs.Line@60451069]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6913d5b1]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@61dcc4ef, grammar_graphs.Line@17d77de5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@136b2e72, grammar_graphs.Line@57ef71ce]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@5380d8c0, grammar_graphs.Line@4532f25b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f33cf5c, grammar_graphs.Line@6856b9d5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@41bfad44, grammar_graphs.Line@3bef539c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f76f712, grammar_graphs.Line@2ceec44e]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c4a7269, grammar_graphs.Line@6edbff0b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4f9f0aae, grammar_graphs.Line@49d696b2]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c66f6de, grammar_graphs.Line@2f2e2a2d]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@518fea24, grammar_graphs.Line@61e8e14c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@30da69a9, grammar_graphs.Line@7892afe7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@11ceb265, grammar_graphs.Line@3af20f63]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@507a79dd, grammar_graphs.Line@629ebb94]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@724f4cc6, grammar_graphs.Line@5b23d378]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@7c3aec40, grammar_graphs.Line@786ae891]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@59bd9f17, grammar_graphs.Line@53bc3a50]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6e6da6a9, grammar_graphs.Line@3cecec65]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@51075d3e, grammar_graphs.Line@372f3d5c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2aab9778, grammar_graphs.Line@2520128c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@39554a64, grammar_graphs.Line@29f0246a]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@66ee749e, grammar_graphs.Line@6aa86030]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@86ae8bc, grammar_graphs.Line@9832e95]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b284af8, grammar_graphs.Line@7eabb2ea]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4aa8d500, grammar_graphs.Line@20ed1867]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4d9ad5ce, grammar_graphs.Line@712c1178, grammar_graphs.Line@5ac35862]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@572be4ef, grammar_graphs.Line@715e4999]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@213c11b6, grammar_graphs.Line@1ad7234b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@753b70f0, grammar_graphs.Line@bc9085f]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@2a8971e0, grammar_graphs.Line@70d4af90]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@1ad14547]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b7bce1e, grammar_graphs.Line@161ffda7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@196e5768, grammar_graphs.Line@7044d084, grammar_graphs.Line@60451069]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6913d5b1]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@61dcc4ef, grammar_graphs.Line@17d77de5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@136b2e72, grammar_graphs.Line@57ef71ce]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@5380d8c0, grammar_graphs.Line@4532f25b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f33cf5c, grammar_graphs.Line@6856b9d5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@41bfad44, grammar_graphs.Line@3bef539c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f76f712, grammar_graphs.Line@2ceec44e]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c4a7269, grammar_graphs.Line@6edbff0b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4f9f0aae, grammar_graphs.Line@49d696b2]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c66f6de, grammar_graphs.Line@2f2e2a2d]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@518fea24, grammar_graphs.Line@61e8e14c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@30da69a9, grammar_graphs.Line@7892afe7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@11ceb265, grammar_graphs.Line@3af20f63]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@507a79dd, grammar_graphs.Line@629ebb94]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@724f4cc6, grammar_graphs.Line@5b23d378]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@7c3aec40, grammar_graphs.Line@786ae891]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@59bd9f17, grammar_graphs.Line@53bc3a50]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6e6da6a9, grammar_graphs.Line@3cecec65]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@51075d3e, grammar_graphs.Line@372f3d5c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2aab9778, grammar_graphs.Line@2520128c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@39554a64, grammar_graphs.Line@29f0246a]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@66ee749e, grammar_graphs.Line@6aa86030]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@86ae8bc, grammar_graphs.Line@9832e95]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b284af8, grammar_graphs.Line@7eabb2ea]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4aa8d500, grammar_graphs.Line@20ed1867]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4d9ad5ce, grammar_graphs.Line@712c1178, grammar_graphs.Line@5ac35862]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@572be4ef, grammar_graphs.Line@715e4999]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@213c11b6, grammar_graphs.Line@1ad7234b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@753b70f0, grammar_graphs.Line@bc9085f]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@2a8971e0, grammar_graphs.Line@70d4af90]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@1ad14547]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b7bce1e, grammar_graphs.Line@161ffda7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@196e5768, grammar_graphs.Line@7044d084, grammar_graphs.Line@60451069]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6913d5b1]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@61dcc4ef, grammar_graphs.Line@17d77de5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@136b2e72, grammar_graphs.Line@57ef71ce]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@5380d8c0, grammar_graphs.Line@4532f25b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f33cf5c, grammar_graphs.Line@6856b9d5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@41bfad44, grammar_graphs.Line@3bef539c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f76f712, grammar_graphs.Line@2ceec44e]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c4a7269, grammar_graphs.Line@6edbff0b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4f9f0aae, grammar_graphs.Line@49d696b2]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c66f6de, grammar_graphs.Line@2f2e2a2d]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@518fea24, grammar_graphs.Line@61e8e14c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@30da69a9, grammar_graphs.Line@7892afe7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@11ceb265, grammar_graphs.Line@3af20f63]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@507a79dd, grammar_graphs.Line@629ebb94]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@724f4cc6, grammar_graphs.Line@5b23d378]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@7c3aec40, grammar_graphs.Line@786ae891]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@59bd9f17, grammar_graphs.Line@53bc3a50]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6e6da6a9, grammar_graphs.Line@3cecec65]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@51075d3e, grammar_graphs.Line@372f3d5c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2aab9778, grammar_graphs.Line@2520128c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@39554a64, grammar_graphs.Line@29f0246a]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@66ee749e, grammar_graphs.Line@6aa86030]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@86ae8bc, grammar_graphs.Line@9832e95]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b284af8, grammar_graphs.Line@7eabb2ea]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4aa8d500, grammar_graphs.Line@20ed1867]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4d9ad5ce, grammar_graphs.Line@712c1178, grammar_graphs.Line@5ac35862]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@572be4ef, grammar_graphs.Line@715e4999]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@213c11b6, grammar_graphs.Line@1ad7234b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@753b70f0, grammar_graphs.Line@bc9085f]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@2a8971e0, grammar_graphs.Line@70d4af90]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@1ad14547]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b7bce1e, grammar_graphs.Line@161ffda7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@196e5768, grammar_graphs.Line@7044d084, grammar_graphs.Line@60451069]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6913d5b1]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@61dcc4ef, grammar_graphs.Line@17d77de5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@136b2e72, grammar_graphs.Line@57ef71ce]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@5380d8c0, grammar_graphs.Line@4532f25b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f33cf5c, grammar_graphs.Line@6856b9d5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@41bfad44, grammar_graphs.Line@3bef539c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f76f712, grammar_graphs.Line@2ceec44e]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c4a7269, grammar_graphs.Line@6edbff0b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4f9f0aae, grammar_graphs.Line@49d696b2]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c66f6de, grammar_graphs.Line@2f2e2a2d]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@518fea24, grammar_graphs.Line@61e8e14c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@30da69a9, grammar_graphs.Line@7892afe7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@11ceb265, grammar_graphs.Line@3af20f63]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@507a79dd, grammar_graphs.Line@629ebb94]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@724f4cc6, grammar_graphs.Line@5b23d378]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@7c3aec40, grammar_graphs.Line@786ae891]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@59bd9f17, grammar_graphs.Line@53bc3a50]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6e6da6a9, grammar_graphs.Line@3cecec65]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@51075d3e, grammar_graphs.Line@372f3d5c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2aab9778, grammar_graphs.Line@2520128c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@39554a64, grammar_graphs.Line@29f0246a]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@66ee749e, grammar_graphs.Line@6aa86030]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@86ae8bc, grammar_graphs.Line@9832e95]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b284af8, grammar_graphs.Line@7eabb2ea]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4aa8d500, grammar_graphs.Line@20ed1867]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4d9ad5ce, grammar_graphs.Line@712c1178, grammar_graphs.Line@5ac35862]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@572be4ef, grammar_graphs.Line@715e4999]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@213c11b6, grammar_graphs.Line@1ad7234b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@753b70f0, grammar_graphs.Line@bc9085f]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@2a8971e0, grammar_graphs.Line@70d4af90]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@1ad14547]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b7bce1e, grammar_graphs.Line@161ffda7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@196e5768, grammar_graphs.Line@7044d084, grammar_graphs.Line@60451069]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6913d5b1]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@61dcc4ef, grammar_graphs.Line@17d77de5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@136b2e72, grammar_graphs.Line@57ef71ce]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@5380d8c0, grammar_graphs.Line@4532f25b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f33cf5c, grammar_graphs.Line@6856b9d5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@41bfad44, grammar_graphs.Line@3bef539c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f76f712, grammar_graphs.Line@2ceec44e]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c4a7269, grammar_graphs.Line@6edbff0b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4f9f0aae, grammar_graphs.Line@49d696b2]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c66f6de, grammar_graphs.Line@2f2e2a2d]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@518fea24, grammar_graphs.Line@61e8e14c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@30da69a9, grammar_graphs.Line@7892afe7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@11ceb265, grammar_graphs.Line@3af20f63]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@507a79dd, grammar_graphs.Line@629ebb94]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@724f4cc6, grammar_graphs.Line@5b23d378]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@7c3aec40, grammar_graphs.Line@786ae891]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@59bd9f17, grammar_graphs.Line@53bc3a50]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6e6da6a9, grammar_graphs.Line@3cecec65]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@51075d3e, grammar_graphs.Line@372f3d5c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2aab9778, grammar_graphs.Line@2520128c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@39554a64, grammar_graphs.Line@29f0246a]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@66ee749e, grammar_graphs.Line@6aa86030]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@86ae8bc, grammar_graphs.Line@9832e95]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b284af8, grammar_graphs.Line@7eabb2ea]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4aa8d500, grammar_graphs.Line@20ed1867]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4d9ad5ce, grammar_graphs.Line@712c1178, grammar_graphs.Line@5ac35862]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@572be4ef, grammar_graphs.Line@715e4999]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@213c11b6, grammar_graphs.Line@1ad7234b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@753b70f0, grammar_graphs.Line@bc9085f]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@2a8971e0, grammar_graphs.Line@70d4af90]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@1ad14547]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b7bce1e, grammar_graphs.Line@161ffda7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@196e5768, grammar_graphs.Line@7044d084, grammar_graphs.Line@60451069]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6913d5b1]
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@61dcc4ef, grammar_graphs.Line@17d77de5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@136b2e72, grammar_graphs.Line@57ef71ce]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@5380d8c0, grammar_graphs.Line@4532f25b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f33cf5c, grammar_graphs.Line@6856b9d5]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@41bfad44, grammar_graphs.Line@3bef539c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2f76f712, grammar_graphs.Line@2ceec44e]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c4a7269, grammar_graphs.Line@6edbff0b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4f9f0aae, grammar_graphs.Line@49d696b2]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@c66f6de, grammar_graphs.Line@2f2e2a2d]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@518fea24, grammar_graphs.Line@61e8e14c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@30da69a9, grammar_graphs.Line@7892afe7]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@11ceb265, grammar_graphs.Line@3af20f63]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@507a79dd, grammar_graphs.Line@629ebb94]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@724f4cc6, grammar_graphs.Line@5b23d378]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@7c3aec40, grammar_graphs.Line@786ae891]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@59bd9f17, grammar_graphs.Line@53bc3a50]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@6e6da6a9, grammar_graphs.Line@3cecec65]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@51075d3e, grammar_graphs.Line@372f3d5c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@2aab9778, grammar_graphs.Line@2520128c]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@39554a64, grammar_graphs.Line@29f0246a]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@66ee749e, grammar_graphs.Line@6aa86030]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@86ae8bc, grammar_graphs.Line@9832e95]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@b284af8, grammar_graphs.Line@7eabb2ea]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4aa8d500, grammar_graphs.Line@20ed1867]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@4d9ad5ce, grammar_graphs.Line@712c1178, grammar_graphs.Line@5ac35862]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@572be4ef, grammar_graphs.Line@715e4999]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@213c11b6, grammar_graphs.Line@1ad7234b]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE [grammar_graphs.Line@753b70f0, grammar_graphs.Line@bc9085f]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE [grammar_graphs.Line@2a8971e0, grammar_graphs.Line@70d4af90]
+	MOVE CHILD
+MOVE []
+	MOVE CHILD
+MOVE []
+MOVE []
+MOVE []
+MOVE []
+MOVE []
