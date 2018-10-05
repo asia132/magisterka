@@ -3,14 +3,17 @@ package grammar_graphs;
 import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
 import java.awt.Font;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.AffineTransform;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelListener;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 import java.util.ArrayList;
 import java.util.StringJoiner;
@@ -21,8 +24,6 @@ import javax.swing.JButton;
 
 import java.lang.Math;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class MainPanel extends JPanel implements MouseListener, MouseWheelListener, MouseMotionListener {
 	static final long serialVersionUID = 42L;
@@ -89,12 +90,18 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		// programData.point0[1] += MainData.toGrid(y2 - y1);
 		if (programData.marker != null)
 			this.programData.marker.move(x2 - x1, y2 - y1);
+		programData.moveLines(x1, y1, x2, y2, (!(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)));
+		
 		if (!(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)){
 			for (Line line: programData.coloringRuleLevels.limitingShape.levelLines){
 				line.move(x2 - x1, y2 - y1);
 			}
+			AffineTransform trans = new AffineTransform();
+			trans.translate(x2 - x1, y2 - y1);
+			for (ColorRule rule: MainData.getColorRules()) {
+				rule.paintCavnas.transform(trans);
+			}
 		}
-		programData.moveLines(x1, y1, x2, y2, (!(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)));
 
 		this.repaint();
 	}
