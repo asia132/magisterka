@@ -29,12 +29,21 @@ class Shape{
 		this.lines_dist = new HashMap<Line, Dist>();
 		this.marker_norm = marker.getNormalized();
 		this.name = name;
-		int before = lines.size();
+
+		ArrayList <Line> linesCopy = new ArrayList<>(lines.size());
+		for (Line line: lines) {
+			Line newLine = line.copy();
+			line.addChild(newLine);
+			linesCopy.add(newLine);
+		}
+
+		int before = linesCopy.size();
 		do{
-			before = lines.size();
-			lines = groupLines(lines);
-		}while (before != lines.size());
-		for (Line line: lines){
+			System.out.print("\nShape const: ");
+			before = linesCopy.size();
+			linesCopy = groupLines(linesCopy);
+		}while (before != linesCopy.size());
+		for (Line line: linesCopy){
 			this.lines_dist.put(line, new Dist(line, marker));
 		}
 	}
@@ -66,7 +75,6 @@ class Shape{
 		return 2*xc - x;
 	}
 	ArrayList <Line> findMatch(Shape inputShape) throws NotAllRuleLinesRecognized{
-		System.out.println("-------------find match----------");
 		double k = this.marker.length() / inputShape.marker.length();
 
 		ArrayList <Line> ruleLines = new ArrayList<>(this.lines_dist.keySet());
@@ -160,51 +168,96 @@ class Shape{
 							int y1_b = findYOnLine(x1s_b, params_i[0], params_i[1]);
 							int y2_b = findYOnLine(x2s_b, params_i[0], params_i[1]);
 
-							boolean var_x1a = false;
-
+							// CHECK POINT S1_A
 							if (xrange[0] <= x1s_a && x1s_a <= xrange[1] && (x1s_a == x1a_a || x1s_a == x1a_b || x1s_a == x2a_a || x1s_a == x2a_b)){
+								// CHECK POINT S1_B
 								if (xrange[0] <= x1s_b && x1s_b <= xrange[1] && (x1s_b == x1a_a || x1s_b == x1a_b || x1s_b == x2a_a || x1s_b == x2a_b) && line_r.small_length() == (MainData.distans(x1s_a, y1_a, x1s_b, y1_b) * k)){
 									newLine = new Line(x1s_a*MainData.grid_size, y1_a*MainData.grid_size, x1s_b*MainData.grid_size, y1_b*MainData.grid_size);
+
+									newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
+									if (!(checkY(newLine.pa.y, inLine_i) && checkY(newLine.pb.y, inLine_i))){ continue;}
+									Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
+									if (subRef == Referral.SAME){
+										matchedLines[i][0] = newLine;
+									}else{
+										if (subRef == Referral.DIFFERENT){
+											matchedLines[i][1] = newLine;
+										}else{ // subRef == Referral.DUPLICATED
+											matchedLines[i][0] = newLine;
+											matchedLines[i][1] = newLine;		
+										}
+									}
+
 									inLine_i.addChild(newLine);
-									var_x1a = true;
-								}else if (xrange[0] <= x2s_b && x2s_b <= xrange[1] && (x2s_b == x1a_a || x2s_b == x1a_b || x2s_b == x2a_a || x2s_b == x2a_b) && line_r.small_length() == (MainData.distans(x1s_a, y1_a, x2s_b, y2_b) * k)){
-									newLine = new Line(x1s_a*MainData.grid_size, y1_a*MainData.grid_size, x2s_b*MainData.grid_size, y2_b*MainData.grid_size);
-									inLine_i.addChild(newLine);
-									var_x1a = true;
+								// CHECK POINT S2_B
+								}else{
+									if (xrange[0] <= x2s_b && x2s_b <= xrange[1] && (x2s_b == x1a_a || x2s_b == x1a_b || x2s_b == x2a_a || x2s_b == x2a_b) && line_r.small_length() == (MainData.distans(x1s_a, y1_a, x2s_b, y2_b) * k)){
+										newLine = new Line(x1s_a*MainData.grid_size, y1_a*MainData.grid_size, x2s_b*MainData.grid_size, y2_b*MainData.grid_size);
+
+										newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
+										if (!(checkY(newLine.pa.y, inLine_i) && checkY(newLine.pb.y, inLine_i))){ continue;}
+										Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
+										if (subRef == Referral.SAME){
+											matchedLines[i][0] = newLine;
+										}else{
+											if (subRef == Referral.DIFFERENT){
+												matchedLines[i][1] = newLine;
+											}else{ // subRef == Referral.DUPLICATED
+												matchedLines[i][0] = newLine;
+												matchedLines[i][1] = newLine;		
+											}
+										}
+
+										inLine_i.addChild(newLine);
+									}
 								}
 							}
-							if (var_x1a == false && xrange[0] <= x2s_a && x2s_a <= xrange[1] && (x2s_a == x1a_a || x2s_a == x1a_b || x2s_a == x2a_a || x2s_a == x2a_b)){
+							// CHECK POINT S2_A
+							if (xrange[0] <= x2s_a && x2s_a <= xrange[1] && (x2s_a == x1a_a || x2s_a == x1a_b || x2s_a == x2a_a || x2s_a == x2a_b)){
+								// CHECK POINT S1_B
 								if (xrange[0] <= x1s_b && x1s_b <= xrange[1] && (x1s_b == x1a_a || x1s_b == x1a_b || x1s_b == x2a_a || x1s_b == x2a_b) && line_r.small_length() == (MainData.distans(x2s_a, y2_a, x1s_b, y1_b) * k)){
 									newLine = new Line(x2s_a*MainData.grid_size, y2_a*MainData.grid_size, x1s_b*MainData.grid_size, y1_b*MainData.grid_size);
+
+										newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
+										if (!(checkY(newLine.pa.y, inLine_i) && checkY(newLine.pb.y, inLine_i))){ continue;}
+										Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
+										if (subRef == Referral.SAME){
+											matchedLines[i][0] = newLine;
+										}else{
+											if (subRef == Referral.DIFFERENT){
+												matchedLines[i][1] = newLine;
+											}else{ // subRef == Referral.DUPLICATED
+												matchedLines[i][0] = newLine;
+												matchedLines[i][1] = newLine;		
+											}
+										}
+
 									inLine_i.addChild(newLine);
-									var_x1a = true;
 								}else{
+								// CHECK POINT S2_B
 									if (xrange[0] <= x2s_b && x2s_b <= xrange[1] && (x2s_b == x1a_a || x2s_b == x1a_b || x2s_b == x2a_a || x2s_b == x2a_b) && line_r.small_length() == (MainData.distans(x2s_a, y2_a, x2s_b, y2_b) * k)){
 										newLine = new Line(x2s_a*MainData.grid_size, y2_a*MainData.grid_size, x2s_b*MainData.grid_size, y2_b*MainData.grid_size);
+
+										newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
+										if (!(checkY(newLine.pa.y, inLine_i) && checkY(newLine.pb.y, inLine_i))){ continue;}
+										Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
+										if (subRef == Referral.SAME){
+											matchedLines[i][0] = newLine;
+										}else{
+											if (subRef == Referral.DIFFERENT){
+												matchedLines[i][1] = newLine;
+											}else{ // subRef == Referral.DUPLICATED
+												matchedLines[i][0] = newLine;
+												matchedLines[i][1] = newLine;		
+											}
+										}
+
 										inLine_i.addChild(newLine);
-										var_x1a = true;
 									}else{
 										continue;
 									}
 								}
-							}else if (var_x1a == false){
-								continue;
 							}
-							newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
-
-							if (!(checkY(newLine.pa.y, inLine_i) && checkY(newLine.pb.y, inLine_i))){ continue;}
-
-							Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
-							if (subRef == Referral.SAME){
-								matchedLines[i][0] = newLine;
-							}else{
-								if (subRef == Referral.DIFFERENT){
-									matchedLines[i][1] = newLine;
-								}else{ // subRef == Referral.DUPLICATED
-									matchedLines[i][0] = newLine;
-									matchedLines[i][1] = newLine;		
-								}
-							}							
 						}catch (PointDoesNotExist pointDoesNotExist) {
 							continue;
 						}
@@ -263,51 +316,93 @@ class Shape{
 							int y1Aa_b = findY1OnLineForNonLinearFunction(x, k, distBp, markerAPoint);
 							int y2Aa_b = findY2OnLineForNonLinearFunction(x, k, distBp, markerAPoint);
 
-							boolean var_x1a = false;
 
 							Line newLine = null;							
 
 							if (yrange[0] <= y1_a && y1_a <= yrange[1] && (y1_a == y1Aa_a || y1_a == y1Aa_b || y1_a == y2Aa_a || y1_a == y2Aa_b)){
 								if (yrange[0] <= y1_b && y1_b <= yrange[1] && (y1_b == y1Aa_a || y1_b == y1Aa_b || y1_b == y2Aa_a || y1_b == y2Aa_b) && line_r.small_length() == (MainData.distans(x, y1_a, x, y1_b) * k)){
 									newLine = new Line(x*MainData.grid_size, y1_a*MainData.grid_size, x*MainData.grid_size, y1_b*MainData.grid_size);
+									
+									newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
+									if (!(checkX(newLine.pa.x, inLine_i) && checkX(newLine.pb.x, inLine_i))){		continue;}
+
+									Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
+									if (subRef == Referral.SAME){
+										matchedLines[i][0] = newLine;
+									}else{
+										if (subRef == Referral.DIFFERENT){
+											matchedLines[i][1] = newLine;
+										}else{ // subRef == Referral.DUPLICATED
+											matchedLines[i][0] = newLine;
+											matchedLines[i][1] = newLine;		
+										}
+									}
+
 									inLine_i.addChild(newLine);
-									var_x1a = true;
 								}else if (yrange[0] <= y2_b && y2_b <= yrange[1] && (y2_b == y1Aa_a || y2_b == y1Aa_b || y2_b == y2Aa_a || y2_b == y2Aa_b) && line_r.small_length() == (MainData.distans(x, y1_a, x, y2_b) * k)){
 									newLine = new Line(x*MainData.grid_size, y1_a*MainData.grid_size, x*MainData.grid_size, y2_b*MainData.grid_size);
+									
+									newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
+									if (!(checkX(newLine.pa.x, inLine_i) && checkX(newLine.pb.x, inLine_i))){		continue;}
+
+									Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
+									if (subRef == Referral.SAME){
+										matchedLines[i][0] = newLine;
+									}else{
+										if (subRef == Referral.DIFFERENT){
+											matchedLines[i][1] = newLine;
+										}else{ // subRef == Referral.DUPLICATED
+											matchedLines[i][0] = newLine;
+											matchedLines[i][1] = newLine;		
+										}
+									}
+
 									line_r.addChild(newLine);
-									var_x1a = true;
 								}
 							}
-							if (var_x1a == false && yrange[0] <= y2_a && y2_a <= yrange[1] && (y2_a == y1Aa_a || y2_a == y1Aa_b || y2_a == y2Aa_a || y2_a == y2Aa_b)){
+							if (yrange[0] <= y2_a && y2_a <= yrange[1] && (y2_a == y1Aa_a || y2_a == y1Aa_b || y2_a == y2Aa_a || y2_a == y2Aa_b)){
 								if (yrange[0] <= y1_b && y1_b <= yrange[1] && (y1_b == y1Aa_a || y1_b == y1Aa_b || y1_b == y2Aa_a || y1_b == y2Aa_b) && line_r.small_length() == (MainData.distans(x, y2_a, x, y1_b) * k)){
 									newLine = new Line(x*MainData.grid_size, y2_a*MainData.grid_size, x*MainData.grid_size, y1_b*MainData.grid_size);
+									
+									newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
+									if (!(checkX(newLine.pa.x, inLine_i) && checkX(newLine.pb.x, inLine_i))){		continue;}
+
+									Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
+									if (subRef == Referral.SAME){
+										matchedLines[i][0] = newLine;
+									}else{
+										if (subRef == Referral.DIFFERENT){
+											matchedLines[i][1] = newLine;
+										}else{ // subRef == Referral.DUPLICATED
+											matchedLines[i][0] = newLine;
+											matchedLines[i][1] = newLine;		
+										}
+									}
+
 									inLine_i.addChild(newLine);
-									var_x1a = true;
 								}else{
 									if (yrange[0] <= y2_b && y2_b <= yrange[1] && (y2_b == y1Aa_a || y2_b == y1Aa_b || y2_b == y2Aa_a || y2_b == y2Aa_b) && line_r.small_length() == (MainData.distans(x, y2_a, x, y2_b) * k)){
 										newLine = new Line(x*MainData.grid_size, y2_a*MainData.grid_size, x*MainData.grid_size, y2_b*MainData.grid_size);
+									
+										newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
+										if (!(checkX(newLine.pa.x, inLine_i) && checkX(newLine.pb.x, inLine_i))){		continue;}
+
+										Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
+										if (subRef == Referral.SAME){
+											matchedLines[i][0] = newLine;
+										}else{
+											if (subRef == Referral.DIFFERENT){
+												matchedLines[i][1] = newLine;
+											}else{ // subRef == Referral.DUPLICATED
+												matchedLines[i][0] = newLine;
+												matchedLines[i][1] = newLine;		
+											}
+										}
+
 										inLine_i.addChild(newLine);
-										var_x1a = true;
 									}else{
 										continue;
 									}
-								}
-							}else if (var_x1a == false){
-								continue;
-							}
-
-							newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
-							if (!(checkX(newLine.pa.x, inLine_i) && checkX(newLine.pb.x, inLine_i))){		continue;}
-
-							Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
-							if (subRef == Referral.SAME){
-								matchedLines[i][0] = newLine;
-							}else{
-								if (subRef == Referral.DIFFERENT){
-									matchedLines[i][1] = newLine;
-								}else{ // subRef == Referral.DUPLICATED
-									matchedLines[i][0] = newLine;
-									matchedLines[i][1] = newLine;		
 								}
 							}
 						}catch (PointDoesNotExist pointDoesNotExist1) {
@@ -367,20 +462,22 @@ class Shape{
 	Referral checkMirroringSide(double k, Marker marker, Line line, int x_a, int x_b, int y_a, int y_b){
 		double precision = 1e-13;
 
-		double dist_b = this.lines_dist.get(line).mb_la;
-		double mb_la = MainData.distans(x_a, y_a, marker.getbx()*1., marker.getby()*1.);
-		double mb_lb = MainData.distans(x_b, y_b, marker.getbx()*1., marker.getby()*1.);
+		double r_mb_la = this.lines_dist.get(line).mb_la; // RULE LINE
+		double r_mb_lb = this.lines_dist.get(line).mb_lb; // RULE LINE
+		double l_mb_la = MainData.distans(x_a, y_a, marker.getbx()*1., marker.getby()*1.);
+		double l_mb_lb = MainData.distans(x_b, y_b, marker.getbx()*1., marker.getby()*1.);
 
-		double dist_d = this.lines_dist.get(line).md_la;
-		double md_la = MainData.distans(x_a, y_a, marker.getdx()*1., marker.getdy()*1.);
-		double md_lb = MainData.distans(x_b, y_b, marker.getdx()*1., marker.getdy()*1.);
+		double r_md_la = this.lines_dist.get(line).md_la; // RULE LINE
+		double r_md_lb = this.lines_dist.get(line).md_lb; // RULE LINE
+		double l_md_la = MainData.distans(x_a, y_a, marker.getdx()*1., marker.getdy()*1.);
+		double l_md_lb = MainData.distans(x_b, y_b, marker.getdx()*1., marker.getdy()*1.);
 
-		if (Math.abs(mb_la - md_lb) < precision && Math.abs(md_la - mb_lb) < precision){
+		if (Math.abs(r_mb_la - r_md_la) < precision && Math.abs(r_md_lb - r_mb_lb) < precision){
 			return Referral.DUPLICATED;
 		}
 
-		if ((Math.abs(dist_b-mb_la*k) < precision && Math.abs(dist_d-md_la*k) < precision) || 
-			(Math.abs(dist_b-mb_lb*k) < precision && Math.abs(dist_d-md_lb*k) < precision)){
+		if ((Math.abs(r_mb_la - l_mb_lb*k) < precision && Math.abs(r_mb_lb - l_mb_la*k) < precision && Math.abs(r_md_la - l_md_lb*k) < precision && Math.abs(r_md_lb - l_md_la*k) < precision) ||
+			(Math.abs(r_mb_la - l_mb_la*k) < precision && Math.abs(r_mb_lb - l_mb_lb*k) < precision && Math.abs(r_md_lb - l_md_lb*k) < precision && Math.abs(r_md_la - l_md_la*k) < precision) ){
 						
 			return Referral.SAME;
 		}
@@ -412,6 +509,7 @@ class Shape{
 	}
 	// Consider joining lines
 	static ArrayList <Line> groupLines(ArrayList <Line> shape_lines){
+		System.out.println("GROUP LINES");
 		ArrayList <Line> lines = new ArrayList<>();
 		for (Line line: shape_lines)
 			lines.add(line);
@@ -635,11 +733,12 @@ class Shape{
 			if ((Math.abs(this.ms_lb - inputDist.ms_lb * k) < precision && Math.abs(this.ma_la - inputDist.ma_la * k) < precision) ||
 				(Math.abs(this.ms_la - inputDist.ms_lb * k) < precision && Math.abs(this.ma_lb - inputDist.ma_la * k) < precision)){
 				
-				if (Math.abs(this.mb_la - this.md_lb) < precision && Math.abs(this.md_la - this.mb_lb) < precision){
+				if (Math.abs(this.mb_la - this.md_la) < precision && Math.abs(this.md_lb - this.mb_lb) < precision){
 					return Referral.DUPLICATED;
 				}
-				if ((Math.abs(this.mb_la-inputDist.mb_la*k) < precision && Math.abs(this.md_la-inputDist.md_la*k) < precision) ||
-					(Math.abs(this.mb_lb-inputDist.mb_la*k) < precision && Math.abs(this.md_lb-inputDist.md_la*k) < precision)){
+
+				if ((Math.abs(this.mb_la - inputDist.mb_lb*k) < precision && Math.abs(this.mb_lb - inputDist.mb_la*k) < precision && Math.abs(this.md_la - inputDist.md_lb*k) < precision && Math.abs(this.md_lb - inputDist.md_la*k) < precision) ||
+					(Math.abs(this.mb_la - inputDist.mb_la*k) < precision && Math.abs(this.mb_lb - inputDist.mb_lb*k) < precision && Math.abs(this.md_lb - inputDist.md_lb*k) < precision && Math.abs(this.md_la - inputDist.md_la*k) < precision) ){
 					
 					return Referral.SAME;
 				}

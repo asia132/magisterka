@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
 
 import java.util.ArrayList;
 import java.util.StringJoiner;
@@ -27,6 +28,7 @@ class MainData {
 	private static boolean COLOR_RULES = false;
 	static boolean LIMITING_SHAPE = false;
 	static boolean DRAW_LEVELS = false;
+	static boolean CLOSED_SHAPES = true;
 
 	Rectangle checkingRect = null;
 	Marker marker = null;
@@ -117,7 +119,7 @@ class MainData {
 			line.move(x2 - x1, y2 - y1);
 		}
 		if (LIMITING_SHAPE){
-			for (Line line: coloringRuleLevels.limitingShape.levelLines){
+			for (Line line: linesStack){
 				line.move(x2 - x1, y2 - y1);
 			}
 		}
@@ -237,7 +239,7 @@ class MainData {
 			for (ColoringRule rule : rulePainting){
 				info.add(rule.toString());
 			}
-			return info.add("\n").toString();	
+			return info.add("").toString();	
 		}else{
 			return "";
 		}
@@ -299,14 +301,22 @@ class MainData {
 	static void setGrig(){
 		SHOW_GRID = !SHOW_GRID;
 	}
+	int getGridSize(){
+		return grid_size;
+	}
 	void setGridSize(int i, int screenWidth, int screenHeight){
 		int max_grid = screenWidth < screenHeight ? screenWidth : screenHeight;
 		if (i + grid_size > 1 && grid_size + i < max_grid){
+
+			AffineTransform trans = new AffineTransform();
+			trans.scale((grid_size*1. + i)/(grid_size*1.), (grid_size*1. + i)/(grid_size*1.));
+			System.out.println(trans.getScaleX());
+			for (ColoringRule rule: MainData.rulePainting) {
+				rule.paintCavnas.transform(trans);
+			}
+
 			grid_size += i;
 		}
-	}
-	int getGridSize(){
-		return grid_size;
 	}
 	void allLinesScale(int i, int screenWidth, int screenHeight){
 		if (i == 1 || grid_size > 5){
@@ -464,8 +474,10 @@ class MainData {
 		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
 		for (ColoringRule rule: rulePainting) {
-			g2d.setPaint(rule.getColor());		
-			g2d.fill(rule.paintCavnas);
+			if (rule.isAplicable){
+				g2d.setPaint(rule.getColor());		
+				g2d.fill(rule.paintCavnas);
+			}
 		}
 		g2d.dispose();
 	}

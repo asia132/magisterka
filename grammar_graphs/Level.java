@@ -29,36 +29,53 @@ class Level {
 		return this.color;
 	}
 	void closeLevel(){
-		System.out.println("---------------CLOSE-LEVEL-" + this.name + "--------------");
-		int before = levelLines.size();
-		do{
-			before = levelLines.size();
-			levelLines = Shape.groupLines(levelLines);
-		}while (before != levelLines.size());
-		if (levelLines.size() > 2){
-			try{
-				this.points = generatePoints();
-			}catch(NotClosedShape e){
-				MainData.setColorRules();
-				System.out.println(e.getMessage());
+		if (MainData.CLOSED_SHAPES){
+			System.out.print("---------------CLOSE-LEVEL-" + this.name);
+			int before = levelLines.size();
+			do{
+				before = levelLines.size();
+				levelLines = Shape.groupLines(levelLines);
+			}while (before != levelLines.size());
+			System.out.print(" - size = " + levelLines.size());
+			if (levelLines.size() > 2){
+				try{
+					this.points = generatePoints();
+					getShape();
+					System.out.println(" WITH SUCCESS. Check area: " + area.isEmpty());
+				}catch(NotClosedShape e){
+					System.out.println(" WITHOUT SUCCESS--------------");
+					MainData.setColorRules();
+					if (!this.name.equals("Limit Shape"))
+						MainData.CLOSED_SHAPES = false;
+					System.out.println(e.getMessage());
+				}
 			}
 		}
 	}
 	Area getShape() throws NotClosedShape{
-		GeneralPath levelShape = new GeneralPath();
-		levelShape.setWindingRule(GeneralPath.WIND_NON_ZERO);
+		if (MainData.CLOSED_SHAPES){
+			GeneralPath levelShape = new GeneralPath();
+			levelShape.setWindingRule(GeneralPath.WIND_NON_ZERO);
 
-		if (points == null || points.length < 0){
-			throw new NotClosedShape("Get shape: Points are null. The shapes are not closed.");
+			if (points == null || points.length < 0){
+				System.out.println(name + ": Get shape: Points are null. The shapes are not closed.");
+				throw new NotClosedShape("Get shape: Points are null. The shapes are not closed.");
+			}
+			levelShape.moveTo(points[0][0], points[0][1]);
+			for (int k = 1; k < points.length; k++)
+				levelShape.lineTo(points[k][0], points[k][1]);
+			levelShape.closePath();
+
+			area = new Area(levelShape);
+			if (MainData.coloringRuleLevels.limitingShape.area == null){
+				MainData.coloringRuleLevels.limitingShape.closeLevel();
+			}
+			if (MainData.coloringRuleLevels.limitingShape.area != null)
+				area.intersect(MainData.coloringRuleLevels.limitingShape.area);
+			return area;
+		}else{
+			throw new NotClosedShape("Get shape: one of shape is not closed. The shapes are not closed.");
 		}
-		levelShape.moveTo(points[0][0], points[0][1]);
-		for (int k = 1; k < points.length; k++)
-			levelShape.lineTo(points[k][0], points[k][1]);
-		levelShape.closePath();
-
-		area = new Area(levelShape);
-		area.intersect(MainData.coloringRuleLevels.limitingShape.area);
-		return area;
 	}
 	int moveToBackCounter = 0;
 	void moveToBack(Line line) throws NotClosedShape{
@@ -71,12 +88,8 @@ class Level {
 		levelLines.add(line);
 	}
 	double [][] generatePoints() throws NotClosedShape{
-
-
 		ArrayList <Double []> points = new ArrayList<>();
-
 		ArrayList <Line> linesToCheck = new ArrayList<>();
-		ArrayList <Line> linesAlreadyChecked = new ArrayList<>();
 		
 		for (Line line: levelLines){
 			linesToCheck.add(line);
@@ -87,9 +100,12 @@ class Level {
 
 		points.get(0)[0] = linesToCheck.get(0).pa.x*1.;
 		points.get(0)[1] = linesToCheck.get(0).pa.y*1.;
+
 		Point p = linesToCheck.get(0).pb;
 		points.get(1)[0] = p.x*1.;
 		points.get(1)[1] = p.y*1.;
+
+		// linesToCheck.remove(0);
 
 		int sizeControl = 0;
 
@@ -99,13 +115,11 @@ class Level {
 				if (p.equals(linesToCheck.get(i).pa)){
 					p = linesToCheck.get(i).pb;
 					points.add(new Double []{p.x*1., p.y*1.});
-					linesAlreadyChecked.add(linesToCheck.get(i));
 					linesToCheck.remove(i);
 					break;
 				}else if (p.equals(linesToCheck.get(i).pb)){
 					p = linesToCheck.get(i).pa;
 					points.add(new Double[]{p.x*1., p.y*1.});
-					linesAlreadyChecked.add(linesToCheck.get(i));
 					linesToCheck.remove(i);
 					break;
 				}
@@ -116,7 +130,7 @@ class Level {
 				this.moveToBack(levelLines.get(0));
 				return generatePoints();
 			}
-			for (Line line: linesToCheck) {
+			for (Line line: linesToCheck.subList(1, linesToCheck.size())) {
 				if (line.onLine(points.get(0)[0].intValue(), points.get(0)[1].intValue()) && line.onLine(points.get(points.size()-1)[0].intValue(), points.get(points.size()-1)[1].intValue())){
 					return arrayConverter(points.toArray(new Double[points.size()][2]));
 				}

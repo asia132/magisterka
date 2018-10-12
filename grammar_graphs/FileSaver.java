@@ -174,12 +174,6 @@ class FileSaver{
 				}
 			}
 			reader.close();
-
-			System.out.println("N = " + MainData.coloringRuleLevels.getN());
-			MainData.coloringRuleLevels.limitingShape.closeLevel();
-			for (int i = 0; i <= MainData.coloringRuleLevels.getN(); ++i){
-				MainData.coloringRuleLevels.levels[i].closeLevel();
-			}
 			
 			panel.repaint();
 		}catch (IOException e) {

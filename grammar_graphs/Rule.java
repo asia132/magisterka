@@ -44,7 +44,7 @@ final class Rule{
 		return this.cat;
 	}
 	void apply(MainPanel panel) throws NoMarkerException{
-		System.out.println("----------APPLY RULE: " + this.getName() + " of Category: " + cat.getChar() + "----------");
+		System.out.print("APPLY RULE: " + this.getName() + " of Category: " + cat.getChar() + " is painting rules active: " + MainData.CLOSED_SHAPES + "; N = " +MainData.coloringRuleLevels.getN());
 		if (panel.programData.marker == null)
 			throw new NoMarkerException("Please add a marker to main panel\n");
 		if (initialshape.marker == null)
@@ -52,15 +52,12 @@ final class Rule{
 		Shape inputshape = new Shape(panel.programData.getLines(), panel.programData.marker, "Input");
 
 		try{
-
-			System.out.println("-------------INPUT----------");
-			System.out.println(panel.programData.lines);
 			ArrayList <Line> found_lines = initialshape.findMatch(inputshape);
-			System.out.println("-------------end finding match----------");
 			if (finalshape != null){
 				finalshape.needsToBeMirrored = inputshape.needsToBeMirrored;
 			}
 			if (found_lines.size() >= initialshape.lines_dist.size()){
+				System.out.println(" - end with success----------");
 				if (finalshape != null && finalshape.marker != null){
 					Marker inputMarker = panel.programData.marker.copy();
 
@@ -79,7 +76,10 @@ final class Rule{
 							}
 						}
 						ArrayList <Line> finalLines = finalshape.setInPlace(inputMarker, initialshape.marker);
-						MainData.coloringRuleLevels.updateWithRule(this.cat, found_lines, finalLines, panel.programData);
+						if (MainData.CLOSED_SHAPES)
+							MainData.coloringRuleLevels.updateWithRule(this.cat, found_lines, finalLines, panel.programData);
+						else
+							panel.programData.addLinesByRule(finalLines);
 					}catch (ToSmallRException e) {
 						new MessageFrame("Rule could not be applicated. " + e.getMessage());
 						panel.programData.marker = inputMarker;
@@ -88,11 +88,15 @@ final class Rule{
 				}
 				else{
 					panel.programData.marker = null;
-					MainData.coloringRuleLevels.updateWithRule(this.cat, found_lines, null, panel.programData);
+					if (MainData.CLOSED_SHAPES)
+						MainData.coloringRuleLevels.updateWithRule(this.cat, found_lines, null, panel.programData);
 				}
 				panel.repaint();
+			}else{
+				System.out.println(" - end without success----------");
 			}
 		}catch(NotAllRuleLinesRecognized error){
+			System.out.println(" - end without success----------");
 			System.out.println(error.getMessage());;
 		}
 	}

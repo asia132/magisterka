@@ -98,7 +98,7 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 			}
 			AffineTransform trans = new AffineTransform();
 			trans.translate(x2 - x1, y2 - y1);
-			for (ColorRule rule: MainData.getColorRules()) {
+			for (ColoringRule rule: MainData.rulePainting) {
 				rule.paintCavnas.transform(trans);
 			}
 		}
@@ -144,8 +144,8 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		info.add(programData.limitShapeToString());
 		info.add(programData.markerToString());
 		info.add(programData.rulesToString());
-		info.add(programData.ruleAppListToString());
 		info.add(programData.rulePaintingToString());
+		info.add(programData.ruleAppListToString());
 		
 		return info.toString();
 	}
@@ -159,7 +159,7 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		Graphics2D g2d = (Graphics2D)g;
 		g2d.setColor(programData.default_background_color);
 		g2d.fillRect(0, 0, this.getWidth(), this.getHeight());
-		if (MainData.getColorRules()){
+		if (MainData.getColorRules() && MainData.CLOSED_SHAPES){
 			if (programData.rulePainting.size() > 0)	programData.render(g2d);
 			else	MainData.coloringRuleLevels.paintLevels(g2d);
 			this.repaint();
@@ -174,9 +174,11 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 			}
 			if (programData.DRAW_LEVELS && !(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)){
 				int i = 0;
+				int x = 0;
+				int y = 0;
 				for (Level level: MainData.coloringRuleLevels.levels){
 					if (i > MainData.coloringRuleLevels.getN() + 1) break;
-					// if (i == 2)
+					// if (i == 0)
 					for (Line line: level.levelLines){
 						line.changeColor(level.getColor());
 						line.drawLine(g2d, programData.point0);
@@ -185,8 +187,8 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 					g2d.setColor(programData.default_background_color);
 					g2d.setFont(new Font("Dialog", Font.BOLD, 20)); 
 					Rectangle2D rect = g2d.getFontMetrics().getStringBounds("L1000", g2d);
-					int x = this.getWidth() - (int)(this.getWidth()*0.25);
-					int y = (i + 1)*((int)rect.getHeight());
+					x = this.getWidth() - (int)(this.getWidth()*0.25);
+					y = (i + 1)*((int)rect.getHeight());
 					g2d.fillRect(x, y - g2d.getFontMetrics().getAscent(), (int) rect.getWidth(), (int) rect.getHeight());
 
 					g2d.setColor(level.getColor());
@@ -194,6 +196,12 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 
 					i++;
 				}
+				Rectangle2D rect = g2d.getFontMetrics().getStringBounds("L1000", g2d);
+				x = this.getWidth() - (int)(this.getWidth()*0.25);
+				y = (i + 1)*((int)rect.getHeight());
+				g2d.fillRect(x, y - g2d.getFontMetrics().getAscent(), (int) rect.getWidth(), (int) rect.getHeight());
+				g2d.setColor(MainData.default_figure_color);
+				g2d.drawString("n = " + MainData.coloringRuleLevels.getN(), x, y);
 			}else{
 				paintLines(g2d);
 			}
@@ -295,9 +303,7 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		if (e.getWheelRotation() < 0){
 			programData.allLinesScale(1, screenWidth, screenHeight);
 			repaint();
-		}
-		else
-		{
+		}else{
 			programData.allLinesScale(-1, screenWidth, screenHeight);
 			repaint();
 		}

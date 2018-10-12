@@ -3,7 +3,6 @@ Bugs:
   ☐ poprawić precyzję skalowania @low
 
   ☐ poprawić rule application list
-  ☐ problem z usuwaniem ostatniej reguły kolorowania
 --- ✄ -----------------------
 BRs:
   ☐ symulacja @critical @started
@@ -13,6 +12,7 @@ BRs:
 
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 Archive:
+ ✘ problem z usuwaniem ostatniej reguły kolorowania @cancelled (18-10-05 19:12) @project(Bugs)
  ✔ zmienić sposób zapisu do plików linii @done (18-10-05 16:08) @project(Bugs)
  ✔ wprowadzić przycinanie linii na potrzeby kolorowania (SG1) w momencie przejścia do następnego levelu @started @done (18-10-05 15:15) @project(Bugs)
  ✔ przesuwanie poziomów: podlinie znalezione na inpucie powinny być childem odpowiadających ich linii i przesuwać się razem z rodzicem. @done (18-10-05 15:15) @project(Bugs)

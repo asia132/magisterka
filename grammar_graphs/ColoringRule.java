@@ -8,6 +8,7 @@ import java.util.function.*;
 import java.util.Stack;
 import java.util.LinkedList;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
@@ -85,7 +86,7 @@ public class ColoringRule {
 			System.out.print(t);
 		}
 	}
-	static String [] shuntingYardAlgorithm(ArrayList<String> text) throws WrongTag{
+	static LinkedList <String> shuntingYardAlgorithm(ArrayList<String> text) throws WrongTag{
 		LinkedList <String> output = new LinkedList<>();
 		Stack <String> stack = new Stack<>();
 
@@ -120,7 +121,7 @@ public class ColoringRule {
 			}
 			output.add(stack.pop());
 		}
-		return output.toArray(new String[output.size()]);
+		return output;
 	}
 	static Function  <Area [], Area> parseOperation(String tag) throws WrongTag{
 		switch(tag){
@@ -137,51 +138,35 @@ public class ColoringRule {
 		if (tag.charAt(1) == 'S') return MainData.coloringRuleLevels.limitingShape;
 		try{
 			int i = Integer.parseInt(tag.substring(1));
-			System.out.println(":::FIND LEVEL" + i);
-			System.out.println(":::FIND LEVEL " + MainData.coloringRuleLevels.levels[i]);
-			System.out.println(":::FIND LEVEL " + MainData.coloringRuleLevels.levels[i].area);
-			// MainData.coloringRuleLevels.levels[i].closeLevel();
+			if (MainData.coloringRuleLevels.levels[i].area == null){
+				MainData.coloringRuleLevels.levels[i].closeLevel();
+			}
 			return MainData.coloringRuleLevels.levels[i];
 		}catch(NumberFormatException e){
 			throw new WrongTag("Cannot parse level tag: " + tag);
 		}
 	}
 	static Area parseTagSet(ArrayList<String> text) throws WrongTag{
-		String [] rpnText = shuntingYardAlgorithm(text);
-
-		Stack <String> sStack = new Stack<>();
-		String sResult = "";
+		LinkedList <String> rpnText = shuntingYardAlgorithm(text);
+		System.out.println("jeszcze działa");
 
 		Stack <Area> stack = new Stack<>();
 		Area result = new Area();
 
-		System.out.println(":::LEVEL ADDING");
+		if (rpnText.size() == 1)
+			return parseLevel(rpnText.get(0)).area;
 
 		for (String token: rpnText){
 			if (token.equals(levelAdd) || token.equals(levelIntersect) || token.equals(levelXOR) || token.equals(levelNot) || token.equals(levelSubstract)){
-				String level_b = sStack.pop();
-				String level_a = sStack.pop();
-				sResult = "(" + level_a + token + level_b + ")";
-				sStack.add(sResult);
-
 				Function  <Area [], Area> operation = parseOperation(token);
 				Area area_b = stack.pop();
 				Area area_a = stack.pop();
-				System.out.println("a: " + area_a + ", b: " + area_b + ", operation: " + operation);
 				result = operation.apply(new Area[]{area_a, area_b});
 				stack.add(result);
 			}else{
-				sStack.add(token);
 				stack.add(parseLevel(token).area);
 			}
-			System.out.println("::TOKEN: " + token);
-			System.out.println("::QUEUE: " + Arrays.toString(rpnText));
-			System.out.println("::STACK: " + stack);
-		}
-		sResult = sStack.pop();
-
-		System.out.println("\n\nResult is: " + sResult);
-		
+		}		
 		return result;
 	}
 	static Area add(Area [] areas){

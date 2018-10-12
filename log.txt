@@ -1,799 +1,182 @@
----------------CLOSE-LEVEL-0--------------
----------------CLOSE-LEVEL-1--------------
-N = 2
----------------CLOSE-LEVEL-Limit Shape--------------
----------------CLOSE-LEVEL-0--------------
----------------CLOSE-LEVEL-1--------------
----------------CLOSE-LEVEL-2--------------
+
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+-------------------OPEN L_SYSTEM_I.grammar-------------------
+0.95
+0.9473684210526315
+0.9444444444444444
+0.9411764705882353
+0.9375
+0.9333333333333333
+0.9285714285714286
+0.9230769230769231
+0.9166666666666666
+0.9090909090909091
+0.9
+0.8888888888888888
+APPLY RULE: add_lines of Category: C is painting rules active: true; N = 0
+Shape const: GROUP LINES
+ - end with success----------
+Add lines to L1
+APPLY RULE: move_marker of Category: B is painting rules active: true; N = 0
+Shape const: GROUP LINES
+ - end with success----------
+INCREASE N
+---------------CLOSE-LEVEL-0GROUP LINES
+ - size = 4---------------CLOSE-LEVEL-Limit ShapeGROUP LINES
+ - size = 4 WITH SUCCESS. Check area: false
+ WITH SUCCESS. Check area: false
+APPLY RULE: add_lines_II of Category: C is painting rules active: true; N = 1
+Shape const: GROUP LINES
+ - end with success----------
+Add lines to L2
+APPLY RULE: move_marker_II of Category: B is painting rules active: true; N = 1
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+ - end with success----------
+INCREASE N
+---------------CLOSE-LEVEL-1GROUP LINES
+GROUP LINES
+ - size = 20 WITH SUCCESS. Check area: false
+APPLY RULE: add_lines_III of Category: C is painting rules active: true; N = 2
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+ - end with success----------
+Add lines to L3
+APPLY RULE: add_lines_III of Category: C is painting rules active: true; N = 2
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+ - end with success----------
+Add lines to L3
+APPLY RULE: add_lines_III of Category: C is painting rules active: true; N = 2
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+ - end with success----------
+Add lines to L3
+APPLY RULE: add_lines_III of Category: C is painting rules active: true; N = 2
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+ - end with success----------
+Add lines to L3
+----------------TURN RENDERING ON WITH N = 2----------------
+---------------CLOSE-LEVEL-Limit ShapeGROUP LINES
+ - size = 4 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-0GROUP LINES
+ - size = 4 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-1GROUP LINES
+ - size = 20 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-2GROUP LINES
+GROUP LINES
+ - size = 84 WITH SUCCESS. Check area: false
+----------------TURN RENDERING ON WITH N = 2----------------
+---------------CLOSE-LEVEL-Limit ShapeGROUP LINES
+ - size = 4 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-0GROUP LINES
+ - size = 4 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-1GROUP LINES
+ - size = 20 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-2GROUP LINES
+ - size = 84 WITH SUCCESS. Check area: false
+0.875
+0.8571428571428571
+----------------TURN RENDERING ON WITH N = 2----------------
+---------------CLOSE-LEVEL-Limit ShapeGROUP LINES
+ - size = 4 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-0GROUP LINES
+ - size = 4 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-1GROUP LINES
+ - size = 20 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-2GROUP LINES
+ - size = 84 WITH SUCCESS. Check area: false
+----------------TURN RENDERING ON WITH N = 2----------------
+---------------CLOSE-LEVEL-Limit ShapeGROUP LINES
+ - size = 4 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-0GROUP LINES
+ - size = 4 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-1GROUP LINES
+ - size = 20 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-2GROUP LINES
+ - size = 84 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-Limit ShapeGROUP LINES
+ - size = 4 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-0GROUP LINES
+ - size = 4 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-1GROUP LINES
+ - size = 20 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-2GROUP LINES
+ - size = 84 WITH SUCCESS. Check area: false
+0 found
+jeszcze działa
+----------------TURN RENDERING ON WITH N = 2----------------
+---------------CLOSE-LEVEL-Limit ShapeGROUP LINES
+ - size = 4 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-0GROUP LINES
+ - size = 4 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-1GROUP LINES
+ - size = 20 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-2GROUP LINES
+ - size = 84 WITH SUCCESS. Check area: false
+----------------TURN RENDERING ON WITH N = 2----------------
+---------------CLOSE-LEVEL-Limit ShapeGROUP LINES
+ - size = 4 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-0GROUP LINES
+ - size = 4 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-1GROUP LINES
+ - size = 20 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-2GROUP LINES
+ - size = 84 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-0GROUP LINES
+ - size = 0---------------CLOSE-LEVEL-1GROUP LINES
+ - size = 0---------------CLOSE-LEVEL-2GROUP LINES
+ - size = 0
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
+
+Shape const: GROUP LINES
 -------------------OPEN a.grammar-------------------
-----------------TURN RENDERING ON----------------
----------------CLOSE-LEVEL-Limit Shape--------------
----------------CLOSE-LEVEL-0--------------
----------------CLOSE-LEVEL-1--------------
----------------CLOSE-LEVEL-2--------------
-----------------TURN RENDERING ON----------------
----------------CLOSE-LEVEL-Limit Shape--------------
----------------CLOSE-LEVEL-0--------------
----------------CLOSE-LEVEL-1--------------
----------------CLOSE-LEVEL-2--------------
-0 should be copied
-0 found
-0 should be copied
-0 found
-0 should be copied
-0 found
-0 should be copied
-0 found
-:::LEVEL ADDING
-::TOKEN: LS
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e]
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e, java.awt.geom.Area@3aec0ef3]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e, java.awt.geom.Area@3aec0ef3, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@3aec0ef3, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e, java.awt.geom.Area@6e701569]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e, java.awt.geom.Area@6e701569, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@6e701569, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e, java.awt.geom.Area@6f1c8e07]
-a: java.awt.geom.Area@24cf618e, b: java.awt.geom.Area@6f1c8e07, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@38a8cf02]
-
-
-Result is: (LS\((L0∩L1)∩L2))
-:::LEVEL ADDING
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@3aec0ef3]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@3aec0ef3, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@3aec0ef3, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@33cf12a6]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@33cf12a6, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@33cf12a6, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@7a01869a]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@7a01869a, java.awt.geom.Area@17ce880]
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@7a01869a, java.awt.geom.Area@17ce880, java.awt.geom.Area@3aec0ef3]
-a: java.awt.geom.Area@17ce880, b: java.awt.geom.Area@3aec0ef3, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@7a01869a, java.awt.geom.Area@70f77abf]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@7a01869a, java.awt.geom.Area@70f77abf, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@70f77abf, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@7a01869a, java.awt.geom.Area@e596b7c]
-a: java.awt.geom.Area@7a01869a, b: java.awt.geom.Area@e596b7c, operation: grammar_graphs.ColoringRule$$Lambda$25/1162347059@338b7956
-::TOKEN: ∪
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@78e2df1a]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@78e2df1a, java.awt.geom.Area@664d4dcd]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@78e2df1a, java.awt.geom.Area@664d4dcd, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@664d4dcd, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@78e2df1a, java.awt.geom.Area@3da559f1]
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@78e2df1a, java.awt.geom.Area@3da559f1, java.awt.geom.Area@3aec0ef3]
-a: java.awt.geom.Area@3da559f1, b: java.awt.geom.Area@3aec0ef3, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@78e2df1a, java.awt.geom.Area@38799dec]
-a: java.awt.geom.Area@78e2df1a, b: java.awt.geom.Area@38799dec, operation: grammar_graphs.ColoringRule$$Lambda$25/1162347059@338b7956
-::TOKEN: ∪
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@5050027c]
-
-
-Result is: ((((L0\L1)\L2)∪((L1\L0)\L2))∪((L2\L1)\L0))
-:::LEVEL ADDING
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@3aec0ef3]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@3aec0ef3, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@3aec0ef3, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@3e240d63]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@3e240d63, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@3e240d63, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@2959a187]
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@2959a187, java.awt.geom.Area@3aec0ef3]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@2959a187, java.awt.geom.Area@3aec0ef3, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@3aec0ef3, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@2959a187, java.awt.geom.Area@5dbbdfbd]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@2959a187, java.awt.geom.Area@5dbbdfbd, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@5dbbdfbd, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@2959a187, java.awt.geom.Area@da86594]
-a: java.awt.geom.Area@2959a187, b: java.awt.geom.Area@da86594, operation: grammar_graphs.ColoringRule$$Lambda$25/1162347059@338b7956
-::TOKEN: ∪
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@13792e57]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@13792e57, java.awt.geom.Area@17ce880]
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@13792e57, java.awt.geom.Area@17ce880, java.awt.geom.Area@3aec0ef3]
-a: java.awt.geom.Area@17ce880, b: java.awt.geom.Area@3aec0ef3, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@13792e57, java.awt.geom.Area@7748e026]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@13792e57, java.awt.geom.Area@7748e026, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@7748e026, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@13792e57, java.awt.geom.Area@740d9f45]
-a: java.awt.geom.Area@13792e57, b: java.awt.geom.Area@740d9f45, operation: grammar_graphs.ColoringRule$$Lambda$25/1162347059@338b7956
-::TOKEN: ∪
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@3a47d095]
-
-
-Result is: ((((L0∩L1)\L2)∪((L0\L1)∩L2))∪((L1\L0)∩L2))
-:::LEVEL ADDING
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, ∪, L2, ∪]
-::STACK: [java.awt.geom.Area@3aec0ef3]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, ∪, L2, ∪]
-::STACK: [java.awt.geom.Area@3aec0ef3, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@3aec0ef3, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$25/1162347059@338b7956
-::TOKEN: ∪
-::QUEUE: [L0, L1, ∪, L2, ∪]
-::STACK: [java.awt.geom.Area@60965a1c]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, ∪, L2, ∪]
-::STACK: [java.awt.geom.Area@60965a1c, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@60965a1c, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$25/1162347059@338b7956
-::TOKEN: ∪
-::QUEUE: [L0, L1, ∪, L2, ∪]
-::STACK: [java.awt.geom.Area@50efcff8]
-
-
-Result is: ((L0∪L1)∪L2)
-----------------TURN RENDERING ON----------------
----------------CLOSE-LEVEL-Limit Shape--------------
----------------CLOSE-LEVEL-0--------------
----------------CLOSE-LEVEL-1--------------
----------------CLOSE-LEVEL-2--------------
-----------------TURN RENDERING ON----------------
----------------CLOSE-LEVEL-Limit Shape--------------
----------------CLOSE-LEVEL-0--------------
----------------CLOSE-LEVEL-1--------------
----------------CLOSE-LEVEL-2--------------
-5 should be copied
-5 found
-:::LEVEL ADDING
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, ∩, L2, ∩]
-::STACK: [java.awt.geom.Area@3aec0ef3]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, ∩, L2, ∩]
-::STACK: [java.awt.geom.Area@3aec0ef3, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@3aec0ef3, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [L0, L1, ∩, L2, ∩]
-::STACK: [java.awt.geom.Area@4949ed22]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, ∩, L2, ∩]
-::STACK: [java.awt.geom.Area@4949ed22, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@4949ed22, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [L0, L1, ∩, L2, ∩]
-::STACK: [java.awt.geom.Area@2034812a]
-
-
-Result is: ((L0∩L1)∩L2)
-:::LEVEL ADDING
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@3aec0ef3]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@3aec0ef3, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@3aec0ef3, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@4d367373]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@4d367373, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@4d367373, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@4baced19]
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@4baced19, java.awt.geom.Area@3aec0ef3]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@4baced19, java.awt.geom.Area@3aec0ef3, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@3aec0ef3, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@4baced19, java.awt.geom.Area@4d0a29b3]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@4baced19, java.awt.geom.Area@4d0a29b3, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@4d0a29b3, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@4baced19, java.awt.geom.Area@49b3cce9]
-a: java.awt.geom.Area@4baced19, b: java.awt.geom.Area@49b3cce9, operation: grammar_graphs.ColoringRule$$Lambda$25/1162347059@338b7956
-::TOKEN: ∪
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@37e09347]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@37e09347, java.awt.geom.Area@17ce880]
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@37e09347, java.awt.geom.Area@17ce880, java.awt.geom.Area@3aec0ef3]
-a: java.awt.geom.Area@17ce880, b: java.awt.geom.Area@3aec0ef3, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@37e09347, java.awt.geom.Area@1b887487]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@37e09347, java.awt.geom.Area@1b887487, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@1b887487, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@37e09347, java.awt.geom.Area@7d391f4]
-a: java.awt.geom.Area@37e09347, b: java.awt.geom.Area@7d391f4, operation: grammar_graphs.ColoringRule$$Lambda$25/1162347059@338b7956
-::TOKEN: ∪
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@5050d163]
-
-
-Result is: ((((L0∩L1)\L2)∪((L0\L1)∩L2))∪((L1\L0)∩L2))
-:::LEVEL ADDING
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@3aec0ef3]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@3aec0ef3, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@3aec0ef3, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@63191a85]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@63191a85, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@63191a85, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@3bed662d]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@3bed662d, java.awt.geom.Area@17ce880]
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@3bed662d, java.awt.geom.Area@17ce880, java.awt.geom.Area@3aec0ef3]
-a: java.awt.geom.Area@17ce880, b: java.awt.geom.Area@3aec0ef3, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@3bed662d, java.awt.geom.Area@20aa0c95]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@3bed662d, java.awt.geom.Area@20aa0c95, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@20aa0c95, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@3bed662d, java.awt.geom.Area@76271a2a]
-a: java.awt.geom.Area@3bed662d, b: java.awt.geom.Area@76271a2a, operation: grammar_graphs.ColoringRule$$Lambda$25/1162347059@338b7956
-::TOKEN: ∪
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@5dc1eb59]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@5dc1eb59, java.awt.geom.Area@664d4dcd]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@5dc1eb59, java.awt.geom.Area@664d4dcd, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@664d4dcd, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@5dc1eb59, java.awt.geom.Area@d4d32c2]
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@5dc1eb59, java.awt.geom.Area@d4d32c2, java.awt.geom.Area@3aec0ef3]
-a: java.awt.geom.Area@d4d32c2, b: java.awt.geom.Area@3aec0ef3, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@5dc1eb59, java.awt.geom.Area@7df3595a]
-a: java.awt.geom.Area@5dc1eb59, b: java.awt.geom.Area@7df3595a, operation: grammar_graphs.ColoringRule$$Lambda$25/1162347059@338b7956
-::TOKEN: ∪
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@334bea84]
-
-
-Result is: ((((L0\L1)\L2)∪((L1\L0)\L2))∪((L2\L1)\L0))
-:::LEVEL ADDING
-::TOKEN: LS
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e]
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e, java.awt.geom.Area@3aec0ef3]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e, java.awt.geom.Area@3aec0ef3, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@3aec0ef3, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e, java.awt.geom.Area@61825497]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e, java.awt.geom.Area@61825497, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@61825497, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e, java.awt.geom.Area@53da147]
-a: java.awt.geom.Area@24cf618e, b: java.awt.geom.Area@53da147, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@62e31133]
-
-
-Result is: (LS\((L0∩L1)∩L2))
-----------------TURN RENDERING ON----------------
----------------CLOSE-LEVEL-Limit Shape--------------
----------------CLOSE-LEVEL-0--------------
----------------CLOSE-LEVEL-1--------------
----------------CLOSE-LEVEL-2--------------
-----------------TURN RENDERING ON----------------
----------------CLOSE-LEVEL-Limit Shape--------------
----------------CLOSE-LEVEL-0--------------
----------------CLOSE-LEVEL-1--------------
----------------CLOSE-LEVEL-2--------------
-:::LEVEL ADDING
-::TOKEN: LS
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e]
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e, java.awt.geom.Area@3aec0ef3]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e, java.awt.geom.Area@3aec0ef3, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@3aec0ef3, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e, java.awt.geom.Area@37771d43]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e, java.awt.geom.Area@37771d43, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@37771d43, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@24cf618e, java.awt.geom.Area@657856c0]
-a: java.awt.geom.Area@24cf618e, b: java.awt.geom.Area@657856c0, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [LS, L0, L1, ∩, L2, ∩, \]
-::STACK: [java.awt.geom.Area@d7ed9d7]
-
-
-Result is: (LS\((L0∩L1)∩L2))
-:::LEVEL ADDING
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@3aec0ef3]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@3aec0ef3, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@3aec0ef3, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@45ec575c]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@45ec575c, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@45ec575c, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@4a7ec7a7]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@4a7ec7a7, java.awt.geom.Area@17ce880]
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@4a7ec7a7, java.awt.geom.Area@17ce880, java.awt.geom.Area@3aec0ef3]
-a: java.awt.geom.Area@17ce880, b: java.awt.geom.Area@3aec0ef3, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@4a7ec7a7, java.awt.geom.Area@6d97567e]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@4a7ec7a7, java.awt.geom.Area@6d97567e, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@6d97567e, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@4a7ec7a7, java.awt.geom.Area@165c8a7a]
-a: java.awt.geom.Area@4a7ec7a7, b: java.awt.geom.Area@165c8a7a, operation: grammar_graphs.ColoringRule$$Lambda$25/1162347059@338b7956
-::TOKEN: ∪
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@312d695a]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@312d695a, java.awt.geom.Area@664d4dcd]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@312d695a, java.awt.geom.Area@664d4dcd, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@664d4dcd, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@312d695a, java.awt.geom.Area@dd2d327]
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@312d695a, java.awt.geom.Area@dd2d327, java.awt.geom.Area@3aec0ef3]
-a: java.awt.geom.Area@dd2d327, b: java.awt.geom.Area@3aec0ef3, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@312d695a, java.awt.geom.Area@5a214045]
-a: java.awt.geom.Area@312d695a, b: java.awt.geom.Area@5a214045, operation: grammar_graphs.ColoringRule$$Lambda$25/1162347059@338b7956
-::TOKEN: ∪
-::QUEUE: [L0, L1, \, L2, \, L1, L0, \, L2, \, ∪, L2, L1, \, L0, \, ∪]
-::STACK: [java.awt.geom.Area@28dc1e21]
-
-
-Result is: ((((L0\L1)\L2)∪((L1\L0)\L2))∪((L2\L1)\L0))
-:::LEVEL ADDING
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@3aec0ef3]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@3aec0ef3, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@3aec0ef3, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@72e1d5d9]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@72e1d5d9, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@72e1d5d9, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@69b16b49]
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@69b16b49, java.awt.geom.Area@3aec0ef3]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@69b16b49, java.awt.geom.Area@3aec0ef3, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@3aec0ef3, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@69b16b49, java.awt.geom.Area@39c23d52]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@69b16b49, java.awt.geom.Area@39c23d52, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@39c23d52, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@69b16b49, java.awt.geom.Area@71a7115d]
-a: java.awt.geom.Area@69b16b49, b: java.awt.geom.Area@71a7115d, operation: grammar_graphs.ColoringRule$$Lambda$25/1162347059@338b7956
-::TOKEN: ∪
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@d145dad]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@d145dad, java.awt.geom.Area@17ce880]
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@d145dad, java.awt.geom.Area@17ce880, java.awt.geom.Area@3aec0ef3]
-a: java.awt.geom.Area@17ce880, b: java.awt.geom.Area@3aec0ef3, operation: grammar_graphs.ColoringRule$$Lambda$24/27858384@3487cf7a
-::TOKEN: \
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@d145dad, java.awt.geom.Area@6f9d9465]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@d145dad, java.awt.geom.Area@6f9d9465, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@6f9d9465, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@d145dad, java.awt.geom.Area@471d1c69]
-a: java.awt.geom.Area@d145dad, b: java.awt.geom.Area@471d1c69, operation: grammar_graphs.ColoringRule$$Lambda$25/1162347059@338b7956
-::TOKEN: ∪
-::QUEUE: [L0, L1, ∩, L2, \, L0, L1, \, L2, ∩, ∪, L1, L0, \, L2, ∩, ∪]
-::STACK: [java.awt.geom.Area@ef9d02e]
-
-
-Result is: ((((L0∩L1)\L2)∪((L0\L1)∩L2))∪((L1\L0)∩L2))
-:::LEVEL ADDING
-:::FIND LEVEL0
-:::FIND LEVEL grammar_graphs.Level@3b10eb6b
-:::FIND LEVEL java.awt.geom.Area@3aec0ef3
-::TOKEN: L0
-::QUEUE: [L0, L1, ∩, L2, ∩]
-::STACK: [java.awt.geom.Area@3aec0ef3]
-:::FIND LEVEL1
-:::FIND LEVEL grammar_graphs.Level@5e6031d3
-:::FIND LEVEL java.awt.geom.Area@17ce880
-::TOKEN: L1
-::QUEUE: [L0, L1, ∩, L2, ∩]
-::STACK: [java.awt.geom.Area@3aec0ef3, java.awt.geom.Area@17ce880]
-a: java.awt.geom.Area@3aec0ef3, b: java.awt.geom.Area@17ce880, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [L0, L1, ∩, L2, ∩]
-::STACK: [java.awt.geom.Area@21af1d69]
-:::FIND LEVEL2
-:::FIND LEVEL grammar_graphs.Level@1c9521ce
-:::FIND LEVEL java.awt.geom.Area@664d4dcd
-::TOKEN: L2
-::QUEUE: [L0, L1, ∩, L2, ∩]
-::STACK: [java.awt.geom.Area@21af1d69, java.awt.geom.Area@664d4dcd]
-a: java.awt.geom.Area@21af1d69, b: java.awt.geom.Area@664d4dcd, operation: grammar_graphs.ColoringRule$$Lambda$23/1002974556@c60b714
-::TOKEN: ∩
-::QUEUE: [L0, L1, ∩, L2, ∩]
-::STACK: [java.awt.geom.Area@22128b85]
-
-
-Result is: ((L0∩L1)∩L2)
-----------------TURN RENDERING ON----------------
----------------CLOSE-LEVEL-Limit Shape--------------
----------------CLOSE-LEVEL-0--------------
----------------CLOSE-LEVEL-1--------------
----------------CLOSE-LEVEL-2--------------
-----------------TURN RENDERING ON----------------
----------------CLOSE-LEVEL-Limit Shape--------------
----------------CLOSE-LEVEL-0--------------
----------------CLOSE-LEVEL-1--------------
----------------CLOSE-LEVEL-2--------------
+----------------TURN RENDERING ON WITH N = 3----------------
+---------------CLOSE-LEVEL-Limit ShapeGROUP LINES
+ - size = 4 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-0GROUP LINES
+ - size = 4 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-1GROUP LINES
+ - size = 20 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-2GROUP LINES
+ - size = 84 WITH SUCCESS. Check area: false
+---------------CLOSE-LEVEL-3GROUP LINES
+ - size = 162The points are not connected. Regression count = 161
+ WITHOUT SUCCESS--------------
+The shape is not closed. The points are not connected. Regression count = 161

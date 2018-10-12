@@ -169,14 +169,29 @@ class PopUpMenu extends JPopupMenu {
 // coloring rules
 	void showColoringRuleLevelss(MainPanel panel){
 		JMenu buttonMenu = new JMenu(ProgramLabels.colorRuleMenu);
-		if (!MainData.LIMITING_SHAPE){
-			buttonMenu.add(showColorRuleOption(panel));
-			buttonMenu.add(addColoringRuleLevels(panel));
+		if (MainData.CLOSED_SHAPES){
+			if (!MainData.LIMITING_SHAPE){
+				buttonMenu.add(showColorRuleOption(panel));
+				buttonMenu.add(addColoringRuleLevels(panel));
+			}
+		}else{
+				buttonMenu.add(info(panel));
 		}
 		if (!MainData.getColorRules())
 			buttonMenu.add(showColorRuleLimitingShape(panel));
 		buttonMenu.add(drawLevels(panel));
+		buttonMenu.add(showResetLevels(panel));
 		add(buttonMenu);
+	}
+	JMenuItem info(MainPanel panel){
+		JMenuItem button = new JMenuItem("One of level shapes is not closed\n- it is not possible to define\npainting rules");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel.programData.setColorRules();
+				panel.repaint();
+			}
+		});
+		return button;
 	}
 	JMenuItem drawLevels(MainPanel panel){
 		JMenuItem button = new JMenuItem();
@@ -197,6 +212,10 @@ class PopUpMenu extends JPopupMenu {
 		JMenuItem addRules = new JMenuItem(ProgramLabels.colorRuleDefine);
 		addRules.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				MainData.coloringRuleLevels.limitingShape.closeLevel();
+				for (int i = 0; i <= MainData.coloringRuleLevels.getN(); ++i){
+					MainData.coloringRuleLevels.levels[i].closeLevel();
+				}
 				new CreateColorRuleFrame();
 			}
 		});
@@ -223,7 +242,7 @@ class PopUpMenu extends JPopupMenu {
 			colorRuleOption.setText(ProgramLabels.colorRuleOptionOn);
 		colorRuleOption.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				System.out.println("----------------TURN RENDERING ON----------------");
+				System.out.println("----------------TURN RENDERING ON WITH N = " + MainData.coloringRuleLevels.getN() + "----------------");
 				MainData.coloringRuleLevels.limitingShape.closeLevel();
 				for (int i = 0; i <= MainData.coloringRuleLevels.getN(); ++i){
 					MainData.coloringRuleLevels.levels[i].closeLevel();
@@ -444,6 +463,7 @@ class PopUpMenu extends JPopupMenu {
 		resetButton.setText(ProgramLabels.resetAll);
 		resetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
+				MainData.CLOSED_SHAPES = true;
 				panel.programData.clear();
 				MainData.coloringRuleLevels = new ColoringRuleLevels(panel);
 				panel.repaint();
@@ -459,6 +479,7 @@ class PopUpMenu extends JPopupMenu {
 		resetButton.setText(ProgramLabels.reset + " " + MainData.file.getName());
 		resetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
+				MainData.CLOSED_SHAPES = true;
 				FileSaver fileSaver = new FileSaver(MainData.file);
 				fileSaver.openDataFile(panel);
 				panel.repaint();

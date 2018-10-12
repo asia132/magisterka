@@ -439,19 +439,35 @@ class Marker{
 		int qty = 0;
 		try{
 			qty = inDir.rotationRQty(finDir);
-			while (qty > 0){
-				qty--;
-				this.rotateR();
-			}
-			if (mirror)	this.mirrorDir();
-		}catch (Exception e1) {
-			try{
-				qty = inDir.rotationLQty(finDir);
+			if (mirror){
 				while (qty > 0){
 					qty--;
 					this.rotateL();
 				}
-				if (mirror)	this.mirrorDir();
+
+			}else{
+				while (qty > 0){
+					qty--;
+					this.rotateR();
+				}
+			}
+			// if (mirror)	this.mirrorDir();
+		}catch (Exception e1) {
+			try{
+				qty = inDir.rotationLQty(finDir);
+				if (mirror){
+					while (qty > 0){
+						qty--;
+						this.rotateR();
+					}
+				}else{
+					while (qty > 0){
+						qty--;
+						this.rotateL();
+					}
+				}
+				
+				// if (mirror)	this.mirrorDir();
 			}catch (Exception e2) {;
 				// System.out.println("Cannot find rotation. " + e1.getMessage() + " " + e2.getMessage());
 			}

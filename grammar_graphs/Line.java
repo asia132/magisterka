@@ -49,7 +49,6 @@ class Line{
 	}
 	void addChild(Line line){
 		this.childs.add(line);
-		System.out.println(this + " add child: " + line);
 	}
 	void scale(int x, int y, double s){
 		// pa.x = round((pa.x - x) * s + x, x, s);
@@ -112,10 +111,10 @@ class Line{
 		}
 		if (MainData.SHOW_POINTS == true){
 			g2d.setColor(MainData.default_point_color);
-			String text = "[" + (pa.x - point0[0]) + ", " + (pa.y - point0[1]) + "]";
+			String text = "A[" + (pa.x - point0[0]) + ", " + (pa.y - point0[1]) + "]";
 			g2d.drawString(text, getX_a() + 1, getY_a() - (int)(MainData.grid_size*0.5));
 			
-			text = "[" + (pb.x - point0[0]) + ", " + (pb.y - point0[1]) + "]";
+			text = "B[" + (pb.x - point0[0]) + ", " + (pb.y - point0[1]) + "]";
 			g2d.drawString(text, getX_b() + 1, getY_b() - (int)(MainData.grid_size*0.5));
 		}
 	}
@@ -204,7 +203,6 @@ class Line{
 		}
 	}
 	void setA(int [] points){
-		System.out.println("SET A");
 		this.pa.x = points[0];
 		this.pa.y = points[1];
 		if (!childs.isEmpty()){

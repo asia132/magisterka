@@ -86,6 +86,7 @@ public class RuleListPrepraration extends JFrame {
 		saveButton = new JButton(ProgramLabels.save);
 		saveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
+				MainData.ruleAppList.clear();
 				for (int i = 0; i < destList.getModel().getSize(); ++i) {
 					MainData.ruleAppList.add(MainData.getRuleOfName(destList.getModel().getElementAt(i)));				
 				}

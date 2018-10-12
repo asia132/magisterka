@@ -43,6 +43,7 @@ class ColoringRuleLevels {
 		this.n = n;
 	}
 	void increaseN(){
+		System.out.println("INCREASE N");
 		levels[n].closeLevel();
 		this.n++;
 	}
@@ -73,6 +74,7 @@ class ColoringRuleLevels {
 		}else if (ruleCat == Category.C){ // right side - left side => n+1
 			programData.lines.addAll(ruleFinalLines);
 			if (n+1 < max_n_allowed){
+				System.out.println("Add lines to L" + (n + 1));
 				levels[n+1].levelLines.addAll(ruleFinalLines);
 			}
 			this.n_change = true;
@@ -124,7 +126,6 @@ class ColoringRuleLevels {
 			try{
 				Level level = levels[i];
 				if (level.levelLines.size() <= 2) continue;
-
 				g2d.setPaint(level.getColor());		
 				g2d.fill(level.getShape());
 

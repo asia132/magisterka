@@ -228,7 +228,6 @@ class RuleComponents{
 		tagsSet = new ArrayList<>();
 	}
 	ArrayList <String> tagsSetCopy(){
-		System.out.println(tagsSet.size() + " should be copied");
 		ArrayList <String> copy = new ArrayList<>(tagsSet.size());
 		for (String tag: tagsSet)
 			copy.add(tag);
