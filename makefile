@@ -34,7 +34,7 @@ r:
 	$(RM) ./$(PACKAGE)/*.class
 	$(RM) $(MAIN).class
 	@$(JC) $(MAIN).java
-	@java $(MAIN) > log.txt
+	@java $(MAIN)
 
 #generates the documentation
 doc:

@@ -1,7 +1,9 @@
 package grammar_graphs;
 
+import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.ArrayList;
 import java.util.StringJoiner;
 import java.lang.Math;
@@ -77,10 +79,7 @@ class Shape{
 	ArrayList <Line> findMatch(Shape inputShape) throws NotAllRuleLinesRecognized{
 		double k = this.marker.length() / inputShape.marker.length();
 
-		ArrayList <Line> ruleLines = new ArrayList<>(this.lines_dist.keySet());
-		Line [][] matchedLines = new Line[this.lines_dist.size()][2];
-
-		ArrayList <Line> mached_lines = new ArrayList<>();
+		MirroringTable mirrorTable = new MirroringTable(this.lines_dist.size(), this.lines_dist.keySet());
 
 		Marker tempMarker = inputShape.marker.copy();
 		tempMarker.rotateBasedOnDirSub(inputShape.marker.dir, this.marker.dir, false);
@@ -99,7 +98,7 @@ class Shape{
 			}catch(Line.NotALinearFunction error){;}
 
 			for (int i = 0; i < this.lines_dist.size(); i++) {
-				Line line_r = ruleLines.get(i);
+				Line line_r = mirrorTable.ruleLines.get(i);
 				Dist dist_j = this.lines_dist.get(line_r);
 				double [] params_j = null;
 
@@ -110,17 +109,7 @@ class Shape{
 				if (params_i != null && params_j != null && params_i[0] == params_j[0]){ // poziome i skośne
 					Referral ref = dist_j.compareLine(inDist_i, k);
 					if (ref != null){ // odcinki dla poziomych i skośnych
-						if (ref == Referral.DUPLICATED){
-							matchedLines[i][0] = inLine_i;
-							matchedLines[i][1] = inLine_i;
-						}
-						else{
-							if (ref == Referral.SAME){
-								matchedLines[i][0] = inLine_i;
-							}else{ // ref == Referral.DIFFERENT
-								matchedLines[i][1] = inLine_i;
-							}
-						}
+						mirrorTable.setValue(i, inLine_i, ref);
 					}
 					if (line_r.length() / k < transLine_i.length()) { // pododcinki dla poziomych i skośnych
 
@@ -148,6 +137,7 @@ class Shape{
 								xrange[0] = transLine_i.pb.x;	
 								xrange[1] = transLine_i.pa.x;
 							}
+
 							
 							int x1s_a = fixdX1OnLine(params_i[0], params_i[1], k, distAs, markerCenter);
 							int x2s_a = fixdX2OnLine(params_i[0], params_i[1], k, distAs, markerCenter);
@@ -156,11 +146,11 @@ class Shape{
 							int x2s_b = fixdX2OnLine(params_i[0], params_i[1], k, distBs, markerCenter);
 
 
-							int x1a_a = fixdX1OnLine(params_i[0], params_i[1], k, distAp, markerAPoint);
-							int x2a_a = fixdX2OnLine(params_i[0], params_i[1], k, distAp, markerAPoint);
-
-							int x1a_b = fixdX1OnLine(params_i[0], params_i[1], k, distBp, markerAPoint);
-							int x2a_b = fixdX2OnLine(params_i[0], params_i[1], k, distBp, markerAPoint);
+							ArrayList <Integer> xValuesFromA = new ArrayList<>(4);
+							xValuesFromA.add(fixdX1OnLine(params_i[0], params_i[1], k, distAp, markerAPoint));
+							xValuesFromA.add(fixdX2OnLine(params_i[0], params_i[1], k, distAp, markerAPoint));
+							xValuesFromA.add(fixdX1OnLine(params_i[0], params_i[1], k, distBp, markerAPoint));
+							xValuesFromA.add(fixdX2OnLine(params_i[0], params_i[1], k, distBp, markerAPoint));
 
 							
 							int y1_a = findYOnLine(x1s_a, params_i[0], params_i[1]);
@@ -169,88 +159,47 @@ class Shape{
 							int y2_b = findYOnLine(x2s_b, params_i[0], params_i[1]);
 
 							// CHECK POINT S1_A
-							if (xrange[0] <= x1s_a && x1s_a <= xrange[1] && (x1s_a == x1a_a || x1s_a == x1a_b || x1s_a == x2a_a || x1s_a == x2a_b)){
+							if (xrange[0] <= x1s_a && x1s_a <= xrange[1] && xValuesFromA.contains(x1s_a)){
 								// CHECK POINT S1_B
-								if (xrange[0] <= x1s_b && x1s_b <= xrange[1] && (x1s_b == x1a_a || x1s_b == x1a_b || x1s_b == x2a_a || x1s_b == x2a_b) && line_r.small_length() == (MainData.distans(x1s_a, y1_a, x1s_b, y1_b) * k)){
-									newLine = new Line(x1s_a*MainData.grid_size, y1_a*MainData.grid_size, x1s_b*MainData.grid_size, y1_b*MainData.grid_size);
+								if (xrange[0] <= x1s_b && x1s_b <= xrange[1] && xValuesFromA.contains(x1s_b) && line_r.compareLen(k ,x1s_a, y1_a, x1s_b, y1_b)){
+									newLine = new Line(new Point(x1s_a, y1_a), new Point(x1s_b, y1_b), -alpha, inputShape.marker.p);
 
-									newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
 									if (!(checkY(newLine.pa.y, inLine_i) && checkY(newLine.pb.y, inLine_i))){ continue;}
-									Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
-									if (subRef == Referral.SAME){
-										matchedLines[i][0] = newLine;
-									}else{
-										if (subRef == Referral.DIFFERENT){
-											matchedLines[i][1] = newLine;
-										}else{ // subRef == Referral.DUPLICATED
-											matchedLines[i][0] = newLine;
-											matchedLines[i][1] = newLine;		
-										}
-									}
+									Referral subRef = Referral.checkMirroringSide(k, inputShape.marker, this.lines_dist.get(line_r), newLine);
+									mirrorTable.setValue(i, newLine, subRef);
 
 									inLine_i.addChild(newLine);
 								// CHECK POINT S2_B
 								}else{
-									if (xrange[0] <= x2s_b && x2s_b <= xrange[1] && (x2s_b == x1a_a || x2s_b == x1a_b || x2s_b == x2a_a || x2s_b == x2a_b) && line_r.small_length() == (MainData.distans(x1s_a, y1_a, x2s_b, y2_b) * k)){
-										newLine = new Line(x1s_a*MainData.grid_size, y1_a*MainData.grid_size, x2s_b*MainData.grid_size, y2_b*MainData.grid_size);
+									if (xrange[0] <= x2s_b && x2s_b <= xrange[1] && xValuesFromA.contains(x2s_b) && line_r.compareLen(k, x1s_a, y1_a, x2s_b, y2_b)){
+										newLine = new Line(new Point(x1s_a, y1_a), new Point(x2s_b, y2_b), -alpha, inputShape.marker.p);
 
-										newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
 										if (!(checkY(newLine.pa.y, inLine_i) && checkY(newLine.pb.y, inLine_i))){ continue;}
-										Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
-										if (subRef == Referral.SAME){
-											matchedLines[i][0] = newLine;
-										}else{
-											if (subRef == Referral.DIFFERENT){
-												matchedLines[i][1] = newLine;
-											}else{ // subRef == Referral.DUPLICATED
-												matchedLines[i][0] = newLine;
-												matchedLines[i][1] = newLine;		
-											}
-										}
+										Referral subRef = Referral.checkMirroringSide(k, inputShape.marker, this.lines_dist.get(line_r), newLine);
+										mirrorTable.setValue(i, newLine, subRef);
 
 										inLine_i.addChild(newLine);
 									}
 								}
 							}
 							// CHECK POINT S2_A
-							if (xrange[0] <= x2s_a && x2s_a <= xrange[1] && (x2s_a == x1a_a || x2s_a == x1a_b || x2s_a == x2a_a || x2s_a == x2a_b)){
+							if (xrange[0] <= x2s_a && x2s_a <= xrange[1] && xValuesFromA.contains(x2s_a)){
 								// CHECK POINT S1_B
-								if (xrange[0] <= x1s_b && x1s_b <= xrange[1] && (x1s_b == x1a_a || x1s_b == x1a_b || x1s_b == x2a_a || x1s_b == x2a_b) && line_r.small_length() == (MainData.distans(x2s_a, y2_a, x1s_b, y1_b) * k)){
-									newLine = new Line(x2s_a*MainData.grid_size, y2_a*MainData.grid_size, x1s_b*MainData.grid_size, y1_b*MainData.grid_size);
+								if (xrange[0] <= x1s_b && x1s_b <= xrange[1] && xValuesFromA.contains(x1s_b) && line_r.compareLen(k, x2s_a, y2_a, x1s_b, y1_b)){
+									newLine = new Line(new Point(x2s_a, y2_a), new Point(x1s_b, y1_b), -alpha, inputShape.marker.p);
 
-										newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
 										if (!(checkY(newLine.pa.y, inLine_i) && checkY(newLine.pb.y, inLine_i))){ continue;}
-										Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
-										if (subRef == Referral.SAME){
-											matchedLines[i][0] = newLine;
-										}else{
-											if (subRef == Referral.DIFFERENT){
-												matchedLines[i][1] = newLine;
-											}else{ // subRef == Referral.DUPLICATED
-												matchedLines[i][0] = newLine;
-												matchedLines[i][1] = newLine;		
-											}
-										}
+										Referral subRef = Referral.checkMirroringSide(k, inputShape.marker, this.lines_dist.get(line_r), newLine);
+										mirrorTable.setValue(i, newLine, subRef);
 
 									inLine_i.addChild(newLine);
 								}else{
 								// CHECK POINT S2_B
-									if (xrange[0] <= x2s_b && x2s_b <= xrange[1] && (x2s_b == x1a_a || x2s_b == x1a_b || x2s_b == x2a_a || x2s_b == x2a_b) && line_r.small_length() == (MainData.distans(x2s_a, y2_a, x2s_b, y2_b) * k)){
-										newLine = new Line(x2s_a*MainData.grid_size, y2_a*MainData.grid_size, x2s_b*MainData.grid_size, y2_b*MainData.grid_size);
-
-										newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
+									if (xrange[0] <= x2s_b && x2s_b <= xrange[1] && xValuesFromA.contains(x2s_b) && line_r.compareLen(k, x2s_a, y2_a, x2s_b, y2_b)){
+										newLine = new Line(new Point(x2s_a, y2_a), new Point(x2s_b, y2_b), -alpha, inputShape.marker.p);
 										if (!(checkY(newLine.pa.y, inLine_i) && checkY(newLine.pb.y, inLine_i))){ continue;}
-										Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
-										if (subRef == Referral.SAME){
-											matchedLines[i][0] = newLine;
-										}else{
-											if (subRef == Referral.DIFFERENT){
-												matchedLines[i][1] = newLine;
-											}else{ // subRef == Referral.DUPLICATED
-												matchedLines[i][0] = newLine;
-												matchedLines[i][1] = newLine;		
-											}
-										}
+										Referral subRef = Referral.checkMirroringSide(k, inputShape.marker, this.lines_dist.get(line_r), newLine);
+										mirrorTable.setValue(i, newLine, subRef);
 
 										inLine_i.addChild(newLine);
 									}else{
@@ -265,19 +214,10 @@ class Shape{
 				} else if (params_i == null && params_j == null){ // pionowe
 					Referral ref = dist_j.compareLine(inDist_i, k);
 					if (ref != null){ // odcinki pionowe
-						if (ref == Referral.DUPLICATED){
-							matchedLines[i][0] = inLine_i;
-							matchedLines[i][1] = inLine_i;
-						}
-						else{
-							if (ref == Referral.SAME){
-								matchedLines[i][0] = inLine_i;
-							}else{ // ref == Referral.DIFFERENT
-								matchedLines[i][1] = inLine_i;
-							}
-						}
+						mirrorTable.setValue(i, inLine_i, ref);
 					}
 					int x = transLine_i.pa.x;
+
 					if (line_r.length() / k < transLine_i.length()) { // pododcinki pionowe
 
 						if (Math.abs(this.marker.p.x - line_r.pa.x)/k != Math.abs(inputShape.marker.p.x - x)){ // dodatkowe sprawdzenie dla poziomych
@@ -307,98 +247,60 @@ class Shape{
 
 							int y1_a = findY1OnLineForNonLinearFunction(x, k, distAs, markerCenter);
 							int y2_a = findY2OnLineForNonLinearFunction(x, k, distAs, markerCenter);
-
 							int y1_b = findY1OnLineForNonLinearFunction(x, k, distBs, markerCenter);
 							int y2_b = findY2OnLineForNonLinearFunction(x, k, distBs, markerCenter);
 
-							int y1Aa_a = findY1OnLineForNonLinearFunction(x, k, distAp, markerAPoint);
-							int y2Aa_a = findY2OnLineForNonLinearFunction(x, k, distAp, markerAPoint);
-							int y1Aa_b = findY1OnLineForNonLinearFunction(x, k, distBp, markerAPoint);
-							int y2Aa_b = findY2OnLineForNonLinearFunction(x, k, distBp, markerAPoint);
-
+							ArrayList <Integer> yValuesFromA = new ArrayList<>(4);
+							yValuesFromA.add(findY1OnLineForNonLinearFunction(x, k, distAp, markerAPoint));
+							yValuesFromA.add(findY2OnLineForNonLinearFunction(x, k, distAp, markerAPoint));
+							yValuesFromA.add(findY1OnLineForNonLinearFunction(x, k, distBp, markerAPoint));
+							yValuesFromA.add(findY2OnLineForNonLinearFunction(x, k, distBp, markerAPoint));
 
 							Line newLine = null;							
 
-							if (yrange[0] <= y1_a && y1_a <= yrange[1] && (y1_a == y1Aa_a || y1_a == y1Aa_b || y1_a == y2Aa_a || y1_a == y2Aa_b)){
-								if (yrange[0] <= y1_b && y1_b <= yrange[1] && (y1_b == y1Aa_a || y1_b == y1Aa_b || y1_b == y2Aa_a || y1_b == y2Aa_b) && line_r.small_length() == (MainData.distans(x, y1_a, x, y1_b) * k)){
-									newLine = new Line(x*MainData.grid_size, y1_a*MainData.grid_size, x*MainData.grid_size, y1_b*MainData.grid_size);
+							if (yrange[0] <= y1_a && y1_a <= yrange[1] && yValuesFromA.contains(y1_a)){
+								if (yrange[0] <= y1_b && y1_b <= yrange[1] && yValuesFromA.contains(y1_b) && line_r.compareLen(k, x, y1_a, x, y1_b)){
+									newLine = new Line(new Point(x, y1_a), new Point(x, y1_b), -alpha, inputShape.marker.p);
 									
-									newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
 									if (!(checkX(newLine.pa.x, inLine_i) && checkX(newLine.pb.x, inLine_i))){		continue;}
 
-									Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
-									if (subRef == Referral.SAME){
-										matchedLines[i][0] = newLine;
-									}else{
-										if (subRef == Referral.DIFFERENT){
-											matchedLines[i][1] = newLine;
-										}else{ // subRef == Referral.DUPLICATED
-											matchedLines[i][0] = newLine;
-											matchedLines[i][1] = newLine;		
-										}
-									}
+									Referral subRef = Referral.checkMirroringSide(k, inputShape.marker, this.lines_dist.get(line_r), newLine);
+									mirrorTable.setValue(i, newLine, subRef);
 
 									inLine_i.addChild(newLine);
-								}else if (yrange[0] <= y2_b && y2_b <= yrange[1] && (y2_b == y1Aa_a || y2_b == y1Aa_b || y2_b == y2Aa_a || y2_b == y2Aa_b) && line_r.small_length() == (MainData.distans(x, y1_a, x, y2_b) * k)){
-									newLine = new Line(x*MainData.grid_size, y1_a*MainData.grid_size, x*MainData.grid_size, y2_b*MainData.grid_size);
+								}else if (yrange[0] <= y2_b && y2_b <= yrange[1] && yValuesFromA.contains(y2_b) && line_r.compareLen(k, x, y1_a, x, y2_b)){
+									newLine = new Line(new Point(x, y1_a), new Point(x, y2_b), -alpha, inputShape.marker.p);
 									
-									newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
 									if (!(checkX(newLine.pa.x, inLine_i) && checkX(newLine.pb.x, inLine_i))){		continue;}
 
-									Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
-									if (subRef == Referral.SAME){
-										matchedLines[i][0] = newLine;
-									}else{
-										if (subRef == Referral.DIFFERENT){
-											matchedLines[i][1] = newLine;
-										}else{ // subRef == Referral.DUPLICATED
-											matchedLines[i][0] = newLine;
-											matchedLines[i][1] = newLine;		
-										}
-									}
+									Referral subRef = Referral.checkMirroringSide(k, inputShape.marker, this.lines_dist.get(line_r), newLine);
+									mirrorTable.setValue(i, newLine, subRef);
 
 									line_r.addChild(newLine);
 								}
 							}
-							if (yrange[0] <= y2_a && y2_a <= yrange[1] && (y2_a == y1Aa_a || y2_a == y1Aa_b || y2_a == y2Aa_a || y2_a == y2Aa_b)){
-								if (yrange[0] <= y1_b && y1_b <= yrange[1] && (y1_b == y1Aa_a || y1_b == y1Aa_b || y1_b == y2Aa_a || y1_b == y2Aa_b) && line_r.small_length() == (MainData.distans(x, y2_a, x, y1_b) * k)){
-									newLine = new Line(x*MainData.grid_size, y2_a*MainData.grid_size, x*MainData.grid_size, y1_b*MainData.grid_size);
+							if (yrange[0] <= y2_a && y2_a <= yrange[1] && yValuesFromA.contains(y2_a)){
+								if (yrange[0] <= y1_b && y1_b <= yrange[1] && yValuesFromA.contains(y1_b) && line_r.compareLen(k, x, y2_a, x, y1_b)){
 									
-									newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
+									newLine = new Line(new Point(x, y2_a), new Point(x, y1_b), -alpha, inputShape.marker.p);
+									
 									if (!(checkX(newLine.pa.x, inLine_i) && checkX(newLine.pb.x, inLine_i))){		continue;}
 
-									Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
-									if (subRef == Referral.SAME){
-										matchedLines[i][0] = newLine;
-									}else{
-										if (subRef == Referral.DIFFERENT){
-											matchedLines[i][1] = newLine;
-										}else{ // subRef == Referral.DUPLICATED
-											matchedLines[i][0] = newLine;
-											matchedLines[i][1] = newLine;		
-										}
-									}
+									Referral subRef = Referral.checkMirroringSide(k, inputShape.marker, this.lines_dist.get(line_r), newLine);
+									mirrorTable.setValue(i, newLine, subRef);
 
+									
 									inLine_i.addChild(newLine);
 								}else{
-									if (yrange[0] <= y2_b && y2_b <= yrange[1] && (y2_b == y1Aa_a || y2_b == y1Aa_b || y2_b == y2Aa_a || y2_b == y2Aa_b) && line_r.small_length() == (MainData.distans(x, y2_a, x, y2_b) * k)){
-										newLine = new Line(x*MainData.grid_size, y2_a*MainData.grid_size, x*MainData.grid_size, y2_b*MainData.grid_size);
+									if (yrange[0] <= y2_b && y2_b <= yrange[1] && yValuesFromA.contains(y2_b) && line_r.compareLen(k, x, y2_a, x, y2_b)){
+										newLine = new Line(new Point(x, y2_a), new Point(x, y2_b), -alpha, inputShape.marker.p);
 									
-										newLine.rotate(inputShape.marker.p.x, inputShape.marker.p.y, -alpha);
 										if (!(checkX(newLine.pa.x, inLine_i) && checkX(newLine.pb.x, inLine_i))){		continue;}
 
-										Referral subRef = checkMirroringSide(k, inputShape.marker, line_r, newLine.pa.x, newLine.pb.x, newLine.pa.y, newLine.pb.y);
-										if (subRef == Referral.SAME){
-											matchedLines[i][0] = newLine;
-										}else{
-											if (subRef == Referral.DIFFERENT){
-												matchedLines[i][1] = newLine;
-											}else{ // subRef == Referral.DUPLICATED
-												matchedLines[i][0] = newLine;
-												matchedLines[i][1] = newLine;		
-											}
-										}
+										Referral subRef = Referral.checkMirroringSide(k, inputShape.marker, this.lines_dist.get(line_r), newLine);
+										mirrorTable.setValue(i, newLine, subRef);
 
+										
 										inLine_i.addChild(newLine);
 									}else{
 										continue;
@@ -414,41 +316,10 @@ class Shape{
 		}
 	//
 		this.same = 0;
-		int same_counter = matchedLines.length;
+		int same_counter = mirrorTable.size;
+		ArrayList <Line> mached_lines = mirrorTable.getMatchedLines();
 
-		ArrayList <Integer> checkItAgain = new ArrayList <>();
-		for (int i = 0; i < matchedLines.length; ++i){
-			if (matchedLines[i][0] != null){
-				if (matchedLines[i][1] == null){
-					this.same++;
-					mached_lines.add(matchedLines[i][0]);
-				}else{
-					checkItAgain.add(i);
-					same_counter--;
-				}
-			}else{
-				if (matchedLines[i][1] == null){;
-					// throw new NotAllRuleLinesRecognized("No lines recognized for " + ruleLines.get(i));
-				}else{
-					mached_lines.add(matchedLines[i][1]);
-				}
-			} 
-		}
-		if ((this.same + checkItAgain.size()) == matchedLines.length){
-			for (Integer i: checkItAgain) {
-				mached_lines.add(matchedLines[i][0]);
-			}
-		}else{
-			for (Integer i: checkItAgain) {
-				mached_lines.add(matchedLines[i][1]);
-			}
-		}
-
-		if (this.same != 0 && this.same != same_counter){
-			throw new NotAllRuleLinesRecognized("The lines was not found on the same side");
-		}
-
-		inputShape.needsToBeMirrored = !(this.same == same_counter);
+		inputShape.needsToBeMirrored = mirrorTable.needsToBeMirrored();
 		return mached_lines;
 	}
 	boolean checkY(int y, Line line){
@@ -458,30 +329,6 @@ class Shape{
 	boolean checkX(int x, Line line){
 		return	((line.pa.x <= x && x <= line.pb.x) ||
 				 (line.pb.x <= x && x <= line.pa.x));
-	}
-	Referral checkMirroringSide(double k, Marker marker, Line line, int x_a, int x_b, int y_a, int y_b){
-		double precision = 1e-13;
-
-		double r_mb_la = this.lines_dist.get(line).mb_la; // RULE LINE
-		double r_mb_lb = this.lines_dist.get(line).mb_lb; // RULE LINE
-		double l_mb_la = MainData.distans(x_a, y_a, marker.getbx()*1., marker.getby()*1.);
-		double l_mb_lb = MainData.distans(x_b, y_b, marker.getbx()*1., marker.getby()*1.);
-
-		double r_md_la = this.lines_dist.get(line).md_la; // RULE LINE
-		double r_md_lb = this.lines_dist.get(line).md_lb; // RULE LINE
-		double l_md_la = MainData.distans(x_a, y_a, marker.getdx()*1., marker.getdy()*1.);
-		double l_md_lb = MainData.distans(x_b, y_b, marker.getdx()*1., marker.getdy()*1.);
-
-		if (Math.abs(r_mb_la - r_md_la) < precision && Math.abs(r_md_lb - r_mb_lb) < precision){
-			return Referral.DUPLICATED;
-		}
-
-		if ((Math.abs(r_mb_la - l_mb_lb*k) < precision && Math.abs(r_mb_lb - l_mb_la*k) < precision && Math.abs(r_md_la - l_md_lb*k) < precision && Math.abs(r_md_lb - l_md_la*k) < precision) ||
-			(Math.abs(r_mb_la - l_mb_la*k) < precision && Math.abs(r_mb_lb - l_mb_lb*k) < precision && Math.abs(r_md_lb - l_md_lb*k) < precision && Math.abs(r_md_la - l_md_la*k) < precision) ){
-						
-			return Referral.SAME;
-		}
-		return Referral.DIFFERENT;
 	}
 	String linesDistToString(String ruleName, String siteTag){
 		StringJoiner info = new StringJoiner("");
@@ -671,6 +518,117 @@ class Shape{
 			pointA[1] = b.pb.y;
 		}
 		return pointA;
+	}
+	private class MirroringTable{
+		ArrayList <Line> ruleLines;
+		Line[] correctSideLines;
+		Line[] opositeSideLines;
+
+		int size;
+		int correctCounter = 0;
+		int opositeCounter = 0;
+		int duplicatedCounter = 0;
+
+		MirroringTable(int size, Set <Line> ruleLines){
+			this.size = size;
+			this.ruleLines = new ArrayList<>(ruleLines);
+			this.correctSideLines = new Line[size];
+			this.opositeSideLines = new Line[size];
+		}
+		void setValue(int i, Line newLine, Referral subRef){
+			if (subRef == Referral.SAME){
+				if (correctSideLines[i] == null){
+					if (opositeSideLines[i] != null){
+						duplicatedCounter++;
+						opositeCounter--;
+					}else 
+						correctCounter++;
+				}
+				correctSideLines[i] = newLine;
+			}else{
+				if (subRef == Referral.DIFFERENT){
+					if (opositeSideLines[i] == null){
+						if (correctSideLines[i] != null){
+							duplicatedCounter++;
+							correctCounter--;
+						}else
+							opositeCounter++;
+					}
+					opositeSideLines[i] = newLine;
+				}else{ // subRef == Referral.DUPLICATED
+					if (opositeSideLines[i] == null){	
+						duplicatedCounter++;
+					}
+					correctSideLines[i] = newLine;
+					opositeSideLines[i] = newLine;
+				}
+			}
+		}
+		ArrayList <Line> getMatchedLines() throws NotAllRuleLinesRecognized{
+			if (size == correctCounter + duplicatedCounter){
+				ArrayList<Line> result = new ArrayList<>(size);
+				for (Line line: correctSideLines) {
+					result.add(line);
+				}
+				return result;
+			}
+			if (size == opositeCounter + duplicatedCounter){
+				ArrayList<Line> result = new ArrayList<>(size);
+				for (Line line: opositeSideLines) {
+					result.add(line);
+				}
+				return result;
+			}
+			throw new NotAllRuleLinesRecognized("The lines was not found on the same side");
+		}
+		boolean needsToBeMirrored(){
+			return size != correctCounter + duplicatedCounter;
+		}
+	}
+	private enum Referral{
+		SAME, DIFFERENT, DUPLICATED;
+		private String value;
+		private int num;
+		static{
+			SAME.value = "Same as original";
+			DIFFERENT.value = "DIFFERENT TO ORIGINAL";
+			DUPLICATED.value = "LINE IS DUPLICATED";
+
+			SAME.num = 1;
+			DIFFERENT.num = 0;
+			DUPLICATED.num = -1;
+		}
+		@Override
+		public String toString(){
+			return "" + value;
+		}
+		int getNum(){
+			return num;
+		}	
+		static Referral checkMirroringSide(double k, Marker marker, Dist distanses, Line newLine){
+			double precision = 1e-13;
+
+			double r_mb_la = distanses.mb_la; // RULE LINE
+			double r_mb_lb = distanses.mb_lb; // RULE LINE
+			double l_mb_la = MainData.distans(newLine.pa.x, newLine.pa.y, marker.getbx()*1., marker.getby()*1.);
+			double l_mb_lb = MainData.distans(newLine.pb.x, newLine.pb.y, marker.getbx()*1., marker.getby()*1.);
+
+			double r_md_la = distanses.md_la; // RULE LINE
+			double r_md_lb = distanses.md_lb; // RULE LINE
+			double l_md_la = MainData.distans(newLine.pa.x, newLine.pa.y, marker.getdx()*1., marker.getdy()*1.);
+			double l_md_lb = MainData.distans(newLine.pb.x, newLine.pb.y, marker.getdx()*1., marker.getdy()*1.);
+
+			if (Math.abs(r_mb_la - r_md_la) < precision && Math.abs(r_md_lb - r_mb_lb) < precision){
+				return Referral.DUPLICATED;
+			}
+
+			if ((Math.abs(r_mb_la - l_mb_lb*k) < precision && Math.abs(r_mb_lb - l_mb_la*k) < precision && Math.abs(r_md_la - l_md_lb*k) < precision && Math.abs(r_md_lb - l_md_la*k) < precision) ||
+				(Math.abs(r_mb_la - l_mb_la*k) < precision && Math.abs(r_mb_lb - l_mb_lb*k) < precision && Math.abs(r_md_lb - l_md_lb*k) < precision && Math.abs(r_md_la - l_md_la*k) < precision) ){
+							
+				return Referral.SAME;
+			}
+			return Referral.DIFFERENT;
+		}
 	}
 	private class Dist{
 	// 

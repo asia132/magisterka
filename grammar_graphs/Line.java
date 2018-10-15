@@ -28,6 +28,12 @@ class Line{
 		this.pa = a;
 		this.pb = b;
 	}
+	Line(Point a, Point b, double alpha, Point rotationPoint){
+		// System.out.println("CREATE LINE + " + this);
+		this.pa = a;
+		this.pb = b;
+		this.rotate(rotationPoint.x, rotationPoint.y, alpha);
+	}
 	void mirrorX(int x){
 		pa.x = 2*x - pa.x;
 		pb.x = 2*x - pb.x;
@@ -87,6 +93,9 @@ class Line{
 	}
 	double small_length(){
 		return MainData.distans(this.pa.x, this.pa.y, this.pb.x, this.pb.y);
+	}
+	boolean compareLen(double k, int x_a, int y_a, int x_b, int y_b){
+		return this.small_length() == (MainData.distans(x_a, y_a, x_b, y_b) * k);
 	}
 	double [] getDoubleCoordinates(){
 		double [] norm = new double [4];

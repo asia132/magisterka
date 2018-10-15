@@ -24,13 +24,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent; 
 
 import java.util.List;
+import java.util.Vector;
 
 public class RuleListPrepraration extends JFrame {
 	private JList<String> sourceList = new JList<>(new DefaultListModel<>());
 	private JList<String> destList = new JList<>(new DefaultListModel<>());
-
-	private JButton saveButton;
-	private JButton cancelButton;
 
 	public RuleListPrepraration() {
 		
@@ -83,7 +81,7 @@ public class RuleListPrepraration extends JFrame {
 		super.dispose();
 	}
 	void showSaveButton(Box box){
-		saveButton = new JButton(ProgramLabels.save);
+		JButton saveButton = new JButton(ProgramLabels.save);
 		saveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				MainData.ruleAppList.clear();
@@ -96,7 +94,7 @@ public class RuleListPrepraration extends JFrame {
 		box.add(saveButton);
 	}
 	void showCancelButton(Box box){
-		cancelButton = new JButton(ProgramLabels.cancel);
+		JButton cancelButton = new JButton(ProgramLabels.cancel);
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {;
 				closeFrame();
@@ -165,10 +163,13 @@ class DestListTransferHandler extends SourceListTransferHandler {
 		@SuppressWarnings("unchecked")
 		JList<String> sourceList = (JList<String>) source;
 		String movedItem = sourceList.getSelectedValue();
+		int movedItemIndx = sourceList.getSelectedIndex();
 		if (action == TransferHandler.MOVE) {
 			DefaultListModel<String> listModel = (DefaultListModel<String>) sourceList.getModel();
-			listModel.removeElement(movedItem);
-			MainData.ruleAppList.remove(MainData.getRuleOfName(movedItem));
+			System.out.println("REMOVE RULE OF INDEX: " + movedItemIndx + "\tRULE NAME: " + listModel.get(movedItemIndx));
+			listModel.remove(movedItemIndx);
+			System.out.println("SIZE CHECK: " + listModel.size());
+			// MainData.ruleAppList.remove(movedItemIndx);
 		}
 	}
 	@Override
