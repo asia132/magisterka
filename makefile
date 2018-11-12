@@ -26,8 +26,14 @@ build:
 run:
 	@java $(MAIN)
 
-debug:
-	jdb $(MAIN)
+test:
+	$(RM) ./$(PACKAGE)/*.class
+	$(RM) $(MAIN).class
+	javac -cp .:junit4.jar:hamcrest-core.jar *.java TestLine.java
+	java -cp .:junit4.jar:hamcrest-core.jar org.junit.runner.JUnitCore TestLine
+
+
+
 
 #only runs ready program
 r: 

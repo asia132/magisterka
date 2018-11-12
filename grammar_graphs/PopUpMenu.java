@@ -9,54 +9,56 @@ import javax.swing.BorderFactory;
 import javax.swing.JPopupMenu;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.JFrame; 
 
 import javax.swing.border.Border;
 
 import java.awt.Color;
-
-import java.util.Hashtable;
 import java.util.ArrayList;
 
 import java.io.File;
 
-
-
 class PopUpMenu extends JPopupMenu {
-	PopUpMenu(MainPanel panel){
-		if(!(panel instanceof LeftRulePanel) && !(panel instanceof RigthRulePanel)){
-			if (!MainData.getColorRules() && !MainData.LIMITING_SHAPE){
+
+	public static final long serialVersionUID = 42L;
+
+	PopUpMenu(MainPanel panel) {
+		if (!(panel instanceof LeftRulePanel) && !(panel instanceof RigthRulePanel)) {
+			if (!Settings.COLOR_RULES && !Settings.LIMITING_SHAPE) {
 				showRulesChanging(panel);
 				showRuleListOptions(panel);
 				showGrammarOptions(panel);
 			}
-			showColoringRuleLevelss(panel);
+			showPaintingRuleLevelss(panel);
 		}
-		if (!MainData.getColorRules()){
+		if (!Settings.COLOR_RULES) {
 			showViewSettings(panel);
 			showElemEdit(panel);
-			if (!MainData.LIMITING_SHAPE)
+			if (!Settings.LIMITING_SHAPE)
 				showMarker(panel);
 		}
 	}
-// change rules
-	JMenuItem addRuleForLines(MainPanel panel){
+
+	// change rules
+	JMenuItem addRuleForLines(MainPanel panel) {
 		JMenuItem ruleforlineButton = new JMenuItem();
 		ruleforlineButton.setText(ProgramLabels.rulleAddingForLines);
 		ruleforlineButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				if (panel.programData.modified_marker != null)
-					new CreateRuleFrame(panel.programData.getModified(), new ArrayList<>(), panel.programData.marker.copy(), panel.programData.marker.copy());
-				else 
+					new CreateRuleFrame(panel.programData.getModified(), new ArrayList<>(),
+							panel.programData.marker.copy(), panel.programData.marker.copy());
+				else
 					new CreateRuleFrame(panel.programData.getModified(), new ArrayList<>(), null, null);
 
 			}
 		});
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
-		ruleforlineButton.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(3, 3, 3, 3)));
+		ruleforlineButton
+				.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(3, 3, 3, 3)));
 		return ruleforlineButton;
 	}
-	JMenuItem addRule(MainPanel panel){
+
+	JMenuItem addRule(MainPanel panel) {
 		JMenuItem addRules = new JMenuItem(ProgramLabels.rulleAdding);
 		addRules.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -67,23 +69,23 @@ class PopUpMenu extends JPopupMenu {
 		addRules.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(3, 3, 3, 3)));
 		return addRules;
 	}
-	void showRulesChanging(MainPanel panel){
+
+	void showRulesChanging(MainPanel panel) {
 		JMenu rulesMenu = new JMenu(ProgramLabels.rulleList);
-		
-		JMenu [] rulesList = new JMenu [panel.programData.ruleList.size()];
+
+		JMenu[] rulesList = new JMenu[GrammarControl.getInstance().ruleList.size()];
 		int i = 0;
 
-		for (Rule changedRule: panel.programData.ruleList){
-			rulesList[i] = new JMenu(panel.programData.ruleList.get(i).getName());
+		for (Rule changedRule : GrammarControl.getInstance().ruleList) {
+			rulesList[i] = new JMenu(GrammarControl.getInstance().ruleList.get(i).getName());
 
 			JMenuItem applyRule = new JMenuItem("Apply");
 			applyRule.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					try{
+					try {
 						changedRule.apply(panel);
-					}
-					catch(Rule.NoMarkerException exc){
-						MessageFrame error = new MessageFrame(exc.getMessage());
+					} catch (Rule.NoMarkerException exc) {
+						new MessageFrame(exc.getMessage());
 						System.out.println("PopUp line 86" + exc.getLocalizedMessage());
 					}
 				}
@@ -97,11 +99,11 @@ class PopUpMenu extends JPopupMenu {
 				}
 			});
 			rulesList[i].add(editRule);
-			
+
 			JMenuItem removeRule = new JMenuItem("Remove");
 			removeRule.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					panel.programData.ruleList.remove(changedRule);
+					GrammarControl.getInstance().ruleList.remove(changedRule);
 				}
 			});
 			rulesList[i].add(removeRule);
@@ -116,189 +118,211 @@ class PopUpMenu extends JPopupMenu {
 
 		add(rulesMenu);
 	}
-// change view settings
-	void showViewSettings(MainPanel panel){
+
+	// change view settings
+	void showViewSettings(MainPanel panel) {
 		JMenu panelSettings = new JMenu(ProgramLabels.panelSettings);
 		panelSettings.add(showGridOpt(panel));
 		panelSettings.add(showLenOpt(panel));
 		panelSettings.add(showPointOpt(panel));
 		add(panelSettings);
 	}
-	JMenuItem showGridOpt(MainPanel panel){
+
+	JMenuItem showGridOpt(MainPanel panel) {
 		JMenuItem gridButton = new JMenuItem();
-		if (panel.programData.SHOW_GRID)
+		if (Settings.SHOW_GRID)
 			gridButton.setText(ProgramLabels.hideGrid);
 		else
 			gridButton.setText(ProgramLabels.showGrid);
 		gridButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				panel.programData.setGrig();
-				panel.repaint();
+				Settings.SHOW_GRID = !Settings.SHOW_GRID;
+				// panel.repaint();
+				GrammarControl.repaintAll();
 			}
 		});
 		return gridButton;
 	}
-	JMenuItem showLenOpt(MainPanel panel){
+
+	JMenuItem showLenOpt(MainPanel panel) {
 		JMenuItem markerSimulate = new JMenuItem();
-		if (panel.programData.SHOW_DIST)
+		if (Settings.SHOW_DIST)
 			markerSimulate.setText(ProgramLabels.hideDist);
 		else
 			markerSimulate.setText(ProgramLabels.showDist);
 		markerSimulate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				panel.programData.SHOW_DIST = !panel.programData.SHOW_DIST;
-				panel.repaint();
+				Settings.SHOW_DIST = !Settings.SHOW_DIST;
+				// panel.repaint();
+				GrammarControl.repaintAll();
 			}
 		});
 		return markerSimulate;
 	}
-	JMenuItem showPointOpt(MainPanel panel){
+
+	JMenuItem showPointOpt(MainPanel panel) {
 		JMenuItem markerSimulate = new JMenuItem();
-		if (panel.programData.SHOW_POINTS)
+		if (Settings.SHOW_POINTS)
 			markerSimulate.setText(ProgramLabels.hidePoints);
 		else
 			markerSimulate.setText(ProgramLabels.showPoints);
 		markerSimulate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				panel.programData.SHOW_POINTS = !panel.programData.SHOW_POINTS;
-				panel.repaint();
+				Settings.SHOW_POINTS = !Settings.SHOW_POINTS;
+				// panel.repaint();
+				GrammarControl.repaintAll();
 			}
 		});
 		return markerSimulate;
 	}
-// coloring rules
-	void showColoringRuleLevelss(MainPanel panel){
+
+	// painting rules
+	void showPaintingRuleLevelss(MainPanel panel) {
 		JMenu buttonMenu = new JMenu(ProgramLabels.colorRuleMenu);
-		if (MainData.CLOSED_SHAPES){
-			if (!MainData.LIMITING_SHAPE){
-				buttonMenu.add(showColorRuleOption(panel));
-				buttonMenu.add(addColoringRuleLevels(panel));
+		if (Settings.CLOSED_SHAPES) {
+			if (!Settings.LIMITING_SHAPE) {
+				buttonMenu.add(showPaintingRuleOption(panel));
+				buttonMenu.add(addPaintngRuleLevels(panel));
 			}
-		}else{
-				buttonMenu.add(info(panel));
+		} else {
+			buttonMenu.add(info(panel));
 		}
-		if (!MainData.getColorRules())
+		if (!Settings.COLOR_RULES)
 			buttonMenu.add(showColorRuleLimitingShape(panel));
 		buttonMenu.add(drawLevels(panel));
 		buttonMenu.add(showResetLevels(panel));
 		add(buttonMenu);
 	}
-	JMenuItem info(MainPanel panel){
-		JMenuItem button = new JMenuItem("One of level shapes is not closed\n- it is not possible to define\npainting rules");
+
+	JMenuItem info(MainPanel panel) {
+		JMenuItem button = new JMenuItem(
+				"One of level shapes is not closed\n- it is not possible to define\npainting rules");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panel.programData.setColorRules();
-				panel.repaint();
+				Settings.setColorRules();
+				// panel.repaint();
+				GrammarControl.repaintAll();
 			}
 		});
 		return button;
 	}
-	JMenuItem drawLevels(MainPanel panel){
+
+	JMenuItem drawLevels(MainPanel panel) {
 		JMenuItem button = new JMenuItem();
-		if (panel.programData.DRAW_LEVELS)
+		if (Settings.DRAW_LEVELS)
 			button.setText(ProgramLabels.stopDrawLevels);
 		else
 			button.setText(ProgramLabels.drawLevels);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				panel.programData.DRAW_LEVELS = !panel.programData.DRAW_LEVELS;
+				Settings.DRAW_LEVELS = !Settings.DRAW_LEVELS;
 				panel.programData.changeFiguresColor();
-				panel.repaint();
+				// panel.repaint();
+				GrammarControl.repaintAll();
 			}
 		});
 		return button;
 	}
-	JMenuItem addColoringRuleLevels(MainPanel panel){
+
+	JMenuItem addPaintngRuleLevels(MainPanel panel) {
 		JMenuItem addRules = new JMenuItem(ProgramLabels.colorRuleDefine);
 		addRules.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainData.coloringRuleLevels.limitingShape.closeLevel();
-				for (int i = 0; i <= MainData.coloringRuleLevels.getN(); ++i){
-					MainData.coloringRuleLevels.levels[i].closeLevel();
+				GrammarControl.getInstance().paintingRuleLevels.limitingShape.closeLevel();
+				for (int i = 0; i <= GrammarControl.getInstance().paintingRuleLevels.getN(); ++i) {
+					PaintingRuleLevels.levels[i].closeLevel();
 				}
-				new CreateColorRuleFrame();
+				new CreatePaintingRuleFrame();
 			}
 		});
 		Border border = BorderFactory.createLineBorder(Color.BLACK);
 		addRules.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(3, 3, 3, 3)));
 		return addRules;
 	}
-	JMenuItem showResetLevels(MainPanel panel){
+
+	JMenuItem showResetLevels(MainPanel panel) {
 		JMenuItem colorRuleOption = new JMenuItem();
 		colorRuleOption.setText(ProgramLabels.resetLevels);
 		colorRuleOption.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				MainData.coloringRuleLevels = new ColoringRuleLevels(panel);
-				panel.programData.fillColoringRuleLevelsWithInput();
+				GrammarControl.getInstance().paintingRuleLevels = new PaintingRuleLevels(panel);
+				panel.programData.lines.fillPaintingRuleLevelsWithInput();
 			}
 		});
 		return colorRuleOption;
 	}
-	JMenuItem showColorRuleOption(MainPanel panel){
+
+	JMenuItem showPaintingRuleOption(MainPanel panel) {
 		JMenuItem colorRuleOption = new JMenuItem();
-		if (MainData.getColorRules())
+		if (Settings.COLOR_RULES)
 			colorRuleOption.setText(ProgramLabels.colorRuleOptionOff);
 		else
 			colorRuleOption.setText(ProgramLabels.colorRuleOptionOn);
 		colorRuleOption.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				System.out.println("----------------TURN RENDERING ON WITH N = " + MainData.coloringRuleLevels.getN() + "----------------");
-				MainData.coloringRuleLevels.limitingShape.closeLevel();
-				for (int i = 0; i <= MainData.coloringRuleLevels.getN(); ++i){
-					MainData.coloringRuleLevels.levels[i].closeLevel();
+				System.out.println("----------------TURN RENDERING ON WITH N = "
+						+ GrammarControl.getInstance().paintingRuleLevels.getN() + "----------------");
+				GrammarControl.getInstance().paintingRuleLevels.limitingShape.closeLevel();
+				for (int i = 0; i <= GrammarControl.getInstance().paintingRuleLevels.getN(); ++i) {
+					PaintingRuleLevels.levels[i].closeLevel();
 				}
-				MainData.setColorRules();
+				Settings.setColorRules();
 			}
 		});
 		return colorRuleOption;
 	}
-	JMenuItem showColorRuleLimitingShape(MainPanel panel){
+
+	JMenuItem showColorRuleLimitingShape(MainPanel panel) {
 		JMenuItem colorRuleOption = new JMenuItem();
-		if (MainData.LIMITING_SHAPE){
+		if (Settings.LIMITING_SHAPE) {
 			colorRuleOption.setText(ProgramLabels.limitShapeOff);
-		}
-		else
+		} else
 			colorRuleOption.setText(ProgramLabels.limitShapeOn);
 		colorRuleOption.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				if (MainData.LIMITING_SHAPE){
+				if (Settings.LIMITING_SHAPE) {
 					panel.programData.endDefininingLimitShape();
-					panel.repaint();
-				}else{
+					// panel.repaint();
+					GrammarControl.repaintAll();
+				} else {
 					panel.programData.startDefininingLimitShape();
-					panel.repaint();
+					// panel.repaint();
+					GrammarControl.repaintAll();
 				}
-				MainData.LIMITING_SHAPE = !MainData.LIMITING_SHAPE;
+				Settings.LIMITING_SHAPE = !Settings.LIMITING_SHAPE;
 			}
 		});
 		return colorRuleOption;
 	}
-	JMenuItem showColorRuleSettings(MainPanel panel){
+
+	JMenuItem showColorRuleSettings(MainPanel panel) {
 		JMenuItem colorRuleOption = new JMenuItem();
 		colorRuleOption.setText(ProgramLabels.colorRuleSettings);
 		colorRuleOption.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				;
-				
+
 			}
 		});
 		return colorRuleOption;
 	}
-// edit selected elements
-	void showElemEdit(MainPanel panel){
+
+	// edit selected elements
+	void showElemEdit(MainPanel panel) {
 		JMenu elemEdit = new JMenu(ProgramLabels.elemEdit);
-		if (!panel.programData.isEmptyModified()){
+		if (!panel.programData.isEmptyModified()) {
 			elemEdit.add(showElemEditRem(panel));
 			elemEdit.add(showElemEditCopy(panel));
 		}
-		if (!panel.programData.copiedLines.isEmpty()){
+		if (!GrammarControl.getInstance().copiedLines.isEmpty()) {
 			elemEdit.add(showElemEditPaste(panel));
 		}
-		if (panel.programData.getLines() != null)
-			elemEdit.add(showElemEditGroup(panel));			
-			add(elemEdit);
+		if (panel.programData.lines.getLines() != null)
+			elemEdit.add(showElemEditGroup(panel));
+		add(elemEdit);
 	}
-	JMenuItem showElemEditRem(MainPanel panel){
+
+	JMenuItem showElemEditRem(MainPanel panel) {
 		JMenuItem removeButton = new JMenuItem();
 		removeButton.setText(ProgramLabels.elemRemove);
 		removeButton.addActionListener(new ActionListener() {
@@ -309,7 +333,8 @@ class PopUpMenu extends JPopupMenu {
 		});
 		return removeButton;
 	}
-	JMenuItem showElemEditCopy(MainPanel panel){
+
+	JMenuItem showElemEditCopy(MainPanel panel) {
 		JMenuItem copyButton = new JMenuItem();
 		copyButton.setText(ProgramLabels.elemCopy);
 		copyButton.addActionListener(new ActionListener() {
@@ -320,7 +345,8 @@ class PopUpMenu extends JPopupMenu {
 		});
 		return copyButton;
 	}
-	JMenuItem showElemEditPaste(MainPanel panel){
+
+	JMenuItem showElemEditPaste(MainPanel panel) {
 		JMenuItem pasteButton = new JMenuItem();
 		pasteButton.setText(ProgramLabels.elemPaste);
 		pasteButton.addActionListener(new ActionListener() {
@@ -331,54 +357,57 @@ class PopUpMenu extends JPopupMenu {
 		});
 		return pasteButton;
 	}
-	JMenuItem showElemEditGroup(MainPanel panel){
+
+	JMenuItem showElemEditGroup(MainPanel panel) {
 		JMenuItem pasteButton = new JMenuItem();
 		pasteButton.setText(ProgramLabels.elemGroup);
 		pasteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
 				System.out.println("-----------------GROUP-LINES-------------------");
-				
-				int before = panel.programData.getLinesSize();
-				do{
-					before = panel.programData.getLinesSize();
-					panel.programData.setLines(Shape.groupLines(panel.programData.getLines()));
-				}while (before != panel.programData.getLinesSize());
-				panel.repaint();
+
+				int before = panel.programData.lines.size();
+				do {
+					before = panel.programData.lines.size();
+					panel.programData.lines.setLines(Shape.groupLines(panel.programData.lines.getLines()));
+				} while (before != panel.programData.lines.size());
+				// panel.repaint();
+				GrammarControl.repaintAll();
 			}
 		});
 		return pasteButton;
 	}
-// marker
-	void showMarker(MainPanel panel){
-		if (panel.programData.marker == null){
+
+	// marker
+	void showMarker(MainPanel panel) {
+		if (panel.programData.marker == null) {
 			if (!(panel instanceof RigthRulePanel))
 				add(showAddMarker(panel));
-			else{
-				if (((RigthRulePanel)panel).parent.programData.marker != null){
+			else {
+				if (((RigthRulePanel) panel).parent.programData.marker != null) {
 					JMenu marker = new JMenu(ProgramLabels.marker);
 					marker.add(showAddMarker(panel));
 					marker.add(showCopyFromLeftSideMarker(panel));
 					add(marker);
-				}else{
+				} else {
 					add(showAddMarker(panel));
 				}
 			}
-		}
-		else{
+		} else {
 			JMenu marker = new JMenu(ProgramLabels.marker);
 			marker.add(showMoveMarker(panel));
 			marker.add(showRemoveMarker(panel));
-			if((panel instanceof LeftRulePanel)){
+			if ((panel instanceof LeftRulePanel)) {
 				marker.add(showCopyToRigthSideMarker(panel));
 			}
-			if((panel instanceof RigthRulePanel)){
-				if (((RigthRulePanel)panel).parent.programData.marker != null)
-				marker.add(showCopyFromLeftSideMarker(panel));
+			if ((panel instanceof RigthRulePanel)) {
+				if (((RigthRulePanel) panel).parent.programData.marker != null)
+					marker.add(showCopyFromLeftSideMarker(panel));
 			}
 			add(marker);
 		}
 	}
-	JMenuItem showAddMarker(MainPanel panel){
+
+	JMenuItem showAddMarker(MainPanel panel) {
 		JMenuItem markerButton = new JMenuItem();
 		markerButton.setText(ProgramLabels.addMarker);
 		markerButton.addActionListener(new ActionListener() {
@@ -388,7 +417,8 @@ class PopUpMenu extends JPopupMenu {
 		});
 		return markerButton;
 	}
-	JMenuItem showMoveMarker(MainPanel panel){
+
+	JMenuItem showMoveMarker(MainPanel panel) {
 		JMenuItem markerButton = new JMenuItem();
 		markerButton.setText(ProgramLabels.moveMarker);
 		markerButton.addActionListener(new ActionListener() {
@@ -398,7 +428,8 @@ class PopUpMenu extends JPopupMenu {
 		});
 		return markerButton;
 	}
-	JMenuItem showRemoveMarker(MainPanel panel){
+
+	JMenuItem showRemoveMarker(MainPanel panel) {
 		JMenuItem removeMarkerButton = new JMenuItem();
 		removeMarkerButton.setText(ProgramLabels.removeMarker);
 		removeMarkerButton.addActionListener(new ActionListener() {
@@ -408,35 +439,38 @@ class PopUpMenu extends JPopupMenu {
 		});
 		return removeMarkerButton;
 	}
-	JMenuItem showCopyToRigthSideMarker(MainPanel panel){
+
+	JMenuItem showCopyToRigthSideMarker(MainPanel panel) {
 		JMenuItem copyMarkerButton = new JMenuItem();
 		copyMarkerButton.setText(ProgramLabels.copyMarkerToRigthSide);
 		copyMarkerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				((LeftRulePanel)panel).copyMarker();
-				((LeftRulePanel)panel).rigthRulePanel.repaint();
+				((LeftRulePanel) panel).copyMarker();
+				((LeftRulePanel) panel).rigthRulePanel.repaint();
 			}
 		});
 		return copyMarkerButton;
 	}
-	JMenuItem showCopyFromLeftSideMarker(MainPanel panel){
+
+	JMenuItem showCopyFromLeftSideMarker(MainPanel panel) {
 		JMenuItem copyMarkerButton = new JMenuItem();
 		copyMarkerButton.setText(ProgramLabels.copyMarkerFromLeftSide);
 		copyMarkerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				((RigthRulePanel)panel).parent.copyMarker();
-				((RigthRulePanel)panel).repaint();
+				((RigthRulePanel) panel).parent.copyMarker();
+				((RigthRulePanel) panel).repaint();
 			}
 		});
 		return copyMarkerButton;
 	}
-// grammar options
-	void showGrammarOptions(MainPanel panel){
+
+	// grammar options
+	void showGrammarOptions(MainPanel panel) {
 		JMenu grammar = new JMenu(ProgramLabels.grammar);
 
 		grammar.add(showOpenFile(panel));
 		grammar.add(showSaveFile(panel));
-		if (MainData.file != null){
+		if (GrammarControl.getInstance().file != null) {
 			grammar.add(showSaveTheFile(panel));
 			grammar.add(showResetOption(panel));
 		}
@@ -445,8 +479,9 @@ class PopUpMenu extends JPopupMenu {
 
 		add(grammar);
 	}
+
 	// run simulation
-	JMenuItem showSimulate(MainPanel panel){
+	JMenuItem showSimulate(MainPanel panel) {
 		JMenuItem markerSimulate = new JMenuItem();
 		markerSimulate.setText(ProgramLabels.runSimulation);
 		markerSimulate.addActionListener(new ActionListener() {
@@ -457,30 +492,32 @@ class PopUpMenu extends JPopupMenu {
 		});
 		return markerSimulate;
 	}
+
 	// remove all rules and lines
-	JMenuItem showResetAllOption(MainPanel panel){
+	JMenuItem showResetAllOption(MainPanel panel) {
 		JMenuItem resetButton = new JMenuItem();
 		resetButton.setText(ProgramLabels.resetAll);
 		resetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				MainData.CLOSED_SHAPES = true;
+				Settings.CLOSED_SHAPES = true;
 				panel.programData.clear();
-				MainData.coloringRuleLevels = new ColoringRuleLevels(panel);
+				GrammarControl.getInstance().paintingRuleLevels = new PaintingRuleLevels(panel);
 				panel.repaint();
-				MainData.file = null;
+				GrammarControl.getInstance().file = null;
 				System.out.println("-----------------RESET-ALL-----------------");
 			}
 		});
 		return resetButton;
 	}
+
 	// remove all rules and lines
-	JMenuItem showResetOption(MainPanel panel){
+	JMenuItem showResetOption(MainPanel panel) {
 		JMenuItem resetButton = new JMenuItem();
-		resetButton.setText(ProgramLabels.reset + " " + MainData.file.getName());
+		resetButton.setText(ProgramLabels.reset + " " + GrammarControl.getInstance().file.getName());
 		resetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				MainData.CLOSED_SHAPES = true;
-				FileSaver fileSaver = new FileSaver(MainData.file);
+				Settings.CLOSED_SHAPES = true;
+				FileSaver fileSaver = new FileSaver(GrammarControl.getInstance().file);
 				fileSaver.openDataFile(panel);
 				panel.repaint();
 				System.out.println("-------------------RESET-" + fileSaver.getName() + "------------------");
@@ -488,23 +525,26 @@ class PopUpMenu extends JPopupMenu {
 		});
 		return resetButton;
 	}
+
 	// save the document
-	JMenuItem showSaveTheFile(MainPanel panel){
+	JMenuItem showSaveTheFile(MainPanel panel) {
 		JMenuItem resetButton = new JMenuItem();
-		resetButton.setText(ProgramLabels.saveGrammar + " " + MainData.file.getName());
+		resetButton.setText(ProgramLabels.saveGrammar + " " + GrammarControl.getInstance().file.getName());
 		resetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				FileSaver fileSaver = new FileSaver(MainData.file);
+				FileSaver fileSaver = new FileSaver(GrammarControl.getInstance().file);
 				fileSaver.saveDataFile(panel);
-				panel.repaint();
+				// panel.repaint();
 			}
 		});
 		return resetButton;
 	}
+
 	// save as document
-	JMenuItem showSaveFile(MainPanel panel){
+	JMenuItem showSaveFile(MainPanel panel) {
 		JFileChooser fc = new JFileChooser("./temp/");
-		fc.setFileFilter(new FileNameExtensionFilter(ProgramLabels.extensionGrammarInfo, ProgramLabels.extensionGrammar));
+		fc.setFileFilter(
+				new FileNameExtensionFilter(ProgramLabels.extensionGrammarInfo, ProgramLabels.extensionGrammar));
 		fc.setSelectedFile(new File("." + ProgramLabels.extensionGrammar));
 		JMenuItem resetButton = new JMenuItem();
 		resetButton.setText(ProgramLabels.saveGrammar);
@@ -514,17 +554,19 @@ class PopUpMenu extends JPopupMenu {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					FileSaver fileSaver = new FileSaver(fc.getSelectedFile());
 					fileSaver.saveDataFile(panel);
-					MainData.file = fc.getSelectedFile();
+					GrammarControl.getInstance().file = fc.getSelectedFile();
 				}
 				panel.repaint();
 			}
 		});
 		return resetButton;
 	}
+
 	// open document
-	JMenuItem showOpenFile(MainPanel panel){
+	JMenuItem showOpenFile(MainPanel panel) {
 		JFileChooser fc = new JFileChooser("./temp/");
-		fc.setFileFilter(new FileNameExtensionFilter(ProgramLabels.extensionGrammarInfo, ProgramLabels.extensionGrammar));
+		fc.setFileFilter(
+				new FileNameExtensionFilter(ProgramLabels.extensionGrammarInfo, ProgramLabels.extensionGrammar));
 		fc.setSelectedFile(new File("." + ProgramLabels.extensionGrammar));
 		JMenuItem resetButton = new JMenuItem();
 		resetButton.setText(ProgramLabels.openGrammar);
@@ -534,16 +576,18 @@ class PopUpMenu extends JPopupMenu {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					FileSaver fileSaver = new FileSaver(fc.getSelectedFile());
 					fileSaver.openDataFile(panel);
-					System.out.println("-------------------OPEN " + fc.getSelectedFile().getName() + "-------------------");
-					MainData.file = fc.getSelectedFile();
+					System.out.println(
+							"-------------------OPEN " + fc.getSelectedFile().getName() + "-------------------");
+					GrammarControl.getInstance().file = fc.getSelectedFile();
 				}
 				panel.repaint();
 			}
 		});
 		return resetButton;
 	}
-// prepare rule application list
-	void showRuleListOptions(MainPanel panel){
+
+	// prepare rule application list
+	void showRuleListOptions(MainPanel panel) {
 		JMenu ruleList = new JMenu(ProgramLabels.rulleAppListOpt);
 
 		ruleList.add(showRuleApplicationList(panel));
@@ -551,27 +595,28 @@ class PopUpMenu extends JPopupMenu {
 
 		add(ruleList);
 	}
-	JMenuItem showRuleApplicationList(MainPanel panel){
+
+	JMenuItem showRuleApplicationList(MainPanel panel) {
 		JMenuItem resetButton = new JMenuItem();
 		resetButton.setText(ProgramLabels.ruleAppList);
 		resetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				RuleListPrepraration frame = new RuleListPrepraration();
+				new RuleListPrepraration();
 			}
 		});
 		return resetButton;
 	}// apply rule application list
-	JMenuItem showApplyRuleApplicationList(MainPanel panel){
+
+	JMenuItem showApplyRuleApplicationList(MainPanel panel) {
 		JMenuItem resetButton = new JMenuItem();
 		resetButton.setText(ProgramLabels.applyruleAppList);
 		resetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ev) {
-				try{
-					for (Rule rule: MainData.ruleAppList)
+				try {
+					for (Rule rule : GrammarControl.getInstance().ruleAppList)
 						rule.apply(panel);
-				}
-				catch(Rule.NoMarkerException exc){
-					MessageFrame error = new MessageFrame(exc.getMessage());
+				} catch (Rule.NoMarkerException exc) {
+					new MessageFrame(exc.getMessage());
 					System.out.println(exc.getLocalizedMessage());
 				}
 			}

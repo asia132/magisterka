@@ -6,8 +6,8 @@ import java.awt.Color;
 import java.lang.Math;
 
 class Rectangle{
-	int x, y;
-	int a, b;
+	private int x, y;
+	private int a, b;
 
 	Color color;
 
@@ -18,7 +18,7 @@ class Rectangle{
 		this.a = Math.abs(x_a - x_b);
 		this.b = Math.abs(y_a - y_b);
 
-		this.color = MainData.default_rect_color;
+		this.color = Settings.default_rect_color;
 	}
 	void drawRectanle(Graphics2D g2d){
 		g2d.setColor(color);
@@ -49,9 +49,9 @@ class Rectangle{
 		this.b = b;
 	}
 	boolean insideRect(Line line){
-		for (int i = this.x; i < this.x + this.a; i += MainData.grid_size)
-			for (int j = this.y; j < this.y + this.b; j += MainData.grid_size)
-				if (line.onLine(i, j, MainData.grid_size))
+		for (int i = this.x; i < this.x + this.a; i += GridControl.getInstance().grid_size)
+			for (int j = this.y; j < this.y + this.b; j += GridControl.getInstance().grid_size)
+				if (line.onLine(i, j, GridControl.getInstance().grid_size))
 					return true;
 		if (this.x < line.getX_a() && line.getX_a() < this.x + this.a
 			&& this.y < line.getY_a() && line.getY_a() < this.y + this.b)

@@ -4,32 +4,28 @@ import java.util.ArrayList;
 import java.util.StringJoiner;
 
 import java.awt.RenderingHints;
-import java.awt.geom.GeneralPath;
 import java.awt.Graphics2D;
-import java.awt.Color;
-import java.awt.Point;
-import java.lang.Math;
 
-class ColoringRuleLevels {
+class PaintingRuleLevels {
 	static Level levels[];
 	Level limitingShape = new Level("Limit Shape");
 	private int n = 0;
 	int max_n_allowed;
 	private boolean n_change = false;
 
-	ColoringRuleLevels(MainPanel panel){
+	PaintingRuleLevels(MainPanel panel){
 		this.n = 0;
 		this.max_n_allowed = 10;
-		this.levels = new Level [100];
+		PaintingRuleLevels.levels = new Level [100];
 
 		for (int i = 0; i < this.max_n_allowed; ++i)
-			this.levels[i] = new Level(i + "");
+			PaintingRuleLevels.levels[i] = new Level(i + "");
 		// this.print();
 	}
 	void setMaxNAllowed(int max_n){
 		for (int i = this.max_n_allowed; i < max_n; ++i){
-			if (this.levels[i] == null)
-				this.levels[i] = new Level(i + "");
+			if (PaintingRuleLevels.levels[i] == null)
+				PaintingRuleLevels.levels[i] = new Level(i + "");
 		}
 		this.max_n_allowed = max_n;
 	}
@@ -48,17 +44,17 @@ class ColoringRuleLevels {
 		this.n++;
 	}
 	void updateLevel0(Line newLine){
-		this.levels[0].levelLines.add(newLine);
+		PaintingRuleLevels.levels[0].levelLines.add(newLine);
 	}
 	void updateLevel0(ArrayList <Line> newLines){
-		this.levels[0].levelLines = newLines;
+		PaintingRuleLevels.levels[0].levelLines = newLines;
 	}
-	void updateWithRule(Category ruleCat, ArrayList <Line> ruleInitialLines, ArrayList <Line> ruleFinalLines, MainData programData){
-		if (ruleCat == Category.A){ // left side => n
+	void updateWithRule(Rule.Category ruleCat, ArrayList <Line> ruleInitialLines, ArrayList <Line> ruleFinalLines, MainData programData){
+		if (ruleCat == Rule.Category.A){ // left side => n
 			this.increaseN();
 			levels[n].update(ruleInitialLines);
 			levels[n].closeLevel();
-		}else if (ruleCat == Category.B){ // left side => n | right side => n+1
+		}else if (ruleCat == Rule.Category.B){ // left side => n | right side => n+1
 			if (this.n_change){
 				if (n+1 < max_n_allowed){
 					this.increaseN();
@@ -71,8 +67,8 @@ class ColoringRuleLevels {
 			if (n+1 < max_n_allowed){
 				levels[n+1].update(ruleInitialLines);
 			}	
-		}else if (ruleCat == Category.C){ // right side - left side => n+1
-			programData.lines.addAll(ruleFinalLines);
+		}else if (ruleCat == Rule.Category.C){ // right side - left side => n+1
+			programData.lines.lines.addAll(ruleFinalLines);
 			if (n+1 < max_n_allowed){
 				System.out.println("Add lines to L" + (n + 1));
 				levels[n+1].levelLines.addAll(ruleFinalLines);
@@ -83,17 +79,9 @@ class ColoringRuleLevels {
 	String limitingShapeToString(){
 		StringJoiner info = new StringJoiner("");
 		for (Line line: limitingShape.levelLines){
-			info.add(FileSaver.limitShapeTag).add("\t").add(FileSaver.iSideTag).add("\t").add(line.toString()).add("\n");
+			info.add(FileSaverTags.LIMITSHAPETAG.toString()).add("\t").add(FileSaverTags.ISIDETAG.toString()).add("\t").add(line.toString()).add("\n");
 		}
 		return info.toString();
-	}
-	void print(){
-		System.out.println("Limiting shape");
-		limitingShape.print();
-		for (int i = 0; i <= n + 1; ++i){
-			System.out.println("Level " + i);
-			levels[i].print();
-		}
 	}
 	void paintLevels(Graphics2D g2d){
 		// this.print();
@@ -106,7 +94,7 @@ class ColoringRuleLevels {
 				g2d.setPaint(limitingShape.getColor());				
 				g2d.fill(limitingShape.getShape()); 
 			}catch (NotClosedShape e) {;
-				MainData.setColorRules();
+				Settings.setColorRules();
 				new MessageFrame(e.getMessage() + ". Limiting shape.");
 				System.out.println(e.getMessage());
 			}
@@ -117,7 +105,7 @@ class ColoringRuleLevels {
 			g2d.setPaint(level.getColor());			
 			g2d.fill(level.getShape());
 		}catch (NotClosedShape e) {;
-			MainData.setColorRules();
+			Settings.setColorRules();
 			new MessageFrame(e.getMessage() + ". Level index: 0");
 			System.out.println(e.getMessage());
 		}
@@ -130,19 +118,20 @@ class ColoringRuleLevels {
 				g2d.fill(level.getShape());
 
 			}catch (NotClosedShape e) {;
-				MainData.setColorRules();
+				Settings.setColorRules();
 				new MessageFrame(e.getMessage() + ". Level index: " + i);
 				System.out.println(e.getMessage() + ". Level index: " + i);
 			}
 		}
 		g2d.dispose();
 	}
-}
-class NotClosedShape extends Exception {
-	NotClosedShape(){
-		super("The shape is not closed");
-	}
-	NotClosedShape(String message){
-		super("The shape is not closed. " + message);
+	static class NotClosedShape extends Exception {
+		public static final long serialVersionUID = 42L;
+		NotClosedShape(){
+			super("The shape is not closed");
+		}
+		NotClosedShape(String message){
+			super("The shape is not closed. " + message);
+		}
 	}
 }

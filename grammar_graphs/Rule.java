@@ -2,7 +2,6 @@ package grammar_graphs;
 
 import java.util.ArrayList;
 import java.util.StringJoiner;
-import java.lang.Math;
 
 
 final class Rule{
@@ -44,12 +43,11 @@ final class Rule{
 		return this.cat;
 	}
 	void apply(MainPanel panel) throws NoMarkerException{
-		System.out.print("APPLY RULE: " + this.getName() + " of Category: " + cat.getChar() + " is painting rules active: " + MainData.CLOSED_SHAPES + "; N = " +MainData.coloringRuleLevels.getN());
 		if (panel.programData.marker == null)
 			throw new NoMarkerException("Please add a marker to main panel\n");
 		if (initialshape.marker == null)
 			throw new NoMarkerException("Please add a marker to left side of rule\n");
-		Shape inputshape = new Shape(panel.programData.getLines(), panel.programData.marker, "Input");
+		Shape inputshape = new Shape(panel.programData.lines.getLines(), panel.programData.marker, "Input");
 
 		try{
 			ArrayList <Line> found_lines = initialshape.findMatch(inputshape);
@@ -60,7 +58,6 @@ final class Rule{
 				System.out.println(" - end with success----------");
 				if (finalshape != null && finalshape.marker != null){
 					Marker inputMarker = panel.programData.marker.copy();
-
 					try{
 						double k = initialshape.marker.length() / inputshape.marker.length();
 						panel.programData.marker.move((int)((finalshape.marker.getX() - initialshape.marker.getX())/k), (int)((finalshape.marker.getY() - initialshape.marker.getY())/k), inputshape.marker.calcRotation(initialshape.marker.dir));
@@ -68,19 +65,20 @@ final class Rule{
 					
 						panel.programData.marker.scale(this.findMarkerScaleParam());
 						if (finalshape.needsToBeMirrored){
-							if (inputMarker.dir.equals(Direct.N) || inputMarker.dir.equals(Direct.S)){
+							if (inputMarker.dir.equals(Marker.Direct.N) || inputMarker.dir.equals(Marker.Direct.S)){
 								panel.programData.marker.mirrorX(inputMarker.p.x);
 							}
 							else{
 								panel.programData.marker.mirrorY(inputMarker.p.y);
 							}
 						}
+						System.out.println("INPUT MARKER COPY: " + inputMarker);
 						ArrayList <Line> finalLines = finalshape.setInPlace(inputMarker, initialshape.marker);
-						if (MainData.CLOSED_SHAPES)
-							MainData.coloringRuleLevels.updateWithRule(this.cat, found_lines, finalLines, panel.programData);
+						if (Settings.CLOSED_SHAPES)
+							GrammarControl.getInstance().paintingRuleLevels.updateWithRule(this.cat, found_lines, finalLines, panel.programData);
 						else
-							panel.programData.addLinesByRule(finalLines);
-					}catch (ToSmallRException e) {
+							panel.programData.lines.addLinesByRule(finalLines);
+					}catch (Marker.ToSmallRException e) {
 						new MessageFrame("Rule could not be applicated. " + e.getMessage());
 						panel.programData.marker = inputMarker;
 						System.out.println("Rule apply: " + e.getLocalizedMessage());
@@ -88,14 +86,14 @@ final class Rule{
 				}
 				else{
 					panel.programData.marker = null;
-					if (MainData.CLOSED_SHAPES)
-						MainData.coloringRuleLevels.updateWithRule(this.cat, found_lines, null, panel.programData);
+					if (Settings.CLOSED_SHAPES)
+						GrammarControl.getInstance().paintingRuleLevels.updateWithRule(this.cat, found_lines, null, panel.programData);
 				}
 				panel.repaint();
 			}else{
 				System.out.println(" - end without success----------");
 			}
-		}catch(NotAllRuleLinesRecognized error){
+		}catch(Shape.NotAllRuleLinesRecognized error){
 			System.out.println(" - end without success----------");
 			System.out.println(error.getMessage());;
 		}
@@ -103,11 +101,11 @@ final class Rule{
 	@Override
 	public String toString(){
 		StringJoiner info = new StringJoiner("");
-		info.add(initialshape.markerToString(name, FileSaver.aSideTag));
-		info.add(initialshape.linesDistToString(name, FileSaver.aSideTag));
+		info.add(initialshape.markerToString(name, FileSaverTags.ASIDETAG.toString()));
+		info.add(initialshape.linesDistToString(name, FileSaverTags.ASIDETAG.toString()));
 		if (finalshape != null){
-			if (finalshape.marker != null)	info.add(finalshape.markerToString(name, FileSaver.bSideTag));
-			info.add(finalshape.linesDistToString(name, FileSaver.bSideTag));
+			if (finalshape.marker != null)	info.add(finalshape.markerToString(name, FileSaverTags.BSIDETAG.toString()));
+			info.add(finalshape.linesDistToString(name, FileSaverTags.BSIDETAG.toString()));
 		}
 		return info.toString();
 	}
@@ -132,11 +130,13 @@ final class Rule{
 		return 1.*finalshape.marker.r / (1.*initialshape.marker.r);
 	}
 	public class NoMarkerException extends Exception {
+		public static final long serialVersionUID = 42L;
 		public NoMarkerException(String message) {
 			super(message);
 		}
 	}
 	public class WrongNameException extends Exception {
+		public static final long serialVersionUID = 42L;
 		public WrongNameException() {
 			super("The name cannot contains white characters, like space, tab or enter.");
 		}
@@ -145,6 +145,7 @@ final class Rule{
 		}
 	}
 	public class MarkerRemovingRule extends Exception {
+		public static final long serialVersionUID = 42L;
 		public MarkerRemovingRule(String message) {
 			super(message);
 		}
@@ -152,33 +153,27 @@ final class Rule{
 			super("The rule was designed to remove the marker from input.\nIt will not add any of definded line.\n");
 		}
 	}
-}
-enum Category{
-	A, B, C;
-	private String value;
-	private char index;
-	private int num;
-	static{
-		A.value = "RIGH SIDE CONTAINS TERMINAL LIST, SAME AS LEFT";
-		B.value = "RIGH SIDE CONTAINS TERMINAL LIST, SAME AS LEFT AND AN MARKER";
-		C.value = "RIGH SIDE CONTAINS TERMINAL LIST, SAME AS LEFT WITH OTHER TERMINALS AND AN MARKER";
-
-		A.index = 'A';
-		B.index = 'B';
-		C.index = 'C';
-
-		A.num = 1;
-		B.num = 2;
-		C.num = 3;
-	}
-	@Override
-	public String toString(){
-		return "" + value;
-	}
-	char getChar(){
-		return index;
-	}
-	int getNum(){
-		return num;
+	enum Category{
+		A('A', 1, "RIGH SIDE CONTAINS TERMINAL LIST, SAME AS LEFT"), 
+		B('B', 2, "RIGH SIDE CONTAINS TERMINAL LIST, SAME AS LEFT AND AN MARKER"), 
+		C('C', 3, "RIGH SIDE CONTAINS TERMINAL LIST, SAME AS LEFT WITH OTHER TERMINALS AND AN MARKER");
+		private String value;
+		private char index;
+		private int num;
+		Category(char index, int num, String value){
+			this.value = value;
+			this.index = index;
+			this.num = num;
+		}
+		@Override
+		public String toString(){
+			return "" + value;
+		}
+		char getChar(){
+			return index;
+		}
+		int getNum(){
+			return num;
+		}
 	}
 }

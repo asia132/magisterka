@@ -1,0 +1,20 @@
+#N	0
+#INPUT	#I	#M	N	3	61	14
+#New_Rule	#A	#M	N	2	15	15
+#New_Rule	#A	#L	17	17	13	17
+#New_Rule	#A	#L	19	19	17	17
+#New_Rule	#A	#L	19	11	19	19
+#New_Rule	#A	#L	11	21	11	9
+#New_Rule	#A	#L	17	13	19	11
+#New_Rule	#A	#L	11	9	13	13
+#New_Rule	#A	#L	13	17	11	21
+#New_Rule	#A	#L	13	13	17	13
+#New_Rule	#B	#M	N	3	26	15
+#New_Rule	#B	#L	32	9	32	21
+#New_Rule	#B	#L	23	12	29	12
+#New_Rule	#B	#L	23	18	29	18
+#New_Rule	#B	#L	20	6	20	24
+#New_Rule	#B	#L	20	24	23	18
+#New_Rule	#B	#L	29	18	32	21
+#New_Rule	#B	#L	20	6	23	12
+#New_Rule	#B	#L	29	12	32	9

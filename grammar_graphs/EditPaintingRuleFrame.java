@@ -1,8 +1,6 @@
 package grammar_graphs;
 
 import java.awt.FlowLayout;
-import java.awt.Toolkit;
-import java.awt.Dimension;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
@@ -10,12 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextArea; 
 import javax.swing.JButton; 
 import javax.swing.JPanel;  
-import javax.swing.JSplitPane; 
 import javax.swing.BorderFactory; 
-import javax.swing.border.Border;
-import javax.swing.JColorChooser;
-import javax.swing.Box;
-import javax.swing.JComboBox;
 import javax.swing.BoxLayout;
 
 import java.awt.event.ActionListener;
@@ -24,7 +17,9 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.StringJoiner;
 
-class EditColorRuleFrame extends JFrame {
+class EditPaintingRuleFrame extends JFrame {
+	
+	public static final long serialVersionUID = 42L;
 
 	double loc = 0.3;
 	double panScale = 0.8;
@@ -38,7 +33,7 @@ class EditColorRuleFrame extends JFrame {
 	JFrame me = this;
 
 	ArrayList <String> tagList;
-	RuleComponents parentRuleData;
+	PaintingRuleComponents parentRuleData;
 	JFrame parent;
 
 	JTextArea ruleBody;
@@ -46,7 +41,7 @@ class EditColorRuleFrame extends JFrame {
 	int tagPos = 0;
 
 
-	EditColorRuleFrame(RuleComponents ruleData, JFrame parent) {
+	EditPaintingRuleFrame(PaintingRuleComponents ruleData, JFrame parent) {
 		super(ProgramLabels.editColorRuleFrame);
 
 		this.parentRuleData = ruleData;
@@ -63,7 +58,6 @@ class EditColorRuleFrame extends JFrame {
 		this.setVisible(true);
 	}
 	protected void loadFrameData(){
-		Toolkit tk = Toolkit.getDefaultToolkit();
 		this.setDefaultCloseOperation(CreateRuleFrame.DISPOSE_ON_CLOSE);
 	}
 	static String arrayListToString(ArrayList <String> stringList){
@@ -101,7 +95,7 @@ class EditColorRuleFrame extends JFrame {
 		JPanel levelPanel = new JPanel();
 		levelPanel.setBackground(Color.white);
 
-		for (int i = 0; i <= MainData.coloringRuleLevels.getN(); i++){
+		for (int i = 0; i <= GrammarControl.getInstance().paintingRuleLevels.getN(); i++){
 			levelPanel.add(addSign("L" + i));
 		}
 
@@ -111,13 +105,13 @@ class EditColorRuleFrame extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.white);
 
-		panel.add(addSign(ColoringRule.levelAdd));
-		panel.add(addSign(ColoringRule.levelIntersect));
-		panel.add(addNegationSign(ColoringRule.levelNot));
-		panel.add(addSign(ColoringRule.levelXOR));
-		panel.add(addSign(ColoringRule.levelSubstract));
-		panel.add(addSign(ColoringRule.levelBra));
-		panel.add(addSign(ColoringRule.levelKet));
+		panel.add(addSign(PaintingRuleTags.LEVELADD.toString()));
+		panel.add(addSign(PaintingRuleTags.LEVELINTERSECT.toString()));
+		panel.add(addNegationSign(PaintingRuleTags.LEVELNOT.toString()));
+		panel.add(addSign(PaintingRuleTags.LEVELXOR.toString()));
+		panel.add(addSign(PaintingRuleTags.LEVELSUBSTRACT.toString()));
+		panel.add(addSign(PaintingRuleTags.LEVELBRA.toString()));
+		panel.add(addSign(PaintingRuleTags.LEVELKET.toString()));
 
 		this.mainPanel.add(panel);
 	}
@@ -222,11 +216,11 @@ class EditColorRuleFrame extends JFrame {
 		JButton button = new JButton(operator);
 		button.addActionListener(event -> {
 
-			String updatedOperator = "LS" + ColoringRule.levelSubstract;
+			String updatedOperator = "LS" + PaintingRuleTags.LEVELSUBSTRACT.toString();
 			
 			ruleBody.insert(updatedOperator, pos);
 			tagList.add(tagPos++, "LS");
-			tagList.add(tagPos++, ColoringRule.levelSubstract);
+			tagList.add(tagPos++, PaintingRuleTags.LEVELSUBSTRACT.toString());
 			pos += updatedOperator.length();
 
 			this.ruleBody.setCaretPosition(pos);

@@ -15,38 +15,16 @@ class Marker{
 	int r;
 	Direct dir;
 	Color color;
-	static int toGrid(int x){
-		int modX = x%MainData.grid_size;
-		if (modX <= (MainData.grid_size/2)*1.){
-			return (int)Math.floor((x/MainData.grid_size)*1);
-		}
-		return (int)Math.ceil((x/MainData.grid_size)*1);
-	}
-// constructors
-	// based on coordinators
-	Marker(int x, int y){
-		this.p = new Point(toGrid(x), toGrid(y));
-		this.r = 2;
-		this.dir = Direct.N;
-		this.color = MainData.default_marker_color;
-	}
-	// based on other Marker object 
-	Marker(Marker marker){
-		this.p = new Point(marker.p.x, marker.p.y);
-		this.r = marker.r;
-		this.dir = marker.dir;
-		this.color = MainData.default_marker_color;
-	}
 	// Based on Point
 	Marker(Point p){
 		this.p = p;
 		this.r = 2;
 		this.dir = Direct.N;
-		this.color = MainData.default_marker_color;
+		this.color = Settings.default_marker_color;
 	}
-	// Based on Point
-	Marker(){
-		this.color = MainData.default_marker_color;
+	// based on coordinators
+	static Marker createMarkerAtScreenPoint(int x, int y){
+		return new Marker(new Point(GridControl.getInstance().toGrid(x), GridControl.getInstance().toGrid(y)));
 	}
 	void print(){
 		System.out.println(dir.toString() + ", " + r + " [" + p.x + ", " + p.y + "]");
@@ -67,10 +45,10 @@ class Marker{
 	@Override
 	public String toString(){
 		StringJoiner info = new StringJoiner("\t");
-		return info.add("#M").add(dir.toString()).add(Integer.toString(r)).add("" + p.x).add(p.y + "\n").toString();
+		return info.add("#M").add(dir.toString()).add(Integer.toString(r)).add("" + p.x).add(p.y + " ").toString();
 	}
 	boolean isMiddle(int x, int y){
-		if (Math.abs(getX() - x) < MainData.grid_size * 0.5 && Math.abs(getY() - y) < MainData.grid_size * 0.5){
+		if (Math.abs(getX() - x) < GridControl.getInstance().grid_size * 0.5 && Math.abs(getY() - y) < GridControl.getInstance().grid_size * 0.5){
 			return true;
 		}
 		return false;
@@ -82,7 +60,6 @@ class Marker{
 
 		int d = getR() * 2;
 		int x = getX()-getR(), y = getY()-getR();
-		int startAngle = 0;
 		int bigAngle = 180, shortAngle = 90;
 
 		switch (dir){
@@ -112,34 +89,34 @@ class Marker{
 				}
 		}
 		
-		g2d.setColor(MainData.default_rect_color);
-		if (MainData.SHOW_DIST == true){
+		g2d.setColor(Settings.default_rect_color);
+		if (Settings.SHOW_DIST == true){
 			g2d.drawString(getD(), getX()+ 2, getY() - 2);
 			g2d.drawString("A", this.getAx(), this.getAy());
 			g2d.drawString("B", this.getBx(), this.getBy());
 			g2d.drawString("C", this.getCx(), this.getCy());
 			g2d.drawString("D", this.getDx(), this.getDy());
 		}
-		if (MainData.SHOW_POINTS == true){
-			g2d.setColor(MainData.default_point_color);
-			g2d.drawString("[" + (p.x - point0[0]) + ", " + (p.y - point0[1]) + "]", getX() - 4, getY() + (int)(MainData.grid_size*0.5)); // S
-			g2d.drawString("[" + (getax() - point0[0]) + ", " + (getay() - point0[1]) + "]", getAx() - 4, getAy() + (int)(MainData.grid_size*0.5)); // A
-			g2d.drawString("[" + (getbx() - point0[0]) + ", " + (getby() - point0[1]) + "]", getBx() - 4, getBy() + (int)(MainData.grid_size*0.5)); // B
-			g2d.drawString("[" + (getcx() - point0[0]) + ", " + (getcy() - point0[1]) + "]", getCx() - 4, getCy() + (int)(MainData.grid_size*0.5)); // C
-			g2d.drawString("[" + (getdx() - point0[0]) + ", " + (getdy() - point0[1]) + "]", getDx() - 4, getDy() + (int)(MainData.grid_size*0.5)); // D
+		if (Settings.SHOW_POINTS == true){
+			g2d.setColor(Settings.default_point_color);
+			g2d.drawString("[" + (p.x - point0[0]) + ", " + (p.y - point0[1]) + "]", getX() - 4, getY() + (int)(GridControl.getInstance().grid_size*0.5)); // S
+			g2d.drawString("[" + (getax() - point0[0]) + ", " + (getay() - point0[1]) + "]", getAx() - 4, getAy() + (int)(GridControl.getInstance().grid_size*0.5)); // A
+			g2d.drawString("[" + (getbx() - point0[0]) + ", " + (getby() - point0[1]) + "]", getBx() - 4, getBy() + (int)(GridControl.getInstance().grid_size*0.5)); // B
+			g2d.drawString("[" + (getcx() - point0[0]) + ", " + (getcy() - point0[1]) + "]", getCx() - 4, getCy() + (int)(GridControl.getInstance().grid_size*0.5)); // C
+			g2d.drawString("[" + (getdx() - point0[0]) + ", " + (getdy() - point0[1]) + "]", getDx() - 4, getDy() + (int)(GridControl.getInstance().grid_size*0.5)); // D
 		}
 	}
 	void setXY(int x, int y){
-		this.p = new Point(toGrid(x), toGrid(y));
+		this.p = new Point(GridControl.getInstance().toGrid(x), GridControl.getInstance().toGrid(y));
 	}
 	int getX(){
-		return p.x*MainData.grid_size;
+		return p.x*GridControl.getInstance().grid_size;
 	}
 	int getY(){
-		return p.y*MainData.grid_size;
+		return p.y*GridControl.getInstance().grid_size;
 	}
 	int getR(){
-		return r*MainData.grid_size;
+		return r*GridControl.getInstance().grid_size;
 	}
 	int [] calcX(){
 		int [] x = {getAx(), getBx(), getX(), getCx()};
@@ -162,12 +139,12 @@ class Marker{
 	void move(int xt, int yt, double angle){
 		int x = (int)Math.round(Math.cos(angle) * xt*1. - (Math.sin(angle) * yt*1.));
 		int y = (int)Math.round(Math.sin(angle) * xt*1. + (Math.cos(angle) * yt*1.));
-		this.p.x += toGrid(x);
-		this.p.y += toGrid(y);
+		this.p.x += GridControl.getInstance().toGrid(x);
+		this.p.y += GridControl.getInstance().toGrid(y);
 	}
 	void move(int xt, int yt){
-		this.p.x += toGrid(xt);
-		this.p.y += toGrid(yt);
+		this.p.x += GridControl.getInstance().toGrid(xt);
+		this.p.y += GridControl.getInstance().toGrid(yt);
 	}
 	void move(Point a, Point b){
 		this.p.x += b.x - a.x;
@@ -175,28 +152,28 @@ class Marker{
 	}
 // ABC
 	int getAx(){
-		return getax() * MainData.grid_size;
+		return getax() * GridControl.getInstance().grid_size;
 	}
 	int getBx(){
-		return getbx() * MainData.grid_size;
+		return getbx() * GridControl.getInstance().grid_size;
 	}
 	int getCx(){
-		return getcx() * MainData.grid_size;
+		return getcx() * GridControl.getInstance().grid_size;
 	}
 	int getDx(){
-		return getdx() * MainData.grid_size;
+		return getdx() * GridControl.getInstance().grid_size;
 	}
 	int getAy(){
-		return getay() * MainData.grid_size;
+		return getay() * GridControl.getInstance().grid_size;
 	}
 	int getBy(){
-		return getby() * MainData.grid_size;
+		return getby() * GridControl.getInstance().grid_size;
 	}
 	int getCy(){
-		return getcy() * MainData.grid_size;
+		return getcy() * GridControl.getInstance().grid_size;
 	}
 	int getDy(){
-		return getdy() * MainData.grid_size;
+		return getdy() * GridControl.getInstance().grid_size;
 	}
 // abc
 	int getax(){
@@ -276,42 +253,46 @@ class Marker{
 		this.color = color;
 	}
 	Marker copy(){
-		return new Marker(this);
+		Marker newMarker = new Marker(new Point(this.p.x, this.p.y));
+		newMarker.r = this.r;
+		newMarker.dir = this.dir;
+		newMarker.setColor(Settings.default_marker_color);
+		return newMarker;
 	}
 // check ABD
 	boolean checkA(int x, int y){
-		if (Math.abs(this.getAx() - x) < (int)(MainData.grid_size*0.25) && Math.abs(this.getAy() - y) < (int)(MainData.grid_size*0.25)){
+		if (Math.abs(this.getAx() - x) < (int)(GridControl.getInstance().grid_size*0.25) && Math.abs(this.getAy() - y) < (int)(GridControl.getInstance().grid_size*0.25)){
 			return true;
 		}
 		return false;
 	}
 	boolean checkB(int x, int y){
-		if (Math.abs(this.getBx() - x) < (int)(MainData.grid_size*0.25) && Math.abs(this.getBy() - y) < (int)(MainData.grid_size*0.25))
+		if (Math.abs(this.getBx() - x) < (int)(GridControl.getInstance().grid_size*0.25) && Math.abs(this.getBy() - y) < (int)(GridControl.getInstance().grid_size*0.25))
 			return true;
 		return false;
 	}
 	boolean checkC(int x, int y){
-		if (Math.abs(this.getCx() - x) < (int)(MainData.grid_size*0.25) && Math.abs(this.getCy() - y) < (int)(MainData.grid_size*0.25))
+		if (Math.abs(this.getCx() - x) < (int)(GridControl.getInstance().grid_size*0.25) && Math.abs(this.getCy() - y) < (int)(GridControl.getInstance().grid_size*0.25))
 			return true;
 		return false;
 	}
 	boolean checkD(int x, int y){
-		if (Math.abs(this.getDx() - x) < (int)(MainData.grid_size*0.25) && Math.abs(this.getDy() - y) < (int)(MainData.grid_size*0.25))
+		if (Math.abs(this.getDx() - x) < (int)(GridControl.getInstance().grid_size*0.25) && Math.abs(this.getDy() - y) < (int)(GridControl.getInstance().grid_size*0.25))
 			return true;
 		return false;
 	}
 //
 	void increaseR(int i){
-		this.r += toGrid(i);
+		this.r += GridControl.getInstance().toGrid(i);
 	}
 	void decreaseR(int i){
-		this.r -= toGrid(i);
+		this.r -= GridControl.getInstance().toGrid(i);
 	}
 	boolean checkR(int i){
-		return r > toGrid(i);
+		return r > GridControl.getInstance().toGrid(i);
 	}
 	boolean tryToResize(int x1, int y1, int x2, int y2){
-		int precision = (int)(MainData.grid_size*0.5);
+		int precision = (int)(GridControl.getInstance().grid_size*0.5);
 		if (this.checkA(x1, y1) == true){
 			if (this.dir == Direct.N){
 				if (x1 - x2 > precision) rotateL();
@@ -508,67 +489,63 @@ class Marker{
 		}
 		return 0;
 	}
-}
-class ToSmallRException extends Exception{
-	ToSmallRException(){
-		super("The marker radius cannot be smaller than 1.");
+	enum Direct{
+		N('N', 1), E('E', 2), S('W', 3), W('S', 4);
+		private char value;
+		private int num;
+		Direct(char value, int num){
+			this.value = value;
+			this.num = num;
+		}
+		public char value(){
+			return value;
+		}
+		@Override
+		public String toString(){
+			return "" + value;
+		}
+		public boolean equals(Direct dir){
+			if (dir.value == this.value)	return true;
+			return false;
+		}
+		public int getNum(){
+			return num;
+		}
+		public static Direct parseValue(char value) throws IllegalArgumentException{
+			if (value == 'N')   return N;
+			if (value == 'E')   return E;
+			if (value == 'W')   return W;
+			if (value == 'S')   return S;
+			throw new IllegalArgumentException("Wrong value " + value);
+		}
+		public static Direct parseValue(String value) throws IllegalArgumentException{
+			if (value.equals("N"))   return N;
+			if (value.equals("E"))   return E;
+			if (value.equals("W"))   return W;
+			if (value.equals("S"))   return S;
+			throw new IllegalArgumentException("Wrong value " + value);
+		}
+		public int rotationRQty(Direct otherDir) throws Exception{
+			if (otherDir.getNum() - this.num > 0)
+				return otherDir.getNum() - this.num;
+			throw new Exception("It is beter to use left rotation in this case.");
+		}
+		public int rotationLQty(Direct otherDir) throws Exception{
+			if (this.num - otherDir.getNum() > 0)
+				return this.num - otherDir.getNum();
+			throw new Exception("It is beter to use right rotation in this case.");
+		}
 	}
-	ToSmallRException(String mess){
-		super(mess + ".\tThe marker radius cannot be smaller than 1.");
+	class ToSmallRException extends Exception{
+		public static final long serialVersionUID = 42L;
+		ToSmallRException(){
+			super("The marker radius cannot be smaller than 1.");
+		}
+		ToSmallRException(String mess){
+			super(mess + ".\tThe marker radius cannot be smaller than 1.");
+		}
 	}
 }
-enum Direct{
-	N, E, S, W;
-	private char value;
-	private int num;
-	static {
-		N.value = 'N';
-		E.value = 'E';
-		W.value = 'W';
-		S.value = 'S';
 
-		N.num = 1;
-		E.num = 2;
-		S.num = 3;
-		W.num = 4;
-	}
-	public char value(){
-		return value;
-	}
-	@Override
-	public String toString(){
-		return "" + value;
-	}
-	public boolean equals(Direct dir){
-		if (dir.value == this.value)	return true;
-		return false;
-	}
-	public int getNum(){
-		return num;
-	}
-	public static Direct parseValue(char value) throws IllegalArgumentException{
-		if (value == 'N')   return N;
-		if (value == 'E')   return E;
-		if (value == 'W')   return W;
-		if (value == 'S')   return S;
-		throw new IllegalArgumentException("Wrong value " + value);
-	}
-	public static Direct parseValue(String value) throws IllegalArgumentException{
-		if (value.equals("N"))   return N;
-		if (value.equals("E"))   return E;
-		if (value.equals("W"))   return W;
-		if (value.equals("S"))   return S;
-		throw new IllegalArgumentException("Wrong value " + value);
-	}
-	public int rotationRQty(Direct otherDir) throws Exception{
-		if (otherDir.getNum() - this.num > 0)
-			return otherDir.getNum() - this.num;
-		throw new Exception("It is beter to use left rotation in this case.");
-	}
-	public int rotationLQty(Direct otherDir) throws Exception{
-		if (this.num - otherDir.getNum() > 0)
-			return this.num - otherDir.getNum();
-		throw new Exception("It is beter to use right rotation in this case.");
-	}
-};
+
 

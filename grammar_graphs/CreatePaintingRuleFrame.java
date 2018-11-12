@@ -1,8 +1,6 @@
 package grammar_graphs;
 
 import java.awt.FlowLayout;
-import java.awt.Toolkit;
-import java.awt.Dimension;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
@@ -10,11 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JTextArea; 
 import javax.swing.JButton; 
 import javax.swing.JPanel;  
-import javax.swing.JSplitPane; 
 import javax.swing.BorderFactory; 
-import javax.swing.border.Border;
 import javax.swing.JColorChooser;
-import javax.swing.Box;
 import javax.swing.JComboBox;
 import javax.swing.BoxLayout;
 
@@ -22,11 +17,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import java.util.ArrayList;
-import java.util.StringJoiner;
 
 import java.lang.NumberFormatException;
 
-class CreateColorRuleFrame extends JFrame {
+class CreatePaintingRuleFrame extends JFrame {
+	
+	public static final long serialVersionUID = 42L;
 
 	double loc = 0.3;
 	double panScale = 0.8;
@@ -42,13 +38,13 @@ class CreateColorRuleFrame extends JFrame {
 
 	JFrame me = this;
 	JTextArea nvalue;
-	ArrayList <RuleComponents> rules;
+	ArrayList <PaintingRuleComponents> rules;
 	
 	// TAGS
 	String ruleSeparator = " => ";
 
 
-	CreateColorRuleFrame() {
+	CreatePaintingRuleFrame() {
 		super(ProgramLabels.defineColorRulesFrame);
 
 		this.rules = new ArrayList<>();
@@ -60,7 +56,6 @@ class CreateColorRuleFrame extends JFrame {
 		this.setVisible(true);
 	}
 	protected void loadFrameData(){
-		Toolkit tk = Toolkit.getDefaultToolkit();
 		this.setDefaultCloseOperation(CreateRuleFrame.DISPOSE_ON_CLOSE);
 	}
 	protected void loadPanel(){
@@ -75,8 +70,8 @@ class CreateColorRuleFrame extends JFrame {
 		this.showCancelButton(buttonPanel);
 		this.mainPanel.add(buttonPanel);
 
-		for (ColoringRule oldRule: MainData.rulePainting){
-			rules.add(0, new RuleComponents());
+		for (PaintingRule oldRule: GrammarControl.getInstance().rulePainting){
+			rules.add(0, new PaintingRuleComponents());
 			rules.get(0).panel = new JPanel();
 			mainPanel.add(rules.get(0).panel);
 			showRemoveRuleButton(rules.get(0));
@@ -84,7 +79,7 @@ class CreateColorRuleFrame extends JFrame {
 			rules.get(0).tagsSet = oldRule.getTagSet();
 			rules.get(0).colorButton.setBackground(oldRule.getColor());
 			rules.get(0).comboLevel.setSelectedItem(oldRule.getAplicableInfo());
-			rules.get(0).rulesBodies.insert(EditColorRuleFrame.arrayListToString(oldRule.getTagSet()), 0);
+			rules.get(0).rulesBodies.insert(EditPaintingRuleFrame.arrayListToString(oldRule.getTagSet()), 0);
 			me.pack();
 		}
 
@@ -118,15 +113,15 @@ class CreateColorRuleFrame extends JFrame {
 
 		panel.add(addEditButton(rules.get(0)));
 	}
-	protected JComboBox ruleComboIndex(RuleComponents rule){
+	protected JComboBox <String> ruleComboIndex(PaintingRuleComponents rule){
 		rule.comboLevel = new JComboBox<String>();
 
-		rule.comboLevel.addItem(ColoringRule.ruleApplied);
-		rule.comboLevel.addItem(ColoringRule.ruleSkipped);
+		rule.comboLevel.addItem(PaintingRuleTags.RULEAPPLIED.toString());
+		rule.comboLevel.addItem(PaintingRuleTags.RULESKIPPED.toString());
 
 		return rule.comboLevel;
 	}
-	protected JButton ruleColorButton(RuleComponents rule){
+	protected JButton ruleColorButton(PaintingRuleComponents rule){
 		rule.colorButton = new JButton("\n\t\t\t\n");
 		rule.colorButton.setBackground(Color.LIGHT_GRAY);
 		rule.colorButton.setFocusPainted(false);
@@ -136,11 +131,11 @@ class CreateColorRuleFrame extends JFrame {
 		});
 		return rule.colorButton;
 	}
-	protected JButton addEditButton(RuleComponents rule){
+	protected JButton addEditButton(PaintingRuleComponents rule){
 		JButton addButton = new JButton(ProgramLabels.editRule);
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EditColorRuleFrame editFrame = new EditColorRuleFrame(rule, me);
+				new EditPaintingRuleFrame(rule, me);
 			}
 		});
 		return addButton;
@@ -149,18 +144,17 @@ class CreateColorRuleFrame extends JFrame {
 		saveButton = new JButton(ProgramLabels.save);
 		saveButton.addActionListener(event -> {
 			try{
-				MainData.coloringRuleLevels.setMaxNAllowed(Integer.parseInt(nvalue.getText()));
+				GrammarControl.getInstance().paintingRuleLevels.setMaxNAllowed(Integer.parseInt(nvalue.getText()));
 				closeFrame();
 			}catch(NumberFormatException e){
 				new MessageFrame(nvalue.getText() + " - the provided N must be integer");
 			}
-			// TODO: tutaj trzeba uzupełnić zapis reguł
 			try{
-				MainData.rulePainting.clear();
-				for (RuleComponents ruleData: rules){
-					MainData.rulePainting.add(new ColoringRule(ruleData.getApplicableTag(), ruleData.getColor(), ruleData.tagsSet));
+				GrammarControl.getInstance().rulePainting.clear();
+				for (PaintingRuleComponents ruleData: rules){
+					GrammarControl.getInstance().rulePainting.add(new PaintingRule(ruleData.getApplicableTag(), ruleData.getColor(), ruleData.tagsSet));
 				}
-			}catch(WrongTag e){
+			}catch(PaintingRule.WrongTag e){
 				new MessageFrame(e.getMessage());
 			}
 		});
@@ -179,7 +173,7 @@ class CreateColorRuleFrame extends JFrame {
 		addRuleButton = new JButton(ProgramLabels.addRule);
 		addRuleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				rules.add(0, new RuleComponents());
+				rules.add(0, new PaintingRuleComponents());
 				rules.get(0).panel = new JPanel();
 				mainPanel.add(rules.get(0).panel);
 				showRemoveRuleButton(rules.get(0));
@@ -189,7 +183,7 @@ class CreateColorRuleFrame extends JFrame {
 		});
 		panel.add(addRuleButton, BorderLayout.LINE_START);
 	}
-	void showRemoveRuleButton(RuleComponents rule){
+	void showRemoveRuleButton(PaintingRuleComponents rule){
 		removeRuleButton = new JButton(ProgramLabels.removeRule);
 		removeRuleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -206,7 +200,7 @@ class CreateColorRuleFrame extends JFrame {
 		nlabel.setEditable(false);
 		panel.add(nlabel, BorderLayout.LINE_START);
 
-		this.nvalue = new JTextArea(MainData.coloringRuleLevels.max_n_allowed + "");
+		this.nvalue = new JTextArea(GrammarControl.getInstance().paintingRuleLevels.max_n_allowed + "");
 		this.nvalue.setEditable(true);
 		this.nvalue.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK), BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 		nvalue.setBackground(new Color(224, 224, 224));
@@ -217,26 +211,4 @@ class CreateColorRuleFrame extends JFrame {
 		super.dispose();
 	}
 }
-class RuleComponents{
-	JTextArea rulesBodies;
-	ArrayList <String> tagsSet;
-	JComboBox<String> comboLevel;
-	JButton colorButton;
-	JPanel panel;
 
-	RuleComponents(){
-		tagsSet = new ArrayList<>();
-	}
-	ArrayList <String> tagsSetCopy(){
-		ArrayList <String> copy = new ArrayList<>(tagsSet.size());
-		for (String tag: tagsSet)
-			copy.add(tag);
-		return copy;
-	}
-	Color getColor(){
-		return colorButton.getBackground();
-	}
-	String getApplicableTag(){
-		return (String)(comboLevel.getSelectedItem());
-	}
-}

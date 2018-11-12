@@ -1,9 +1,5 @@
 package grammar_graphs;
 
-import java.util.ArrayList;
-
-import java.lang.Math;
-
 import java.nio.file.Path;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -31,18 +27,18 @@ class Simulation{
 		panel.programData.clear();
 
 		load0Level(panel);
-		MainData.coloringRuleLevels.increaseN();
-		System.out.println("N = " + MainData.coloringRuleLevels.getN());
+		GrammarControl.getInstance().paintingRuleLevels.increaseN();
+		System.out.println("N = " + GrammarControl.getInstance().paintingRuleLevels.getN());
 		load1Level(panel);
-		MainData.coloringRuleLevels.increaseN();
-		System.out.println("N = " + MainData.coloringRuleLevels.getN());
+		GrammarControl.getInstance().paintingRuleLevels.increaseN();
+		System.out.println("N = " + GrammarControl.getInstance().paintingRuleLevels.getN());
 		load2Level(panel);
-		MainData.coloringRuleLevels.increaseN();
-		System.out.println("N = " + MainData.coloringRuleLevels.getN());
+		GrammarControl.getInstance().paintingRuleLevels.increaseN();
+		System.out.println("N = " + GrammarControl.getInstance().paintingRuleLevels.getN());
 
 		panel.programData.marker = new Marker(new Point(114, 3));
 		panel.programData.marker.scale(4);
-		panel.programData.grid_size = 15;
+		GridControl.getInstance().grid_size = 15;
 		
 		panel.repaint();
 
@@ -56,7 +52,7 @@ class Simulation{
 				String [] spoint = line.split(" ");
 				Point a = new Point(Integer.parseInt(spoint[0]), Integer.parseInt(spoint[1]));
 				Point b = new Point(Integer.parseInt(spoint[2]), Integer.parseInt(spoint[3]));
-				panel.programData.addLine(new Line(a, b), true);
+				panel.programData.lines.addLine(new Line(a, b), true);
 			}
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);
@@ -72,9 +68,9 @@ class Simulation{
 				Point a = new Point(Integer.parseInt(spoint[0]), Integer.parseInt(spoint[1]));
 				Point b = new Point(Integer.parseInt(spoint[2]), Integer.parseInt(spoint[3]));
 				Line newline = new Line(a, b);
-				panel.programData.addLine(newline, false);
-				MainData.coloringRuleLevels.levels[1].addLine(newline);
-				// MainData.coloringRuleLevels.setN(1);
+				panel.programData.lines.addLine(newline, false);
+				PaintingRuleLevels.levels[1].addLine(newline);
+				// MainData.paintingRuleLevels.setN(1);
 			}
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);
@@ -90,9 +86,9 @@ class Simulation{
 				Point a = new Point(Integer.parseInt(spoint[0]), Integer.parseInt(spoint[1]));
 				Point b = new Point(Integer.parseInt(spoint[2]), Integer.parseInt(spoint[3]));
 				Line newline = new Line(a, b);
-				panel.programData.addLine(newline, false);
-				MainData.coloringRuleLevels.levels[2].addLine(newline);
-				// MainData.coloringRuleLevels.setN(2);
+				panel.programData.lines.addLine(newline, false);
+				PaintingRuleLevels.levels[2].addLine(newline);
+				// MainData.paintingRuleLevels.setN(2);
 			}
 		} catch (IOException x) {
 			System.err.format("IOException: %s%n", x);

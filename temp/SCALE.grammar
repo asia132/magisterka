@@ -1,0 +1,16 @@
+#N	0
+#LEVEL	L0	#L	74	27	80	21
+#LEVEL	L0	#L	68	27	62	21
+#LEVEL	L0	#L	68	27	74	27
+#LEVEL	L0	#L	62	21	80	21
+#INPUT	#I	#M	N	3	71	24
+#New_Rule	#A	#M	N	2	17	9
+#New_Rule	#A	#L	15	11	11	7
+#New_Rule	#A	#L	11	7	23	7
+#New_Rule	#A	#L	23	7	19	11
+#New_Rule	#A	#L	19	11	15	11
+#New_Rule	#B	#M	N	3	17	9
+#New_Rule	#B	#L	20	12	26	6
+#New_Rule	#B	#L	14	12	8	6
+#New_Rule	#B	#L	14	12	20	12
+#New_Rule	#B	#L	8	6	26	6
