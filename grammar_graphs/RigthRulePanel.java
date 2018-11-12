@@ -1,22 +1,24 @@
 package grammar_graphs;
 
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+
 class RigthRulePanel extends MainPanel{
+		
+	public static final long serialVersionUID = 42L;
+	
 	ArrayList <Line> leftLines = new ArrayList<Line>();
 	LeftRulePanel parent;
-	RigthRulePanel(int screenWidth, int screenHeight, LeftRulePanel parent){
-		super(screenWidth, screenHeight);
-		this.parent = parent;
-	}
-	RigthRulePanel(LeftRulePanel parent){
-		super();
+	RigthRulePanel(JFrame frameParent, int screenWidth, int screenHeight, LeftRulePanel parent){
+		super(frameParent, screenWidth, screenHeight);
 		this.parent = parent;
 	}
 	@Override
 	public void moveLines(int x1, int y1, int x2, int y2){
-		for (Line line: programData.getLines()){
+		programData.point0[0] += GridControl.getInstance().toGrid(x2 - x1);
+		programData.point0[1] += GridControl.getInstance().toGrid(y2 - y1);
+		for (Line line: programData.lines.getLines()){
 			line.move(x2 - x1, y2 - y1);
 		}
 		if (programData.marker != null)
@@ -25,7 +27,9 @@ class RigthRulePanel extends MainPanel{
 		this.repaint();
 	}
 	public void moveAllLines(int x1, int y1, int x2, int y2){
-		for (Line line: programData.getLines()){
+		programData.point0[0] += GridControl.getInstance().toGrid(x2 - x1);
+		programData.point0[1] += GridControl.getInstance().toGrid(y2 - y1);
+		for (Line line: programData.lines.getLines()){
 			line.move(x2 - x1, y2 - y1);
 		}
 		if (programData.marker != null)
@@ -33,16 +37,16 @@ class RigthRulePanel extends MainPanel{
 		this.repaint();
 	}
 	public void addLeftLine(int x1, int y1, int x2, int y2){
-		Line newLine = new Line(x1, y1, x2, y2);
+		Line newLine = Line.createLineAtScreenPoint(x1, y1, x2, y2);
 		this.leftLines.add(newLine);
-		this.programData.addLine(newLine, false);
+		this.programData.lines.addLine(newLine, false);
 		this.repaint();
 	}
 	@Override
 	public void modifyLines(int x1, int y1, int x2, int y2){
 		Line line = programData.tempShapeFirstLine();
 		if (!this.leftLines.contains(line)){
-			if (programData.distans(line.getX_a(), line.getY_a(), x2, y2) < programData.distans(line.getX_b(), line.getY_b(), x2, y2)){
+			if (MainData.distans(line.getX_a(), line.getY_a(), x2, y2) < MainData.distans(line.getX_b(), line.getY_b(), x2, y2)){
 				line.setXY_a(x2, y2);
 			}
 			else{
@@ -51,17 +55,17 @@ class RigthRulePanel extends MainPanel{
 		}
 	}
 	public void pasteLinesFromLetf(int x, int y){
-		if (!this.programData.copiedLines.isEmpty()){
-			this.programData.changeModifiedColor(this.programData.default_figure_color);
+		if (!GrammarControl.getInstance().copiedLines.isEmpty()){
+			this.programData.changeModifiedColor(Settings.default_figure_color);
 			this.programData.modyfiedLines.clear();
-			int [] point = this.programData.findCenter(this.programData.copiedLines);
-			for (Line line: this.programData.copiedLines) {
+			int [] point = MainData.findCenter(GrammarControl.getInstance().copiedLines);
+			for (Line line: GrammarControl.getInstance().copiedLines) {
 				line.move(x - point[0], y - point[1]);
 				Line newLine = line.copy();
-				this.programData.addLine(newLine, false);
+				this.programData.lines.addLine(newLine, false);
 				leftLines.add(newLine);
-				this.programData.modyfiedLines.add(this.programData.getLine(this.programData.getLinesSize() - 1));
-				this.programData.modyfiedLines.get(this.programData.modyfiedLines.size() - 1).changeColor(this.programData.default_check_color);
+				this.programData.modyfiedLines.add(this.programData.lines.get(this.programData.lines.size() - 1));
+				this.programData.modyfiedLines.get(this.programData.modyfiedLines.size() - 1).changeColor(Settings.default_check_color);
 			}
 		}
 		this.repaint();
@@ -70,7 +74,7 @@ class RigthRulePanel extends MainPanel{
 	public void removeSelectedLines(){
 		for (Line line: this.programData.getModified()){
 			if (!this.leftLines.contains(line)){
-				this.programData.removeLine(line);
+				this.programData.lines.removeLine(line);
 				this.leftLines.remove(line);
 			}
 		}
@@ -89,7 +93,7 @@ class RigthRulePanel extends MainPanel{
 	public void modifyLines(int i ,int x1, int y1, int x2, int y2){
 		if (i >= 0){
 			Line line = leftLines.get(i);
-			if (programData.distans(line.getX_a(), line.getY_a(), x2, y2) < programData.distans(line.getX_b(), line.getY_b(), x2, y2)){
+			if (MainData.distans(line.getX_a(), line.getY_a(), x2, y2) < MainData.distans(line.getX_b(), line.getY_b(), x2, y2)){
 				line.setXY_a(x2, y2);
 			}
 			else{
@@ -100,7 +104,7 @@ class RigthRulePanel extends MainPanel{
 	void makeLineRemovable(ArrayList <Line> linesRemovedFromLeftSide){
 		for (Line lLine: linesRemovedFromLeftSide){
 			for (Line line: leftLines){
-				if (line.isTheSameLine(lLine)){
+				if (line.equals(lLine)){
 					leftLines.remove(line);
 					break;
 				}

@@ -33,7 +33,7 @@ class CreateRuleFrame extends JFrame {
 	int screenHeight;
 	int screenWidth;
 
-	double rfScale = 0.5;
+	double rfScale = 0.6;
 	double loc = 0.3;
 	double panScale = 0.8;
 
@@ -47,6 +47,10 @@ class CreateRuleFrame extends JFrame {
 
 		this.loadLeftPanel(initialLines, initialmarker);
 		this.loadRightPanel(initialLines, finalLines, finalmarker);
+		
+		GrammarControl.addPanel(panelL);
+		GrammarControl.addPanel(panelL.rigthRulePanel);
+		
 		this.loadBottomPanel();
 
 		splitPanel();
@@ -63,6 +67,9 @@ class CreateRuleFrame extends JFrame {
 		this.loadLeftPanel(rule.getInitialLines(), rule.getInitialMarker());
 		this.loadRightPanel(rule.getInitialLines(), rule.getFinalLines(), rule.getFinalMarker());
 		this.loadBottomPanel();
+		
+		GrammarControl.addPanel(panelL);
+		GrammarControl.addPanel(panelL.rigthRulePanel);
 
 		splitPanel();
 
@@ -77,22 +84,23 @@ class CreateRuleFrame extends JFrame {
 		this.screenWidth = screenSize.width;
 		this.setSize((int)(screenWidth*rfScale), (int)(screenHeight*rfScale));
 		this.setLocation((int)(screenWidth*loc), (int)(screenHeight*loc));
-		this.setDefaultCloseOperation(CreateRuleFrame.DISPOSE_ON_CLOSE);
+		this.setLayout(new BorderLayout());
+		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		this.pack();
 	}
 	protected void splitPanel(){
 		JPanel topPanel = new JPanel();
 		topPanel.setLayout(new BorderLayout());
-		this.getContentPane().add(topPanel);
-
-		JSplitPane splitPaneV = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-		topPanel.add(splitPaneV, BorderLayout.CENTER);
 
 		JSplitPane splitPaneH = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		splitPaneH.setLeftComponent(panelL);
 		splitPaneH.setRightComponent(panelL.rigthRulePanel);
-
-		splitPaneV.setLeftComponent(splitPaneH);
-		splitPaneV.setRightComponent(panelB);
+		
+		topPanel.add(panelB, BorderLayout.NORTH);
+		topPanel.add(splitPaneH, BorderLayout.CENTER);
+		
+		this.getContentPane().add(topPanel);
+		this.pack();
 	}
 	private int [] extremeXY(ArrayList <Line> lines, Marker marker){
 		int min_x = screenWidth;
@@ -124,7 +132,7 @@ class CreateRuleFrame extends JFrame {
 	void loadLeftPanel(ArrayList <Line> lines, Marker initialmarker) {
 		int width = (int)(screenWidth*rfScale*0.5);
 		int height = (int)(screenHeight*rfScale*panScale);
-		panelL = new LeftRulePanel(width, height);
+		panelL = new LeftRulePanel(this, width, screenHeight);
 
 		int [] tran = extremeXY(lines, initialmarker);
 		tran[2] -=  (int)(width*0.2);
@@ -132,16 +140,17 @@ class CreateRuleFrame extends JFrame {
 
 		for (Line line : lines){
 			Line newLine = line.copy();
-			panelL.programData.addLine(newLine, false);
+			panelL.programData.lines.addLine(newLine, false);
 		}
 		if (initialmarker != null){
 			panelL.programData.marker = initialmarker.copy();
 		}
+		panelL.setLayout(new BorderLayout());
 	}
 	void loadRightPanel(ArrayList <Line> initialLines, ArrayList <Line> finalLines, Marker finalmarker) {
 		int width = (int)(screenWidth*rfScale*0.5);
 		int height = (int)(screenHeight*rfScale*panScale);
-		panelL.rigthRulePanel = new RigthRulePanel(width, height, panelL);
+		panelL.rigthRulePanel = new RigthRulePanel(this, width, screenHeight, panelL);
 
 		ArrayList <Line> lines = new ArrayList<>();
 		lines.addAll(initialLines);
@@ -153,19 +162,20 @@ class CreateRuleFrame extends JFrame {
 
 		for (Line line : initialLines){
 			Line newLine = line.copy();
-			panelL.rigthRulePanel.programData.addLine(newLine, false);
+			panelL.rigthRulePanel.programData.lines.addLine(newLine, false);
 			panelL.rigthRulePanel.leftLines.add(newLine);
 		}
 		if (finalLines != null && !finalLines.isEmpty()){
 			for (Line line : finalLines){
 				Line newLine = line.copy();
-				panelL.rigthRulePanel.programData.addLine(newLine, false);
+				panelL.rigthRulePanel.programData.lines.addLine(newLine, false);
 			}
 		}
 		if (finalmarker != null){
 			panelL.rigthRulePanel.programData.marker = finalmarker.copy();
 		}
-		panelL.moveLines(0, 0, -tran[2] + MainData.grid_size, -tran[3] + MainData.grid_size);
+//		panelL.moveLines(0, 0, -tran[2] + GridControl.getInstance().grid_size, -tran[3] + GridControl.getInstance().grid_size);
+		panelL.rigthRulePanel.setLayout(new BorderLayout());
 	}
 	void loadBottomPanel() {
 		panelB = new JPanel();
@@ -204,29 +214,29 @@ class CreateRuleFrame extends JFrame {
 
 			if (this.ruleName.equals(theName)){
 				try{
-					panelL.programData.ruleList.remove(panelL.programData.getRuleOfName(theName));
-					panelL.programData.ruleList.add(new Rule(theName, panelL.programData.copy(), panelL.rigthRulePanel.programData.copy(), panelL.programData.marker, panelL.rigthRulePanel.programData.marker));			
+					GrammarControl.getInstance().ruleList.remove(GrammarControl.getInstance().getRuleOfName(theName));
+					GrammarControl.getInstance().ruleList.add(new Rule(theName, panelL.programData.lines.copy(), panelL.rigthRulePanel.programData.lines.copy(), panelL.programData.marker, panelL.rigthRulePanel.programData.marker));			
 					closeFrame();
 				}
 				catch(Exception exc){
-					MessageFrame error = new MessageFrame(exc.getMessage());
+					new MessageFrame(exc.getMessage());
 					System.out.println(exc.getLocalizedMessage());
 				}
 			}else{
-				for (Rule rule: panelL.programData.ruleList){
+				for (Rule rule: GrammarControl.getInstance().ruleList){
 					if (rule.getName().equals(theName)){
-						int serialNumber = panelL.programData.ruleList.size() + 1;
+						int serialNumber = GrammarControl.getInstance().ruleList.size() + 1;
 						theName += Integer.toString(serialNumber);
 						break;
 					}
 				}
 
 				try{
-					panelL.programData.ruleList.add(new Rule(theName, panelL.programData.copy(), panelL.rigthRulePanel.programData.copy(), panelL.programData.marker, panelL.rigthRulePanel.programData.marker));			
+					GrammarControl.getInstance().ruleList.add(new Rule(theName, panelL.programData.lines.copy(), panelL.rigthRulePanel.programData.lines.copy(), panelL.programData.marker, panelL.rigthRulePanel.programData.marker));			
 					closeFrame();
 				}
 				catch(Exception exc){
-					MessageFrame error = new MessageFrame(exc.getMessage());
+					new MessageFrame(exc.getMessage());
 					System.out.println(exc.getLocalizedMessage());
 				}				
 			}
@@ -243,6 +253,9 @@ class CreateRuleFrame extends JFrame {
 		panel.add(cancelButton, BorderLayout.LINE_START);
 	}
 	void closeFrame(){
+		
+		GrammarControl.removePanel(panelL.rigthRulePanel);
+		GrammarControl.removePanel(panelL);
 		super.dispose();
 	}
 }

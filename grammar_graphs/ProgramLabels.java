@@ -1,77 +1,81 @@
 package grammar_graphs;
 
-public class ProgramLabels{
-	public static String programName = "Grammar Graphs";
-	static String rulleWinName = "Rule";
-	static String defineColorRulesFrame = "Define Color Rules";
-	static String editColorRuleFrame = "Edit Rule";
+public final class ProgramLabels {
+	private ProgramLabels() {
+		throw new AssertionError();
+	}
 
-	static String rulleList = "Rules...";
-	static String rulleAdding = "Add new rule";
-	static String rulleAddingForLines = "Add new rule for choosen lines";
+	public static final String programName = "Grammar Graphs";
+	static final String rulleWinName = "Rule";
+	static final String defineColorRulesFrame = "Define Color Rules";
+	static final String editColorRuleFrame = "Edit Rule";
 
-	static String rulleAppListOpt = "Rule Application options";
-	static String ruleAppList = "Prepare rule application list";
-	static String applyruleAppList = "Apply rule list";
+	static final String rulleList = "Rules...";
+	static final String rulleAdding = "Add new rule";
+	static final String rulleAddingForLines = "Add new rule for choosen lines";
 
-	static String goToStep = "Go to step...";
-	
-	static String panelSettings = "View";
-	static String blackMode = "Black Mode";
-	static String whiteMode = "White Mode";
+	static final String rulleAppListOpt = "Rule Application options";
+	static final String ruleAppList = "Prepare rule application list";
+	static final String applyruleAppList = "Apply rule list";
 
-	static String hideGrid = "Hide Grid";
-	static String showGrid = "Show Grid";
+	static final String goToStep = "Go to step...";
 
-	static String elemEdit = "Edit elements";
-	static String elemRemove = "Remove elements";
-	static String elemCopy = "Copy elements";
-	static String elemPaste = "Paste elements";
-	static String elemGroup = "Group elements";
+	static final String panelSettings = "View";
+	static final String blackMode = "Black Mode";
+	static final String whiteMode = "White Mode";
 
-	static String save = "Save";
-	static String remove = "Remove";
-	static String cancel = "Cancel";
-	static String delete = "Del";
+	static final String hideGrid = "Hide Grid";
+	static final String showGrid = "Show Grid";
 
-	static String addRule = "Add Rule";
-	static String removeRule = "Remove Rule";
-	static String editRule = "Edit";
-	static String chooseColor = "Choose Color";
+	static final String elemEdit = "Edit elements";
+	static final String elemRemove = "Remove elements";
+	static final String elemCopy = "Copy elements";
+	static final String elemPaste = "Paste elements";
+	static final String elemGroup = "Group elements";
 
-	static String newRuleLabel = "Please, provide the name of rule";
-	static String defaultNewRule = "New_Rule";
+	static final String save = "Save";
+	static final String remove = "Remove";
+	static final String cancel = "Cancel";
+	static final String delete = "Del";
 
-	static String marker = "Marker";
-	static String addMarker = "Add Marker Here";
-	static String removeMarker = "Remove Marker";
-	static String moveMarker = "Move Marker Here";
-	static String copyMarkerToRigthSide = "Copy Marker to right side";
-	static String copyMarkerFromLeftSide = "Copy Marker from left side";
+	static final String addRule = "Add Rule";
+	static final String removeRule = "Remove Rule";
+	static final String editRule = "Edit";
+	static final String chooseColor = "Choose Color";
 
-	static String runSimulation = "Run Simulation";
-	static String showDist = "Show length";
-	static String hideDist = "Hide length";
-	static String resetAll = "Reset All";
-	static String reset = "Reset";
-	static String showPoints = "Show co-ordinates";
-	static String hidePoints = "Hide co-ordinates";
+	static final String newRuleLabel = "Please, provide the name of rule";
+	static final String defaultNewRule = "New_Rule";
 
-	static String colorRuleMenu = "Painting rules";
-	static String colorRuleDefine = "Define Painting rules";
-	static String colorRuleOptionOn = "Render";
-	static String colorRuleOptionOff = "Exit Render View";
-	static String limitShapeOn = "Define limiting shape";
-	static String limitShapeOff = "End defining process";
-	static String colorRuleSettings = "Choose colors for levels";
-	static String resetLevels = "Reset Levels";
-	static String drawLevels = "Draw Levels";
-	static String stopDrawLevels = "Stop drawing Levels";
+	static final String marker = "Marker";
+	static final String addMarker = "Add Marker Here";
+	static final String removeMarker = "Remove Marker";
+	static final String moveMarker = "Move Marker Here";
+	static final String copyMarkerToRigthSide = "Copy Marker to right side";
+	static final String copyMarkerFromLeftSide = "Copy Marker from left side";
 
-	static String saveGrammar = "Save";
-	static String openGrammar = "Open";
-	static String extensionGrammar = "grammar";
-	static String extensionGrammarInfo = "Grammar file";
-	
-	static String grammar = "Grammar Shape File";
+	static final String runSimulation = "Run Simulation";
+	static final String showDist = "Show length";
+	static final String hideDist = "Hide length";
+	static final String resetAll = "Reset All";
+	static final String reset = "Reset";
+	static final String showPoints = "Show co-ordinates";
+	static final String hidePoints = "Hide co-ordinates";
+
+	static final String colorRuleMenu = "Painting rules";
+	static final String colorRuleDefine = "Define Painting rules";
+	static final String colorRuleOptionOn = "Render";
+	static final String colorRuleOptionOff = "Exit Render View";
+	static final String limitShapeOn = "Define limiting shape";
+	static final String limitShapeOff = "End defining process";
+	static final String colorRuleSettings = "Choose colors for levels";
+	static final String resetLevels = "Reset Levels";
+	static final String drawLevels = "Draw Levels";
+	static final String stopDrawLevels = "Stop drawing Levels";
+
+	static final String saveGrammar = "Save";
+	static final String openGrammar = "Open";
+	static final String extensionGrammar = "grammar";
+	static final String extensionGrammarInfo = "Grammar file";
+
+	static final String grammar = "Grammar Shape File";
 }

@@ -9,30 +9,39 @@ import java.lang.Math;
 
 import java.util.StringJoiner;
 import java.util.ArrayList;
+import java.util.Objects;
 
 class Line{
 	Point pa;
 	Point pb;
 
 	private ArrayList <Line> childs = new ArrayList<>();
+	private Color color = Settings.default_figure_color;
 
-	private Color color = MainData.default_figure_color;
-
-	Line(int x_a, int y_a, int x_b, int y_b){	
-		// System.out.println("CREATE LINE + " + this);
-		this.pa = new Point(toGrid(x_a), toGrid(y_a));
-		this.pb = new Point(toGrid(x_b), toGrid(y_b));
-	}
 	Line(Point a, Point b){
-		// System.out.println("CREATE LINE + " + this);
 		this.pa = a;
 		this.pb = b;
 	}
-	Line(Point a, Point b, double alpha, Point rotationPoint){
-		// System.out.println("CREATE LINE + " + this);
-		this.pa = a;
-		this.pb = b;
-		this.rotate(rotationPoint.x, rotationPoint.y, alpha);
+	static Line createRotatedLine(Point a, Point b, double alpha, Point rotationPoint){
+		Line line = new Line(a, b);
+//		line.rotate(rotationPoint, alpha);
+		line.rotate(rotationPoint.x, rotationPoint.y, alpha);
+		return line;
+	}
+	static Line createLineAtScreenPoint(int x_a, int y_a, int x_b, int y_b){
+		return new Line(new Point(GridControl.getInstance().toGrid(x_a), GridControl.getInstance().toGrid(y_a)), new Point(GridControl.getInstance().toGrid(x_b), GridControl.getInstance().toGrid(y_b)));
+	}
+	boolean checkY(int y){
+		return	(this.pa.y <= y && y <= this.pb.y) || (this.pb.y <= y && y <= this.pa.y);
+	}
+	boolean checkX(int x){
+		return	(this.pa.x <= x && x <= this.pb.x) || (this.pb.x <= x && x <= this.pa.x);
+	}
+	boolean checkLineY(Line line){
+		return	this.checkY(line.pa.y) && this.checkY(line.pb.y);
+	}
+	boolean checkLineX(Line line){
+		return	this.checkX(line.pa.x) && this.checkX(line.pb.x);
 	}
 	void mirrorX(int x){
 		pa.x = 2*x - pa.x;
@@ -42,25 +51,10 @@ class Line{
 		pa.y = 2*y - pa.y;
 		pb.y = 2*y - pb.y;
 	}
-	int round(double v, int x, double s){
-		double xx = (double)(x);
-		if (s > 1){
-			if (v < xx)	return (int)Math.ceil(v);
-			else		return (int)Math.floor(v);
-		}
-		else{
-			if (v < xx)	return (int)Math.floor(v);
-			else		return (int)Math.ceil(v);
-		}
-	}
 	void addChild(Line line){
 		this.childs.add(line);
 	}
 	void scale(int x, int y, double s){
-		// pa.x = round((pa.x - x) * s + x, x, s);
-		// pb.x = round((pb.x - x) * s + x, x, s);
-		// pa.y = round((pa.y - y) * s + y, y, s);
-		// pb.y = round((pb.y - y) * s + y, y, s);
 		pa.x = (int)Math.round((pa.x - x) * s + x);
 		pb.x = (int)Math.round((pb.x - x) * s + x);
 		pa.y = (int)Math.round((pa.y - y) * s + y);
@@ -73,20 +67,12 @@ class Line{
 		pb.x = (int)Math.round(Math.cos(alpha) * pbx - (Math.sin(alpha) * pby) + (x * (1 - Math.cos(alpha))) + (y * Math.sin(alpha)));
 		pa.y = (int)Math.round(Math.sin(alpha) * pax + (Math.cos(alpha) * pay) + (y * (1 - Math.cos(alpha))) - (x * Math.sin(alpha)));
 		pb.y = (int)Math.round(Math.sin(alpha) * pbx + (Math.cos(alpha) * pby) + (y * (1 - Math.cos(alpha))) - (x * Math.sin(alpha)));
-	}
+}
 	boolean sameA(Line line){
 		return (line.pa.x == this.pa.x && line.pa.y == this.pa.y) || (line.pb.x == this.pa.x && line.pb.y == this.pa.y);
 	}
 	boolean sameB(Line line){
 		return (line.pa.x == this.pb.x && line.pa.y == this.pb.y) || (line.pb.x == this.pb.x && line.pb.y == this.pb.y);
-	}
-	static int toGrid(int x){
-		int gs = MainData.grid_size;
-		int modX = x%gs;
-		if (modX <= (gs*0.5)*1.){
-			return (int)Math.floor((x/gs)*1);
-		}
-		return (int)Math.ceil((x/gs)*1);
 	}
 	double length(){
 		return MainData.distans(this.getX_a(), this.getY_a(), this.getX_b(), this.getY_b());
@@ -111,45 +97,43 @@ class Line{
 
 		g2d.drawLine(this.getX_a(), this.getY_a(), this.getX_b(), this.getY_b());
 		
-		if (MainData.SHOW_DIST == true){
+		if (Settings.SHOW_DIST == true){
 			int x = (int)((getX_a() + getX_b()) * 0.5);
-			int y = (int)((getY_a() + getY_b()) * 0.5) - (int)(MainData.grid_size*0.5);
+			int y = (int)((getY_a() + getY_b()) * 0.5) - (int)(GridControl.getInstance().grid_size*0.5);
 			String text = Integer.toString((int)Math.floor(disx()))  + ", " + Integer.toString((int)Math.floor(disy()));
-			g2d.setColor(MainData.default_rect_color);
+			g2d.setColor(Settings.default_rect_color);
 			g2d.drawString(text, x + 1, y + 1);
 		}
-		if (MainData.SHOW_POINTS == true){
-			g2d.setColor(MainData.default_point_color);
+		if (Settings.SHOW_POINTS == true){
+			g2d.setColor(Settings.default_point_color);
 			String text = "A[" + (pa.x - point0[0]) + ", " + (pa.y - point0[1]) + "]";
-			g2d.drawString(text, getX_a() + 1, getY_a() - (int)(MainData.grid_size*0.5));
+			g2d.drawString(text, getX_a() + 1, getY_a() - (int)(GridControl.getInstance().grid_size*0.5));
 			
 			text = "B[" + (pb.x - point0[0]) + ", " + (pb.y - point0[1]) + "]";
-			g2d.drawString(text, getX_b() + 1, getY_b() - (int)(MainData.grid_size*0.5));
+			g2d.drawString(text, getX_b() + 1, getY_b() - (int)(GridControl.getInstance().grid_size*0.5));
 		}
 	}
 	void changeColor(Color new_color){
 		this.color = new_color;
 	}
 // gets
-	int [] getA(){
-		int [] a = {this.getX_a(), this.getY_a()};
-		return a;
-	}
-	int [] getB(){
-		int [] b = {this.getX_b(), this.getY_b()};
-		return b;
-	}
 	int getX_a(){
-		return pa.x*MainData.grid_size;
+		return pa.x*GridControl.getInstance().grid_size;
 	}
 	int getY_a(){
-		return pa.y*MainData.grid_size;
+		return pa.y*GridControl.getInstance().grid_size;
 	}
 	int getX_b(){
-		return pb.x*MainData.grid_size;
+		return pb.x*GridControl.getInstance().grid_size;
 	}
 	int getY_b(){
-		return pb.y*MainData.grid_size;
+		return pb.y*GridControl.getInstance().grid_size;
+	}
+	Point getA(){
+		return pa;
+	}
+	Point getB(){
+		return pb;
 	}
 	int [] getSortedAB(){
 		int [] ab = new int [4];
@@ -194,8 +178,8 @@ class Line{
 	}
 // sets
 	void setXY_a(int x_a, int y_a){
-		this.pa.x = toGrid(x_a);
-		this.pa.y = toGrid(y_a);
+		this.pa.x = GridControl.getInstance().toGrid(x_a);
+		this.pa.y = GridControl.getInstance().toGrid(y_a);
 		if (!childs.isEmpty()){
 			for (Line child: childs){
 				child.setXY_a(x_a, y_a);
@@ -203,8 +187,8 @@ class Line{
 		}
 	}
 	void setXY_b(int x_b, int y_b){
-		this.pb.x = toGrid(x_b);
-		this.pb.y = toGrid(y_b);
+		this.pb.x = GridControl.getInstance().toGrid(x_b);
+		this.pb.y = GridControl.getInstance().toGrid(y_b);
 		if (!childs.isEmpty()){
 			for (Line child: childs){
 				child.setXY_b(x_b, y_b);
@@ -230,10 +214,10 @@ class Line{
 		}
 	}
 	void move(int x, int y){
-		this.pa.x += toGrid(x); 
-		this.pa.y += toGrid(y);
-		this.pb.x += toGrid(x);
-		this.pb.y += toGrid(y);
+		this.pa.x += GridControl.getInstance().toGrid(x); 
+		this.pa.y += GridControl.getInstance().toGrid(y);
+		this.pb.x += GridControl.getInstance().toGrid(x);
+		this.pb.y += GridControl.getInstance().toGrid(y);
 		if (!childs.isEmpty()){
 			for (Line child: childs){
 				child.move(x, y);
@@ -242,7 +226,7 @@ class Line{
 	}
 	// check if the other line has the same a nad b params as the line
 	boolean compareABParams(Line otherLine){
-		return this.onLine(otherLine.getX_a(), otherLine.getY_a(), MainData.grid_size) || this.onLine(otherLine.getX_b(), otherLine.getY_b(), MainData.grid_size);
+		return this.onLine(otherLine.getX_a(), otherLine.getY_a(), GridControl.getInstance().grid_size) || this.onLine(otherLine.getX_b(), otherLine.getY_b(), GridControl.getInstance().grid_size);
 	}
 	// check if the point of x and y coordinates are in the line
 	boolean onLine(int x, int y, int threshold){
@@ -273,7 +257,7 @@ class Line{
 				y_1 = this.getY_b();
 				y_2 = this.getY_a();
 			}
-			if (y_1 <= y && y_2 >= y && toGrid(x)*threshold == this.getX_a())
+			if (y_1 <= y && y_2 >= y && GridControl.getInstance().toGrid(x)*threshold == this.getX_a())
 				return true;
 		}
 		return false;
@@ -322,7 +306,7 @@ class Line{
 		return false;
 	}
 	Line copy(){
-		return new Line(this.getX_a(), this.getY_a(), this.getX_b(), this.getY_b());
+		return new Line(new Point(this.pa.x, this.pa.y), new Point(this.pb.x, this.pb.y));
 	}
 	double disX(){
 		return Math.abs(this.getX_a() - this.getX_b());
@@ -337,22 +321,32 @@ class Line{
 	double disy(){
 		return Math.abs(this.pa.y - this.pb.y);
 	}
-	void print(){
-		System.out.println("Line: A("+pa.x+", "+pa.y+") - B("+pb.x+", "+pb.y+")");
-	}
 	@Override
 	public String toString(){
 		StringJoiner info = new StringJoiner("\t");
-		return info.add(FileSaver.lineTag).add("" + pa.x).add("" + pa.y).add("" + pb.x).add(pb.y + "").toString();
+		return info.add(FileSaverTags.LINETAG.toString()).add("" + pa.x).add("" + pa.y).add("" + pb.x).add(pb.y + "").toString();
 	}
-	boolean isTheSameLine(Line other){
-		if (this.pa.x != other.pa.x) return false;
-		if (this.pa.y != other.pa.y) return false;
-		if (this.pb.x != other.pb.x) return false;
-		if (this.pb.y != other.pb.y) return false;
-		return true;
+	@Override
+	public final boolean equals(Object obj){
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Line))
+			return false;
+		Line other = (Line)obj;
+		if (this.pa.equals(other.getA()) && this.pb.equals(other.getB())) 
+			return true;
+		if (this.pa.equals(other.getB()) && this.pb.equals(other.getA())) 
+			return true;
+		return false;
+	}
+	@Override
+	public final int hashCode() {
+		int [] ab = this.getSortedAB();
+		return Objects.hash(ab[0], ab[1], ab[2], ab[3]);
 	}
 	class NotALinearFunction extends Exception{
+		public static final long serialVersionUID = 42L;
+		
 		private int x;
 		NotALinearFunction(String message, int x){
 			super(message);
