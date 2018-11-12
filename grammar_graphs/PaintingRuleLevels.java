@@ -15,7 +15,7 @@ class PaintingRuleLevels {
 
 	PaintingRuleLevels(MainPanel panel){
 		this.n = 0;
-		this.max_n_allowed = 10;
+		this.max_n_allowed = 100;
 		PaintingRuleLevels.levels = new Level [100];
 
 		for (int i = 0; i < this.max_n_allowed; ++i)

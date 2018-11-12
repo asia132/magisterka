@@ -64,7 +64,7 @@ class CreatePaintingRuleFrame extends JFrame {
 
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
-		this.showNEditSection(buttonPanel);
+//		this.showNEditSection(buttonPanel);
 		this.showSaveButton(buttonPanel);
 		this.showAddRuleButton(buttonPanel);
 		this.showCancelButton(buttonPanel);

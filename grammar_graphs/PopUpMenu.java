@@ -187,10 +187,11 @@ class PopUpMenu extends JPopupMenu {
 		} else {
 			buttonMenu.add(info(panel));
 		}
-		if (!Settings.COLOR_RULES)
+		if (!Settings.COLOR_RULES) {
 			buttonMenu.add(showColorRuleLimitingShape(panel));
-		buttonMenu.add(drawLevels(panel));
-		buttonMenu.add(showResetLevels(panel));
+			buttonMenu.add(drawLevels(panel));
+			buttonMenu.add(showResetLevels(panel));
+		}
 		add(buttonMenu);
 	}
 
@@ -475,7 +476,7 @@ class PopUpMenu extends JPopupMenu {
 			grammar.add(showResetOption(panel));
 		}
 		grammar.add(showResetAllOption(panel));
-		grammar.add(showSimulate(panel));
+//		grammar.add(showSimulate(panel));
 
 		add(grammar);
 	}
