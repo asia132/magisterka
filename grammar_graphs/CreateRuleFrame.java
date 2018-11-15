@@ -1,6 +1,7 @@
 package grammar_graphs;
 
 import java.awt.FlowLayout;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
@@ -44,9 +45,11 @@ class CreateRuleFrame extends JFrame {
 		super(ProgramLabels.rulleWinName);
 		loadFrameData();
 		this.ruleName = "";
+		
+		Point tran = findTrans(finalLines, initialLines, finalmarker, initialmarker);
 
-		this.loadLeftPanel(initialLines, initialmarker);
-		this.loadRightPanel(initialLines, finalLines, finalmarker);
+		this.loadLeftPanel(initialLines, initialmarker, tran.x, tran.y);
+		this.loadRightPanel(initialLines, finalLines, finalmarker, tran.x, tran.y);
 		
 		GrammarControl.addPanel(panelL);
 		GrammarControl.addPanel(panelL.rigthRulePanel);
@@ -64,8 +67,10 @@ class CreateRuleFrame extends JFrame {
 		loadFrameData();
 		this.ruleName = rule.name;
 		
-		this.loadLeftPanel(rule.getInitialLines(), rule.getInitialMarker());
-		this.loadRightPanel(rule.getInitialLines(), rule.getFinalLines(), rule.getFinalMarker());
+		Point tran = findTrans(rule.getFinalLines(), rule.getInitialLines(), rule.getFinalMarker(), rule.getInitialMarker());
+		
+		this.loadLeftPanel(rule.getInitialLines(), rule.getInitialMarker(), tran.x, tran.y);
+		this.loadRightPanel(rule.getInitialLines(), rule.getFinalLines(), rule.getFinalMarker(), tran.x, tran.y);
 		this.loadBottomPanel();
 		
 		GrammarControl.addPanel(panelL);
@@ -102,79 +107,71 @@ class CreateRuleFrame extends JFrame {
 		this.getContentPane().add(topPanel);
 		this.pack();
 	}
-	private int [] extremeXY(ArrayList <Line> lines, Marker marker){
-		int min_x = screenWidth;
-		int min_y = screenHeight;
-		int max_x = 0;
-		int max_y = 0;
-		if (marker != null){
-			min_x = marker.getX();
-			min_y = marker.getY();
-			max_x = marker.getX();
-			max_y = marker.getY();
+	private Point findTrans(ArrayList <Line> finalLines, ArrayList <Line> initialLines, Marker finalmarker, Marker initialmarker){
+		int min_x = initialmarker.getX();
+		int min_y = initialmarker.getY();
+		if (finalmarker != null){
+			min_x = min_x < finalmarker.getX() ? min_x : finalmarker.getX();
+			min_y = min_y < finalmarker.getY() ? min_y : finalmarker.getY();
 		}
-		for (Line line : lines){
+		
+		for (Line line : initialLines){
 			min_x = min_x < line.getX_a() ? min_x : line.getX_a();
 			min_x = min_x < line.getX_b() ? min_x : line.getX_b();
 
 			min_y = min_y < line.getY_a() ? min_y : line.getY_a();
 			min_y = min_y < line.getY_b() ? min_y : line.getY_b();
-
-			max_x = max_x > line.getX_a() ? max_x : line.getX_a();
-			max_x = max_x > line.getX_b() ? max_x : line.getX_b();
-
-			max_y = max_y > line.getY_a() ? max_y : line.getY_a();
-			max_y = max_y > line.getY_b() ? max_y : line.getY_b();
 		}
-		int [] result = {max_x, max_y, min_x, min_y};
-		return result;
-	}
-	void loadLeftPanel(ArrayList <Line> lines, Marker initialmarker) {
-		int width = (int)(screenWidth*rfScale*0.5);
-		int height = (int)(screenHeight*rfScale*panScale);
-		panelL = new LeftRulePanel(this, width, screenHeight);
+		if (finalLines != null)
+		for (Line line : finalLines){
+			min_x = min_x < line.getX_a() ? min_x : line.getX_a();
+			min_x = min_x < line.getX_b() ? min_x : line.getX_b();
 
-		int [] tran = extremeXY(lines, initialmarker);
-		tran[2] -=  (int)(width*0.2);
-		tran[3] -=  (int)(height*0.2);
+			min_y = min_y < line.getY_a() ? min_y : line.getY_a();
+			min_y = min_y < line.getY_b() ? min_y : line.getY_b();
+		}
+		
+		int height = (int)(screenHeight*rfScale*panScale);
+		int width = (int)(screenWidth*rfScale*0.5);
+		
+		return new Point(-min_x + GridControl.getInstance().grid_size + (int)(width*0.2), -min_y + GridControl.getInstance().grid_size + (int)(height*0.2));
+	}
+	void loadLeftPanel(ArrayList <Line> lines, Marker initialmarker, int tranX, int tranY) {
+		int width = (int)(screenWidth*rfScale*0.5);
+		panelL = new LeftRulePanel(this, width, screenHeight);
 
 		for (Line line : lines){
 			Line newLine = line.copy();
+			newLine.move(tranX, tranY);
 			panelL.programData.lines.addLine(newLine, false);
 		}
 		if (initialmarker != null){
 			panelL.programData.marker = initialmarker.copy();
+			panelL.programData.marker.move(tranX, tranY);
 		}
 		panelL.setLayout(new BorderLayout());
 	}
-	void loadRightPanel(ArrayList <Line> initialLines, ArrayList <Line> finalLines, Marker finalmarker) {
+	void loadRightPanel(ArrayList <Line> initialLines, ArrayList <Line> finalLines, Marker finalmarker, int tranX, int tranY) {
 		int width = (int)(screenWidth*rfScale*0.5);
-		int height = (int)(screenHeight*rfScale*panScale);
 		panelL.rigthRulePanel = new RigthRulePanel(this, width, screenHeight, panelL);
-
-		ArrayList <Line> lines = new ArrayList<>();
-		lines.addAll(initialLines);
-		if (finalLines != null && !finalLines.isEmpty()) lines.addAll(finalLines);
-
-		int [] tran = extremeXY(lines, finalmarker);
-		tran[2] -=  (int)(width*0.2);
-		tran[3] -=  (int)(height*0.2);
 
 		for (Line line : initialLines){
 			Line newLine = line.copy();
+			newLine.move(tranX, tranY);
 			panelL.rigthRulePanel.programData.lines.addLine(newLine, false);
 			panelL.rigthRulePanel.leftLines.add(newLine);
 		}
 		if (finalLines != null && !finalLines.isEmpty()){
 			for (Line line : finalLines){
 				Line newLine = line.copy();
+				newLine.move(tranX, tranY);
 				panelL.rigthRulePanel.programData.lines.addLine(newLine, false);
 			}
 		}
 		if (finalmarker != null){
 			panelL.rigthRulePanel.programData.marker = finalmarker.copy();
+			panelL.rigthRulePanel.programData.marker.move(tranX, tranY);
 		}
-//		panelL.moveLines(0, 0, -tran[2] + GridControl.getInstance().grid_size, -tran[3] + GridControl.getInstance().grid_size);
 		panelL.rigthRulePanel.setLayout(new BorderLayout());
 	}
 	void loadBottomPanel() {

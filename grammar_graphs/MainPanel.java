@@ -133,7 +133,7 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 			programData.marker.setXY(programData.modified_marker.getX() + x2 - x1,
 					programData.modified_marker.getY() + y2 - y1);
 		}
-		for (int i = 0; i < programData.getModified().size(); i++) {
+		for (int i = 0; i < programData.tempShapeSize(); i++) {
 			programData.tempShapeMove(i, x1, y1, x2, y2);
 		}
 	}
