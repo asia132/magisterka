@@ -293,6 +293,7 @@ class MainData {
 	}
 
 	void findLinesInRect() {
+		System.out.println(lines.size());
 		for (Line line : lines.getLines()) {
 			if (checkingRect.insideRect(line)) {
 				addToModified(line);

@@ -45,7 +45,7 @@ class Marker{
 	@Override
 	public String toString(){
 		StringJoiner info = new StringJoiner("\t");
-		return info.add("#M").add(dir.toString()).add(Integer.toString(r)).add("" + p.x).add(p.y + " ").toString();
+		return info.add("#M").add(dir.toString()).add(Integer.toString(r)).add("" + p.x).add(p.y + "").toString();
 	}
 	boolean isMiddle(int x, int y){
 		if (Math.abs(getX() - x) < GridControl.getInstance().grid_size * 0.5 && Math.abs(getY() - y) < GridControl.getInstance().grid_size * 0.5){
@@ -91,7 +91,7 @@ class Marker{
 		
 		g2d.setColor(Settings.default_rect_color);
 		if (Settings.SHOW_DIST == true){
-			g2d.drawString(getD(), getX()+ 2, getY() - 2);
+			g2d.drawString(getD() + " " + this.r, getX(), getY());
 			g2d.drawString("A", this.getAx(), this.getAy());
 			g2d.drawString("B", this.getBx(), this.getBy());
 			g2d.drawString("C", this.getCx(), this.getCy());
@@ -292,7 +292,8 @@ class Marker{
 		return r > GridControl.getInstance().toGrid(i);
 	}
 	boolean tryToResize(int x1, int y1, int x2, int y2){
-		int precision = (int)(GridControl.getInstance().grid_size*0.5);
+//		int precision = (int)(GridControl.getInstance().grid_size*0.5);
+		int precision = 20;
 		if (this.checkA(x1, y1) == true){
 			if (this.dir == Direct.N){
 				if (x1 - x2 > precision) rotateL();

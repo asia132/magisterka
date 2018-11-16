@@ -67,6 +67,9 @@ final class PanelLines {
 		for (Line line : this.lines) {
 			line.move(x2 - x1, y2 - y1);
 		}
+		if (mainPanel && !Settings.LIMITING_SHAPE) {
+			GrammarControl.getInstance().moveLimitShape(x1, y1, x2, y2);
+		}
 		if (Settings.LIMITING_SHAPE) {
 			for (Line line : linesStack) {
 				line.move(x2 - x1, y2 - y1);

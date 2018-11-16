@@ -18,8 +18,6 @@ import java.awt.event.ActionEvent;
 
 import java.util.ArrayList;
 
-import java.lang.NumberFormatException;
-
 class CreatePaintingRuleFrame extends JFrame {
 	
 	public static final long serialVersionUID = 42L;
@@ -143,12 +141,12 @@ class CreatePaintingRuleFrame extends JFrame {
 	void showSaveButton(JPanel mainPanel){
 		saveButton = new JButton(ProgramLabels.save);
 		saveButton.addActionListener(event -> {
-			try{
-				GrammarControl.getInstance().paintingRuleLevels.setMaxNAllowed(Integer.parseInt(nvalue.getText()));
-				closeFrame();
-			}catch(NumberFormatException e){
-				new MessageFrame(nvalue.getText() + " - the provided N must be integer");
-			}
+//			try{
+//				GrammarControl.getInstance().paintingRuleLevels.setMaxNAllowed(Integer.parseInt(nvalue.getText()));
+//				
+//			}catch(NumberFormatException e){
+//				new MessageFrame(nvalue.getText() + " - the provided N must be integer");
+//			}
 			try{
 				GrammarControl.getInstance().rulePainting.clear();
 				for (PaintingRuleComponents ruleData: rules){
@@ -157,6 +155,7 @@ class CreatePaintingRuleFrame extends JFrame {
 			}catch(PaintingRule.WrongTag e){
 				new MessageFrame(e.getMessage());
 			}
+			closeFrame();
 		});
 		mainPanel.add(saveButton, BorderLayout.LINE_START);
 	}

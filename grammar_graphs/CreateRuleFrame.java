@@ -46,7 +46,9 @@ class CreateRuleFrame extends JFrame {
 		loadFrameData();
 		this.ruleName = "";
 		
-		Point tran = findTrans(finalLines, initialLines, finalmarker, initialmarker);
+		Point tran;		
+		if (initialmarker != null)		tran = findTrans(finalLines, initialLines, finalmarker, initialmarker);
+		else	tran = new Point(0, 0);
 
 		this.loadLeftPanel(initialLines, initialmarker, tran.x, tran.y);
 		this.loadRightPanel(initialLines, finalLines, finalmarker, tran.x, tran.y);

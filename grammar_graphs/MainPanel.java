@@ -90,7 +90,8 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		programData.point0[1] += GridControl.getInstance().toGrid(y2 - y1);
 		if (programData.marker != null)
 			this.programData.marker.move(x2 - x1, y2 - y1);
-		programData.lines.moveLines(x1, y1, x2, y2, (!(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)));
+		programData.lines.moveLines(x1, y1, x2, y2,
+				(!(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)));
 
 		if (!(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)) {
 			AffineTransform trans = new AffineTransform();
@@ -146,9 +147,7 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 		info.add(GrammarControl.getInstance().paintingRuleLevels.getN() + "\n");
 		info.add(GrammarControl.getInstance().levelsToString());
 		info.add(GrammarControl.getInstance().limitShapeToString());
-		if (programData.marker != null) {
-			info.add(programData.markerToString() + "\n");
-		}
+		info.add(programData.markerToString());
 		info.add(GrammarControl.getInstance().rulesToString());
 		info.add(programData.rulePaintingToString());
 		info.add(programData.ruleAppListToString());

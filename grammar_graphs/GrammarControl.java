@@ -43,6 +43,11 @@ final class GrammarControl {
 			panel.repaint();
 		}
 	}
+	void moveLimitShape(int x1, int y1, int x2, int y2) {
+		for (Line line: paintingRuleLevels.limitingShape.levelLines) {
+			line.move(x2 - x1, y2 - y1);
+		}
+	}
 	ArrayList <Line> getLimitShapeLines(){
 		return paintingRuleLevels.limitingShape.levelLines;
 	}
