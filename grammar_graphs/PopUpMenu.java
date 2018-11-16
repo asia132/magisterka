@@ -535,6 +535,8 @@ class PopUpMenu extends JPopupMenu {
 			public void actionPerformed(ActionEvent ev) {
 				FileSaver fileSaver = new FileSaver(GrammarControl.getInstance().file);
 				fileSaver.saveDataFile(panel);
+				System.out.println(
+						"-------------------SAVE AS " + fileSaver.getName() + "-------------------");
 				// panel.repaint();
 			}
 		});
@@ -555,6 +557,8 @@ class PopUpMenu extends JPopupMenu {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					FileSaver fileSaver = new FileSaver(fc.getSelectedFile());
 					fileSaver.saveDataFile(panel);
+					System.out.println(
+							"-------------------SAVE AS " + fc.getSelectedFile().getName() + "-------------------");
 					GrammarControl.getInstance().file = fc.getSelectedFile();
 				}
 				panel.repaint();

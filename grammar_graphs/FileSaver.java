@@ -110,7 +110,6 @@ class FileSaver{
 								else GrammarControl.getInstance().ruleList.add(new Rule(newRuleName, getArrayCopy(linesASide), getArrayCopy(linesBSide), markerASide.copy(), null));
 							}catch (Exception e) {
 								System.out.println("WARNING: Rule " + newRuleName + " was not added. " + e.getMessage());
-								// System.out.println((markerBSide.copy() == null) + " " + (markerASide.copy() == null));
 							}
 						}
 						newRuleName = ruleName;

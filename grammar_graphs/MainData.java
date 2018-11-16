@@ -82,6 +82,7 @@ class MainData {
 		this.lines.clear();
 		this.tempShapeClear();
 		GrammarControl.getInstance().copiedLines.clear();
+		GrammarControl.getInstance().rulePainting.clear();
 	}
 
 	boolean inRuleList(String name) {

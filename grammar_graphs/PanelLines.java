@@ -64,13 +64,16 @@ final class PanelLines {
 	}
 
 	void moveLines(int x1, int y1, int x2, int y2, boolean mainPanel) {
+		System.out.println("Move lines");
 		for (Line line : this.lines) {
 			line.move(x2 - x1, y2 - y1);
 		}
 		if (mainPanel && !Settings.LIMITING_SHAPE) {
+			System.out.println("Move limitShape");
 			GrammarControl.getInstance().moveLimitShape(x1, y1, x2, y2);
 		}
 		if (Settings.LIMITING_SHAPE) {
+			System.out.println("Move linesStack");
 			for (Line line : linesStack) {
 				line.move(x2 - x1, y2 - y1);
 			}

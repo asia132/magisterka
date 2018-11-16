@@ -94,7 +94,9 @@ class EditPaintingRuleFrame extends JFrame {
 	void loadLevelPanel(){
 		JPanel levelPanel = new JPanel();
 		levelPanel.setBackground(Color.white);
-
+		
+		levelPanel.add(addSign("LS"));
+		
 		for (int i = 0; i <= GrammarControl.getInstance().paintingRuleLevels.getN(); i++){
 			levelPanel.add(addSign("L" + i));
 		}
