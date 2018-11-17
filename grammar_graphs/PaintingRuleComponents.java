@@ -2,6 +2,7 @@ package grammar_graphs;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -10,7 +11,7 @@ import javax.swing.JTextArea;
 
 class PaintingRuleComponents {
 	JTextArea rulesBodies;
-	ArrayList<String> tagsSet;
+	List<String> tagsSet;
 	JComboBox<String> comboLevel;
 	JButton colorButton;
 	JPanel panel;
@@ -19,8 +20,8 @@ class PaintingRuleComponents {
 		tagsSet = new ArrayList<>();
 	}
 
-	ArrayList<String> tagsSetCopy() {
-		ArrayList<String> copy = new ArrayList<>(tagsSet.size());
+	List<String> tagsSetCopy() {
+		List<String> copy = new ArrayList<>(tagsSet.size());
 		for (String tag : tagsSet)
 			copy.add(tag);
 		return copy;

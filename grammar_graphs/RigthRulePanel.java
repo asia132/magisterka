@@ -1,6 +1,7 @@
 package grammar_graphs;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 
@@ -8,7 +9,7 @@ class RigthRulePanel extends MainPanel{
 		
 	public static final long serialVersionUID = 42L;
 	
-	ArrayList <Line> leftLines = new ArrayList<Line>();
+	List <Line> leftLines = new ArrayList<Line>();
 	LeftRulePanel parent;
 	RigthRulePanel(JFrame frameParent, int screenWidth, int screenHeight, LeftRulePanel parent){
 		super(frameParent, screenWidth, screenHeight);
@@ -16,8 +17,8 @@ class RigthRulePanel extends MainPanel{
 	}
 	@Override
 	public void moveLines(int x1, int y1, int x2, int y2){
-		programData.point0[0] += GridControl.getInstance().toGrid(x2 - x1);
-		programData.point0[1] += GridControl.getInstance().toGrid(y2 - y1);
+		programData.point0.x += GridControl.getInstance().toGrid(x2 - x1);
+		programData.point0.y += GridControl.getInstance().toGrid(y2 - y1);
 		for (Line line: programData.lines.getLines()){
 			line.move(x2 - x1, y2 - y1);
 		}
@@ -27,8 +28,8 @@ class RigthRulePanel extends MainPanel{
 		this.repaint();
 	}
 	public void moveAllLines(int x1, int y1, int x2, int y2){
-		programData.point0[0] += GridControl.getInstance().toGrid(x2 - x1);
-		programData.point0[1] += GridControl.getInstance().toGrid(y2 - y1);
+		programData.point0.x += GridControl.getInstance().toGrid(x2 - x1);
+		programData.point0.y += GridControl.getInstance().toGrid(y2 - y1);
 		for (Line line: programData.lines.getLines()){
 			line.move(x2 - x1, y2 - y1);
 		}
@@ -101,7 +102,7 @@ class RigthRulePanel extends MainPanel{
 			}
 		}
 	}
-	void makeLineRemovable(ArrayList <Line> linesRemovedFromLeftSide){
+	void makeLineRemovable(List <Line> linesRemovedFromLeftSide){
 		for (Line lLine: linesRemovedFromLeftSide){
 			for (Line line: leftLines){
 				if (line.equals(lLine)){

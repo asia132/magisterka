@@ -1,6 +1,6 @@
 package grammar_graphs;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 
 import java.awt.RenderingHints;
@@ -46,10 +46,10 @@ class PaintingRuleLevels {
 	void updateLevel0(Line newLine){
 		PaintingRuleLevels.levels[0].levelLines.add(newLine);
 	}
-	void updateLevel0(ArrayList <Line> newLines){
+	void updateLevel0(List <Line> newLines){
 		PaintingRuleLevels.levels[0].levelLines = newLines;
 	}
-	void updateWithRule(Rule.Category ruleCat, ArrayList <Line> ruleInitialLines, ArrayList <Line> ruleFinalLines, MainData programData){
+	void updateWithRule(Rule.Category ruleCat, List <Line> ruleInitialLines, List <Line> ruleFinalLines, MainData programData){
 		if (ruleCat == Rule.Category.A){ // left side => n
 			this.increaseN();
 			levels[n].update(ruleInitialLines);

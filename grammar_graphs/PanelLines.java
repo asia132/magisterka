@@ -1,12 +1,14 @@
 package grammar_graphs;
 
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 
 final class PanelLines {
-	ArrayList<Line> lines = new ArrayList<Line>();
-	ArrayList <Line> linesStack = null;
+	List<Line> lines = new ArrayList<Line>();
+	List <Line> linesStack = null;
 	
 	void clear() {
 		lines.clear();
@@ -22,19 +24,26 @@ final class PanelLines {
 		}
 	}
 
-	void setLines(ArrayList<Line> newLines) {
+	void setLines(List<Line> newLines) {
 		this.lines = newLines;
 		GrammarControl.getInstance().paintingRuleLevels.updateLevel0(newLines);
 	}
 
-	ArrayList<Line> copy() {
-		ArrayList<Line> copy = new ArrayList<Line>();
+	List<Line> copy() {
+		List<Line> copy = new ArrayList<Line>();
 		for (Line line : this.lines)
 			copy.add(line.copy());
 		return copy;
 	}
 
-	void addLinesByRule(ArrayList<Line> newlines) {
+	List<Line> elements() {
+		List<Line> copy = new ArrayList<Line>();
+		for (Line line : this.lines)
+			copy.add(line);
+		return copy;
+	}
+
+	void addLinesByRule(List<Line> newlines) {
 		this.lines.addAll(newlines);
 	}
 
@@ -43,11 +52,13 @@ final class PanelLines {
 			line.changeColor(Settings.default_check_marker_color);
 			GrammarControl.getInstance().paintingRuleLevels.limitingShape.levelLines.add(line);
 		}
-		this.lines.add(line);
 
 		if (mainPanel && !Settings.LIMITING_SHAPE) {
-			GrammarControl.getInstance().paintingRuleLevels.updateLevel0(line);
+			Line levelLine = line.copy();
+			line.addChild(levelLine);
+			GrammarControl.getInstance().paintingRuleLevels.updateLevel0(levelLine);
 		}
+		this.lines.add(line);
 	}
 
 	void addLine(Line line, int level_i) {
@@ -64,8 +75,9 @@ final class PanelLines {
 	}
 
 	void moveLines(int x1, int y1, int x2, int y2, boolean mainPanel) {
-		System.out.println("Move lines");
+		System.out.println("Move lines " + this.lines.size());
 		for (Line line : this.lines) {
+			System.out.println("moveLines: Move line: " + line);
 			line.move(x2 - x1, y2 - y1);
 		}
 		if (mainPanel && !Settings.LIMITING_SHAPE) {
@@ -80,7 +92,7 @@ final class PanelLines {
 		}
 	}
 
-	ArrayList<Line> getLines() {
+	List<Line> getLines() {
 		return this.lines;
 	}
 
@@ -101,7 +113,7 @@ final class PanelLines {
 		return info.toString();
 	}
 	
-	void drawLines(Graphics2D g2d, int [] point0) {
+	void drawLines(Graphics2D g2d, Point point0) {
 		for (Line line : lines) {
 			line.drawLine(g2d, point0);
 		}

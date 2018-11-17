@@ -86,10 +86,12 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 	}
 
 	public void moveLines(int x1, int y1, int x2, int y2) {
-		programData.point0[0] += GridControl.getInstance().toGrid(x2 - x1);
-		programData.point0[1] += GridControl.getInstance().toGrid(y2 - y1);
+		programData.point0.x += GridControl.getInstance().toGrid(x2 - x1);
+		programData.point0.y += GridControl.getInstance().toGrid(y2 - y1);
+		
 		if (programData.marker != null)
 			this.programData.marker.move(x2 - x1, y2 - y1);
+		
 		programData.lines.moveLines(x1, y1, x2, y2,
 				(!(this instanceof LeftRulePanel) && !(this instanceof RigthRulePanel)));
 

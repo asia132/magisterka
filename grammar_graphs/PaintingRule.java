@@ -7,6 +7,7 @@ import java.util.function.*;
 
 import java.util.Stack;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.StringJoiner;
 
@@ -15,9 +16,9 @@ public class PaintingRule {
 	boolean isAplicable;
 	String name;
 	Color color;
-	ArrayList<String> tagsSet;
+	List<String> tagsSet;
 	
-	PaintingRule(String isAplicable, Color color, ArrayList<String> tagsSet) throws WrongTag{
+	PaintingRule(String isAplicable, Color color, List<String> tagsSet) throws WrongTag{
 		try{
 			this.tagsSet = tagsSet;
 			this.isAplicable = this.parseFlag(isAplicable);
@@ -58,7 +59,7 @@ public class PaintingRule {
 		}
 		return info.toString();
 	}
-	ArrayList<String> getTagSet(){
+	List<String> getTagSet(){
 		return tagsSet;
 	}
 	boolean parseFlag(String isAplicable) throws WrongTag{
@@ -71,8 +72,8 @@ public class PaintingRule {
 			System.out.print(t);
 		}
 	}
-	static LinkedList <String> shuntingYardAlgorithm(ArrayList<String> text) throws WrongTag{
-		LinkedList <String> output = new LinkedList<>();
+	static List <String> shuntingYardAlgorithm(List<String> text) throws WrongTag{
+		List <String> output = new LinkedList<>();
 		Stack <String> stack = new Stack<>();
 
 		for (String token: text){
@@ -128,8 +129,8 @@ public class PaintingRule {
 			throw new WrongTag("Cannot parse level tag: " + tag);
 		}
 	}
-	static Area parseTagSet(ArrayList<String> text) throws WrongTag{
-		LinkedList <String> rpnText = shuntingYardAlgorithm(text);
+	static Area parseTagSet(List<String> text) throws WrongTag{
+		List <String> rpnText = shuntingYardAlgorithm(text);
 		System.out.println("jeszcze działa");
 
 		Stack <Area> stack = new Stack<>();

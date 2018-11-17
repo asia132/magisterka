@@ -2,6 +2,7 @@ package grammar_graphs;
 
 import java.awt.Point;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ class Shape {
 
 	double precision = 1e-12;
 
-	Shape(ArrayList<Line> lines, Marker marker) {
+	Shape(List<Line> lines, Marker marker) {
 		this.name = "Rule B site";
 		this.marker = marker.copy();
 		this.lines_dist = new HashMap<Line, Dist>();
@@ -27,13 +28,13 @@ class Shape {
 		}
 	}
 
-	Shape(ArrayList<Line> lines, Marker marker, String name) {
+	Shape(List<Line> lines, Marker marker, String name) {
 		this.marker = marker.copy();
 		this.lines_dist = new HashMap<Line, Dist>();
 		this.marker_norm = marker.getNormalized();
 		this.name = name;
 
-		ArrayList<Line> linesCopy = new ArrayList<>(lines.size());
+		List<Line> linesCopy = new ArrayList<>(lines.size());
 		for (Line line : lines) {
 			Line newLine = line.copy();
 			line.addChild(newLine);
@@ -56,11 +57,11 @@ class Shape {
 		this.lines_dist = new HashMap<Line, Dist>();
 	}
 
-	ArrayList<Line> setInPlace(Marker inputMarker, Marker initialMarker) {
+	List<Line> setInPlace(Marker inputMarker, Marker initialMarker) {
 		// inputMarker: N 2 60 8
 		// initiMarker: W 2 12 5
 		double k = inputMarker.length() / initialMarker.length();
-		ArrayList<Line> resultLines = new ArrayList<>();
+		List<Line> resultLines = new ArrayList<>();
 		for (Line line : this.getLines()) {
 			Line resultline = line.copy();
 			resultline.move(inputMarker.getX() - initialMarker.getX(), inputMarker.getY() - initialMarker.getY());
@@ -80,7 +81,7 @@ class Shape {
 		return resultLines;
 	}
 
-	ArrayList<Line> findMatch(Shape inputShape) throws NotAllRuleLinesRecognized {
+	List<Line> findMatch(Shape inputShape) throws NotAllRuleLinesRecognized {
 		double k = this.marker.length() / inputShape.marker.length();
 
 		MirroringTable mirrorTable = new MirroringTable(this.lines_dist.size(), this.lines_dist.keySet());
@@ -151,7 +152,7 @@ class Shape {
 							int x1s_b = fixdX1OnLine(params_i[0], params_i[1], k, distBs, markerCenter);
 							int x2s_b = fixdX2OnLine(params_i[0], params_i[1], k, distBs, markerCenter);
 
-							ArrayList<Integer> xValuesFromA = new ArrayList<>(4);
+							List<Integer> xValuesFromA = new ArrayList<>(4);
 							xValuesFromA.add(fixdX1OnLine(params_i[0], params_i[1], k, distAp, markerAPoint));
 							xValuesFromA.add(fixdX2OnLine(params_i[0], params_i[1], k, distAp, markerAPoint));
 							xValuesFromA.add(fixdX1OnLine(params_i[0], params_i[1], k, distBp, markerAPoint));
@@ -273,7 +274,7 @@ class Shape {
 							int y1_b = findY1OnLineForNonLinearFunction(x, k, distBs, markerCenter);
 							int y2_b = findY2OnLineForNonLinearFunction(x, k, distBs, markerCenter);
 
-							ArrayList<Integer> yValuesFromA = new ArrayList<>(4);
+							List<Integer> yValuesFromA = new ArrayList<>(4);
 							yValuesFromA.add(findY1OnLineForNonLinearFunction(x, k, distAp, markerAPoint));
 							yValuesFromA.add(findY2OnLineForNonLinearFunction(x, k, distAp, markerAPoint));
 							yValuesFromA.add(findY1OnLineForNonLinearFunction(x, k, distBp, markerAPoint));
@@ -346,7 +347,7 @@ class Shape {
 		}
 		//
 		this.same = 0;
-		ArrayList<Line> mached_lines = mirrorTable.getMatchedLines();
+		List<Line> mached_lines = mirrorTable.getMatchedLines();
 
 		inputShape.needsToBeMirrored = mirrorTable.needsToBeMirrored();
 		return mached_lines;
@@ -382,9 +383,9 @@ class Shape {
 	}
 
 	// Consider joining lines
-	static ArrayList<Line> groupLines(ArrayList<Line> shape_lines) {
+	static List<Line> groupLines(List<Line> shape_lines) {
 		System.out.println("GROUP LINES");
-		ArrayList<Line> lines = new ArrayList<>();
+		List<Line> lines = new ArrayList<>();
 		for (Line line : shape_lines)
 			lines.add(line);
 		for (int i = 0; i < lines.size(); ++i) {
@@ -462,8 +463,8 @@ class Shape {
 		return MainData.distans(marker_norm[0], marker_norm[1], marker_norm[3], marker_norm[4]);
 	}
 
-	ArrayList<Line> getLines() {
-		ArrayList<Line> lines = new ArrayList<>();
+	List<Line> getLines() {
+		List<Line> lines = new ArrayList<>();
 		lines.addAll(this.lines_dist.keySet());
 		return lines;
 	}
@@ -581,7 +582,7 @@ class Shape {
 	}
 
 	private class MirroringTable {
-		ArrayList<Line> ruleLines;
+		List<Line> ruleLines;
 		Line[] correctSideLines;
 		Line[] opositeSideLines;
 
@@ -627,16 +628,16 @@ class Shape {
 			}
 		}
 
-		ArrayList<Line> getMatchedLines() throws NotAllRuleLinesRecognized {
+		List<Line> getMatchedLines() throws NotAllRuleLinesRecognized {
 			if (size == correctCounter + duplicatedCounter) {
-				ArrayList<Line> result = new ArrayList<>(size);
+				List<Line> result = new ArrayList<>(size);
 				for (Line line : correctSideLines) {
 					result.add(line);
 				}
 				return result;
 			}
 			if (size == opositeCounter + duplicatedCounter) {
-				ArrayList<Line> result = new ArrayList<>(size);
+				List<Line> result = new ArrayList<>(size);
 				for (Line line : opositeSideLines) {
 					result.add(line);
 				}

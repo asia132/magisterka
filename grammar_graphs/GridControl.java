@@ -64,28 +64,28 @@ public final class GridControl {
 	void paintGrid(Graphics2D g2d, MainPanel panel) {
 		Dimension dim = panel.getSize();
 		g2d.setColor(Settings.default_grid_color);
-		for (int i = panel.programData.point0[0] * grid_size, j = 0; i > 0; i -= grid_size, --j) {
+		for (int i = panel.programData.point0.x * grid_size, j = 0; i > 0; i -= grid_size, --j) {
 			if (j % grid_section == 0)
 				g2d.setStroke(new BasicStroke(2));
 			else
 				g2d.setStroke(new BasicStroke(1));
 			g2d.drawLine(i, 0, i, dim.height);
 		}
-		for (int i = panel.programData.point0[1] * grid_size, j = 0; i > 0; i -= grid_size, j--) {
+		for (int i = panel.programData.point0.y * grid_size, j = 0; i > 0; i -= grid_size, j--) {
 			if (j % grid_section == 0)
 				g2d.setStroke(new BasicStroke(2));
 			else
 				g2d.setStroke(new BasicStroke(1));
 			g2d.drawLine(0, i, dim.width, i);
 		}
-		for (int i = panel.programData.point0[0] * grid_size, j = 0; i < dim.width; i += grid_size, j++) {
+		for (int i = panel.programData.point0.x * grid_size, j = 0; i < dim.width; i += grid_size, j++) {
 			if (j % grid_section == 0)
 				g2d.setStroke(new BasicStroke(2));
 			else
 				g2d.setStroke(new BasicStroke(1));
 			g2d.drawLine(i, 0, i, dim.height);
 		}
-		for (int i = panel.programData.point0[1] * grid_size, j = 0; i < dim.height; i += grid_size, j++) {
+		for (int i = panel.programData.point0.y * grid_size, j = 0; i < dim.height; i += grid_size, j++) {
 			if (j % grid_section == 0)
 				g2d.setStroke(new BasicStroke(2));
 			else

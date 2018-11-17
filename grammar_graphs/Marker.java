@@ -53,7 +53,7 @@ class Marker{
 		}
 		return false;
 	}
-	void drawMarker(Graphics2D g2d, int [] point0){
+	void drawMarker(Graphics2D g2d, Point point0){
 		g2d.setColor(color);
 		g2d.setStroke(new BasicStroke(3));
 		g2d.drawOval(getX(), getY(), 1, 1);
@@ -99,11 +99,11 @@ class Marker{
 		}
 		if (Settings.SHOW_POINTS == true){
 			g2d.setColor(Settings.default_point_color);
-			g2d.drawString("[" + (p.x - point0[0]) + ", " + (p.y - point0[1]) + "]", getX() - 4, getY() + (int)(GridControl.getInstance().grid_size*0.5)); // S
-			g2d.drawString("[" + (getax() - point0[0]) + ", " + (getay() - point0[1]) + "]", getAx() - 4, getAy() + (int)(GridControl.getInstance().grid_size*0.5)); // A
-			g2d.drawString("[" + (getbx() - point0[0]) + ", " + (getby() - point0[1]) + "]", getBx() - 4, getBy() + (int)(GridControl.getInstance().grid_size*0.5)); // B
-			g2d.drawString("[" + (getcx() - point0[0]) + ", " + (getcy() - point0[1]) + "]", getCx() - 4, getCy() + (int)(GridControl.getInstance().grid_size*0.5)); // C
-			g2d.drawString("[" + (getdx() - point0[0]) + ", " + (getdy() - point0[1]) + "]", getDx() - 4, getDy() + (int)(GridControl.getInstance().grid_size*0.5)); // D
+			g2d.drawString("[" + (p.x - point0.x) + ", " + (p.y - point0.y) + "]", getX() - 4, getY() + (int)(GridControl.getInstance().grid_size*0.5)); // S
+			g2d.drawString("[" + (getax() - point0.x) + ", " + (getay() - point0.y) + "]", getAx() - 4, getAy() + (int)(GridControl.getInstance().grid_size*0.5)); // A
+			g2d.drawString("[" + (getbx() - point0.x) + ", " + (getby() - point0.y) + "]", getBx() - 4, getBy() + (int)(GridControl.getInstance().grid_size*0.5)); // B
+			g2d.drawString("[" + (getcx() - point0.x) + ", " + (getcy() - point0.y) + "]", getCx() - 4, getCy() + (int)(GridControl.getInstance().grid_size*0.5)); // C
+			g2d.drawString("[" + (getdx() - point0.x) + ", " + (getdy() - point0.y) + "]", getDx() - 4, getDy() + (int)(GridControl.getInstance().grid_size*0.5)); // D
 		}
 	}
 	void setXY(int x, int y){

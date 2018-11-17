@@ -2,6 +2,7 @@ package grammar_graphs;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 
 final class GrammarControl {
@@ -9,20 +10,27 @@ final class GrammarControl {
 	
 
 	PaintingRuleLevels paintingRuleLevels = null;
-	ArrayList <Line> copiedLines = new ArrayList<Line>();
+	List <Line> copiedLines = new ArrayList<Line>();
 
 	File file = null;
 	
-	ArrayList <PaintingRule> rulePainting = new ArrayList<>();
-	ArrayList <Rule> ruleList = new ArrayList<>(); 
-	ArrayList <Rule> ruleAppList = new ArrayList<>();
+	List <PaintingRule> rulePainting = new ArrayList<>();
+	List <Rule> ruleList = new ArrayList<>(); 
+	List <Rule> ruleAppList = new ArrayList<>();
 	
-	private ArrayList <MainPanel> panels = new ArrayList<>();
+	private List <MainPanel> panels = new ArrayList<>();
 	
 	private GrammarControl() {
 		if (INSTANCE != null) {
 			throw new AssertionError();
 		}
+	}
+	void clear() {
+		this.copiedLines.clear();
+		this.rulePainting.clear();
+		this.ruleList.clear();
+		this.ruleAppList.clear();
+		this.file = null;
 	}
 	static GrammarControl getInstance() {
 		return INSTANCE;
@@ -48,7 +56,7 @@ final class GrammarControl {
 			line.move(x2 - x1, y2 - y1);
 		}
 	}
-	ArrayList <Line> getLimitShapeLines(){
+	List <Line> getLimitShapeLines(){
 		return paintingRuleLevels.limitingShape.levelLines;
 	}
 	Rule getRuleOfName(String name){

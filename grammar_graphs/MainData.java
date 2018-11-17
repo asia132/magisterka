@@ -2,9 +2,11 @@ package grammar_graphs;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 
 import java.lang.Math;
@@ -17,10 +19,10 @@ class MainData {
 
 	PanelLines lines = new PanelLines();
 
-	ArrayList<Line> modyfiedLines = new ArrayList<Line>();
-	ArrayList<Line> initialLines = new ArrayList<Line>();
-	private ArrayList<Line> temp_shape = new ArrayList<Line>();
-	int[] point0 = { 0, 0 };
+	List<Line> modyfiedLines = new ArrayList<Line>();
+	List<Line> initialLines = new ArrayList<Line>();
+	private List<Line> temp_shape = new ArrayList<Line>();
+	Point point0 = new Point(0, 0);
 
 	// limit shape
 	void drawLinesStack(Graphics2D g2d) {
@@ -46,7 +48,7 @@ class MainData {
 	}
 
 	void startDefininingLimitShape() {
-		lines.linesStack = lines.copy();
+		lines.linesStack = lines.elements();
 		this.lines.clear();
 		Settings.default_figure_color = Color.MAGENTA;
 		for (Line line : GrammarControl.getInstance().getLimitShapeLines()) {
@@ -55,8 +57,8 @@ class MainData {
 	}
 
 	// random things
-	static ArrayList<Line> RelativeComplement(ArrayList<Line> setA, ArrayList<Line> setB) {
-		ArrayList<Line> resultSet = new ArrayList<>();
+	static List<Line> RelativeComplement(List<Line> setA, List<Line> setB) {
+		List<Line> resultSet = new ArrayList<>();
 		for (Line lineA : setA) {
 			boolean isInB = false;
 			for (Line lineB : setB) {
@@ -74,15 +76,15 @@ class MainData {
 	void clear() {
 		this.marker = null;
 		this.modified_marker = null;
-
-		GrammarControl.getInstance().ruleList.clear();
-		GrammarControl.getInstance().ruleAppList.clear();
+		
+		this.point0.x = 0;
+		this.point0.y = 0;
 
 		this.modyfiedLines.clear();
 		this.lines.clear();
 		this.tempShapeClear();
-		GrammarControl.getInstance().copiedLines.clear();
-		GrammarControl.getInstance().rulePainting.clear();
+		
+		GrammarControl.getInstance().clear();
 	}
 
 	boolean inRuleList(String name) {
@@ -177,7 +179,7 @@ class MainData {
 		return modyfiedLines.isEmpty();
 	}
 
-	ArrayList<Line> getModified() {
+	List<Line> getModified() {
 		return modyfiedLines;
 	}
 
@@ -228,7 +230,7 @@ class MainData {
 	}
 
 	// copied lines
-	static int[] findCenter(ArrayList<Line> linesList) {
+	static int[] findCenter(List<Line> linesList) {
 		if (linesList.size() > 0) {
 			int min_x = linesList.get(0).getX_a();
 			int max_x = linesList.get(0).getX_a();

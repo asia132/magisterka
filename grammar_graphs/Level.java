@@ -1,6 +1,7 @@
 package grammar_graphs;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.geom.GeneralPath;
 import java.awt.Color;
 import java.awt.Point;
@@ -8,7 +9,7 @@ import java.lang.Math;
 import java.awt.geom.Area;
 
 class Level {
-	ArrayList <Line> levelLines;
+	List <Line> levelLines;
 	private Color color;
 	double [][] points;
 	Area area;
@@ -84,8 +85,8 @@ class Level {
 		levelLines.add(line);
 	}
 	double [][] generatePoints() throws PaintingRuleLevels.NotClosedShape{
-		ArrayList <Double []> points = new ArrayList<>();
-		ArrayList <Line> linesToCheck = new ArrayList<>();
+		List <Double []> points = new ArrayList<>();
+		List <Line> linesToCheck = new ArrayList<>();
 		
 		for (Line line: levelLines){
 			linesToCheck.add(line);
@@ -145,7 +146,7 @@ class Level {
 		}
 		return output;
 	}
-	Level(ArrayList <Line> levelLines, String name){
+	Level(List <Line> levelLines, String name){
 		this.levelLines = levelLines;
 		this.randColor();
 		this.name = name;
@@ -155,7 +156,7 @@ class Level {
 		this.randColor();
 		this.name = name;
 	}
-	void update(ArrayList <Line> newLevelLines){
+	void update(List <Line> newLevelLines){
 		for (Line newline: newLevelLines){
 			this.levelLines.add(newline);
 		}

@@ -9,13 +9,14 @@ import java.lang.Math;
 
 import java.util.StringJoiner;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 class Line{
 	Point pa;
 	Point pb;
 
-	private ArrayList <Line> childs = new ArrayList<>();
+	private List <Line> childs = new ArrayList<>();
 	private Color color = Settings.default_figure_color;
 
 	Line(Point a, Point b){
@@ -91,7 +92,7 @@ class Line{
 		norm[3] = this.pb.y * 1.;
 		return norm;
 	}
-	void drawLine(Graphics2D g2d, int [] point0){
+	void drawLine(Graphics2D g2d, Point point0){
 		g2d.setColor(color);
 		g2d.setStroke(new BasicStroke(3));
 
@@ -106,10 +107,10 @@ class Line{
 		}
 		if (Settings.SHOW_POINTS == true){
 			g2d.setColor(Settings.default_point_color);
-			String text = "A[" + (pa.x - point0[0]) + ", " + (pa.y - point0[1]) + "]";
+			String text = "A[" + (pa.x - point0.x) + ", " + (pa.y - point0.y) + "]";
 			g2d.drawString(text, getX_a() + 1, getY_a() - (int)(GridControl.getInstance().grid_size*0.5));
 			
-			text = "B[" + (pb.x - point0[0]) + ", " + (pb.y - point0[1]) + "]";
+			text = "B[" + (pb.x - point0.x) + ", " + (pb.y - point0.y) + "]";
 			g2d.drawString(text, getX_b() + 1, getY_b() - (int)(GridControl.getInstance().grid_size*0.5));
 		}
 	}
@@ -220,6 +221,7 @@ class Line{
 		this.pb.y += GridControl.getInstance().toGrid(y);
 		if (!childs.isEmpty()){
 			for (Line child: childs){
+				System.out.println("child: Move line: " + this);
 				child.move(x, y);
 			}
 		}
@@ -321,11 +323,11 @@ class Line{
 	double disy(){
 		return Math.abs(this.pa.y - this.pb.y);
 	}
-	@Override
-	public String toString(){
-		StringJoiner info = new StringJoiner("\t");
-		return info.add(FileSaverTags.LINETAG.toString()).add("" + pa.x).add("" + pa.y).add("" + pb.x).add(pb.y + "").toString();
-	}
+//	@Override
+//	public String toString(){
+//		StringJoiner info = new StringJoiner("\t");
+//		return info.add(FileSaverTags.LINETAG.toString()).add("" + pa.x).add("" + pa.y).add("" + pb.x).add(pb.y + "").toString();
+//	}
 	@Override
 	public final boolean equals(Object obj){
 		if (obj == null)

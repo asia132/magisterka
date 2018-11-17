@@ -18,7 +18,7 @@ import javax.swing.border.Border;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import java.util.ArrayList;
+import java.util.List;
  
 class CreateRuleFrame extends JFrame {
 	static final long serialVersionUID = 42L;
@@ -40,7 +40,7 @@ class CreateRuleFrame extends JFrame {
 
 	String ruleName;
 
-	CreateRuleFrame(ArrayList <Line> initialLines, ArrayList <Line> finalLines, 
+	CreateRuleFrame(List <Line> initialLines, List <Line> finalLines, 
 		Marker initialmarker, Marker finalmarker) {
 		super(ProgramLabels.rulleWinName);
 		loadFrameData();
@@ -109,7 +109,7 @@ class CreateRuleFrame extends JFrame {
 		this.getContentPane().add(topPanel);
 		this.pack();
 	}
-	private Point findTrans(ArrayList <Line> finalLines, ArrayList <Line> initialLines, Marker finalmarker, Marker initialmarker){
+	private Point findTrans(List <Line> finalLines, List <Line> initialLines, Marker finalmarker, Marker initialmarker){
 		int min_x = initialmarker.getX();
 		int min_y = initialmarker.getY();
 		if (finalmarker != null){
@@ -138,7 +138,7 @@ class CreateRuleFrame extends JFrame {
 		
 		return new Point(-min_x + GridControl.getInstance().grid_size + (int)(width*0.2), -min_y + GridControl.getInstance().grid_size + (int)(height*0.2));
 	}
-	void loadLeftPanel(ArrayList <Line> lines, Marker initialmarker, int tranX, int tranY) {
+	void loadLeftPanel(List <Line> lines, Marker initialmarker, int tranX, int tranY) {
 		int width = (int)(screenWidth*rfScale*0.5);
 		panelL = new LeftRulePanel(this, width, screenHeight);
 
@@ -153,7 +153,7 @@ class CreateRuleFrame extends JFrame {
 		}
 		panelL.setLayout(new BorderLayout());
 	}
-	void loadRightPanel(ArrayList <Line> initialLines, ArrayList <Line> finalLines, Marker finalmarker, int tranX, int tranY) {
+	void loadRightPanel(List <Line> initialLines, List <Line> finalLines, Marker finalmarker, int tranX, int tranY) {
 		int width = (int)(screenWidth*rfScale*0.5);
 		panelL.rigthRulePanel = new RigthRulePanel(this, width, screenHeight, panelL);
 

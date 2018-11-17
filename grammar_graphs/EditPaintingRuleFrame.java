@@ -14,7 +14,7 @@ import javax.swing.BoxLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 
 class EditPaintingRuleFrame extends JFrame {
@@ -32,7 +32,7 @@ class EditPaintingRuleFrame extends JFrame {
 	private JPanel mainPanel;
 	JFrame me = this;
 
-	ArrayList <String> tagList;
+	List <String> tagList;
 	PaintingRuleComponents parentRuleData;
 	JFrame parent;
 
@@ -60,7 +60,7 @@ class EditPaintingRuleFrame extends JFrame {
 	protected void loadFrameData(){
 		this.setDefaultCloseOperation(CreateRuleFrame.DISPOSE_ON_CLOSE);
 	}
-	static String arrayListToString(ArrayList <String> stringList){
+	static String arrayListToString(List <String> stringList){
 		StringJoiner result = new StringJoiner("");
 		for (String tag: stringList) {
 			result.add(tag);

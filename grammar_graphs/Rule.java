@@ -1,6 +1,6 @@
 package grammar_graphs;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 
 
@@ -10,7 +10,7 @@ final class Rule{
 	Shape finalshape;
 	Category cat;
 
-	Rule(String name, ArrayList <Line> initialLines, ArrayList <Line> finalLines, 
+	Rule(String name, List <Line> initialLines, List <Line> finalLines, 
 		Marker initialmarker, Marker finalmarker) throws NoMarkerException, MarkerRemovingRule, WrongNameException{
 		if (initialmarker == null){
 			throw new NoMarkerException("Please, add a marker on the left site of the rule");
@@ -23,7 +23,7 @@ final class Rule{
 		this.name = name;
 		this.initialshape = new Shape(initialLines, initialmarker, "Rule A site");
 
-		ArrayList <Line> addedLines = MainData.RelativeComplement(finalLines, initialLines);
+		List <Line> addedLines = MainData.RelativeComplement(finalLines, initialLines);
 		if (finalmarker != null)
 			this.finalshape = new Shape(addedLines, finalmarker);
 		else{
@@ -50,7 +50,7 @@ final class Rule{
 		Shape inputshape = new Shape(panel.programData.lines.getLines(), panel.programData.marker, "Input");
 
 		try{
-			ArrayList <Line> found_lines = initialshape.findMatch(inputshape);
+			List <Line> found_lines = initialshape.findMatch(inputshape);
 			if (finalshape != null){
 				finalshape.needsToBeMirrored = inputshape.needsToBeMirrored;
 			}
@@ -73,7 +73,7 @@ final class Rule{
 							}
 						}
 						System.out.println("INPUT MARKER COPY: " + inputMarker);
-						ArrayList <Line> finalLines = finalshape.setInPlace(inputMarker, initialshape.marker);
+						List <Line> finalLines = finalshape.setInPlace(inputMarker, initialshape.marker);
 						if (Settings.CLOSED_SHAPES)
 							GrammarControl.getInstance().paintingRuleLevels.updateWithRule(this.cat, found_lines, finalLines, panel.programData);
 						else
@@ -119,10 +119,10 @@ final class Rule{
 	Marker getInitialMarker(){
 		return initialshape.marker;
 	}
-	ArrayList <Line> getInitialLines(){
+	List <Line> getInitialLines(){
 		return initialshape.getLines();
 	}
-	ArrayList <Line> getFinalLines(){
+	List <Line> getFinalLines(){
 		if (cat == Category.C) return finalshape.getLines();
 		return null;
 	}
