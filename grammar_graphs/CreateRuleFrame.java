@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import java.util.List;
+import java.util.Optional;
  
 class CreateRuleFrame extends JFrame {
 	static final long serialVersionUID = 42L;
@@ -47,11 +48,11 @@ class CreateRuleFrame extends JFrame {
 		this.ruleName = "";
 		
 		Point tran;		
-		if (initialmarker != null)		tran = findTrans(finalLines, initialLines, finalmarker, initialmarker);
+		if (initialmarker != null)		tran = findTrans(finalLines, initialLines, Optional.ofNullable(finalmarker), initialmarker);
 		else	tran = new Point(0, 0);
 
 		this.loadLeftPanel(initialLines, initialmarker, tran.x, tran.y);
-		this.loadRightPanel(initialLines, finalLines, finalmarker, tran.x, tran.y);
+		this.loadRightPanel(initialLines, finalLines, Optional.ofNullable(finalmarker), tran.x, tran.y);
 		
 		GrammarControl.addPanel(panelL);
 		GrammarControl.addPanel(panelL.rigthRulePanel);
@@ -109,12 +110,12 @@ class CreateRuleFrame extends JFrame {
 		this.getContentPane().add(topPanel);
 		this.pack();
 	}
-	private Point findTrans(List <Line> finalLines, List <Line> initialLines, Marker finalmarker, Marker initialmarker){
+	private Point findTrans(List <Line> finalLines, List <Line> initialLines, Optional<Marker> finalmarker, Marker initialmarker){
 		int min_x = initialmarker.getX();
 		int min_y = initialmarker.getY();
-		if (finalmarker != null){
-			min_x = min_x < finalmarker.getX() ? min_x : finalmarker.getX();
-			min_y = min_y < finalmarker.getY() ? min_y : finalmarker.getY();
+		if (finalmarker.isPresent()){
+			min_x = min_x < finalmarker.get().getX() ? min_x : finalmarker.get().getX();
+			min_y = min_y < finalmarker.get().getY() ? min_y : finalmarker.get().getY();
 		}
 		
 		for (Line line : initialLines){
@@ -153,7 +154,7 @@ class CreateRuleFrame extends JFrame {
 		}
 		panelL.setLayout(new BorderLayout());
 	}
-	void loadRightPanel(List <Line> initialLines, List <Line> finalLines, Marker finalmarker, int tranX, int tranY) {
+	void loadRightPanel(List <Line> initialLines, List <Line> finalLines, Optional<Marker> finalmarker, int tranX, int tranY) {
 		int width = (int)(screenWidth*rfScale*0.5);
 		panelL.rigthRulePanel = new RigthRulePanel(this, width, screenHeight, panelL);
 
@@ -170,8 +171,8 @@ class CreateRuleFrame extends JFrame {
 				panelL.rigthRulePanel.programData.lines.addLine(newLine, false);
 			}
 		}
-		if (finalmarker != null){
-			panelL.rigthRulePanel.programData.marker = finalmarker.copy();
+		if (finalmarker.isPresent()){
+			panelL.rigthRulePanel.programData.marker = finalmarker.get().copy();
 			panelL.rigthRulePanel.programData.marker.move(tranX, tranY);
 		}
 		panelL.rigthRulePanel.setLayout(new BorderLayout());

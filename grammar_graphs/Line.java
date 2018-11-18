@@ -221,7 +221,6 @@ class Line{
 		this.pb.y += GridControl.getInstance().toGrid(y);
 		if (!childs.isEmpty()){
 			for (Line child: childs){
-				System.out.println("child: Move line: " + this);
 				child.move(x, y);
 			}
 		}
@@ -323,11 +322,11 @@ class Line{
 	double disy(){
 		return Math.abs(this.pa.y - this.pb.y);
 	}
-//	@Override
-//	public String toString(){
-//		StringJoiner info = new StringJoiner("\t");
-//		return info.add(FileSaverTags.LINETAG.toString()).add("" + pa.x).add("" + pa.y).add("" + pb.x).add(pb.y + "").toString();
-//	}
+	@Override
+	public String toString(){
+		StringJoiner info = new StringJoiner("\t");
+		return info.add(FileSaverTags.LINETAG.toString()).add("" + pa.x).add("" + pa.y).add("" + pb.x).add(pb.y + "").toString();
+	}
 	@Override
 	public final boolean equals(Object obj){
 		if (obj == null)

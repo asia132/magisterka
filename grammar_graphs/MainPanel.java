@@ -12,6 +12,7 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseWheelListener;
+import java.util.Optional;
 import java.util.StringJoiner;
 
 import javax.swing.JFrame;
@@ -230,9 +231,9 @@ public class MainPanel extends JPanel implements MouseListener, MouseWheelListen
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (!programData.wasMoved(x1, y1, x2, y2)) {
-			Line line = programData.lines.onLine(x1, y1);
-			if (line != null) {
-				programData.addToModified(line);
+			Optional <Line> line = programData.lines.onLine(x1, y1);
+			if (line.isPresent()) {
+				programData.addToModified(line.get());
 				this.repaint();
 			} else {
 				programData.clearModified();

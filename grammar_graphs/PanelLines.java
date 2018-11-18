@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.StringJoiner;
 
 final class PanelLines {
@@ -75,17 +76,13 @@ final class PanelLines {
 	}
 
 	void moveLines(int x1, int y1, int x2, int y2, boolean mainPanel) {
-		System.out.println("Move lines " + this.lines.size());
 		for (Line line : this.lines) {
-			System.out.println("moveLines: Move line: " + line);
 			line.move(x2 - x1, y2 - y1);
 		}
 		if (mainPanel && !Settings.LIMITING_SHAPE) {
-			System.out.println("Move limitShape");
 			GrammarControl.getInstance().moveLimitShape(x1, y1, x2, y2);
 		}
 		if (Settings.LIMITING_SHAPE) {
-			System.out.println("Move linesStack");
 			for (Line line : linesStack) {
 				line.move(x2 - x1, y2 - y1);
 			}
@@ -119,27 +116,11 @@ final class PanelLines {
 		}
 	}
 	
-	Line isPoint_a(int x, int y) {
-		for (Line line : lines) {
-			if (line.isPoint_a(x, y, GridControl.getInstance().grid_size))
-				return line;
-		}
-		return null;
-	}
-
-	Line isPoint_b(int x, int y) {
-		for (Line line : lines) {
-			if (line.isPoint_b(x, y, GridControl.getInstance().grid_size))
-				return line;
-		}
-		return null;
-	}
-	
-	Line onLine(int x, int y) {
+	Optional <Line> onLine(int x, int y) {
 		for (Line line : lines) {
 			if (line.onLine(x, y, GridControl.getInstance().grid_size))
-				return line;
+				return Optional.ofNullable(line);
 		}
-		return null;
+		return Optional.empty();
 	}
 }

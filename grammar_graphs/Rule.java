@@ -1,6 +1,8 @@
 package grammar_graphs;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.StringJoiner;
 
 
@@ -112,9 +114,9 @@ final class Rule{
 	String getName(){
 		return this.name;
 	}
-	Marker getFinalMarker(){
-		if (cat == Category.A)	return null;
-		return finalshape.marker;
+	Optional<Marker> getFinalMarker(){
+		if (cat == Category.A)	return Optional.empty();
+		return Optional.ofNullable(finalshape.marker);
 	} 
 	Marker getInitialMarker(){
 		return initialshape.marker;
@@ -124,7 +126,7 @@ final class Rule{
 	}
 	List <Line> getFinalLines(){
 		if (cat == Category.C) return finalshape.getLines();
-		return null;
+		return new ArrayList<>();
 	}
 	double findMarkerScaleParam(){
 		return 1.*finalshape.marker.r / (1.*initialshape.marker.r);

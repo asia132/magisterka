@@ -117,7 +117,7 @@ class Shape {
 
 				if (params_i != null && params_j != null && params_i[0] == params_j[0]) { // poziome i skośne
 					Referral ref = dist_j.compareLine(inDist_i, k);
-					if (ref != null) { // odcinki dla poziomych i skośnych
+					if (ref != Referral.NOT_RECOGNIZED) { // odcinki dla poziomych i skośnych
 						mirrorTable.setValue(i, inLine_i, ref);
 					}
 					if (line_r.length() / k < transLine_i.length()) { // pododcinki dla poziomych i skośnych
@@ -235,7 +235,7 @@ class Shape {
 					}
 				} else if (params_i == null && params_j == null) { // pionowe
 					Referral ref = dist_j.compareLine(inDist_i, k);
-					if (ref != null) { // odcinki pionowe
+					if (ref != Referral.NOT_RECOGNIZED) { // odcinki pionowe
 						mirrorTable.setValue(i, inLine_i, ref);
 					}
 					int x = transLine_i.pa.x;
@@ -652,12 +652,10 @@ class Shape {
 	}
 
 	private enum Referral {
-		SAME, DIFFERENT, DUPLICATED;
+		SAME("SAME AS ORIGINAL"), DIFFERENT("DIFFERENT TO ORIGINAL"), DUPLICATED("LINE IS DUPLICATED"), NOT_RECOGNIZED("LINE IS NOT RECOGNIZED");
 		private String value;
-		static {
-			SAME.value = "Same as original";
-			DIFFERENT.value = "DIFFERENT TO ORIGINAL";
-			DUPLICATED.value = "LINE IS DUPLICATED";
+		Referral(String value){
+			this.value = value;
 		}
 
 		@Override
@@ -739,7 +737,7 @@ class Shape {
 					.add(Double.toString(ma_lb)).toString();
 		}
 
-		Referral compareLine(Dist inputDist, double k) {
+		private Referral compareLine(Dist inputDist, double k) {
 			if ((Math.abs(this.ms_lb - inputDist.ms_lb * k) < precision
 					&& Math.abs(this.ma_la - inputDist.ma_la * k) < precision)
 					|| (Math.abs(this.ms_la - inputDist.ms_lb * k) < precision
@@ -762,7 +760,7 @@ class Shape {
 				}
 				return Referral.DIFFERENT;
 			}
-			return null;
+			return Referral.NOT_RECOGNIZED;
 		}
 
 		// returns distans between the first point (A) of the line section and the
